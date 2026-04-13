@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Origen Perfumería</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+}
+body{
+  margin:0;
+  font-family:'Times New Roman', serif;
+  background:#D9D7D7;
+  color:#2f2b1f;
+}
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* TOP */
+.top-announcement{
+  position:relative;
+  background:linear-gradient(90deg, #f2ede3, #ded4bf, #f2ede3);
+  color:#5a4720;
+  height:38px;
+  overflow:hidden;
+  border-bottom:1px solid rgba(90,71,32,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.announcement-track{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.announcement-item{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  opacity:0;
+  transition:opacity 0.7s ease, transform 0.7s ease;
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  white-space:nowrap;
+  color:#5a4720;
+}
+.announcement-item.active{
+  opacity:1;
+  transform:translate(-50%, -50%);
+}
+.info-bar{
+  background:#ece8dd;
+  color:#5a4720;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 24px;
+  font-size:12px;
+  border-bottom:1px solid rgba(90,71,32,0.15);
+}
+.info-left{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.info-link{
+  text-decoration:none;
+  color:#5a4720;
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.info-link:hover{
+  color:#c9a227;
+}
+
+/* HEADER */
+.sticky-header{
+  position:sticky;
+  top:0;
+  z-index:120;
+  background:#D9D7D7;
+  transition:transform 0.35s ease, box-shadow 0.35s ease;
+}
+.sticky-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#D9D7D7;
+  z-index:-1;
+}
+.sticky-header.hide-header{
+  transform:translateY(-100%);
+}
+.sticky-header.show-shadow{
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.main-header{
+  background:#D9D7D7;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:6px 24px;
+  gap:12px;
+  min-height:72px;
+}
+.search-box{
+  display:flex;
+  justify-content:flex-start;
+}
+.search-box form{
+  width:100%;
+  display:flex;
+}
+.search-box input{
+  width:220px;
+  max-width:100%;
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid rgba(90,71,32,0.18);
+  background:#efeded;
+  color:#5a4720;
+  font-size:13px;
+  outline:none;
+}
+.search-box input::placeholder{
+  color:#756b52;
+}
+.header-logo a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.header-logo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.header-logo img{
+  width:300px;
+  max-width:100%;
+  display:block;
+}
+.header-icons{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:14px;
+}
+.header-icons a{
+  text-decoration:none;
+  color:#5a4720;
+  font-size:20px;
+  transition:0.3s;
+}
+.header-icons a:hover{
+  color:#c9a227;
+  transform:translateY(-2px);
+}
+
+/* MENÚ ESCRITORIO */
+.main-menu{
+  background:#d8d2bf;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  padding:10px 16px;
+  flex-wrap:wrap;
+  border-bottom:1px solid rgba(90,71,32,0.08);
+}
+.main-menu a{
+  color:#5a4720;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  transition:0.3s ease;
+  padding:11px 20px;
+  border-radius:999px;
+  position:relative;
+}
+.main-menu a:hover{
+  color:#5a4720;
+  background:rgba(90,71,32,0.08);
+}
+.main-menu a.active{
+  background:#5a4720;
+  color:#f5f1e8;
+  box-shadow:0 8px 18px rgba(90,71,32,0.16);
+}
+
+/* TABS MÓVIL */
+.mobile-category-tabs{
+  display:none;
+}
+
+/* HERO */
+.hero-carousel{
+  position:relative;
+  width:min(1320px, 94%);
+  height:320px;
+  margin:16px auto 24px;
+  border-radius:18px;
+  overflow:hidden;
+  background:#e7e3df;
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+.hero-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+.hero-slide.active{
+  opacity:1;
+  z-index:1;
+}
+.hero-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.hero-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,0.78);
+  color:#5a4720;
+  font-size:14px;
+  cursor:pointer;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.3s ease;
+}
+.hero-arrow:hover{
+  background:#ffffff;
+  color:#c9a227;
+}
+.hero-prev{
+  left:12px;
+}
+.hero-next{
+  right:12px;
+}
+.hero-dots{
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:3;
+}
+.hero-dot{
+  width:10px;
+  height:10px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,0.65);
+  cursor:pointer;
+  transition:0.3s ease;
+}
+.hero-dot.active{
+  background:#d4af37;
+  transform:scale(1.15);
+}
+
+/* SECCIONES */
+.section{
+  width:min(1320px, 94%);
+  margin:0 auto;
+  padding:14px 0 40px;
+}
+.section-header{
+  text-align:center;
+  margin-bottom:28px;
+}
+.section-subtitle{
+  font-size:12px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:#8b7b50;
+  margin-bottom:10px;
+}
+.section-title{
+  color:#3f3a27;
+  font-size:34px;
+  margin:0;
+  font-weight:normal;
+}
+
+/* CATEGORÍAS */
+.categories-carousel{
+  position:relative;
+  width:100%;
+}
+
+.categories-track{
+  display:flex;
+  gap:22px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+  padding:6px 4px 14px;
+  scrollbar-width:none;
+}
+.categories-track::-webkit-scrollbar{
+  display:none;
+}
+
+.category-card{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+  flex:0 0 calc((100% - 44px) / 3);
+  min-width:calc((100% - 44px) / 3);
+  scroll-snap-align:center;
+  opacity:0.88;
+  transform:scale(0.985);
+  transition:transform 0.45s ease, opacity 0.45s ease;
+}
+.category-card.is-active{
+  opacity:1;
+  transform:scale(1);
+}
+
+.category-box{
+  position:relative;
+  overflow:hidden;
+  border-radius:26px;
+  background:linear-gradient(180deg, #d8d1c5 0%, #d6cec1 100%);
+  min-height:590px;
+  box-shadow:0 10px 28px rgba(0,0,0,0.10);
+  border:1px solid rgba(90,71,32,0.08);
+}
+
+.category-bg-top,
+.category-bg-bottom{
+  position:absolute;
+  left:50%;
+  width:100%;
+  pointer-events:none;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.category-bg-top{
+  top:34px;
+  transform:translateX(-50%);
+}
+.category-bg-bottom{
+  bottom:106px;
+  transform:translateX(-50%) rotate(180deg);
+}
+
+.category-bg-top span,
+.category-bg-bottom span{
+  display:block;
+  text-align:center;
+  font-size:30px;
+  line-height:1;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:rgba(90,71,32,0.26);
+  white-space:nowrap;
+}
+
+.category-bg-top .arc-line-1,
+.category-bg-bottom .arc-line-1{
+  width:74%;
+  opacity:0.55;
+}
+.category-bg-top .arc-line-2,
+.category-bg-bottom .arc-line-2{
+  width:92%;
+  margin-top:10px;
+  opacity:0.72;
+}
+.category-bg-top .arc-line-3,
+.category-bg-bottom .arc-line-3{
+  width:110%;
+  margin-top:10px;
+  opacity:0.9;
+}
+
+.category-image-wrap{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:78px 30px 120px;
+}
+.category-image-wrap img{
+  max-width:60%;
+  max-height:60%;
+  object-fit:contain;
+  transition:transform 0.9s ease;
+  filter:drop-shadow(0 18px 26px rgba(0,0,0,0.16));
+}
+.category-box:hover .category-image-wrap img{
+  transform:scale(1.06);
+}
+
+.category-bottom{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:3;
+  background:#f3efe8;
+  text-align:center;
+  padding:22px 14px 24px;
+}
+.category-bottom h3{
+  margin:0;
+  font-size:19px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:#5a4720;
+  font-weight:normal;
+}
+
+.categories-dots{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+}
+.category-dot{
+  width:9px;
+  height:9px;
+  border:none;
+  border-radius:50%;
+  background:rgba(90,71,32,0.22);
+  cursor:pointer;
+  transition:0.3s ease;
+}
+.category-dot.active{
+  background:#c9a227;
+  transform:scale(1.15);
+}
+/* AROMAS */
+.aromas-section{
+  width:min(1320px, 94%);
+  margin:0 auto;
+  padding:6px 0 44px;
+}
+.aromas-header{
+  margin-bottom:26px;
+}
+.aromas-title{
+  margin:0;
+  font-size:28px;
+  color:#2f2b1f;
+  font-weight:bold;
+  letter-spacing:-0.02em;
+}
+.aromas-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:22px;
+}
+.aroma-card{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+.aroma-box{
+  background:transparent;
+}
+.aroma-image-wrap{
+  overflow:hidden;
+  border-radius:22px;
+  background:#e7e3df;
+  aspect-ratio:4 / 4;
+  margin-bottom:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+.aroma-image-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.8s ease;
+  display:block;
+}
+.aroma-card:hover .aroma-image-wrap img{
+  transform:scale(1.06);
+}
+.aroma-name{
+  text-align:center;
+  font-size:20px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:#5b5632;
+  margin:0;
+}
+
+/* BANNER ENTREGA */
+.delivery-banner{
+  width:min(1320px, 94%);
+  margin:6px auto 34px;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+  background:#e7e3df;
+}
+.delivery-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* PRODUCTOS TABS */
+.products-section{
+  width:min(1320px, 94%);
+  margin:0 auto 46px;
+}
+.products-tabs{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:34px;
+  flex-wrap:wrap;
+  margin-bottom:30px;
+}
+.products-tab{
+  background:none;
+  border:none;
+  padding:0 0 8px;
+  font-family:'Times New Roman', serif;
+  font-size:16px;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  color:#8e8a78;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:0.3s ease;
+}
+.products-tab.active{
+  color:#5a4720;
+  border-bottom-color:#5a4720;
+}
+.products-panel{
+  display:none;
+}
+.products-panel.active{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:22px;
+}
+.product-card{
+  background:#efebe3;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.07);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  position:relative;
+  text-decoration:none;
+}
+.product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 24px rgba(0,0,0,0.10);
+}
+.product-badge{
+  position:absolute;
+  top:14px;
+  left:14px;
+  z-index:2;
+  background:#5a4720;
+  color:#fff;
+  font-size:11px;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  padding:7px 10px;
+  border-radius:999px;
+}
+.product-badge.sale{
+  background:#c9a227;
+}
+.product-image{
+  background:#f6f1ea;
+  aspect-ratio:1 / 1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.product-info{
+  padding:16px 16px 18px;
+  text-align:center;
+}
+.product-category{
+  font-size:11px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:#8b7b50;
+  margin-bottom:8px;
+}
+.product-name{
+  margin:0 0 10px;
+  font-size:18px;
+  color:#3f3a27;
+  min-height:42px;
+}
+.product-price{
+  font-size:18px;
+  font-weight:bold;
+  color:#5a4720;
+}
+.product-price-old{
+  display:block;
+  margin-top:4px;
+  font-size:13px;
+  color:#8b7b50;
+  text-decoration:line-through;
+}
+
+/* BANNER ASESORÍA */
+.advice-banner{
+  width:min(1320px, 94%);
+  margin:0 auto 42px;
+  min-height:280px;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(rgba(60, 52, 45, 0.28), rgba(60, 52, 45, 0.28)),
+    url("img/banner/banner-asesoria.jpg") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  box-shadow:0 10px 26px rgba(0,0,0,0.10);
+}
+.advice-banner-content{
+  width:min(760px, 92%);
+  color:#fff;
+  padding:28px 18px;
+}
+.advice-banner h2{
+  margin:0 0 14px;
+  font-size:34px;
+  line-height:1.15;
+  font-weight:bold;
+}
+.advice-banner p{
+  margin:0 0 22px;
+  font-size:17px;
+  line-height:1.5;
+}
+.advice-banner-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-width:210px;
+  padding:14px 24px;
+  border-radius:12px;
+  background:#ffffff;
+  color:#2f2b1f;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:600;
+  transition:0.3s ease;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+.advice-banner-btn:hover{
+  transform:translateY(-2px);
+  background:#f5f1ea;
+}
+
+/* BOTONES FLOTANTES */
+.scroll-top{
+  position:fixed;
+  right:20px;
+  bottom:90px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #c9ab72, #b8860b);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18);
+  cursor:pointer;
+  z-index:130;
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s ease;
+  border:none;
+}
+.scroll-top.show{
+  opacity:1;
+  visibility:visible;
+}
+.scroll-top i{
+  font-size:22px;
+}
+
+.floating-expert{
+      position:fixed;
+      left:18px;
+      bottom:24px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#efeeee;
+      color:#5a4720;
+      padding:10px 14px 10px 10px;
+      border-radius:999px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.14);
+      z-index:120;
+      transition:0.3s ease;
+      border:1px solid rgba(90,71,32,0.10);
+    }
+    .floating-expert:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(0,0,0,0.18);
+    }
+    .floating-expert-icon{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:#c9a227;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:21px;
+      flex-shrink:0;
+    }
+    .floating-expert-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+    .floating-expert-text strong{
+      font-size:13px;
+      color:#5a4720;
+      letter-spacing:0.03em;
+    }
+    .floating-expert-text span{
+      font-size:11px;
+      color:#7a715c;
+    }
+
+/* FOOTER */
+.site-footer{
+  margin-top:40px;
+  background:#D9D7D7;
+  border-top:1px solid rgba(90,71,32,0.10);
+}
+.footer-benefits{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:24px;
+  padding:40px 50px 34px;
+  border-bottom:1px solid rgba(90,71,32,0.10);
+}
+.benefit-item{
+  text-align:center;
+  color:#2f2b1f;
+}
+.benefit-item i{
+  font-size:28px;
+  margin-bottom:14px;
+  color:#2f2b1f;
+}
+.benefit-item h4{
+  font-size:18px;
+  margin-bottom:10px;
+  color:#2f2b1f;
+}
+.benefit-item p{
+  font-size:14px;
+  line-height:1.5;
+  color:#3f3a2c;
+  max-width:260px;
+  margin:0 auto;
+}
+.footer-main{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;
+  padding:34px 50px;
+}
+.footer-column h3{
+  font-size:16px;
+  margin-bottom:18px;
+  color:#2f2b1f;
+  letter-spacing:0.02em;
+}
+.footer-column p{
+  font-size:14px;
+  line-height:1.6;
+  color:#3f3a2c;
+  margin-bottom:18px;
+  max-width:320px;
+}
+.footer-column a{
+  display:block;
+  font-size:13px;
+  color:#2f2b1f;
+  margin-bottom:14px;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+}
+.footer-column a:hover{
+  color:#c9a227;
+}
+.footer-contact{
+  margin-top:10px;
+}
+.footer-social{
+  display:flex;
+  gap:16px;
+  margin-top:18px;
+}
+.footer-social a{
+  font-size:22px;
+  margin-bottom:0;
+  letter-spacing:normal;
+}
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:18px 50px 26px;
+}
+.footer-bottom p{
+  font-size:12px;
+  letter-spacing:0.12em;
+  color:#2f2b1f;
+}
+.footer-payments img{
+  height:28px;
+  background:#efeeee;
+  padding:6px 12px;
+  border-radius:8px;
+  border:1px solid rgba(90,71,32,0.10);
+}
+
+.cart-icon-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cart-count{
+  position:absolute;
+  top:-8px;
+  right:-10px;
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  border-radius:999px;
+  background:#c9a227;
+  color:#fff;
+  font-size:11px;
+  font-weight:bold;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+.btn-primary{
+  display:block;
+  width:100%;
+  text-align:center;
+  background:#5a4720;
+  color:#f5f1e8;
+  padding:14px 18px;
+  border-radius:12px;
+  font-size:16px;
+  font-family:'Times New Roman', serif;
+  transition:0.3s ease;
+}
+
+.btn-primary:hover{
+  background:#6a5428;
+}
+
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:150;
+}
+
+.cart-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.cart-sidebar{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:360px;
+  max-width:92vw;
+  height:100%;
+  background:#f8f5ef;
+  box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+  z-index:200;
+  transition:0.4s ease;
+  display:flex;
+  flex-direction:column;
+}
+
+.cart-sidebar.active{
+  right:0;
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  border-bottom:1px solid rgba(90,71,32,0.12);
+}
+
+.cart-header h2{
+  font-size:24px;
+  color:#2f2b1f;
+  margin:0;
+}
+
+.cart-header span{
+  cursor:pointer;
+  font-size:24px;
+  color:#5a4720;
+}
+
+.cart-body{
+  flex:1;
+  overflow-y:auto;
+  padding:18px;
+  text-align:left;
+}
+
+.cart-footer{
+  padding:18px;
+  border-top:1px solid rgba(90,71,32,0.12);
+  background:#f8f5ef;
+}
+
+.cart-item{
+  display:flex;
+  gap:12px;
+  padding-bottom:14px;
+  margin-bottom:14px;
+  border-bottom:1px solid rgba(90,71,32,0.10);
+}
+
+.cart-item-image{
+  width:78px;
+  height:90px;
+  flex-shrink:0;
+  border-radius:12px;
+  overflow:hidden;
+  background:#efeeee;
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-name{
+  display:block;
+  font-size:15px;
+  color:#2f2b1f;
+  line-height:1.3;
+  margin-bottom:6px;
+}
+
+.cart-item-price{
+  font-size:15px;
+  color:#c9a227;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.cart-item-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.cart-item-controls button{
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:8px;
+  background:#ece7da;
+  color:#5a4720;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.cart-item-controls span{
+  min-width:18px;
+  text-align:center;
+  font-size:15px;
+}
+
+.cart-remove-btn{
+  border:none;
+  background:transparent;
+  color:#8a4b4b;
+  font-size:13px;
+  cursor:pointer;
+  padding:0;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  font-size:17px;
+  color:#2f2b1f;
+}
+
+.cart-clear-btn{
+  width:100%;
+  margin-top:10px;
+  border:none;
+  background:#ece7da;
+  color:#5a4720;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px){
+  .categories-grid{
+    grid-template-columns:repeat(3, 1fr);
+  }
+  .category-box{
+    min-height:500px;
+  }
+  .category-bg-top span,
+.category-bg-bottom span{
+  font-size:26px;
+}
+.category-bg-top .arc-line-1,
+.category-bg-bottom .arc-line-1{
+  width:88%;
+}
+.category-bg-top .arc-line-2,
+.category-bg-bottom .arc-line-2{
+  width:104%;
+}
+.category-bg-top .arc-line-3,
+.category-bg-bottom .arc-line-3{
+  width:118%;
+}
+  .aromas-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+  .products-panel.active{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+}
+@media (max-width: 992px){
+  .main-header{
+    grid-template-columns:1fr auto 1fr;
+    text-align:center;
+    padding:8px 16px;
+    min-height:auto;
+  }
+  .search-box{
+    justify-content:flex-start;
+  }
+  .header-icons{
+    justify-content:flex-end;
+  }
+  .main-menu{
+    gap:14px;
+    padding:8px 12px;
+  }
+  .hero-carousel{
+    height:260px;
+    border-radius:16px;
+  }
+  .category-card{
+  flex:0 0 78%;
+  min-width:78%;
+}
+.category-box{
+  min-height:460px;
+}
+  .section-title{
+    font-size:30px;
+  }
+  
+  .footer-benefits{
+    grid-template-columns:repeat(2, 1fr);
+    padding:32px 24px 28px;
+  }
+  .footer-main{
+    grid-template-columns:repeat(2, 1fr);
+    padding:30px 24px;
+    gap:28px;
+  }
+  .footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:18px 24px 24px;
+  }
+}
+@media (max-width: 768px){
+  .main-menu{
+    display:none;
+  }
+  .mobile-category-tabs{
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    gap:8px;
+    background:#d8d2bf;
+    padding:10px 12px;
+    border-bottom:1px solid rgba(90,71,32,0.10);
+    position:sticky;
+    top:0;
+    z-index:40;
+  }
+  .mobile-category-tabs a{
+    flex:1;
+    text-align:center;
+    padding:10px 6px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#5a4720;
+    background:transparent;
+    transition:0.25s ease;
+  }
+  .mobile-category-tabs a.active{
+    background:#5a4720;
+    color:#f5f1e8;
+  }
+  .mobile-category-tabs a:hover{
+    background:rgba(90,71,32,0.10);
+  }
+  .floating-expert{
+        left:12px;
+        right:12px;
+        bottom:14px;
+        justify-content:center;
+        border-radius:18px;
+        padding:10px 12px;
+      }
+      .floating-expert-text strong{
+        font-size:12px;
+      }
+      .floating-expert-text span{
+        font-size:10px;
+      }
+
+}
+@media (max-width: 640px){
+  .info-bar{
+    flex-direction:column;
+    gap:8px;
+    text-align:center;
+  }
+  .info-left{
+    justify-content:center;
+    gap:12px;
+  }
+  .header-logo img{
+    width:200px;
+  }
+  .main-header{
+        grid-template-columns:1fr auto 1fr;
+        padding:10px 14px;
+        gap:10px;
+        text-align:left;
+      }
+  .search-box{
+        justify-content:flex-start;
+      }
+      .search-box input{
+        width:100%;
+        padding:9px 12px;
+        font-size:12px;
+      }
+      .header-icons{
+        gap:10px;
+        justify-content:flex-end;
+      }
+      .header-icons a{
+        font-size:17px;
+      }
+  .hero-carousel{
+    height:190px;
+    width:min(94%, 94%);
+    margin:12px auto 18px;
+    border-radius:14px;
+  }
+  .hero-arrow{
+    width:34px;
+    height:34px;
+    font-size:13px;
+  }
+  .hero-prev{
+    left:8px;
+  }
+  .hero-next{
+    right:8px;
+  }
+  .hero-dots{
+    bottom:8px;
+  }
+  .hero-dot{
+    width:9px;
+    height:9px;
+  }
+  .section{
+    padding:10px 0 24px;
+  }
+  .section-title{
+    font-size:26px;
+  }
+  .category-card{
+  flex:0 0 88%;
+  min-width:88%;
+}
+.category-box{
+  min-height:370px;
+  border-radius:20px;
+}
+.category-bg-top{
+  top:20px;
+}
+.category-bg-bottom{
+  bottom:78px;
+}
+.category-bg-top span,
+.category-bg-bottom span{
+  font-size:15px;
+  letter-spacing:0.10em;
+}
+.category-bg-top .arc-line-1,
+.category-bg-bottom .arc-line-1{
+  width:74%;
+}
+.category-bg-top .arc-line-2,
+.category-bg-bottom .arc-line-2{
+  width:92%;
+  margin-top:5px;
+}
+.category-bg-top .arc-line-3,
+.category-bg-bottom .arc-line-3{
+  width:108%;
+  margin-top:5px;
+}
+.category-image-wrap{
+  padding:42px 16px 86px;
+}
+.category-bottom{
+  padding:18px 12px 20px;
+}
+.category-bottom h3{
+  font-size:17px;
+}
+  .aromas-section{
+    padding:0 0 28px;
+  }
+  .aromas-title{
+    font-size:22px;
+  }
+  .aromas-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .aroma-name{
+    font-size:17px;
+  }
+  .delivery-banner{
+    margin:0 auto 24px;
+    border-radius:14px;
+  }
+  .products-section{
+    margin-bottom:34px;
+  }
+  .products-tabs{
+    gap:18px;
+    margin-bottom:22px;
+  }
+  .products-tab{
+    font-size:13px;
+  }
+  .products-panel.active{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .product-name{
+    min-height:auto;
+    font-size:17px;
+  }
+  .advice-banner{
+    min-height:220px;
+    border-radius:16px;
+    margin:0 auto 28px;
+  }
+  .advice-banner h2{
+    font-size:26px;
+  }
+  .advice-banner p{
+    font-size:15px;
+  }
+  .advice-banner-btn{
+    min-width:190px;
+    font-size:16px;
+    padding:12px 20px;
+  }
+  .scroll-top{
+  width:52px;
+  height:52px;
+  right:16px;
+  bottom:84px;
+}
+
+  .footer-benefits{
+    grid-template-columns:1fr;
+  }
+  .footer-main{
+    grid-template-columns:1fr;
+  }
+  .benefit-item h4{
+    font-size:17px;
+  }
+  .footer-column h3{
+    font-size:15px;
+  }
+  .footer-bottom p{
+    font-size:11px;
+    letter-spacing:0.08em;
+  }
+}
+</style>
+</head>
+<body id="top">
+
+<div class="top-announcement">
+  <div class="announcement-track" id="announcementTrack">
+    <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
+    <span class="announcement-item">Perfumes 100% originales con garantía</span>
+    <span class="announcement-item">Asesoría personalizada por WhatsApp</span>
+  </div>
+</div>
+
+<div class="info-bar">
+  <div class="info-left">
+    <a href="https://www.instagram.com/perfumeria.origen?igsh=MXExdmpqNTl1NnZrZg==" target="_blank" class="info-link">
+      <i class="fa-brands fa-instagram"></i> @origenperfumeria
+    </a>
+    <a href="https://wa.me/573145661788" target="_blank" class="info-link">
+      <i class="fa-brands fa-whatsapp"></i> Asesoría personalizada
+    </a>
+  </div>
+</div>
+
+<div class="sticky-header" id="stickyHeader">
+  <div class="main-header">
+    <div class="search-box">
+      <form id="searchForm">
+        <input type="text" id="searchInputHeader" placeholder="Buscar productos">
+      </form>
+    </div>
+
+    <div class="header-logo">
+      <a href="index.html">
+        <img src="logo.png" alt="Origen Perfumería">
+      </a>
+    </div>
+
+    <div class="header-icons">
+      <a href="cuenta.html" title="Cuenta">
+        <i class="fa-regular fa-user"></i>
+      </a>
+      <a href="favoritos.html" title="Favoritos">
+        <i class="fa-regular fa-heart"></i>
+      </a>
+<a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+  <i class="fa-solid fa-bag-shopping"></i>
+  <span id="cartCount" class="cart-count">0</span>
+</a>
+    </div>
+  </div>
+
+  <nav class="main-menu">
+    <a href="index.html" class="active">INICIO</a>
+    <a href="todos.html">TODOS LOS PERFUMES</a>
+    <a href="hombre.html">HOMBRE</a>
+    <a href="mujer.html">MUJER</a>
+    <a href="unisex.html">UNISEX</a>
+  </nav>
+
+  <div class="mobile-category-tabs">
+    <a href="index.html" class="active">Inicio</a>
+    <a href="todos.html">Todos</a>
+    <a href="hombre.html">Hombre</a>
+    <a href="mujer.html">Mujer</a>
+    <a href="unisex.html">Unisex</a>
+  </div>
+</div>
+
+<section class="hero-carousel">
+  <div class="hero-slide active">
+    <img src="img/banner/banner.jpg" alt="Banner 1">
+  </div>
+  <div class="hero-slide">
+    <img src="img/banner/banner1.jpg" alt="Banner 2">
+  </div>
+  <div class="hero-slide">
+    <img src="img/banner/banner2.jpg" alt="Banner 3">
+  </div>
+  <button class="hero-arrow hero-prev" aria-label="Anterior">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <button class="hero-arrow hero-next" aria-label="Siguiente">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+  <div class="hero-dots">
+    <button class="hero-dot active" aria-label="Ir al banner 1"></button>
+    <button class="hero-dot" aria-label="Ir al banner 2"></button>
+    <button class="hero-dot" aria-label="Ir al banner 3"></button>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header"></div>
+
+  <div class="categories-carousel">
+    <div class="categories-track" id="categoriesTrack">
+      <a class="category-card" href="hombre.html">
+        <div class="category-box">
+          <div class="category-bg-top">
+            <span class="arc-line-1">HOMBRE · HOMBRE · HOMBRE</span>
+            <span class="arc-line-2">HOMBRE · HOMBRE · HOMBRE</span>
+            <span class="arc-line-3">HOMBRE · HOMBRE · HOMBRE</span>
+          </div>
+          <div class="category-image-wrap">
+            <img src="img/categorias/hombre.png" alt="Perfumes para Hombre">
+          </div>
+          <div class="category-bg-bottom">
+            <span class="arc-line-1">HOMBRE · HOMBRE · HOMBRE</span>
+            <span class="arc-line-2">HOMBRE · HOMBRE · HOMBRE</span>
+            <span class="arc-line-3">HOMBRE · HOMBRE · HOMBRE</span>
+          </div>
+          <div class="category-bottom">
+            <h3>HOMBRE</h3>
+          </div>
+        </div>
+      </a>
+
+      <a class="category-card" href="mujer.html">
+        <div class="category-box">
+          <div class="category-bg-top">
+            <span class="arc-line-1">MUJER · MUJER · MUJER</span>
+            <span class="arc-line-2">MUJER · MUJER · MUJER</span>
+            <span class="arc-line-3">MUJER · MUJER · MUJER</span>
+          </div>
+          <div class="category-image-wrap">
+            <img src="img/categorias/mujer.png" alt="Perfumes para Mujer">
+          </div>
+          <div class="category-bg-bottom">
+            <span class="arc-line-1">MUJER · MUJER · MUJER</span>
+            <span class="arc-line-2">MUJER · MUJER · MUJER</span>
+            <span class="arc-line-3">MUJER · MUJER · MUJER</span>
+          </div>
+          <div class="category-bottom">
+            <h3>MUJER</h3>
+          </div>
+        </div>
+      </a>
+
+      <a class="category-card" href="unisex.html">
+        <div class="category-box">
+          <div class="category-bg-top">
+            <span class="arc-line-1">UNISEX · UNISEX · UNISEX</span>
+            <span class="arc-line-2">UNISEX · UNISEX · UNISEX</span>
+            <span class="arc-line-3">UNISEX · UNISEX · UNISEX</span>
+          </div>
+          <div class="category-image-wrap">
+            <img src="img/categorias/unisex.png" alt="Perfumes Unisex">
+          </div>
+          <div class="category-bg-bottom">
+            <span class="arc-line-1">UNISEX · UNISEX · UNISEX</span>
+            <span class="arc-line-2">UNISEX · UNISEX · UNISEX</span>
+            <span class="arc-line-3">UNISEX · UNISEX · UNISEX</span>
+          </div>
+          <div class="category-bottom">
+            <h3>UNISEX</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="categories-dots" id="categoriesDots">
+      <button class="category-dot active" type="button" aria-label="Ir a Hombre"></button>
+      <button class="category-dot" type="button" aria-label="Ir a Mujer"></button>
+      <button class="category-dot" type="button" aria-label="Ir a Unisex"></button>
+    </div>
+  </div>
+</section>
+
+<section class="aromas-section">
+  <div class="aromas-header">
+    <h2 class="aromas-title">¿QUÉ AROMA QUIERES ELEGIR HOY?..</h2>
+  </div>
+  <div class="aromas-grid">
+    <a class="aroma-card" href="todos.html?aroma=Dulce">
+      <div class="aroma-box">
+        <div class="aroma-image-wrap">
+          <img src="img/aromas/dulces.jpeg" alt="Aromas dulces">
+        </div>
+        <p class="aroma-name">DULCES</p>
+      </div>
+    </a>
+
+    <a class="aroma-card" href="todos.html?aroma=Fresco-Cítrico">
+      <div class="aroma-box">
+        <div class="aroma-image-wrap">
+          <img src="img/aromas/frescos-citricos.jpg" alt="Aromas frescos y cítricos">
+        </div>
+        <p class="aroma-name">FRESCOS / CÍTRICOS</p>
+      </div>
+    </a>
+
+    <a class="aroma-card" href="todos.html?aroma=Floral-Frutal">
+      <div class="aroma-box">
+        <div class="aroma-image-wrap">
+          <img src="img/aromas/florales-frutales.png" alt="Aromas florales y frutales">
+        </div>
+        <p class="aroma-name">FLORALES / FRUTALES</p>
+      </div>
+    </a>
+
+    <a class="aroma-card" href="todos.html?aroma=Amaderado">
+      <div class="aroma-box">
+        <div class="aroma-image-wrap">
+          <img src="img/aromas/amaderados.jpeg" alt="Aromas amaderados">
+        </div>
+        <p class="aroma-name">AMADERADOS</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="delivery-banner">
+  <img src="img/banner/banner2.png" alt="Entrega el mismo día en Pereira y Dosquebradas">
+</section>
+
+<section class="products-section">
+  <div class="products-tabs">
+    <button class="products-tab active" data-tab="nuevo">NUEVO</button>
+    <button class="products-tab" data-tab="mas-vendidos">MÁS VENDIDOS</button>
+    <button class="products-tab" data-tab="sale">SALE</button>
+  </div>
+
+  <div class="products-panel active" id="nuevo">
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Nuevo</span>
+      <div class="product-image">
+        <img src="img/productos/nuevo/p1.png" alt="Tubbees Lemon M-licious">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Novedad</div>
+        <h3 class="product-name">Tubbees Lemon M-licious</h3>
+        <div class="product-price">$199.900</div>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Nuevo</span>
+      <div class="product-image">
+        <img src="img/productos/nuevo/p2.png" alt="Tubbees Tira-Miss-ooo">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Novedad</div>
+        <h3 class="product-name">Tubbees Tira-Miss-ooo</h3>
+        <div class="product-price">$189.900</div>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Nuevo</span>
+      <div class="product-image">
+        <img src="img/productos/nuevo/p3.png" alt="Tubbees Berry Explosion">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Novedad</div>
+        <h3 class="product-name">Tubbees Berry Explosion</h3>
+        <div class="product-price">$209.900</div>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Nuevo</span>
+      <div class="product-image">
+        <img src="img/productos/nuevo/p4.png" alt="Tubbees Golden Praline Bliss">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Novedad</div>
+        <h3 class="product-name">Tubbees Golden Praline Bliss</h3>
+        <div class="product-price">$194.900</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="products-panel" id="mas-vendidos">
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Top</span>
+      <div class="product-image">
+        <img src="img/productos/mas_vendido/p1.png" alt="Club de Nuit Intense">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Más vendido</div>
+        <h3 class="product-name">Club de Nuit Intense</h3>
+        <div class="product-price">$249.900</div>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Top</span>
+      <div class="product-image">
+        <img src="img/productos/mas_vendido/p2.png" alt="Yara Lattafa">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Más vendido</div>
+        <h3 class="product-name">Yara Lattafa</h3>
+        <div class="product-price">$179.900</div>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Top</span>
+      <div class="product-image">
+        <img src="img/productos/mas_vendido/p3.png" alt="9PM Afnan">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Más vendido</div>
+        <h3 class="product-name">9PM Afnan</h3>
+        <div class="product-price">$219.900</div>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge">Top</span>
+      <div class="product-image">
+        <img src="img/productos/mas_vendido/p4.png" alt="Bade'e Al Oud">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Más vendido</div>
+        <h3 class="product-name">Bade'e Al Oud</h3>
+        <div class="product-price">$229.900</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="products-panel" id="sale">
+    <a class="product-card" href="producto.html">
+      <span class="product-badge sale">Sale</span>
+      <div class="product-image">
+        <img src="img/productos/descuento/p1.png" alt="Amber Oud Gold">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Oferta</div>
+        <h3 class="product-name">Amber Oud Gold</h3>
+        <div class="product-price">$159.900</div>
+        <span class="product-price-old">$199.900</span>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge sale">Sale</span>
+      <div class="product-image">
+        <img src="img/productos/descuento/p2.png" alt="Khamrah Qahwa">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Oferta</div>
+        <h3 class="product-name">Khamrah Qahwa</h3>
+        <div class="product-price">$169.900</div>
+        <span class="product-price-old">$209.900</span>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge sale">Sale</span>
+      <div class="product-image">
+        <img src="img/productos/descuento/p3.png" alt="Asad Lattafa">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Oferta</div>
+        <h3 class="product-name">Asad Lattafa</h3>
+        <div class="product-price">$149.900</div>
+        <span class="product-price-old">$189.900</span>
+      </div>
+    </a>
+
+    <a class="product-card" href="producto.html">
+      <span class="product-badge sale">Sale</span>
+      <div class="product-image">
+        <img src="img/productos/descuento/p4.png" alt="Fakhar Rose">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Oferta</div>
+        <h3 class="product-name">Fakhar Rose</h3>
+        <div class="product-price">$139.900</div>
+        <span class="product-price-old">$179.900</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="advice-banner">
+  <div class="advice-banner-content">
+    <h2>No sabes qué perfume elegir?</h2>
+    <p>Recibe asesoría GRATIS, profesional y personalizada.</p>
+    <a class="advice-banner-btn" href="https://wa.me/573145661788?text=Hola,%20quiero%20asesor%C3%ADa%20para%20elegir%20un%20perfume" target="_blank">
+      Quiero asesoría
+    </a>
+  </div>
+</section>
+
+<button class="scroll-top" id="scrollTopBtn" aria-label="Subir al inicio">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<a class="floating-expert" href="https://wa.me/573145661788?text=Hola,%20quiero%20asesor%C3%ADa%20para%20elegir%20un%20perfume" target="_blank" aria-label="Contacta a un experto">
+  <span class="floating-expert-icon">
+    <i class="fa-brands fa-whatsapp"></i>
+  </span>
+  <span class="floating-expert-text">
+    <strong>Contacta a un experto</strong>
+    <span>Asesoría personalizada</span>
+  </span>
+</a>
+
+<footer class="site-footer">
+  <section class="footer-benefits">
+    <div class="benefit-item">
+      <i class="fa-regular fa-handshake"></i>
+      <h4>Clientes satisfechos</h4>
+      <p>Más de 10.000 clientes han confiado en nosotros</p>
+    </div>
+    <div class="benefit-item">
+      <i class="fa-regular fa-gem"></i>
+      <h4>Calidad garantizada</h4>
+      <p>Fragancias seleccionadas con altos estándares de calidad</p>
+    </div>
+    <div class="benefit-item">
+      <i class="fa-regular fa-clock"></i>
+      <h4>Envíos rápidos</h4>
+      <p>Envíos en pocas horas en Medellín y máximo en 72 hrs a nivel nacional</p>
+    </div>
+    <div class="benefit-item">
+      <i class="fa-regular fa-credit-card"></i>
+      <h4>Pago seguro</h4>
+      <p>Pagos 100% seguros y verificados</p>
+    </div>
+  </section>
+
+  <section class="footer-main">
+    <div class="footer-column">
+      <h3>ORIGEN PERFUMERÍA</h3>
+      <p>
+        Cada persona merece un perfume tan único como su historia.
+        En Origen Perfumería te guiamos a elegir el aroma que eleva tu presencia.
+      </p>
+      <a href="mailto:origenperfumeria@gmail.com">origenperfumeria@gmail.com</a>
+      <p class="footer-contact">
+        Asesoría personalizada:<br>
+        <a href="https://wa.me/573145661788" target="_blank">(+57) 314 566 1788</a>
+      </p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/perfumeria.origen?igsh=MXExdmpqNTl1NnZrZg==" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h3>CATEGORÍAS</h3>
+      <a href="hombre.html">HOMBRES</a>
+      <a href="mujer.html">MUJER</a>
+      <a href="unisex.html">UNISEX</a>
+    </div>
+
+    <div class="footer-column">
+        <h3>POLÍTICAS</h3>
+        <a href="politica-reembolso.html">POLÍTICA DE REEMBOLSO</a>
+        <a href="politica-privacidad.html">POLÍTICA DE PRIVACIDAD</a>
+        <a href="terminos-servicio.html">TÉRMINOS DEL SERVICIO</a>
+        <a href="politica-envio.html">POLÍTICA DE ENVÍO</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>SOBRE NOSOTROS</h3>
+        <a href="contactanos.html">CONTÁCTANOS</a>
+        <a href="sobre-nosotros.html">SOBRE NOSOTROS</a>
+        <a href="preguntas-frecuentes.html">PREGUNTAS FRECUENTES</a>
+      </div>
+    </section>
+
+  <section class="footer-bottom">
+    <p>2026 © ORIGEN PERFUMERÍA. TODOS LOS DERECHOS RESERVADOS</p>
+    <div class="footer-payments">
+      <img src="img/pagos/pse.png" alt="PSE">
+      <img src="img/pagos/mastercard.png" alt="Mastercard">
+      <img src="img/pagos/visa.png" alt="Visa">
+      <img src="img/pagos/amex.png" alt="Amex">
+    </div>
+  </section>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>Carrito</h2>
+    <span id="closeCart" style="cursor:pointer;font-size:22px;">✕</span>
+  </div>
+  <div class="cart-body">
+    <p>Tu carrito está vacío</p>
+  </div>
+  <div class="cart-footer">
+    <a href="todos.html" class="btn-primary">Seguir comprando</a>
+  </div>
+</div>
+
+<script>
+  const heroSlides = document.querySelectorAll(".hero-slide");
+  const heroDots = document.querySelectorAll(".hero-dot");
+  const prevBtn = document.querySelector(".hero-prev");
+  const nextBtn = document.querySelector(".hero-next");
+  let currentSlide = 0;
+  let heroInterval;
+
+  function showSlide(index){
+    heroSlides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    heroDots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+    currentSlide = index;
+  }
+
+  function nextSlide(){
+    let next = currentSlide + 1;
+    if(next >= heroSlides.length) next = 0;
+    showSlide(next);
+  }
+
+  function prevSlide(){
+    let prev = currentSlide - 1;
+    if(prev < 0) prev = heroSlides.length - 1;
+    showSlide(prev);
+  }
+
+  function startHeroAuto(){
+    heroInterval = setInterval(nextSlide, 5000);
+  }
+
+  function resetHeroAuto(){
+    clearInterval(heroInterval);
+    startHeroAuto();
+  }
+
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    resetHeroAuto();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    resetHeroAuto();
+  });
+
+  heroDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      resetHeroAuto();
+    });
+  });
+
+  showSlide(0);
+  startHeroAuto();
+
+  const searchForm = document.getElementById("searchForm");
+  const searchInputHeader = document.getElementById("searchInputHeader");
+
+  if(searchForm && searchInputHeader){
+    searchForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      const texto = searchInputHeader.value.trim();
+      if(texto !== ""){
+        window.location.href = `todos.html?buscar=${encodeURIComponent(texto)}`;
+      } else {
+        window.location.href = "todos.html";
+      }
+    });
+  }
+
+  const announcementItems = document.querySelectorAll(".announcement-item");
+  let announcementIndex = 0;
+
+  function cambiarAnnouncement(){
+    announcementItems[announcementIndex].classList.remove("active");
+    announcementIndex++;
+    if(announcementIndex >= announcementItems.length){
+      announcementIndex = 0;
+    }
+    announcementItems[announcementIndex].classList.add("active");
+  }
+
+  setInterval(cambiarAnnouncement, 3500);
+
+  const productTabs = document.querySelectorAll(".products-tab");
+  const productPanels = document.querySelectorAll(".products-panel");
+
+  productTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const target = tab.getAttribute("data-tab");
+      productTabs.forEach(btn => btn.classList.remove("active"));
+      productPanels.forEach(panel => panel.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(target).classList.add("active");
+    });
+  });
+
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+  const stickyHeader = document.getElementById("stickyHeader");
+
+  let lastScrollTop = 0;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if(window.scrollY > 320){
+      scrollTopBtn.classList.add("show");
+      floatingExpert.classList.add("show");
+    } else {
+      scrollTopBtn.classList.remove("show");
+      floatingExpert.classList.remove("show");
+      floatingExpert.classList.remove("hide-on-scroll");
+    }
+
+    if(currentScroll > lastScrollTop && currentScroll > 220){
+      floatingExpert.classList.add("hide-on-scroll");
+    } else if(currentScroll < lastScrollTop){
+      floatingExpert.classList.remove("hide-on-scroll");
+      if(currentScroll > 320){
+        floatingExpert.classList.add("show");
+      }
+    }
+
+    if(currentScroll > 60){
+      stickyHeader.classList.add("show-shadow");
+    } else {
+      stickyHeader.classList.remove("show-shadow");
+    }
+
+    if(window.innerWidth > 768){
+      if(currentScroll > lastScrollTop && currentScroll > 140){
+        stickyHeader.classList.add("hide-header");
+      } else {
+        stickyHeader.classList.remove("hide-header");
+      }
+    } else {
+      stickyHeader.classList.remove("hide-header");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  const categoriesTrack = document.getElementById("categoriesTrack");
+  const categoryCards = document.querySelectorAll(".category-card");
+  const categoryDots = document.querySelectorAll(".category-dot");
+
+  let currentCategory = 0;
+  let categoriesInterval = null;
+
+  function getCardStep(){
+    if(!categoryCards.length) return 0;
+    const cardWidth = categoryCards[0].offsetWidth;
+    const trackStyle = window.getComputedStyle(categoriesTrack);
+    const gap = parseInt(trackStyle.columnGap || trackStyle.gap || 22);
+    return cardWidth + gap;
+  }
+
+  function setActiveCategory(index){
+    categoryCards.forEach((card, i) => {
+      card.classList.toggle("is-active", i === index);
+    });
+
+    categoryDots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+
+    currentCategory = index;
+  }
+
+  function goToCategory(index, smooth = true){
+    if(!categoryCards.length) return;
+
+    const step = getCardStep();
+    const trackWidth = categoriesTrack.offsetWidth;
+    const cardWidth = categoryCards[index].offsetWidth;
+    const targetLeft = (step * index) - ((trackWidth - cardWidth) / 2);
+
+    categoriesTrack.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: smooth ? "smooth" : "auto"
+    });
+
+    setActiveCategory(index);
+  }
+
+  function nextCategory(){
+    let next = currentCategory + 1;
+    if(next >= categoryCards.length) next = 0;
+    goToCategory(next);
+  }
+
+  function startCategoriesAuto(){
+    clearInterval(categoriesInterval);
+    categoriesInterval = setInterval(nextCategory, 3500);
+  }
+
+  function resetCategoriesAuto(){
+    startCategoriesAuto();
+  }
+
+  categoryDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      goToCategory(index);
+      resetCategoriesAuto();
+    });
+  });
+
+  categoryCards.forEach((card, index) => {
+    card.addEventListener("mouseenter", () => {
+      setActiveCategory(index);
+    });
+
+    card.addEventListener("click", () => {
+      setActiveCategory(index);
+    });
+  });
+
+  let scrollTimeout;
+  categoriesTrack.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const trackCenter = categoriesTrack.scrollLeft + (categoriesTrack.offsetWidth / 2);
+      let nearestIndex = 0;
+      let nearestDistance = Infinity;
+
+      categoryCards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(trackCenter - cardCenter);
+        if(distance < nearestDistance){
+          nearestDistance = distance;
+          nearestIndex = index;
+        }
+      });
+
+      setActiveCategory(nearestIndex);
+    }, 120);
+  });
+
+  window.addEventListener("resize", () => {
+    goToCategory(currentCategory, false);
+  });
+
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      goToCategory(0, false);
+      startCategoriesAuto();
+    }, 120);
+  });
+</script>
+
+<script src="carrito.js"></script>
+
+</body>
+</html>

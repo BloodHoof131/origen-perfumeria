@@ -1,0 +1,575 @@
+{
+  "hombre": [
+    {
+      "id": "afnan-9am-dive",
+      "nombre": "Afnan 9AM Dive",
+      "precio": 230000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/afnan-9am-dive.jpg",
+      "hover": "img/hombre/afnan-9am-dive-hover.jpg"
+    },
+    {
+      "id": "afnan-9pm",
+      "nombre": "Afnan 9PM",
+      "precio": 230000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/afnan-9pm.jpeg",
+      "hover": "img/hombre/afnan-9pm-hover.jpeg"
+    },
+    {
+      "id": "afnan-9pm-elixir",
+      "nombre": "Afnan 9PM Elixir",
+      "precio": 280000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/afnan-9pm-elixir.jpg",
+      "hover": "img/hombre/afnan-9pm-elixir-hover.webp"
+    },
+    {
+      "id": "armaf-club-de-nuit-intense-man",
+      "nombre": "Armaf Club de Nuit Intense Man",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/armaf-club-de-nuit-intense-man.png",
+      "hover": "img/hombre/armaf-club-de-nuit-intense-man-hover.jpg"
+    },
+    {
+      "id": "armaf-odyssey-mandarin-sky",
+      "nombre": "Armaf Odyssey Mandarin Sky",
+      "precio": 230000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/armaf-odyssey-mandarin-sky.jpeg",
+      "hover": "img/hombre/armaf-odyssey-mandarin-sky-hover.jpg"
+    },
+    {
+      "id": "armaf-odyssey-mandarin-sky-elixir",
+      "nombre": "Armaf Odyssey Mandarin Sky Elixir",
+      "precio": 270000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/armaf-odyssey-mandarin-sky-elixir.jpg",
+      "hover": "img/hombre/armaf-odyssey-mandarin-sky-elixir-hover.webp"
+    },
+    {
+      "id": "bharara-king",
+      "nombre": "Bharara King",
+      "precio": 320000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/bharara-king.jpg",
+      "hover": "img/hombre/bharara-king-hover.jpg"
+    },
+    {
+      "id": "carolina-herrera-212-nyc",
+      "nombre": "Carolina Herrera 212 NYC",
+      "precio": 450000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/carolina-herrera-212-nyc.jpg",
+      "hover": "img/hombre/carolina-herrera-212-nyc-hover.jpg"
+    },
+    {
+      "id": "carolina-herrera-212-vip",
+      "nombre": "Carolina Herrera 212 VIP",
+      "precio": 420000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/carolina-herrera-212-vip.jpeg",
+      "hover": "img/hombre/carolina-herrera-212-vip-hover.jpg"
+    },
+    {
+      "id": "dolce-gabbana-light-blue",
+      "nombre": "Dolce & Gabbana Light Blue",
+      "precio": 450000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/dolce-gabbana-light-blue.webp",
+      "hover": "img/hombre/dolce-gabbana-light-blue-hover.jpg"
+    },
+    {
+      "id": "giorgio-armani-acqua-di-gio",
+      "nombre": "Giorgio Armani Acqua di Gio",
+      "precio": 440000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/giorgio-armani-acqua-di-gio.jpg",
+      "hover": "img/hombre/giorgio-armani-acqua-di-gio-hover.jpg"
+    },
+    {
+      "id": "giorgio-armani-acqua-di-gio-profondo",
+      "nombre": "Giorgio Armani Acqua di Gio Profondo",
+      "precio": 620000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/giorgio-armani-acqua-di-gio-profondo.jpg",
+      "hover": "img/hombre/giorgio-armani-acqua-di-gio-profondo-hover.png"
+    },
+    {
+      "id": "issey-miyake-leau-dissey",
+      "nombre": "Issey Miyake L'eau d'Issey",
+      "precio": 290000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/issey-miyake-leau-dissey.jpg",
+      "hover": "img/hombre/issey-miyake-leau-dissey-hover.jpg"
+    },
+    {
+      "id": "lacoste-l1212-blanc",
+      "nombre": "Lacoste L12.12 Blanc",
+      "precio": 300000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/lacoste-l1212-blanc.jpg",
+      "hover": "img/hombre/lacoste-l1212-blanc-hover.jpeg"
+    },
+    {
+      "id": "lattafa-asad",
+      "nombre": "Lattafa Asad",
+      "precio": 200000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/lattafa-asad.jpeg",
+      "hover": "img/hombre/lattafa-asad-hover.webp"
+    },
+    {
+      "id": "lattafa-asad-bourbon",
+      "nombre": "Lattafa Asad Bourbon",
+      "precio": 230000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/lattafa-asad-bourbon.png",
+      "hover": "img/hombre/lattafa-asad-bourbon-hover.jpg"
+    },
+    {
+      "id": "lattafa-fakhar",
+      "nombre": "Lattafa Fakhar",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/lattafa-fakhar.jpg",
+      "hover": "img/hombre/lattafa-fakhar-hover.webp"
+    },
+    {
+      "id": "montblanc-starwalker",
+      "nombre": "Montblanc Starwalker",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/montblanc-starwalker.jpg",
+      "hover": "img/hombre/montblanc-starwalker-hover.webp"
+    },
+    {
+      "id": "moschino-toy-boy",
+      "nombre": "Moschino Toy Boy",
+      "precio": 210000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/moschino-toy-boy.jpg",
+      "hover": "img/hombre/moschino-toy-boy-hover.jpeg"
+    },
+    {
+      "id": "nautica-voyage",
+      "nombre": "Nautica Voyage",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/nautica-voyage.webp",
+      "hover": "img/hombre/nautica-voyage-hover.jpg"
+    },
+    {
+      "id": "paco-rabanne-invictus",
+      "nombre": "Paco Rabanne Invictus",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/paco-rabanne-invictus.webp",
+      "hover": "img/hombre/paco-rabanne-invictus-hover.webp"
+    },
+    {
+      "id": "paco-rabanne-one-million",
+      "nombre": "Paco Rabanne One Million",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/paco-rabanne-one-million.jpg",
+      "hover": "img/hombre/paco-rabanne-one-million-hover.jpg"
+    },
+    {
+      "id": "rasasi-hawas-fire",
+      "nombre": "Rasasi Hawas Fire",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/rasasi-hawas-fire.png",
+      "hover": "img/hombre/rasasi-hawas-fire-hover.webp"
+    },
+    {
+      "id": "rasasi-hawas-tropical",
+      "nombre": "Rasasi Hawas Tropical",
+      "precio": 210000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/rasasi-hawas-tropical.jpeg",
+      "hover": "img/hombre/rasasi-hawas-tropical-hover.webp"
+    },
+    {
+      "id": "valentino-uomo-born-in-roma",
+      "nombre": "Valentino Uomo Born in Roma",
+      "precio": 270000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/valentino-uomo-born-in-roma.png",
+      "hover": "img/hombre/valentino-uomo-born-in-roma-hover.jpg"
+    },
+    {
+      "id": "versace-eros-flame",
+      "nombre": "Versace Eros Flame",
+      "precio": 400000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/versace-eros-flame.jpg",
+      "hover": "img/hombre/versace-eros-flame-hover.jpg"
+    },
+    {
+      "id": "versace-eros",
+      "nombre": "Versace Eros",
+      "precio": 390000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/versace-eros.jpg",
+      "hover": "img/hombre/versace-eros-hover.png"
+    }
+  ],
+  "mujer": [
+    {
+      "id": "ariana-grande-cloud",
+      "nombre": "Ariana Grande Cloud",
+      "precio": 360000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/ariana-grande-cloud.jpeg",
+      "hover": "img/mujer/ariana-grande-cloud-hover.jpg"
+    },
+    {
+      "id": "ariana-grande-cloud-pink",
+      "nombre": "Ariana Grande Cloud Pink",
+      "precio": 370000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/ariana-grande-cloud-pink.webp",
+      "hover": "img/mujer/ariana-grande-cloud-pink-hover.png"
+    },
+    {
+      "id": "ariana-grande-thank-u-next",
+      "nombre": "Ariana Grande Thank U Next",
+      "precio": 310000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/ariana-grande-thank-u-next.webp",
+      "hover": "img/mujer/ariana-grande-thank-u-next-hover.jpg"
+    },
+    {
+      "id": "armaf-club-de-nuit-maleka",
+      "nombre": "Armaf Club de Nuit Maleka",
+      "precio": 280000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/armaf-club-de-nuit-maleka.png",
+      "hover": "img/mujer/armaf-club-de-nuit-maleka-hover.jpg"
+    },
+    {
+      "id": "armaf-yum-yum",
+      "nombre": "Armaf Yum Yum",
+      "precio": 300000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/armaf-yum-yum.webp",
+      "hover": "img/mujer/armaf-yum-yum-hover.webp"
+    },
+    {
+      "id": "calvin-klein-ck-in2u-for-her",
+      "nombre": "Calvin Klein CK IN2U For Her",
+      "precio": 160000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/calvin-klein-ck-in2u-for-her.jpg",
+      "hover": "img/mujer/calvin-klein-ck-in2u-for-her-hover.jpg"
+    },
+    {
+      "id": "lattafa-eclaire",
+      "nombre": "Lattafa Eclaire",
+      "precio": 240000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-eclaire.jpeg",
+      "hover": "img/mujer/lattafa-eclaire-hover.jpg"
+    },
+    {
+      "id": "lattafa-haya",
+      "nombre": "Lattafa Haya",
+      "precio": 210000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-haya.webp",
+      "hover": "img/mujer/lattafa-haya-hover.webp"
+    },
+    {
+      "id": "lattafa-yara",
+      "nombre": "Lattafa Yara",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-yara.png",
+      "hover": "img/mujer/lattafa-yara-hover.jpeg"
+    },
+    {
+      "id": "lattafa-yara-candy",
+      "nombre": "Lattafa Yara Candy",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-yara-candy.jpg",
+      "hover": "img/mujer/lattafa-yara-candy-hover.jpg"
+    },
+    {
+      "id": "lattafa-yara-moi",
+      "nombre": "Lattafa Yara Moi",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-yara-moi.webp",
+      "hover": "img/mujer/lattafa-yara-moi-hover.jpg"
+    },
+    {
+      "id": "lattafa-yara-tous",
+      "nombre": "Lattafa Yara Tous",
+      "precio": 210000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-yara-tous.jpg",
+      "hover": "img/mujer/lattafa-yara-tous-hover.png"
+    },
+    {
+      "id": "moschino-toy-2",
+      "nombre": "Moschino Toy 2",
+      "precio": 200000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/moschino-toy-2.jpeg",
+      "hover": "img/mujer/moschino-toy-2-hover.jpg"
+    },
+    {
+      "id": "moschino-toy-2-bubble-gum",
+      "nombre": "Moschino Toy 2 Bubble Gum",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/moschino-toy-2-bubble-gum.jpg",
+      "hover": "img/mujer/moschino-toy-2-bubble-gum-hover.jpg"
+    },
+    {
+      "id": "rave-now-pink",
+      "nombre": "Rave Now Pink",
+      "precio": 200000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/rave-now-pink.jpg",
+      "hover": "img/mujer/rave-now-pink-hover.jpg"
+    }
+  ],
+  "unisex": [
+    {
+      "id": "al-haramain-amber-oud-gold",
+      "nombre": "Al Haramain Amber Oud Gold",
+      "precio": 370000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/al-haramain-amber-oud-gold.png",
+      "hover": "img/unisex/al-haramain-amber-oud-gold-hover.png"
+    },
+    {
+      "id": "armaf-club-de-nuit-untold",
+      "nombre": "Armaf Club de Nuit Untold",
+      "precio": 270000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/armaf-club-de-nuit-untold.jpg",
+      "hover": "img/unisex/armaf-club-de-nuit-untold-hover.png"
+    },
+    {
+      "id": "armaf-odyssey-dubai-chocolat",
+      "nombre": "Armaf Odyssey Dubai Chocolat",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/armaf-odyssey-dubai-chocolat.png",
+      "hover": "img/unisex/armaf-odyssey-dubai-chocolat-hover.jpg"
+    },
+    {
+      "id": "armaf-odyssey-go-mango-tropical",
+      "nombre": "Armaf Odyssey Go Mango Tropical",
+      "precio": 290000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/armaf-odyssey-go-mango-tropical.jpg",
+      "hover": "img/unisex/armaf-odyssey-go-mango-tropical-hover.jpg"
+    },
+    {
+      "id": "calvin-klein-ck-one",
+      "nombre": "Calvin Klein CK One",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/calvin-klein-ck-one.webp",
+      "hover": "img/unisex/calvin-klein-ck-one-hover.jpg"
+    },
+    {
+      "id": "emper-stallion-53",
+      "nombre": "Emper Stallion 53",
+      "precio": 190000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/emper-stallion-53.jpg",
+      "hover": "img/unisex/emper-stallion-53-hover.jpeg"
+    },
+    {
+      "id": "jo-milano-game-of-spades-full-house",
+      "nombre": "Jo Milano Game of Spades Full House",
+      "precio": 430000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/jo-milano-game-of-spades-full-house.jpg",
+      "hover": "img/unisex/jo-milano-game-of-spades-full-house-hover.webp"
+    },
+    {
+      "id": "lattafa-ajwad",
+      "nombre": "Lattafa Ajwad",
+      "precio": 180000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-ajwad.webp",
+      "hover": "img/unisex/lattafa-ajwad-hover.webp"
+    },
+    {
+      "id": "lattafa-art-of-universe",
+      "nombre": "Lattafa Art of Universe",
+      "precio": 300000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-art-of-universe.webp",
+      "hover": "img/unisex/lattafa-art-of-universe-hover.png"
+    },
+    {
+      "id": "lattafa-badee-al-oud-amethyst",
+      "nombre": "Lattafa Badee Al Oud Amethyst",
+      "precio": 190000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-badee-al-oud-amethyst.webp",
+      "hover": "img/unisex/lattafa-badee-al-oud-amethyst-hover.png"
+    },
+    {
+      "id": "lattafa-badee-al-oud-honor-glory",
+      "nombre": "Lattafa Badee Al Oud Honor & Glory",
+      "precio": 190000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-badee-al-oud-honor-glory.jpg",
+      "hover": "img/unisex/lattafa-badee-al-oud-honor-glory-hover.jpg"
+    },
+    {
+      "id": "lattafa-badee-al-oud-oud-for-glory",
+      "nombre": "Lattafa Badee Al Oud Oud for Glory",
+      "precio": 190000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-badee-al-oud-oud-for-glory.webp",
+      "hover": "img/unisex/lattafa-badee-al-oud-oud-for-glory-hover.png"
+    },
+    {
+      "id": "lattafa-badee-al-oud-sublime",
+      "nombre": "Lattafa Badee Al Oud Sublime",
+      "precio": 190000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-badee-al-oud-sublime.webp",
+      "hover": "img/unisex/lattafa-badee-al-oud-sublime-hover.jpg"
+    },
+    {
+      "id": "lattafa-khamrah",
+      "nombre": "Lattafa Khamrah",
+      "precio": 210000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-khamrah.jpg",
+      "hover": "img/unisex/lattafa-khamrah-hover.jpg"
+    },
+    {
+      "id": "lattafa-khamrah-dukhan",
+      "nombre": "Lattafa Khamrah Dukhan",
+      "precio": 220000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-khamrah-dukhan.jpg",
+      "hover": "img/unisex/lattafa-khamrah-dukhan-hover.png"
+    },
+    {
+      "id": "lattafa-mussamam-white-intense",
+      "nombre": "Lattafa Mussamam White Intense",
+      "precio": 270000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-mussamam-white-intense.png",
+      "hover": "img/unisex/lattafa-mussamam-white-intense-hover.png"
+    },
+    {
+      "id": "lattafa-pride-alqiam-gold",
+      "nombre": "Lattafa Pride Alqiam Gold",
+      "precio": 200000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-pride-alqiam-gold.png",
+      "hover": "img/unisex/lattafa-pride-alqiam-gold-hover.jpeg"
+    },
+    {
+      "id": "lattafa-pride-shaheen-gold",
+      "nombre": "Lattafa Pride Shaheen Gold",
+      "precio": 210000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-pride-shaheen-gold.webp",
+      "hover": "img/unisex/lattafa-pride-shaheen-gold-hover.png"
+    },
+    {
+      "id": "montale-arabians-tonka",
+      "nombre": "Montale Arabians Tonka",
+      "precio": 200000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/montale-arabians-tonka.png",
+      "hover": "img/unisex/montale-arabians-tonka-hover.jpg"
+    },
+    {
+      "id": "moschino-toy-2-pearl",
+      "nombre": "Moschino Toy 2 Pearl",
+      "precio": 210000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/moschino-toy-2-pearl.jpg",
+      "hover": "img/unisex/moschino-toy-2-pearl-hover.jpg"
+    },
+    {
+      "id": "orientica-velvet-gold",
+      "nombre": "Orientica Velvet Gold",
+      "precio": 270000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/orientica-velvet-gold.jpg",
+      "hover": "img/unisex/orientica-velvet-gold-hover.png"
+    }
+  ]
+}

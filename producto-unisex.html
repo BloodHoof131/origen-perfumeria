@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfume | Origen Perfumería</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+    html{
+      scroll-behavior:smooth;
+    }
+    body{
+      font-family:'Times New Roman', serif;
+      background:#D9D7D7;
+      color:#2f2b1f;
+    }
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+    img{
+      max-width:100%;
+      display:block;
+    }
+    button{
+      font-family:inherit;
+    }
+    .top-announcement{
+      position:relative;
+      background:linear-gradient(90deg, #ece7da, #ddd6c3, #ece7da);
+      color:#6b5523;
+      height:38px;
+      overflow:hidden;
+      border-bottom:1px solid rgba(107,85,35,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .announcement-track{
+      position:relative;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .announcement-item{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      opacity:0;
+      transition:opacity 0.7s ease, transform 0.7s ease;
+      font-size:12.5px;
+      font-weight:600;
+      letter-spacing:0.04em;
+      white-space:nowrap;
+      color:#6b5523;
+    }
+    .announcement-item.active{
+      opacity:1;
+      transform:translate(-50%, -50%);
+    }
+    .info-bar{
+      background:#ece8dd;
+      color:#6b5523;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:8px 24px;
+      font-size:12px;
+      border-bottom:1px solid rgba(107,85,35,0.15);
+    }
+    .info-left{
+      display:flex;
+      gap:22px;
+      flex-wrap:wrap;
+    }
+    .info-link{
+      text-decoration:none;
+      color:#6b5523;
+      transition:0.3s;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .info-link:hover{
+      color:#b8860b;
+    }
+    .sticky-header{
+      position:sticky;
+      top:0;
+      z-index:120;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .sticky-header.hide-header{
+      transform:translateY(-100%);
+    }
+    .sticky-header.show-shadow{
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+    .main-header{
+      background:#D9D7D7;
+      border-bottom:1px solid rgba(0,0,0,0.05);
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      padding:6px 24px;
+      gap:12px;
+      min-height:72px;
+    }
+    .search-box{
+      display:flex;
+      justify-content:flex-start;
+    }
+    .search-box form{
+      width:100%;
+      display:flex;
+    }
+    .search-box input{
+      width:220px;
+      max-width:100%;
+      padding:8px 14px;
+      border-radius:10px;
+      border:1px solid rgba(107,85,35,0.18);
+      background:#efeded;
+      color:#6b5523;
+      font-size:13px;
+      outline:none;
+    }
+    .search-box input::placeholder{
+      color:#7b735f;
+    }
+    .header-logo a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .header-logo{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .header-logo img{
+  width:300px;
+  max-width:100%;
+  display:block;
+}
+    .header-icons{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:14px;
+    }
+    .header-icons a{
+      text-decoration:none;
+      color:#6b5523;
+      font-size:20px;
+      transition:0.3s;
+    }
+    .header-icons a:hover{
+      color:#b8860b;
+      transform:translateY(-2px);
+    }
+    .main-menu{
+      background:#d8d2bf;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      padding:8px 16px;
+      flex-wrap:wrap;
+      border-bottom:1px solid rgba(107,85,35,0.08);
+    }
+    .main-menu a{
+      position:relative;
+      text-decoration:none;
+      color:#6b5523;
+      font-size:12.5px;
+      font-weight:bold;
+      letter-spacing:0.4px;
+      transition:0.3s;
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .main-menu a:hover{
+      color:#b8860b;
+    }
+    .main-menu a.active{
+      color:#f7f2e8;
+      background:#7a5c2e;
+    }
+    .mobile-category-tabs{
+      display:none;
+    }
+    .breadcrumb{
+      width:min(1280px, 94%);
+      margin:18px auto 10px;
+      font-size:13px;
+      color:#7a725f;
+    }
+    .breadcrumb a:hover{
+      color:#b8860b;
+    }
+    .product-page{
+      width:min(1280px, 94%);
+      margin:0 auto 24px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:start;
+    }
+    .gallery-box{
+      background:#ece8dd;
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(0,0,0,0.06);
+      position:relative;
+    }
+    .main-image-wrap{
+      border-radius:22px;
+      overflow:hidden;
+      background:#f4f1eb;
+      aspect-ratio:1 / 1.08;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:14px;
+    }
+    .main-image-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+    .thumbs{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+    }
+    .thumb{
+      border:none;
+      border-radius:16px;
+      overflow:hidden;
+      background:#f4f1eb;
+      cursor:pointer;
+      border:2px solid transparent;
+      transition:0.25s ease;
+      aspect-ratio:1 / 1;
+    }
+    .thumb.active{
+      border-color:#c99a2e;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+    .product-info{
+      background:#ece8dd;
+      border-radius:24px;
+      padding:28px 26px;
+      box-shadow:0 8px 22px rgba(0,0,0,0.06);
+    }
+    .tag-category{
+      display:inline-block;
+      background:#d8d2bf;
+      color:#6b5523;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .product-info h1{
+      font-size:34px;
+      color:#2f2b1f;
+      margin-bottom:10px;
+      line-height:1.1;
+    }
+    .price{
+      font-size:34px;
+      color:#b8860b;
+      font-weight:bold;
+      margin-bottom:18px;
+    }
+    .benefits-list{
+      display:grid;
+      gap:14px;
+      margin-bottom:22px;
+    }
+    .benefit-row{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      color:#2f2b1f;
+      font-size:16px;
+      line-height:1.5;
+    }
+    .benefit-row i{
+      font-size:22px;
+      color:#7a5c2e;
+      width:26px;
+      margin-top:1px;
+    }
+    .trust-banner{
+      background:linear-gradient(135deg, #c9ab72, #b8860b);
+      color:#fffdf8;
+      border-radius:18px;
+      padding:14px 18px;
+      margin:18px 0 24px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .trust-avatars{
+      display:flex;
+      align-items:center;
+    }
+    .trust-avatars span{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:2px solid #f4f1eb;
+      background:#eadcc2;
+      display:inline-block;
+      margin-left:-10px;
+    }
+    .trust-avatars span:first-child{
+      margin-left:0;
+    }
+    .trust-text{
+      font-size:15px;
+      line-height:1.4;
+    }
+    .quantity-section{
+      margin-bottom:22px;
+    }
+    .section-label{
+      font-size:18px;
+      color:#6b5523;
+      margin-bottom:12px;
+    }
+    .qty-wrap{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .qty-box{
+      display:flex;
+      align-items:center;
+      background:#f4f1eb;
+      border:1px solid rgba(107,85,35,0.15);
+      border-radius:14px;
+      overflow:hidden;
+    }
+    .qty-box button{
+      width:52px;
+      height:52px;
+      border:none;
+      background:transparent;
+      font-size:26px;
+      color:#6b5523;
+      cursor:pointer;
+    }
+    .qty-box span{
+      width:56px;
+      text-align:center;
+      font-size:24px;
+      color:#6b5523;
+    }
+    .actions{
+      display:grid;
+      gap:14px;
+      margin-bottom:24px;
+    }
+    .btn-outline,
+    .btn-main{
+      padding:18px 20px;
+      border-radius:14px;
+      font-size:18px;
+      text-align:center;
+      cursor:pointer;
+      transition:0.25s ease;
+      font-family:'Times New Roman', serif;
+    }
+    .btn-outline{
+      background:#f4f1eb;
+      border:1px solid #c7962c;
+      color:#6b5523;
+    }
+    .btn-outline:hover{
+      background:#ece3d3;
+      transform:translateY(-2px);
+    }
+    .btn-main{
+      background:linear-gradient(135deg, #c9ab72, #b8860b);
+      color:#fff;
+      border:none;
+    }
+    .btn-main:hover{
+      background:linear-gradient(135deg, #d2b77f, #c19118);
+      transform:translateY(-2px);
+    }
+    .details-top{
+      width:min(1280px, 94%);
+      margin:0 auto 18px;
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:16px;
+    }
+    .mini-card{
+      background:#ece8dd;
+      border-radius:18px;
+      padding:18px 16px;
+      text-align:center;
+      box-shadow:0 6px 16px rgba(0,0,0,0.05);
+    }
+    .mini-card i{
+      font-size:34px;
+      color:#7a5c2e;
+      margin-bottom:12px;
+    }
+    .mini-card h4{
+      font-size:16px;
+      margin-bottom:8px;
+      color:#2f2b1f;
+    }
+    .mini-card p{
+      font-size:14px;
+      line-height:1.5;
+      color:#4b4535;
+    }
+    .payments-strip{
+      width:min(1280px, 94%);
+      margin:0 auto 22px;
+      background:#ece8dd;
+      border-radius:22px;
+      padding:18px 20px;
+      display:grid;
+      grid-template-columns:repeat(6, 1fr);
+      gap:14px;
+      align-items:center;
+      box-shadow:0 6px 16px rgba(0,0,0,0.05);
+    }
+    .pay-item{
+      background:#f4f1eb;
+      border-radius:14px;
+      padding:10px;
+      min-height:66px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .pay-item img{
+      max-width:100%;
+      max-height:42px;
+      object-fit:contain;
+      display:block;
+    }
+    .accordion-section{
+      width:min(1280px, 94%);
+      margin:0 auto 40px;
+    }
+    .accordion-item{
+      border-bottom:1px solid rgba(107,85,35,0.18);
+      background:transparent;
+    }
+    .accordion-header{
+      width:100%;
+      border:none;
+      background:transparent;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:24px 0;
+      font-size:22px;
+      color:#6b5523;
+      cursor:pointer;
+      font-family:'Times New Roman', serif;
+    }
+    .accordion-header i{
+      transition:0.25s ease;
+    }
+    .accordion-item.active .accordion-header i{
+      transform:rotate(180deg);
+    }
+    .accordion-content{
+      display:none;
+      padding:0 0 24px;
+      color:#3f3a2c;
+      font-size:18px;
+      line-height:1.8;
+    }
+    .accordion-item.active .accordion-content{
+      display:block;
+    }
+    .accordion-content strong{
+      color:#2f2b1f;
+    }
+    .reviews-empty{
+      width:min(1280px, 94%);
+      margin:0 auto 40px;
+      background:#ece8dd;
+      border-radius:22px;
+      padding:26px 24px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.05);
+    }
+    .reviews-empty h2{
+      font-size:28px;
+      color:#6b5523;
+      margin-bottom:10px;
+    }
+    .reviews-empty p{
+      font-size:17px;
+      color:#4b4535;
+      line-height:1.6;
+    }
+    .sticky-cart-bar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      background:#f4f1eb;
+      border-top:1px solid rgba(107,85,35,0.15);
+      box-shadow:0 -6px 18px rgba(0,0,0,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:12px 20px;
+      z-index:120;
+      transform:translateY(110%);
+      transition:transform 0.35s ease;
+    }
+    .sticky-cart-bar.show{
+      transform:translateY(0);
+    }
+    .sticky-product{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+      flex:1;
+    }
+    .sticky-product img{
+      width:52px;
+      height:52px;
+      object-fit:contain;
+      border-radius:10px;
+      background:#fff;
+      padding:4px;
+      flex-shrink:0;
+    }
+    .sticky-product-text{
+      min-width:0;
+    }
+    .sticky-product-text h4{
+      font-size:15px;
+      color:#2f2b1f;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      margin-bottom:4px;
+    }
+    .sticky-product-text p{
+      font-size:14px;
+      color:#b8860b;
+      font-weight:bold;
+    }
+    .sticky-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .sticky-qty{
+      display:flex;
+      align-items:center;
+      background:#fff;
+      border:1px solid rgba(107,85,35,0.15);
+      border-radius:10px;
+      overflow:hidden;
+    }
+    .sticky-qty button{
+      width:42px;
+      height:42px;
+      border:none;
+      background:transparent;
+      font-size:22px;
+      color:#6b5523;
+      cursor:pointer;
+    }
+    .sticky-qty span{
+      width:42px;
+      text-align:center;
+      font-size:20px;
+      color:#6b5523;
+    }
+    .sticky-add-btn{
+      border:none;
+      background:linear-gradient(135deg, #c9ab72, #b8860b);
+      color:#fff;
+      padding:14px 24px;
+      border-radius:10px;
+      font-size:16px;
+      cursor:pointer;
+      font-family:'Times New Roman', serif;
+      white-space:nowrap;
+      transition:0.25s ease;
+    }
+    .sticky-add-btn:hover{
+      background:linear-gradient(135deg, #d2b77f, #c19118);
+    }
+    .scroll-top{
+      position:fixed;
+      right:20px;
+      bottom:90px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #c9ab72, #b8860b);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
+      cursor:pointer;
+      z-index:130;
+      opacity:0;
+      visibility:hidden;
+      transition:0.3s ease;
+      border:none;
+    }
+    .scroll-top.show{
+      opacity:1;
+      visibility:visible;
+    }
+    .scroll-top i{
+      font-size:22px;
+    }
+    .site-footer{
+      margin-top:40px;
+      background:#D9D7D7;
+      border-top:1px solid rgba(107,85,35,0.10);
+    }
+    .footer-benefits{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:24px;
+      padding:40px 50px 34px;
+      border-bottom:1px solid rgba(107,85,35,0.10);
+    }
+    .benefit-item{
+      text-align:center;
+      color:#2f2b1f;
+    }
+    .benefit-item i{
+      font-size:28px;
+      margin-bottom:14px;
+      color:#7a5c2e;
+    }
+    .benefit-item h4{
+      font-size:18px;
+      margin-bottom:10px;
+      color:#2f2b1f;
+    }
+    .benefit-item p{
+      font-size:14px;
+      line-height:1.5;
+      color:#3f3a2c;
+      max-width:260px;
+      margin:0 auto;
+    }
+    .footer-main{
+      display:grid;
+      grid-template-columns:1.5fr 1fr 1fr 1fr;
+      gap:40px;
+      padding:34px 50px;
+    }
+    .footer-column h3{
+      font-size:16px;
+      margin-bottom:18px;
+      color:#2f2b1f;
+      letter-spacing:0.02em;
+    }
+    .footer-column p{
+      font-size:14px;
+      line-height:1.6;
+      color:#3f3a2c;
+      margin-bottom:18px;
+      max-width:320px;
+    }
+    .footer-column a{
+      display:block;
+      font-size:13px;
+      color:#2f2b1f;
+      margin-bottom:14px;
+      letter-spacing:0.10em;
+      text-transform:uppercase;
+    }
+    .footer-column a:hover{
+      color:#b8860b;
+    }
+    .footer-contact{
+      margin-top:10px;
+    }
+    .footer-bottom{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:18px 50px 26px;
+    }
+    .footer-bottom p{
+      font-size:12px;
+      letter-spacing:0.12em;
+      color:#2f2b1f;
+    }
+    .footer-payments{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-payments img{
+      height:28px;
+      background:#efeeee;
+      padding:6px 12px;
+      border-radius:8px;
+      border:1px solid rgba(107,85,35,0.10);
+    }
+
+/* BOTÓN */
+.btn-primary{
+  display:block;
+  width:100%;
+  text-align:center;
+  background:#5a4720;
+  color:#f5f1e8;
+  padding:14px 18px;
+  border-radius:12px;
+  font-size:16px;
+  font-family:'Times New Roman', serif;
+  transition:0.3s ease;
+}
+.btn-primary:hover{
+  background:#6a5428;
+}
+
+/* OVERLAY */
+.cart-icon-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cart-count{
+  position:absolute;
+  top:-8px;
+  right:-10px;
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  border-radius:999px;
+  background:#c9a227;
+  color:#fff;
+  font-size:11px;
+  font-weight:bold;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+.btn-primary{
+  display:block;
+  width:100%;
+  text-align:center;
+  background:#5a4720;
+  color:#f5f1e8;
+  padding:14px 18px;
+  border-radius:12px;
+  font-size:16px;
+  font-family:'Times New Roman', serif;
+  transition:0.3s ease;
+}
+
+.btn-primary:hover{
+  background:#6a5428;
+}
+
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:150;
+}
+
+.cart-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.cart-sidebar{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:360px;
+  max-width:92vw;
+  height:100%;
+  background:#f8f5ef;
+  box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+  z-index:200;
+  transition:0.4s ease;
+  display:flex;
+  flex-direction:column;
+}
+
+.cart-sidebar.active{
+  right:0;
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  border-bottom:1px solid rgba(90,71,32,0.12);
+}
+
+.cart-header h2{
+  font-size:24px;
+  color:#2f2b1f;
+  margin:0;
+}
+
+.cart-header span{
+  cursor:pointer;
+  font-size:24px;
+  color:#5a4720;
+}
+
+.cart-body{
+  flex:1;
+  overflow-y:auto;
+  padding:18px;
+  text-align:left;
+}
+
+.cart-footer{
+  padding:18px;
+  border-top:1px solid rgba(90,71,32,0.12);
+  background:#f8f5ef;
+}
+
+.cart-item{
+  display:flex;
+  gap:12px;
+  padding-bottom:14px;
+  margin-bottom:14px;
+  border-bottom:1px solid rgba(90,71,32,0.10);
+}
+
+.cart-item-image{
+  width:78px;
+  height:90px;
+  flex-shrink:0;
+  border-radius:12px;
+  overflow:hidden;
+  background:#efeeee;
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-name{
+  display:block;
+  font-size:15px;
+  color:#2f2b1f;
+  line-height:1.3;
+  margin-bottom:6px;
+}
+
+.cart-item-price{
+  font-size:15px;
+  color:#c9a227;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.cart-item-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.cart-item-controls button{
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:8px;
+  background:#ece7da;
+  color:#5a4720;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.cart-item-controls span{
+  min-width:18px;
+  text-align:center;
+  font-size:15px;
+}
+
+.cart-remove-btn{
+  border:none;
+  background:transparent;
+  color:#8a4b4b;
+  font-size:13px;
+  cursor:pointer;
+  padding:0;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  font-size:17px;
+  color:#2f2b1f;
+}
+
+.cart-clear-btn{
+  width:100%;
+  margin-top:10px;
+  border:none;
+  background:#ece7da;
+  color:#5a4720;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* SIDEBAR */
+.cart-sidebar{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:320px;
+  height:100%;
+  background:#fff;
+  box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+  z-index:200;
+  transition:0.4s;
+  display:flex;
+  flex-direction:column;
+}
+.cart-sidebar.active{
+  right:0;
+}
+
+/* HEADER */
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  border-bottom:1px solid #ddd;
+}
+.cart-header span{
+  cursor:pointer;
+  font-size:22px;
+}
+
+/* BODY */
+.cart-body{
+  flex:1;
+  padding:20px;
+  text-align:center;
+}
+
+/* FOOTER */
+.cart-footer{
+  padding:20px;
+}
+
+    @media (max-width: 992px){
+      .main-header{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding:8px 16px;
+        min-height:auto;
+      }
+      .search-box{
+        justify-content:center;
+      }
+      .header-icons{
+        justify-content:center;
+      }
+      .main-menu{
+        gap:14px;
+        padding:8px 12px;
+      }
+      .product-page{
+        grid-template-columns:1fr;
+      }
+      .details-top{
+        grid-template-columns:repeat(2, 1fr);
+      }
+      .payments-strip{
+        grid-template-columns:repeat(3, 1fr);
+      }
+      .footer-benefits{
+        grid-template-columns:repeat(2, 1fr);
+        padding:32px 24px 28px;
+      }
+      .footer-main{
+        grid-template-columns:repeat(2, 1fr);
+        padding:30px 24px;
+        gap:28px;
+      }
+      .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:18px 24px 24px;
+      }
+      .sticky-cart-bar{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .sticky-actions{
+        width:100%;
+        justify-content:space-between;
+      }
+      .sticky-add-btn{
+        flex:1;
+      }
+    }
+    @media (max-width: 768px){
+      .main-menu{
+        display:none;
+      }
+      .mobile-category-tabs{
+        display:flex;
+        gap:8px;
+        overflow-x:auto;
+        white-space:nowrap;
+        background:#d8d2bf;
+        padding:10px 12px;
+        border-bottom:1px solid rgba(107,85,35,0.10);
+        scrollbar-width:none;
+      }
+      .mobile-category-tabs::-webkit-scrollbar{
+        display:none;
+      }
+      .mobile-category-tabs a{
+        flex:0 0 auto;
+        text-align:center;
+        padding:10px 14px;
+        border-radius:999px;
+        font-size:12px;
+        font-weight:bold;
+        letter-spacing:0.08em;
+        text-transform:uppercase;
+        color:#6b5523;
+        background:transparent;
+        transition:0.25s ease;
+      }
+      .mobile-category-tabs a.active{
+        background:#7a5c2e;
+        color:#f5f1e8;
+      }
+      .mobile-category-tabs a:hover{
+        background:rgba(107,85,35,0.10);
+      }
+    }
+    @media (max-width: 640px){
+      .info-bar{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+      }
+      .info-left{
+        justify-content:center;
+        gap:12px;
+      }
+      .main-header{
+        grid-template-columns:1fr auto 1fr;
+        padding:10px 14px;
+        gap:10px;
+        text-align:left;
+      }
+      .header-logo img{
+        width:200px;
+      }
+      .search-box{
+        justify-content:flex-start;
+      }
+      .search-box input{
+        width:100%;
+        padding:9px 12px;
+        font-size:12px;
+      }
+      .header-icons{
+        gap:10px;
+        justify-content:flex-end;
+      }
+      .header-icons a{
+        font-size:17px;
+      }
+      .breadcrumb{
+        font-size:12px;
+      }
+      .gallery-box,
+      .product-info{
+        border-radius:20px;
+        padding:18px 16px;
+      }
+      .product-info h1{
+        font-size:28px;
+      }
+      .price{
+        font-size:28px;
+      }
+      .benefit-row{
+        font-size:15px;
+      }
+      .details-top{
+        grid-template-columns:1fr;
+      }
+      .payments-strip{
+        grid-template-columns:repeat(2, 1fr);
+      }
+      .accordion-header{
+        font-size:18px;
+      }
+      .accordion-content{
+        font-size:16px;
+      }
+      .footer-benefits{
+        grid-template-columns:1fr;
+      }
+      .footer-main{
+        grid-template-columns:1fr;
+      }
+      .sticky-cart-bar{
+        padding:10px 12px;
+      }
+      .sticky-product img{
+        width:44px;
+        height:44px;
+      }
+      .sticky-product-text h4{
+        font-size:13px;
+      }
+      .sticky-product-text p{
+        font-size:13px;
+      }
+      .sticky-qty button,
+      .sticky-qty span{
+        width:36px;
+        height:36px;
+        font-size:18px;
+      }
+      .sticky-add-btn{
+        padding:12px 16px;
+        font-size:14px;
+      }
+      .scroll-top{
+        width:52px;
+        height:52px;
+        right:16px;
+        bottom:84px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="top-announcement">
+    <div class="announcement-track" id="announcementTrack">
+      <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
+      <span class="announcement-item">Perfumes 100% originales con garantía</span>
+      <span class="announcement-item">Asesoría personalizada por WhatsApp</span>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-left">
+      <a href="https://www.instagram.com/perfumeria.origen?igsh=MXExdmpqNTl1NnZrZg==" target="_blank" class="info-link">
+        <i class="fa-brands fa-instagram"></i> @origenperfumeria
+      </a>
+      <a href="https://wa.me/573145661788" target="_blank" class="info-link">
+        <i class="fa-brands fa-whatsapp"></i> Asesoría personalizada
+      </a>
+    </div>
+  </div>
+
+  <div class="sticky-header" id="stickyHeader">
+    <div class="main-header">
+      <div class="search-box">
+        <form id="searchForm">
+          <input type="text" id="searchInputHeader" placeholder="Buscar productos">
+        </form>
+      </div>
+      <div class="header-logo">
+        <a href="index.html">
+          <img src="logo.png" alt="Origen Perfumería">
+        </a>
+      </div>
+      <div class="header-icons">
+        <a href="cuenta.html" title="Cuenta">
+          <i class="fa-regular fa-user"></i>
+        </a>
+        <a href="favoritos.html" title="Favoritos">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+  <i class="fa-solid fa-bag-shopping"></i>
+  <span id="cartCount" class="cart-count">0</span>
+</a>
+      </div>
+    </div>
+
+    <nav class="main-menu">
+      <a href="index.html">INICIO</a>
+      <a href="todos.html">TODOS LOS PERFUMES</a>
+      <a href="hombre.html">HOMBRE</a>
+      <a href="mujer.html">MUJER</a>
+      <a href="unisex.html" class="active">UNISEX</a>
+    </nav>
+
+    <div class="mobile-category-tabs">
+      <a href="todos.html">Todos</a>
+      <a href="hombre.html">Hombre</a>
+      <a href="mujer.html">Mujer</a>
+      <a href="unisex.html" class="active">Unisex</a>
+    </div>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a> /
+    <a href="unisex.html">Unisex</a> /
+    <span id="breadcrumbName">Perfume</span>
+  </div>
+
+  <section class="product-page">
+    <div class="gallery-box">
+      <div class="main-image-wrap">
+        <img id="mainProductImage" src="" alt="">
+      </div>
+      <div class="thumbs" id="thumbsContainer"></div>
+    </div>
+
+    <div class="product-info">
+      <span class="tag-category">Unisex</span>
+      <h1 id="productName">Perfume</h1>
+      <p class="price" id="productPrice">$0</p>
+
+      <div class="benefits-list">
+        <div class="benefit-row">
+          <i class="fa-regular fa-circle-check"></i>
+          <span><strong>Perfume 100% original</strong></span>
+        </div>
+        <div class="benefit-row">
+          <i class="fa-regular fa-star"></i>
+          <span><strong>Certificado de garantía y originalidad</strong></span>
+        </div>
+        <div class="benefit-row">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span><strong>Envíos GRATIS</strong> por compras superiores a $199.900</span>
+        </div>
+        <div class="benefit-row">
+          <i class="fa-regular fa-credit-card"></i>
+          <span><strong>Todos los medios de pago disponibles</strong></span>
+        </div>
+      </div>
+
+      <div class="trust-banner">
+        <div class="trust-avatars">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="trust-text">
+          <strong>+25.000 clientes satisfechos</strong> y asesoría personalizada de un experto.
+        </div>
+      </div>
+
+      <div class="quantity-section">
+        <p class="section-label">Cantidad</p>
+        <div class="qty-wrap">
+          <div class="qty-box">
+            <button type="button" id="minusQty">−</button>
+            <span id="qtyValue">1</span>
+            <button type="button" id="plusQty">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-outline" type="button" id="addToCartBtn">Agregar al carrito</button>
+        <a id="buyWhatsapp" class="btn-main" href="#" target="_blank">Comprar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="details-top">
+    <div class="mini-card">
+      <i class="fa-regular fa-circle-check"></i>
+      <h4>Perfume 100% ORIGINAL</h4>
+      <p>Productos seleccionados con calidad y autenticidad garantizada.</p>
+    </div>
+    <div class="mini-card">
+      <i class="fa-regular fa-file-lines"></i>
+      <h4>Certificado de garantía</h4>
+      <p>Respaldamos la originalidad y el estado del producto.</p>
+    </div>
+    <div class="mini-card">
+      <i class="fa-solid fa-box-open"></i>
+      <h4>Envíos GRATIS</h4>
+      <p>En compras superiores a $199.900 a nivel nacional.</p>
+    </div>
+    <div class="mini-card">
+      <i class="fa-regular fa-credit-card"></i>
+      <h4>Todos los medios de pago</h4>
+      <p>Paga fácil y seguro con diferentes opciones disponibles.</p>
+    </div>
+  </section>
+
+  <section class="payments-strip">
+    <div class="pay-item"><img src="img/pagos/addi.png" alt="Addi"></div>
+    <div class="pay-item"><img src="img/pagos/sistecredito.png" alt="Sistecrédito"></div>
+    <div class="pay-item"><img src="img/pagos/mercado-pago.png" alt="Mercado Pago"></div>
+    <div class="pay-item"><img src="img/pagos/visa.png" alt="Visa"></div>
+    <div class="pay-item"><img src="img/pagos/mastercard.png" alt="Mastercard"></div>
+    <div class="pay-item"><img src="img/pagos/pago-seguro.png" alt="Pago seguro"></div>
+  </section>
+
+  <section class="accordion-section">
+    <div class="accordion-item active">
+      <button class="accordion-header" type="button">
+        <span>DESCRIPCIÓN</span>
+        <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="accordion-content" id="productDescription"></div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span>CERTIFICADO DE GARANTÍA</span>
+        <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="accordion-content">
+        Todos nuestros perfumes son entregados con respaldo de originalidad. Verificamos presentación, empaque y calidad del producto antes del despacho para brindarte una compra segura y confiable.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span>MEDIOS DE PAGO</span>
+        <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="accordion-content">
+        Puedes pagar por diferentes medios disponibles, incluyendo plataformas digitales, tarjetas y opciones de financiación. Para confirmar el método activo al momento de tu compra, contáctanos por WhatsApp.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" type="button">
+        <span>ENVÍO Y ENTREGA</span>
+        <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="accordion-content">
+        Realizamos envíos rápidos y seguros. En Pereira pueden entregarse en pocas horas y a nivel nacional el tiempo estimado es de hasta 72 horas hábiles, según ubicación y disponibilidad.
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-empty">
+    <h2>Reseñas</h2>
+    <p>Este producto aún no tiene reseñas visibles en la página.</p>
+  </section>
+
+  <div class="sticky-cart-bar" id="stickyCartBar">
+    <div class="sticky-product">
+      <img id="stickyProductImage" src="" alt="">
+      <div class="sticky-product-text">
+        <h4 id="stickyProductName">Perfume</h4>
+        <p id="stickyProductPrice">$0</p>
+      </div>
+    </div>
+    <div class="sticky-actions">
+      <div class="sticky-qty">
+        <button type="button" id="minusStickyQty">−</button>
+        <span id="stickyQtyValue">1</span>
+        <button type="button" id="plusStickyQty">+</button>
+      </div>
+      <button class="sticky-add-btn" type="button" id="stickyAddBtn">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Subir al inicio">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <footer class="site-footer">
+    <section class="footer-benefits">
+      <div class="benefit-item">
+        <i class="fa-regular fa-handshake"></i>
+        <h4>Clientes satisfechos</h4>
+        <p>Más de 10.000 clientes han confiado en nosotros</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fa-regular fa-gem"></i>
+        <h4>Calidad garantizada</h4>
+        <p>Fragancias seleccionadas con altos estándares de calidad</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fa-regular fa-clock"></i>
+        <h4>Envíos rápidos</h4>
+        <p>Envíos en pocas horas en Pereira y máximo en 72 hrs a nivel nacional</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fa-regular fa-credit-card"></i>
+        <h4>Pago seguro</h4>
+        <p>Pagos 100% seguros y verificados</p>
+      </div>
+    </section>
+
+    <section class="footer-main">
+      <div class="footer-column">
+        <h3>ORIGEN PERFUMERÍA</h3>
+        <p>
+          Cada persona merece un perfume tan único como su historia.
+          En Origen Perfumería te guiamos a elegir el aroma que eleva tu presencia.
+        </p>
+        <a href="mailto:origenperfumeria@gmail.com">origenperfumeria@gmail.com</a>
+        <p class="footer-contact">
+          Asesoría personalizada:<br>
+          <a href="https://wa.me/573145661788" target="_blank">(+57) 314 566 1788</a>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>CATEGORÍAS</h3>
+        <a href="hombre.html">HOMBRES</a>
+        <a href="mujer.html">MUJER</a>
+        <a href="unisex.html">UNISEX</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>POLÍTICAS</h3>
+        <a href="politica-reembolso.html">POLÍTICA DE REEMBOLSO</a>
+        <a href="politica-privacidad.html">POLÍTICA DE PRIVACIDAD</a>
+        <a href="terminos-servicio.html">TÉRMINOS DEL SERVICIO</a>
+        <a href="politica-envio.html">POLÍTICA DE ENVÍO</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>SOBRE NOSOTROS</h3>
+        <a href="contactanos.html">CONTÁCTANOS</a>
+        <a href="sobre-nosotros.html">SOBRE NOSOTROS</a>
+        <a href="preguntas-frecuentes.html">PREGUNTAS FRECUENTES</a>
+      </div>
+    </section>
+
+    <section class="footer-bottom">
+      <p>2026 © ORIGEN PERFUMERÍA. TODOS LOS DERECHOS RESERVADOS</p>
+      <div class="footer-payments">
+        <img src="img/pagos/pse.png" alt="PSE">
+        <img src="img/pagos/mastercard.png" alt="Mastercard">
+        <img src="img/pagos/visa.png" alt="Visa">
+        <img src="img/pagos/amex.png" alt="Amex">
+      </div>
+    </section>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>Carrito</h2>
+    <span id="closeCart">✕</span>
+  </div>
+
+  <div class="cart-body">
+    <p>Tu carrito está vacío</p>
+  </div>
+
+  <div class="cart-footer">
+    <a href="todos.html" class="btn-primary">Seguir comprando</a>
+  </div>
+</div>
+
+<script>
+  const perfumesUnisex = [
+    {
+      id: "al-haramain-amber-oud-gold",
+      nombre: "Al Haramain Amber Oud Gold",
+      precio: 370000,
+      aroma: "Dulce",
+      imagen: "img/unisex/al-haramain-amber-oud-gold.png",
+      hover: "img/unisex/al-haramain-amber-oud-gold-hover.png",
+      descripcion: `
+        <p>Una fragancia unisex con un perfil <strong>dulce, elegante y muy envolvente</strong>, ideal para quienes quieren destacar con un aroma lujoso y llamativo.</p>
+        <p>Se siente refinada, moderna y con una presencia que deja huella.</p>
+        <p><strong>Notas principales:</strong> dulces, cálidas y con fondo sofisticado.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para salidas especiales, eventos y noches elegantes.</p>
+      `
+    },
+    {
+      id: "armaf-club-de-nuit-untold",
+      nombre: "Armaf Club de Nuit Untold",
+      precio: 270000,
+      aroma: "Dulce",
+      imagen: "img/unisex/armaf-club-de-nuit-untold.jpg",
+      hover: "img/unisex/armaf-club-de-nuit-untold-hover.png",
+      descripcion: `
+        <p>Una fragancia con un estilo <strong>dulce, intenso y moderno</strong>, ideal para quienes quieren un perfume unisex con mucha personalidad.</p>
+        <p>Su aroma se siente llamativo, envolvente y muy fácil de recordar.</p>
+        <p><strong>Notas principales:</strong> dulces, ambaradas y con gran presencia.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para noches, salidas especiales y momentos donde quieras destacar.</p>
+      `
+    },
+    {
+      id: "armaf-odyssey-dubai-chocolat",
+      nombre: "Armaf Odyssey Dubai Chocolat",
+      precio: 200000,
+      aroma: "Dulce",
+      imagen: "img/unisex/armaf-odyssey-dubai-chocolat.png",
+      hover: "img/unisex/armaf-odyssey-dubai-chocolat-hover.jpg",
+      descripcion: `
+        <p>Una fragancia gourmand con una vibra <strong>dulce, cálida y deliciosa</strong>, perfecta para quienes aman aromas intensos y acogedores.</p>
+        <p>Tiene una sensación moderna y muy atractiva que resalta con facilidad.</p>
+        <p><strong>Notas principales:</strong> dulces, cálidas y golosas.</p>
+        <p><strong>Ocasión de uso:</strong> excelente para noches, clima fresco y ocasiones especiales.</p>
+      `
+    },
+    {
+      id: "armaf-odyssey-go-mango-tropical",
+      nombre: "Armaf Odyssey Go Mango Tropical",
+      precio: 290000,
+      aroma: "Floral-Frutal",
+      imagen: "img/unisex/armaf-odyssey-go-mango-tropical.jpg",
+      hover: "img/unisex/armaf-odyssey-go-mango-tropical-hover.jpg",
+      descripcion: `
+        <p>Una fragancia con un perfil <strong>frutal, tropical y alegre</strong>, ideal para quienes quieren algo diferente, fresco y muy moderno.</p>
+        <p>Se siente vibrante, llamativa y perfecta para climas cálidos.</p>
+        <p><strong>Notas principales:</strong> frutales, tropicales y luminosas.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para el día, vacaciones, salidas casuales y clima caliente.</p>
+      `
+    },
+    {
+      id: "calvin-klein-ck-one",
+      nombre: "Calvin Klein CK One",
+      precio: 200000,
+      aroma: "Fresco-Cítrico",
+      imagen: "img/unisex/calvin-klein-ck-one.webp",
+      hover: "img/unisex/calvin-klein-ck-one-hover.jpg",
+      descripcion: `
+        <p>Un clásico unisex con una sensación <strong>fresca, limpia y ligera</strong>, ideal para quienes buscan un aroma versátil y fácil de llevar.</p>
+        <p>Es una fragancia muy cómoda para el día a día y especialmente agradable en clima cálido.</p>
+        <p><strong>Notas principales:</strong> cítricas, frescas y limpias.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para oficina, universidad, uso diario y planes casuales.</p>
+      `
+    },
+    {
+      id: "emper-stallion-53",
+      nombre: "Emper Stallion 53",
+      precio: 190000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/emper-stallion-53.jpg",
+      hover: "img/unisex/emper-stallion-53-hover.jpeg",
+      descripcion: `
+        <p>Una fragancia con carácter <strong>amaderado, elegante y moderno</strong>, ideal para quienes prefieren perfumes con más profundidad y presencia.</p>
+        <p>Se siente seria, sofisticada y muy versátil.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y con fondo elegante.</p>
+        <p><strong>Ocasión de uso:</strong> excelente para reuniones, salidas nocturnas y ocasiones especiales.</p>
+      `
+    },
+    {
+      id: "jo-milano-game-of-spades-full-house",
+      nombre: "Jo Milano Game of Spades Full House",
+      precio: 430000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/jo-milano-game-of-spades-full-house.jpg",
+      hover: "img/unisex/jo-milano-game-of-spades-full-house-hover.webp",
+      descripcion: `
+        <p>Una fragancia con una vibra <strong>sofisticada, intensa y lujosa</strong>, ideal para quienes quieren un perfume unisex con mucha presencia.</p>
+        <p>Se siente refinada, moderna y perfecta para destacar con elegancia.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y profundas.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para eventos, cenas y noches especiales.</p>
+      `
+    },
+    {
+      id: "lattafa-ajwad",
+      nombre: "Lattafa Ajwad",
+      precio: 180000,
+      aroma: "Floral-Frutal",
+      imagen: "img/unisex/lattafa-ajwad.webp",
+      hover: "img/unisex/lattafa-ajwad-hover.webp",
+      descripcion: `
+        <p>Una fragancia encantadora con un perfil <strong>frutal, floral y muy agradable</strong>, ideal para quienes buscan algo versátil y moderno.</p>
+        <p>Tiene una sensación suave pero llamativa que funciona muy bien en diferentes momentos.</p>
+        <p><strong>Notas principales:</strong> florales, frutales y ligeramente dulces.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para uso diario, salidas y clima cálido.</p>
+      `
+    },
+    {
+      id: "lattafa-art-of-universe",
+      nombre: "Lattafa Art of Universe",
+      precio: 300000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/lattafa-art-of-universe.webp",
+      hover: "img/unisex/lattafa-art-of-universe-hover.png",
+      descripcion: `
+        <p>Una fragancia unisex con una personalidad <strong>amaderada, elegante y sofisticada</strong>, ideal para quienes quieren un aroma con carácter.</p>
+        <p>Se siente profunda, refinada y muy atractiva.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y modernas.</p>
+        <p><strong>Ocasión de uso:</strong> excelente para reuniones, noches y eventos especiales.</p>
+      `
+    },
+    {
+      id: "lattafa-badee-al-oud-amethyst",
+      nombre: "Lattafa Badee Al Oud Amethyst",
+      precio: 190000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/lattafa-badee-al-oud-amethyst.webp",
+      hover: "img/unisex/lattafa-badee-al-oud-amethyst-hover.png",
+      descripcion: `
+        <p>Una fragancia con perfil <strong>amaderado, elegante y envolvente</strong>, ideal para quienes disfrutan aromas intensos y con mucha presencia.</p>
+        <p>Tiene un estilo sofisticado que se siente especial desde el primer momento.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y con fondo profundo.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para noches, clima fresco y ocasiones importantes.</p>
+      `
+    },
+    {
+      id: "lattafa-badee-al-oud-honor-glory",
+      nombre: "Lattafa Badee Al Oud Honor & Glory",
+      precio: 190000,
+      aroma: "Dulce",
+      imagen: "img/unisex/lattafa-badee-al-oud-honor-glory.jpg",
+      hover: "img/unisex/lattafa-badee-al-oud-honor-glory-hover.jpg",
+      descripcion: `
+        <p>Una fragancia dulce con mucha personalidad, de estilo <strong>moderno, envolvente y llamativo</strong>.</p>
+        <p>Ideal para quienes buscan un perfume unisex con presencia y un toque diferente.</p>
+        <p><strong>Notas principales:</strong> dulces, cálidas y cremosas.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para salidas especiales, noche y eventos sociales.</p>
+      `
+    },
+    {
+      id: "lattafa-badee-al-oud-oud-for-glory",
+      nombre: "Lattafa Badee Al Oud Oud for Glory",
+      precio: 190000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/lattafa-badee-al-oud-oud-for-glory.webp",
+      hover: "img/unisex/lattafa-badee-al-oud-oud-for-glory-hover.png",
+      descripcion: `
+        <p>Una fragancia intensa con una firma <strong>amaderada, poderosa y elegante</strong>, ideal para quienes quieren un aroma serio y con mucha personalidad.</p>
+        <p>Se siente sofisticada y con carácter marcado.</p>
+        <p><strong>Notas principales:</strong> oud, amaderadas y cálidas.</p>
+        <p><strong>Ocasión de uso:</strong> excelente para noche, reuniones importantes y clima fresco.</p>
+      `
+    },
+    {
+      id: "lattafa-badee-al-oud-sublime",
+      nombre: "Lattafa Badee Al Oud Sublime",
+      precio: 190000,
+      aroma: "Floral-Frutal",
+      imagen: "img/unisex/lattafa-badee-al-oud-sublime.webp",
+      hover: "img/unisex/lattafa-badee-al-oud-sublime-hover.jpg",
+      descripcion: `
+        <p>Una opción más fresca y vibrante, con un perfil <strong>frutal, floral y moderno</strong>.</p>
+        <p>Ideal para quienes quieren un perfume unisex alegre, diferente y fácil de llevar.</p>
+        <p><strong>Notas principales:</strong> frutales, suaves y luminosas.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para el día, clima cálido y salidas casuales.</p>
+      `
+    },
+    {
+      id: "lattafa-khamrah",
+      nombre: "Lattafa Khamrah",
+      precio: 210000,
+      aroma: "Dulce",
+      imagen: "img/unisex/lattafa-khamrah.jpg",
+      hover: "img/unisex/lattafa-khamrah-hover.jpg",
+      descripcion: `
+        <p>Una fragancia muy reconocida por su estilo <strong>dulce, cálido y especiado</strong>, ideal para quienes aman aromas envolventes.</p>
+        <p>Se siente elegante, intensa y perfecta para destacar con facilidad.</p>
+        <p><strong>Notas principales:</strong> dulces, especiadas y cálidas.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para la noche, clima fresco y ocasiones especiales.</p>
+      `
+    },
+    {
+      id: "lattafa-khamrah-dukhan",
+      nombre: "Lattafa Khamrah Dukhan",
+      precio: 220000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/lattafa-khamrah-dukhan.jpg",
+      hover: "img/unisex/lattafa-khamrah-dukhan-hover.png",
+      descripcion: `
+        <p>Una versión con un perfil más profundo y serio, de estilo <strong>amaderado, cálido y sofisticado</strong>.</p>
+        <p>Ideal para quienes quieren un aroma más intenso y con carácter.</p>
+        <p><strong>Notas principales:</strong> amaderadas, ahumadas y cálidas.</p>
+        <p><strong>Ocasión de uso:</strong> excelente para noche, eventos y climas frescos.</p>
+      `
+    },
+    {
+      id: "lattafa-mussamam-white-intense",
+      nombre: "Lattafa Mussamam White Intense",
+      precio: 270000,
+      aroma: "Fresco-Cítrico",
+      imagen: "img/unisex/lattafa-mussamam-white-intense.png",
+      hover: "img/unisex/lattafa-mussamam-white-intense-hover.png",
+      descripcion: `
+        <p>Una fragancia con un estilo <strong>fresco, limpio y elegante</strong>, perfecta para quienes quieren un perfume unisex refinado y moderno.</p>
+        <p>Se siente luminosa, versátil y muy agradable para diferentes ocasiones.</p>
+        <p><strong>Notas principales:</strong> cítricas, frescas y suaves.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para oficina, uso diario y clima cálido.</p>
+      `
+    },
+    {
+      id: "lattafa-pride-alqiam-gold",
+      nombre: "Lattafa Pride Alqiam Gold",
+      precio: 200000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/lattafa-pride-alqiam-gold.png",
+      hover: "img/unisex/lattafa-pride-alqiam-gold-hover.jpeg",
+      descripcion: `
+        <p>Una fragancia con presencia <strong>amaderada, moderna y elegante</strong>, ideal para quienes buscan algo sofisticado y versátil.</p>
+        <p>Su aroma tiene profundidad y una sensación lujosa muy atractiva.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y refinadas.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para noches, reuniones y ocasiones especiales.</p>
+      `
+    },
+    {
+      id: "lattafa-pride-shaheen-gold",
+      nombre: "Lattafa Pride Shaheen Gold",
+      precio: 210000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/lattafa-pride-shaheen-gold.webp",
+      hover: "img/unisex/lattafa-pride-shaheen-gold-hover.png",
+      descripcion: `
+        <p>Una fragancia con aire <strong>elegante, amaderado y con mucha personalidad</strong>, ideal para quienes quieren un aroma unisex distinguido.</p>
+        <p>Se siente moderna y con una presencia refinada.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y con fondo sofisticado.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para salidas nocturnas, eventos y momentos especiales.</p>
+      `
+    },
+    {
+      id: "montale-arabians-tonka",
+      nombre: "Montale Arabians Tonka",
+      precio: 200000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/montale-arabians-tonka.png",
+      hover: "img/unisex/montale-arabians-tonka-hover.jpg",
+      descripcion: `
+        <p>Una fragancia intensa y lujosa con un perfil <strong>amaderado, cálido y muy sofisticado</strong>.</p>
+        <p>Ideal para quienes buscan un aroma con gran personalidad y mucha presencia.</p>
+        <p><strong>Notas principales:</strong> ambaradas, amaderadas y especiadas.</p>
+        <p><strong>Ocasión de uso:</strong> excelente para noches, eventos elegantes y clima fresco.</p>
+      `
+    },
+    {
+      id: "moschino-toy-2-pearl",
+      nombre: "Moschino Toy 2 Pearl",
+      precio: 210000,
+      aroma: "Floral-Frutal",
+      imagen: "img/unisex/moschino-toy-2-pearl.jpg",
+      hover: "img/unisex/moschino-toy-2-pearl-hover.jpg",
+      descripcion: `
+        <p>Una fragancia fresca y encantadora, con una vibra <strong>floral, frutal y muy moderna</strong>.</p>
+        <p>Perfecta para quienes buscan algo versátil, ligero y con un toque especial.</p>
+        <p><strong>Notas principales:</strong> florales, frutales y suaves.</p>
+        <p><strong>Ocasión de uso:</strong> ideal para el día, clima cálido y uso diario.</p>
+      `
+    },
+    {
+      id: "orientica-velvet-gold",
+      nombre: "Orientica Velvet Gold",
+      precio: 270000,
+      aroma: "Amaderado",
+      imagen: "img/unisex/orientica-velvet-gold.jpg",
+      hover: "img/unisex/orientica-velvet-gold-hover.png",
+      descripcion: `
+        <p>Una fragancia con un estilo <strong>amaderado, lujoso y envolvente</strong>, ideal para quienes quieren un perfume unisex elegante y con presencia.</p>
+        <p>Se siente sofisticada, cálida y perfecta para destacar.</p>
+        <p><strong>Notas principales:</strong> amaderadas, cálidas y refinadas.</p>
+        <p><strong>Ocasión de uso:</strong> perfecta para noche, ocasiones especiales y eventos elegantes.</p>
+      `
+    }
+  ];
+
+  const params = new URLSearchParams(window.location.search);
+  const perfumeId = params.get("id");
+  const producto = perfumesUnisex.find(p => p.id === perfumeId) || perfumesUnisex[0];
+
+  const productName = document.getElementById("productName");
+  const breadcrumbName = document.getElementById("breadcrumbName");
+  const productPrice = document.getElementById("productPrice");
+  const productDescription = document.getElementById("productDescription");
+  const mainProductImage = document.getElementById("mainProductImage");
+  const thumbsContainer = document.getElementById("thumbsContainer");
+  const buyWhatsapp = document.getElementById("buyWhatsapp");
+  const qtyValue = document.getElementById("qtyValue");
+  const minusQty = document.getElementById("minusQty");
+  const plusQty = document.getElementById("plusQty");
+  const stickyCartBar = document.getElementById("stickyCartBar");
+  const stickyProductImage = document.getElementById("stickyProductImage");
+  const stickyProductName = document.getElementById("stickyProductName");
+  const stickyProductPrice = document.getElementById("stickyProductPrice");
+  const stickyQtyValue = document.getElementById("stickyQtyValue");
+  const minusStickyQty = document.getElementById("minusStickyQty");
+  const plusStickyQty = document.getElementById("plusStickyQty");
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+  const searchForm = document.getElementById("searchForm");
+  const searchInputHeader = document.getElementById("searchInputHeader");
+  const addToCartBtn = document.getElementById("addToCartBtn");
+  const stickyAddBtn = document.getElementById("stickyAddBtn");
+  const stickyHeader = document.getElementById("stickyHeader");
+
+  let cantidad = 1;
+
+  function formatPrice(value){
+    return "$" + value.toLocaleString("es-CO");
+  }
+
+  function setMainImage(src, alt){
+    mainProductImage.src = src;
+    mainProductImage.alt = alt;
+  }
+
+  function updateWhatsappLink(){
+    const mensaje = encodeURIComponent(
+      "Hola, quiero comprar " + producto.nombre + " x" + cantidad + " - " + formatPrice(producto.precio)
+    );
+    buyWhatsapp.href = `https://wa.me/573145661788?text=${mensaje}`;
+  }
+
+  function updateQtyViews(){
+    qtyValue.textContent = cantidad;
+    stickyQtyValue.textContent = cantidad;
+    updateWhatsappLink();
+  }
+
+  function renderProduct(){
+    document.title = producto.nombre + " | Origen Perfumería";
+    productName.textContent = producto.nombre;
+    breadcrumbName.textContent = producto.nombre;
+    productPrice.textContent = formatPrice(producto.precio);
+    productDescription.innerHTML = producto.descripcion;
+
+    setMainImage(producto.imagen, producto.nombre);
+
+    stickyProductImage.src = producto.imagen;
+    stickyProductImage.alt = producto.nombre;
+    stickyProductName.textContent = producto.nombre;
+    stickyProductPrice.textContent = formatPrice(producto.precio);
+
+    const galleryImages = [
+      { src: producto.imagen, label: producto.nombre },
+      { src: producto.hover, label: producto.nombre + " detalle" },
+      { src: producto.imagen, label: producto.nombre + " presentación" }
+    ];
+
+    thumbsContainer.innerHTML = "";
+
+    galleryImages.forEach((img, index) => {
+      const button = document.createElement("button");
+      button.className = "thumb" + (index === 0 ? " active" : "");
+      button.type = "button";
+      button.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
+
+      button.addEventListener("click", () => {
+        setMainImage(img.src, img.label);
+        document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+        button.classList.add("active");
+      });
+
+      thumbsContainer.appendChild(button);
+    });
+
+    updateQtyViews();
+  }
+
+  function addToCartAction(){
+    if (typeof agregarAlCarrito !== "function") {
+      console.error("No existe la función agregarAlCarrito(). Revisa carrito.js");
+      return;
+    }
+
+    agregarAlCarrito(
+      {
+        id: producto.id,
+        nombre: producto.nombre,
+        precio: producto.precio,
+        imagen: producto.imagen,
+        url: `producto-unisex.html?id=${producto.id}`,
+        categoria: "Unisex"
+      },
+      cantidad
+    );
+  }
+
+  minusQty.addEventListener("click", () => {
+    if(cantidad > 1){
+      cantidad--;
+      updateQtyViews();
+    }
+  });
+
+  plusQty.addEventListener("click", () => {
+    cantidad++;
+    updateQtyViews();
+  });
+
+  minusStickyQty.addEventListener("click", () => {
+    if(cantidad > 1){
+      cantidad--;
+      updateQtyViews();
+    }
+  });
+
+  plusStickyQty.addEventListener("click", () => {
+    cantidad++;
+    updateQtyViews();
+  });
+
+  addToCartBtn.addEventListener("click", addToCartAction);
+  stickyAddBtn.addEventListener("click", addToCartAction);
+
+  document.querySelectorAll(".accordion-header").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = button.parentElement;
+      item.classList.toggle("active");
+    });
+  });
+
+  if(searchForm && searchInputHeader){
+    searchForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      const texto = searchInputHeader.value.trim();
+      if(texto !== ""){
+        window.location.href = `todos.html?buscar=${encodeURIComponent(texto)}`;
+      } else {
+        window.location.href = "todos.html";
+      }
+    });
+  }
+
+  const announcementItems = document.querySelectorAll(".announcement-item");
+  let announcementIndex = 0;
+
+  function cambiarAnnouncement() {
+    announcementItems[announcementIndex].classList.remove("active");
+    announcementIndex++;
+    if (announcementIndex >= announcementItems.length) {
+      announcementIndex = 0;
+    }
+    announcementItems[announcementIndex].classList.add("active");
+  }
+
+  setInterval(cambiarAnnouncement, 3500);
+
+  let lastScrollTop = 0;
+
+  window.addEventListener("scroll", () => {
+    if(window.scrollY > 500){
+      stickyCartBar.classList.add("show");
+      scrollTopBtn.classList.add("show");
+    } else {
+      stickyCartBar.classList.remove("show");
+      scrollTopBtn.classList.remove("show");
+    }
+
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if(currentScroll > 60){
+      stickyHeader.classList.add("show-shadow");
+    } else {
+      stickyHeader.classList.remove("show-shadow");
+    }
+
+    if(window.innerWidth > 768){
+      if(currentScroll > lastScrollTop && currentScroll > 140){
+        stickyHeader.classList.add("hide-header");
+      } else {
+        stickyHeader.classList.remove("hide-header");
+      }
+    } else {
+      stickyHeader.classList.remove("hide-header");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  renderProduct();
+</script>
+<script src="carrito.js"></script>
+</body>
+</html>
