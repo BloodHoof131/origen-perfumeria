@@ -1146,162 +1146,7 @@
   background:#6a5428;
 }
 
-.advice-banner{
-  width:min(1280px, 94%);
-  margin:0 auto 40px;
-  min-height:260px;
-  border-radius:22px;
-  overflow:hidden;
-  position:relative;
-  background:
-    linear-gradient(rgba(60, 52, 45, 0.28), rgba(60, 52, 45, 0.28)),
-    url("img/banner/banner-asesoria.jpg") center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,0.10);
-}
 
-.advice-banner-content{
-  width:min(760px, 92%);
-  color:#fff;
-  padding:28px 18px;
-}
-
-.advice-banner h2{
-  margin:0 0 14px;
-  font-size:34px;
-  line-height:1.15;
-  font-weight:bold;
-}
-
-.advice-banner p{
-  margin:0 0 22px;
-  font-size:17px;
-  line-height:1.5;
-}
-
-.advice-banner-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  min-width:210px;
-  padding:14px 24px;
-  border-radius:12px;
-  background:#ffffff;
-  color:#2f2b1f;
-  text-decoration:none;
-  font-size:18px;
-  font-weight:600;
-  transition:0.3s ease;
-  box-shadow:0 8px 18px rgba(0,0,0,0.12);
-}
-
-.advice-banner-btn:hover{
-  transform:translateY(-2px);
-  background:#f5f1ea;
-}
-
-.product-gallery{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-}
-
-.product-gallery::-webkit-scrollbar{
-  display:none;
-}
-
-.gallery-slide{
-  flex:0 0 100%;
-  min-width:100%;
-  scroll-snap-align:center;
-  border-radius:22px;
-  overflow:hidden;
-  background:#f4f1eb;
-  aspect-ratio:1 / 1.08;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.gallery-slide img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  padding:18px;
-}
-
-.image-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.88);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  z-index:9999;
-  opacity:0;
-  visibility:hidden;
-  transition:0.3s ease;
-}
-
-.image-modal.active{
-  opacity:1;
-  visibility:visible;
-}
-
-.image-modal img{
-  max-width:92%;
-  max-height:88vh;
-  object-fit:contain;
-  border-radius:16px;
-  background:#fff;
-  padding:10px;
-}
-
-.image-modal-close{
-  position:absolute;
-  top:18px;
-  right:18px;
-  width:44px;
-  height:44px;
-  border:none;
-  border-radius:50%;
-  background:#ffffff;
-  color:#2f2b1f;
-  font-size:18px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-@media (max-width: 640px){
-  .gallery-slide{
-    border-radius:18px;
-  }
-
-  .gallery-slide img{
-    padding:12px;
-  }
-
-  .image-modal{
-    padding:14px;
-  }
-
-  .image-modal img{
-    max-width:96%;
-    max-height:82vh;
-  }
-}
 
     @media (max-width: 992px){
       .main-header{
@@ -1505,26 +1350,6 @@
   .related-header h2{
     font-size:26px;
   }
-    .advice-banner{
-    width:min(94%, 94%);
-    min-height:220px;
-    border-radius:16px;
-    margin:0 auto 28px;
-  }
-
-  .advice-banner h2{
-    font-size:26px;
-  }
-
-  .advice-banner p{
-    font-size:15px;
-  }
-
-  .advice-banner-btn{
-    min-width:190px;
-    font-size:16px;
-    padding:12px 20px;
-  }
     }
   </style>
 </head>
@@ -1596,9 +1421,13 @@
     <span id="breadcrumbName">Perfume</span>
   </div>
 
-  <div class="gallery-box">
-  <div class="product-gallery" id="productGallery"></div>
-</div>
+  <section class="product-page">
+    <div class="gallery-box">
+      <div class="main-image-wrap">
+        <img id="mainProductImage" src="" alt="">
+      </div>
+      <div class="thumbs" id="thumbsContainer"></div>
+    </div>
 
     <div class="product-info">
       <span class="tag-category">Hombre</span>
@@ -1764,16 +1593,6 @@
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
-<section class="advice-banner">
-  <div class="advice-banner-content">
-    <h2>No sabes qué perfume elegir?</h2>
-    <p>Recibe asesoría GRATIS, profesional y personalizada.</p>
-    <a class="advice-banner-btn" href="https://wa.me/573145661788?text=Hola,%20quiero%20asesor%C3%ADa%20para%20elegir%20un%20perfume" target="_blank">
-      Quiero asesoría
-    </a>
-  </div>
-</section>
-
   <footer class="site-footer">
     <section class="footer-benefits">
       <div class="benefit-item">
@@ -1861,13 +1680,6 @@
   <div class="cart-footer">
     <a href="todos.html" class="btn-primary">Seguir comprando</a>
   </div>
-</div>
-
-<div class="image-modal" id="imageModal">
-  <button class="image-modal-close" id="imageModalClose" aria-label="Cerrar imagen">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
-  <img id="imageModalImg" src="" alt="">
 </div>
 
 <script>
@@ -2260,6 +2072,8 @@
   const breadcrumbName = document.getElementById("breadcrumbName");
   const productPrice = document.getElementById("productPrice");
   const productDescription = document.getElementById("productDescription");
+  const mainProductImage = document.getElementById("mainProductImage");
+  const thumbsContainer = document.getElementById("thumbsContainer");
   const buyWhatsapp = document.getElementById("buyWhatsapp");
   const qtyValue = document.getElementById("qtyValue");
   const minusQty = document.getElementById("minusQty");
@@ -2278,10 +2092,6 @@
   const stickyAddBtn = document.getElementById("stickyAddBtn");
   const stickyHeader = document.getElementById("stickyHeader");
   const relatedProductsGrid = document.getElementById("relatedProductsGrid");
-  const productGallery = document.getElementById("productGallery");
-const imageModal = document.getElementById("imageModal");
-const imageModalImg = document.getElementById("imageModalImg");
-const imageModalClose = document.getElementById("imageModalClose");
 
   let cantidad = 1;
 
@@ -2289,17 +2099,10 @@ const imageModalClose = document.getElementById("imageModalClose");
     return "$" + value.toLocaleString("es-CO");
   }
 
-function openImageModal(src, alt){
-  imageModalImg.src = src;
-  imageModalImg.alt = alt || "Imagen del producto";
-  imageModal.classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-function closeImageModal(){
-  imageModal.classList.remove("active");
-  document.body.style.overflow = "";
-}
+  function setMainImage(src, alt){
+    mainProductImage.src = src;
+    mainProductImage.alt = alt;
+  }
 
   function updateWhatsappLink(){
     const mensaje = encodeURIComponent(
@@ -2321,30 +2124,35 @@ function closeImageModal(){
     productPrice.textContent = formatPrice(producto.precio);
     productDescription.innerHTML = producto.descripcion;
 
-stickyProductImage.src = producto.imagen;
-stickyProductImage.alt = producto.nombre;
-stickyProductName.textContent = producto.nombre;
-stickyProductPrice.textContent = formatPrice(producto.precio);
+    setMainImage(producto.imagen, producto.nombre);
 
-const galleryImages = [
-  { src: producto.imagen, label: producto.nombre },
-  { src: producto.hover, label: producto.nombre + " detalle" },
-  { src: producto.imagen, label: producto.nombre + " presentación" }
-];
+    stickyProductImage.src = producto.imagen;
+    stickyProductImage.alt = producto.nombre;
+    stickyProductName.textContent = producto.nombre;
+    stickyProductPrice.textContent = formatPrice(producto.precio);
 
-productGallery.innerHTML = "";
+    const galleryImages = [
+      { src: producto.imagen, label: producto.nombre },
+      { src: producto.hover, label: producto.nombre + " detalle" },
+      { src: producto.imagen, label: producto.nombre + " presentación" }
+    ];
 
-galleryImages.forEach((img) => {
-  const slide = document.createElement("div");
-  slide.className = "gallery-slide";
-  slide.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
+    thumbsContainer.innerHTML = "";
 
-  slide.addEventListener("click", () => {
-    openImageModal(img.src, img.label);
-  });
+    galleryImages.forEach((img, index) => {
+      const button = document.createElement("button");
+      button.className = "thumb" + (index === 0 ? " active" : "");
+      button.type = "button";
+      button.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
 
-  productGallery.appendChild(slide);
-});
+      button.addEventListener("click", () => {
+        setMainImage(img.src, img.label);
+        document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+        button.classList.add("active");
+      });
+
+      thumbsContainer.appendChild(button);
+    });
 
     updateQtyViews();
   }
@@ -2436,14 +2244,6 @@ galleryImages.forEach((img) => {
       stickyCartBar.classList.remove("show");
       scrollTopBtn.classList.remove("show");
     }
-
-    imageModalClose.addEventListener("click", closeImageModal);
-
-imageModal.addEventListener("click", (e) => {
-  if (e.target === imageModal) {
-    closeImageModal();
-  }
-});
 
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -2537,13 +2337,6 @@ function renderRelacionados() {
   });
 }
 
-document.addEventListener("keydown", function(e){
-  if (e.key === "Escape") {
-    if (imageModal.classList.contains("active")) {
-      closeImageModal();
-    }
-  }
-});
  renderProduct();
 renderRelacionados();
 </script>
