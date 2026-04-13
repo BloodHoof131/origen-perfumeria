@@ -2174,7 +2174,7 @@ function renderProducts(lista) {
           </div>
         </div>
         <div class="product-info">
-          <div class="product-category">Hombre</div>
+          <div class="product-category">Unisex</div>
           <h3 class="product-name">${producto.nombre}</h3>
           <p class="product-price">${formatPrice(producto.precio)}</p>
         </div>
@@ -2192,7 +2192,7 @@ function renderProducts(lista) {
       precio: producto.precio,
       imagen: producto.imagen,
       url: getProductUrl(producto),
-      categoria: "Hombre"
+      categoria: "Mujer"
     };
 
     if (estaEnFavoritos(producto.id)) {
