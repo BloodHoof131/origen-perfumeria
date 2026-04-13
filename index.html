@@ -1244,23 +1244,35 @@ a{
       .header-icons a{
         font-size:17px;
       }
-  .hero-carousel{
-    height:190px;
-    width:min(94%, 94%);
-    margin:12px auto 18px;
-    border-radius:14px;
-  }
-  .hero-arrow{
-    width:34px;
-    height:34px;
-    font-size:13px;
-  }
-  .hero-prev{
-    left:8px;
-  }
-  .hero-next{
-    right:8px;
-  }
+.hero-carousel{
+  height:auto;
+  aspect-ratio:16 / 7;
+  width:min(94%, 94%);
+  margin:12px auto 18px;
+  border-radius:14px;
+}
+
+.hero-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+.hero-arrow{
+  width:24px;
+  height:24px;
+  font-size:11px;
+  background:rgba(255,255,255,0.88);
+}
+
+.hero-prev{
+  left:1px;
+}
+
+.hero-next{
+  right:1px;
+}
   .hero-dots{
     bottom:8px;
   }
