@@ -1146,6 +1146,63 @@
   background:#6a5428;
 }
 
+.advice-banner{
+  width:min(1280px, 94%);
+  margin:0 auto 40px;
+  min-height:260px;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(rgba(60, 52, 45, 0.28), rgba(60, 52, 45, 0.28)),
+    url("img/banner/banner-asesoria.jpg") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  box-shadow:0 10px 26px rgba(0,0,0,0.10);
+}
+
+.advice-banner-content{
+  width:min(760px, 92%);
+  color:#fff;
+  padding:28px 18px;
+}
+
+.advice-banner h2{
+  margin:0 0 14px;
+  font-size:34px;
+  line-height:1.15;
+  font-weight:bold;
+}
+
+.advice-banner p{
+  margin:0 0 22px;
+  font-size:17px;
+  line-height:1.5;
+}
+
+.advice-banner-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-width:210px;
+  padding:14px 24px;
+  border-radius:12px;
+  background:#ffffff;
+  color:#2f2b1f;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:600;
+  transition:0.3s ease;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+.advice-banner-btn:hover{
+  transform:translateY(-2px);
+  background:#f5f1ea;
+}
 
 
     @media (max-width: 992px){
@@ -1349,6 +1406,26 @@
   }
   .related-header h2{
     font-size:26px;
+  }
+    .advice-banner{
+    width:min(94%, 94%);
+    min-height:220px;
+    border-radius:16px;
+    margin:0 auto 28px;
+  }
+
+  .advice-banner h2{
+    font-size:26px;
+  }
+
+  .advice-banner p{
+    font-size:15px;
+  }
+
+  .advice-banner-btn{
+    min-width:190px;
+    font-size:16px;
+    padding:12px 20px;
   }
     }
   </style>
