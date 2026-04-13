@@ -1847,7 +1847,6 @@
         <div class="quickview-meta">
           <span class="quickview-chip" id="quickviewCategory"></span>
           <span class="quickview-chip" id="quickviewAroma"></span>
-          <span class="quickview-chip" id="quickviewPresentation">90ml</span>
           <span class="quickview-chip">Perfume original</span>
         </div>
         <div class="quickview-label">Cantidad</div>
@@ -1860,7 +1859,6 @@
           <button class="quickview-btn primary" type="button" id="quickviewAddCart">Agregar al carrito</button>
         </div>
         <button class="quickview-btn buy" type="button" id="quickviewComprar">Comprar ahora</button>
-        <button class="quickview-btn secondary" type="button" id="quickviewWhatsapp">Pedir por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -2083,12 +2081,10 @@ const quickviewTitle = document.getElementById("quickviewTitle");
 const quickviewPrice = document.getElementById("quickviewPrice");
 const quickviewDescription = document.getElementById("quickviewDescription");
 const quickviewAroma = document.getElementById("quickviewAroma");
-const quickviewPresentation = document.getElementById("quickviewPresentation");
 const quickviewStockText = document.getElementById("quickviewStockText");
 const quickviewDetails = document.getElementById("quickviewDetails");
 const quickviewAddCart = document.getElementById("quickviewAddCart");
 const quickviewComprar = document.getElementById("quickviewComprar");
-const quickviewWhatsapp = document.getElementById("quickviewWhatsapp");
 const qtyMinus = document.getElementById("qtyMinus");
 const qtyPlus = document.getElementById("qtyPlus");
 const qtyValue = document.getElementById("qtyValue");
@@ -2257,7 +2253,6 @@ function openQuickView(productId) {
   }
 
   quickviewAroma.textContent = producto.aroma.replace("-", " / ");
-  quickviewPresentation.textContent = getPresentation(producto);
   quickviewStockText.textContent = `${stock} en stock`;
   quickviewDetails.href = detalleUrl;
 
@@ -2276,10 +2271,6 @@ function openQuickView(productId) {
     goToProduct(detalleUrl);
   };
 
-  quickviewWhatsapp.onclick = () => {
-    const mensaje = `Hola, quiero pedir ${currentQty} unidad(es) de ${producto.nombre} por ${formatPrice(producto.precio)}.`;
-    window.open(`https://wa.me/573145661788?text=${encodeURIComponent(mensaje)}`, "_blank");
-  };
 
   quickviewModal.classList.add("active");
   quickviewModal.setAttribute("aria-hidden", "false");

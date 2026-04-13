@@ -1809,7 +1809,6 @@
         </div>
         <div class="quickview-meta">
           <span class="quickview-chip" id="quickviewAroma"></span>
-          <span class="quickview-chip" id="quickviewPresentation">90ml</span>
           <span class="quickview-chip">Perfume original</span>
         </div>
         <div class="quickview-label">Cantidad</div>
@@ -1822,7 +1821,6 @@
           <button class="quickview-btn primary" type="button" id="quickviewAddCart">Agregar al carrito</button>
         </div>
         <button class="quickview-btn buy" type="button" id="quickviewComprar">Comprar ahora</button>
-        <button class="quickview-btn secondary" type="button" id="quickviewWhatsapp">Pedir por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -2029,12 +2027,10 @@ const quickviewTitle = document.getElementById("quickviewTitle");
 const quickviewPrice = document.getElementById("quickviewPrice");
 const quickviewDescription = document.getElementById("quickviewDescription");
 const quickviewAroma = document.getElementById("quickviewAroma");
-const quickviewPresentation = document.getElementById("quickviewPresentation");
 const quickviewStockText = document.getElementById("quickviewStockText");
 const quickviewDetails = document.getElementById("quickviewDetails");
 const quickviewAddCart = document.getElementById("quickviewAddCart");
 const quickviewComprar = document.getElementById("quickviewComprar");
-const quickviewWhatsapp = document.getElementById("quickviewWhatsapp");
 const qtyMinus = document.getElementById("qtyMinus");
 const qtyPlus = document.getElementById("qtyPlus");
 const qtyValue = document.getElementById("qtyValue");
@@ -2083,13 +2079,6 @@ function getDescription(producto){
   return textos[producto.aroma] || `${producto.nombre} es una excelente elección para complementar tu estilo con una fragancia original y memorable.`;
 }
 
-function getPresentation(producto){
-  const nombre = producto.nombre.toLowerCase();
-  if(nombre.includes("elixir")) return "100ml";
-  if(nombre.includes("light blue")) return "125ml";
-  if(nombre.includes("acqua di gio profondo")) return "100ml";
-  return "90ml";
-}
 
 function getStock(producto){
   const stockMap = {
@@ -2145,7 +2134,6 @@ function openQuickView(productId){
   quickviewPrice.textContent = formatPrice(producto.precio);
   quickviewDescription.textContent = getDescription(producto);
   quickviewAroma.textContent = producto.aroma.replace("-", " / ");
-  quickviewPresentation.textContent = getPresentation(producto);
   quickviewStockText.textContent = `${stock} en stock`;
   quickviewDetails.href = `producto-hombre.html?id=${producto.id}`;
 
@@ -2164,10 +2152,6 @@ function openQuickView(productId){
     window.location.href = `producto-hombre.html?id=${producto.id}`;
   };
 
-  quickviewWhatsapp.onclick = () => {
-    const mensaje = `Hola, quiero pedir ${currentQty} unidad(es) de ${producto.nombre} por ${formatPrice(producto.precio)}.`;
-    window.open(`https://wa.me/573145661788?text=${encodeURIComponent(mensaje)}`, "_blank");
-  };
 
   quickviewModal.classList.add("active");
   quickviewModal.setAttribute("aria-hidden", "false");
