@@ -2262,10 +2262,23 @@ function renderProducts(lista) {
     });
 
     quickBuyBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.location.href = getProductUrl(producto);
-    });
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (typeof agregarAlCarrito !== "function") {
+    console.error("No existe la función agregarAlCarrito(). Revisa carrito.js");
+    return;
+  }
+
+  agregarAlCarrito({
+    id: producto.id,
+    nombre: producto.nombre,
+    precio: Number(producto.precio),
+    imagen: producto.imagen,
+    url: getProductUrl(producto),
+    categoria: producto.categoria
+  }, 1);
+});
 
     link.addEventListener("click", () => {});
     productsGrid.appendChild(card);
