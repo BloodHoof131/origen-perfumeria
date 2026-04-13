@@ -1204,6 +1204,104 @@
   background:#f5f1ea;
 }
 
+.product-gallery{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.product-gallery::-webkit-scrollbar{
+  display:none;
+}
+
+.gallery-slide{
+  flex:0 0 100%;
+  min-width:100%;
+  scroll-snap-align:center;
+  border-radius:22px;
+  overflow:hidden;
+  background:#f4f1eb;
+  aspect-ratio:1 / 1.08;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.gallery-slide img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:18px;
+}
+
+.image-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.88);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:9999;
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s ease;
+}
+
+.image-modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.image-modal img{
+  max-width:92%;
+  max-height:88vh;
+  object-fit:contain;
+  border-radius:16px;
+  background:#fff;
+  padding:10px;
+}
+
+.image-modal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:#ffffff;
+  color:#2f2b1f;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+@media (max-width: 640px){
+  .gallery-slide{
+    border-radius:18px;
+  }
+
+  .gallery-slide img{
+    padding:12px;
+  }
+
+  .image-modal{
+    padding:14px;
+  }
+
+  .image-modal img{
+    max-width:96%;
+    max-height:82vh;
+  }
+}
 
     @media (max-width: 992px){
       .main-header{
@@ -1498,13 +1596,9 @@
     <span id="breadcrumbName">Perfume</span>
   </div>
 
-  <section class="product-page">
-    <div class="gallery-box">
-      <div class="main-image-wrap">
-        <img id="mainProductImage" src="" alt="">
-      </div>
-      <div class="thumbs" id="thumbsContainer"></div>
-    </div>
+  <div class="gallery-box">
+  <div class="product-gallery" id="productGallery"></div>
+</div>
 
     <div class="product-info">
       <span class="tag-category">Hombre</span>
@@ -1767,6 +1861,13 @@
   <div class="cart-footer">
     <a href="todos.html" class="btn-primary">Seguir comprando</a>
   </div>
+</div>
+
+<div class="image-modal" id="imageModal">
+  <button class="image-modal-close" id="imageModalClose" aria-label="Cerrar imagen">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <img id="imageModalImg" src="" alt="">
 </div>
 
 <script>
@@ -2159,8 +2260,6 @@
   const breadcrumbName = document.getElementById("breadcrumbName");
   const productPrice = document.getElementById("productPrice");
   const productDescription = document.getElementById("productDescription");
-  const mainProductImage = document.getElementById("mainProductImage");
-  const thumbsContainer = document.getElementById("thumbsContainer");
   const buyWhatsapp = document.getElementById("buyWhatsapp");
   const qtyValue = document.getElementById("qtyValue");
   const minusQty = document.getElementById("minusQty");
@@ -2179,6 +2278,10 @@
   const stickyAddBtn = document.getElementById("stickyAddBtn");
   const stickyHeader = document.getElementById("stickyHeader");
   const relatedProductsGrid = document.getElementById("relatedProductsGrid");
+  const productGallery = document.getElementById("productGallery");
+const imageModal = document.getElementById("imageModal");
+const imageModalImg = document.getElementById("imageModalImg");
+const imageModalClose = document.getElementById("imageModalClose");
 
   let cantidad = 1;
 
@@ -2186,10 +2289,17 @@
     return "$" + value.toLocaleString("es-CO");
   }
 
-  function setMainImage(src, alt){
-    mainProductImage.src = src;
-    mainProductImage.alt = alt;
-  }
+function openImageModal(src, alt){
+  imageModalImg.src = src;
+  imageModalImg.alt = alt || "Imagen del producto";
+  imageModal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeImageModal(){
+  imageModal.classList.remove("active");
+  document.body.style.overflow = "";
+}
 
   function updateWhatsappLink(){
     const mensaje = encodeURIComponent(
@@ -2211,35 +2321,30 @@
     productPrice.textContent = formatPrice(producto.precio);
     productDescription.innerHTML = producto.descripcion;
 
-    setMainImage(producto.imagen, producto.nombre);
+stickyProductImage.src = producto.imagen;
+stickyProductImage.alt = producto.nombre;
+stickyProductName.textContent = producto.nombre;
+stickyProductPrice.textContent = formatPrice(producto.precio);
 
-    stickyProductImage.src = producto.imagen;
-    stickyProductImage.alt = producto.nombre;
-    stickyProductName.textContent = producto.nombre;
-    stickyProductPrice.textContent = formatPrice(producto.precio);
+const galleryImages = [
+  { src: producto.imagen, label: producto.nombre },
+  { src: producto.hover, label: producto.nombre + " detalle" },
+  { src: producto.imagen, label: producto.nombre + " presentación" }
+];
 
-    const galleryImages = [
-      { src: producto.imagen, label: producto.nombre },
-      { src: producto.hover, label: producto.nombre + " detalle" },
-      { src: producto.imagen, label: producto.nombre + " presentación" }
-    ];
+productGallery.innerHTML = "";
 
-    thumbsContainer.innerHTML = "";
+galleryImages.forEach((img) => {
+  const slide = document.createElement("div");
+  slide.className = "gallery-slide";
+  slide.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
 
-    galleryImages.forEach((img, index) => {
-      const button = document.createElement("button");
-      button.className = "thumb" + (index === 0 ? " active" : "");
-      button.type = "button";
-      button.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
+  slide.addEventListener("click", () => {
+    openImageModal(img.src, img.label);
+  });
 
-      button.addEventListener("click", () => {
-        setMainImage(img.src, img.label);
-        document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
-        button.classList.add("active");
-      });
-
-      thumbsContainer.appendChild(button);
-    });
+  productGallery.appendChild(slide);
+});
 
     updateQtyViews();
   }
@@ -2331,6 +2436,14 @@
       stickyCartBar.classList.remove("show");
       scrollTopBtn.classList.remove("show");
     }
+
+    imageModalClose.addEventListener("click", closeImageModal);
+
+imageModal.addEventListener("click", (e) => {
+  if (e.target === imageModal) {
+    closeImageModal();
+  }
+});
 
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -2424,6 +2537,13 @@ function renderRelacionados() {
   });
 }
 
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape") {
+    if (imageModal.classList.contains("active")) {
+      closeImageModal();
+    }
+  }
+});
  renderProduct();
 renderRelacionados();
 </script>
