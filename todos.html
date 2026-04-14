@@ -1690,32 +1690,11 @@
     }
   </style>
 </head>
-<body>
-  <div class="top-announcement">
-    <div class="announcement-track" id="announcementTrack">
-      <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
-      <span class="announcement-item">Perfumes 100% originales con garantía</span>
-      <span class="announcement-item">Asesoría personalizada por WhatsApp</span>
-    </div>
-  </div>
 
-  <div class="info-bar">
-    <div class="info-left">
-      <a href="https://www.instagram.com/perfumeria.origen?igsh=MXExdmpqNTl1NnZrZg==" target="_blank" class="info-link">
-        <i class="fa-brands fa-instagram"></i> @origenperfumeria
-      </a>
-      <a href="https://wa.me/573145661788" target="_blank" class="info-link">
-        <i class="fa-brands fa-whatsapp"></i> Asesoría personalizada
-      </a>
-    </div>
-  </div>
+<body data-page="todos">
 
-  <div class="main-header">
-    <div class="search-box">
-      <form id="searchForm">
-        <input type="text" id="searchInputHeader" placeholder="Buscar productos">
-      </form>
-    </div>
+<div id="origen-header"></div>
+
     <div class="header-logo">
       <a href="index.html">
         <img src="logo.png" alt="Origen Perfumería">
@@ -1736,20 +1715,6 @@
     </div>
   </div>
 
-  <nav class="main-menu">
-    <a href="index.html">INICIO</a>
-    <a href="todos.html" class="active">TODOS LOS PERFUMES</a>
-    <a href="hombre.html">HOMBRE</a>
-    <a href="mujer.html">MUJER</a>
-    <a href="unisex.html">UNISEX</a>
-  </nav>
-
-  <div class="mobile-category-tabs">
-    <a href="todos.html" class="active">Todos</a>
-    <a href="hombre.html">Hombre</a>
-    <a href="mujer.html">Mujer</a>
-    <a href="unisex.html">Unisex</a>
-  </div>
 
   <section class="category-hero">
     <h1>Todos los Perfumes</h1>
@@ -2715,6 +2680,7 @@ scrollTopBtn.addEventListener("click", () => {
 actualizarContadorFavoritos();
 cargarProductosDesdeJSON();
 </script>
+<script src="header-origen.js"></script>
 <script src="carrito.js"></script>
 
 </body>
