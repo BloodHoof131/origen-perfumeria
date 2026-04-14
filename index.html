@@ -1544,93 +1544,60 @@ a{
 </div>
 
 <script>
-  const heroSlides = document.querySelectorAll(".hero-slide");
-  const heroDots = document.querySelectorAll(".hero-dot");
-  const prevBtn = document.querySelector(".hero-prev");
-  const nextBtn = document.querySelector(".hero-next");
-  const floatingExpert = document.querySelector(".floating-expert");
-  let currentSlide = 0;
-  let heroInterval;
+const heroSlides = document.querySelectorAll(".hero-slide");
+const prevBtn = document.querySelector(".hero-prev");
+const nextBtn = document.querySelector(".hero-next");
+const floatingExpert = document.querySelector(".floating-expert");
 
-  function showSlide(index){
-    heroSlides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
-    });
-    heroDots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
-    });
-    currentSlide = index;
-  }
+let currentSlide = 0;
+let heroInterval;
 
-  function nextSlide(){
-    let next = currentSlide + 1;
-    if(next >= heroSlides.length) next = 0;
-    showSlide(next);
-  }
+function showSlide(index){
+  heroSlides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === index);
+  });
+  currentSlide = index;
+}
 
-  function prevSlide(){
-    let prev = currentSlide - 1;
-    if(prev < 0) prev = heroSlides.length - 1;
-    showSlide(prev);
-  }
+function nextSlide(){
+  let next = currentSlide + 1;
+  if(next >= heroSlides.length) next = 0;
+  showSlide(next);
+}
 
-  function startHeroAuto(){
-    heroInterval = setInterval(nextSlide, 5000);
-  }
+function prevSlide(){
+  let prev = currentSlide - 1;
+  if(prev < 0) prev = heroSlides.length - 1;
+  showSlide(prev);
+}
 
-  function resetHeroAuto(){
-    clearInterval(heroInterval);
-    startHeroAuto();
-  }
+function startHeroAuto(){
+  heroInterval = setInterval(nextSlide, 5000);
+}
 
+function resetHeroAuto(){
+  clearInterval(heroInterval);
+  startHeroAuto();
+}
+
+if (nextBtn) {
   nextBtn.addEventListener("click", () => {
     nextSlide();
     resetHeroAuto();
   });
+}
 
+if (prevBtn) {
   prevBtn.addEventListener("click", () => {
     prevSlide();
     resetHeroAuto();
   });
+}
 
-  heroDots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      showSlide(index);
-      resetHeroAuto();
-    });
-  });
+showSlide(0);
+startHeroAuto();
 
-  showSlide(0);
-  startHeroAuto();
 
-  const searchForm = document.getElementById("searchForm");
-  const searchInputHeader = document.getElementById("searchInputHeader");
-
-  if(searchForm && searchInputHeader){
-    searchForm.addEventListener("submit", function(e){
-      e.preventDefault();
-      const texto = searchInputHeader.value.trim();
-      if(texto !== ""){
-        window.location.href = `todos.html?buscar=${encodeURIComponent(texto)}`;
-      } else {
-        window.location.href = "todos.html";
-      }
-    });
-  }
-
-  const announcementItems = document.querySelectorAll(".announcement-item");
-  let announcementIndex = 0;
-
-  function cambiarAnnouncement(){
-    announcementItems[announcementIndex].classList.remove("active");
-    announcementIndex++;
-    if(announcementIndex >= announcementItems.length){
-      announcementIndex = 0;
-    }
-    announcementItems[announcementIndex].classList.add("active");
-  }
-
-  setInterval(cambiarAnnouncement, 3500);
 
   const productTabs = document.querySelectorAll(".products-tab");
   const productPanels = document.querySelectorAll(".products-panel");
@@ -1646,53 +1613,7 @@ a{
   });
 
   const scrollTopBtn = document.getElementById("scrollTopBtn");
-  const stickyHeader = document.getElementById("stickyHeader");
 
-  let lastScrollTop = 0;
-
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if(window.scrollY > 320){
-  scrollTopBtn.classList.add("show");
-  if (floatingExpert) floatingExpert.classList.add("show");
-} else {
-  scrollTopBtn.classList.remove("show");
-  if (floatingExpert) {
-    floatingExpert.classList.remove("show");
-    floatingExpert.classList.remove("hide-on-scroll");
-  }
-}
-
-if (floatingExpert) { 
-  if(currentScroll > lastScrollTop && currentScroll > 220){
-    floatingExpert.classList.add("hide-on-scroll");
-  } else if(currentScroll < lastScrollTop){
-    floatingExpert.classList.remove("hide-on-scroll");
-    if(currentScroll > 320){
-      floatingExpert.classList.add("show");
-    }
-  }
-}
-
-    if(currentScroll > 60){
-      stickyHeader.classList.add("show-shadow");
-    } else {
-      stickyHeader.classList.remove("show-shadow");
-    }
-
-    if(window.innerWidth > 768){
-      if(currentScroll > lastScrollTop && currentScroll > 140){
-        stickyHeader.classList.add("hide-header");
-      } else {
-        stickyHeader.classList.remove("hide-header");
-      }
-    } else {
-      stickyHeader.classList.remove("hide-header");
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
 
   scrollTopBtn.addEventListener("click", () => {
     window.scrollTo({
@@ -1701,82 +1622,69 @@ if (floatingExpert) {
     });
   });
 
-  const categoriesTrack = document.getElementById("categoriesTrack");
-  const categoryCards = document.querySelectorAll(".category-card");
-  const categoryDots = document.querySelectorAll(".category-dot");
+ 
+  
+const categoriesTrack = document.getElementById("categoriesTrack");
+const categoryCards = document.querySelectorAll(".category-card");
 
-  let currentCategory = 0;
-  let categoriesInterval = null;
+let currentCategory = 0;
+let categoriesInterval = null;
 
-  function getCardStep(){
-    if(!categoryCards.length) return 0;
-    const cardWidth = categoryCards[0].offsetWidth;
-    const trackStyle = window.getComputedStyle(categoriesTrack);
-    const gap = parseInt(trackStyle.columnGap || trackStyle.gap || 22);
-    return cardWidth + gap;
-  }
+function getCardStep(){
+  if(!categoryCards.length || !categoriesTrack) return 0;
+  const cardWidth = categoryCards[0].offsetWidth;
+  const trackStyle = window.getComputedStyle(categoriesTrack);
+  const gap = parseInt(trackStyle.columnGap || trackStyle.gap || 22);
+  return cardWidth + gap;
+}
 
-  function setActiveCategory(index){
-    categoryCards.forEach((card, i) => {
-      card.classList.toggle("is-active", i === index);
-    });
+function setActiveCategory(index){
+  categoryCards.forEach((card, i) => {
+    card.classList.toggle("is-active", i === index);
+  });
+  currentCategory = index;
+}
 
-    categoryDots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
-    });
+function goToCategory(index, smooth = true){
+  if(!categoryCards.length || !categoriesTrack) return;
 
-    currentCategory = index;
-  }
+  const step = getCardStep();
+  const trackWidth = categoriesTrack.offsetWidth;
+  const cardWidth = categoryCards[index].offsetWidth;
+  const targetLeft = (step * index) - ((trackWidth - cardWidth) / 2);
 
-  function goToCategory(index, smooth = true){
-    if(!categoryCards.length) return;
+  categoriesTrack.scrollTo({
+    left: Math.max(0, targetLeft),
+    behavior: smooth ? "smooth" : "auto"
+  });
 
-    const step = getCardStep();
-    const trackWidth = categoriesTrack.offsetWidth;
-    const cardWidth = categoryCards[index].offsetWidth;
-    const targetLeft = (step * index) - ((trackWidth - cardWidth) / 2);
+  setActiveCategory(index);
+}
 
-    categoriesTrack.scrollTo({
-      left: Math.max(0, targetLeft),
-      behavior: smooth ? "smooth" : "auto"
-    });
+function nextCategory(){
+  let next = currentCategory + 1;
+  if(next >= categoryCards.length) next = 0;
+  goToCategory(next);
+}
 
+function startCategoriesAuto(){
+  clearInterval(categoriesInterval);
+  categoriesInterval = setInterval(nextCategory, 3500);
+}
+
+categoryCards.forEach((card, index) => {
+  card.addEventListener("mouseenter", () => {
     setActiveCategory(index);
-  }
-
-  function nextCategory(){
-    let next = currentCategory + 1;
-    if(next >= categoryCards.length) next = 0;
-    goToCategory(next);
-  }
-
-  function startCategoriesAuto(){
-    clearInterval(categoriesInterval);
-    categoriesInterval = setInterval(nextCategory, 3500);
-  }
-
-  function resetCategoriesAuto(){
-    startCategoriesAuto();
-  }
-
-  categoryDots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      goToCategory(index);
-      resetCategoriesAuto();
-    });
   });
 
-  categoryCards.forEach((card, index) => {
-    card.addEventListener("mouseenter", () => {
-      setActiveCategory(index);
-    });
-
-    card.addEventListener("click", () => {
-      setActiveCategory(index);
-    });
+  card.addEventListener("click", () => {
+    setActiveCategory(index);
   });
+});
 
-  let scrollTimeout;
+let scrollTimeout;
+
+if (categoriesTrack) {
   categoriesTrack.addEventListener("scroll", () => {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
@@ -1787,6 +1695,7 @@ if (floatingExpert) {
       categoryCards.forEach((card, index) => {
         const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
         const distance = Math.abs(trackCenter - cardCenter);
+
         if(distance < nearestDistance){
           nearestDistance = distance;
           nearestIndex = index;
@@ -1796,17 +1705,18 @@ if (floatingExpert) {
       setActiveCategory(nearestIndex);
     }, 120);
   });
+}
 
-  window.addEventListener("resize", () => {
-    goToCategory(currentCategory, false);
-  });
+window.addEventListener("resize", () => {
+  goToCategory(currentCategory, false);
+});
 
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      goToCategory(0, false);
-      startCategoriesAuto();
-    }, 120);
-  });
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    goToCategory(0, false);
+    startCategoriesAuto();
+  }, 120);
+});
 </script>
 
 <script src="header-origen.js"></script>

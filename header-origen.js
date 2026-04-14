@@ -96,7 +96,6 @@
   function initSearchHeader() {
     const form = document.getElementById("searchFormHeader");
     const input = document.getElementById("searchInputHeaderGlobal");
-
     if (!form || !input) return;
 
     const params = new URLSearchParams(window.location.search);
