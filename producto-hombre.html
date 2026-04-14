@@ -152,10 +152,10 @@
       align-items:center;
     }
     .header-logo img{
-  width:300px;
-  max-width:100%;
-  display:block;
-}
+      width:300px;
+      max-width:100%;
+      display:block;
+    }
 
     .header-icons{
       display:flex;
@@ -233,7 +233,24 @@
       box-shadow:0 8px 22px rgba(0,0,0,0.06);
       position:relative;
     }
-    .main-image-wrap{
+
+    .product-gallery{
+      display:flex;
+      gap:14px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      scrollbar-width:none;
+      -webkit-overflow-scrolling:touch;
+    }
+    .product-gallery::-webkit-scrollbar{
+      display:none;
+    }
+
+    .gallery-slide{
+      flex:0 0 100%;
+      min-width:100%;
+      scroll-snap-align:center;
       border-radius:22px;
       overflow:hidden;
       background:#f4f1eb;
@@ -241,35 +258,13 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      margin-bottom:14px;
-    }
-    .main-image-wrap img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-    }
-    .thumbs{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:12px;
-    }
-    .thumb{
-      border:none;
-      border-radius:16px;
-      overflow:hidden;
-      background:#f4f1eb;
       cursor:pointer;
-      border:2px solid transparent;
-      transition:0.25s ease;
-      aspect-ratio:1/1;
     }
-    .thumb.active{
-      border-color:#c99a2e;
-    }
-    .thumb img{
+    .gallery-slide img{
       width:100%;
       height:100%;
       object-fit:contain;
+      padding:18px;
     }
 
     .product-info{
@@ -762,391 +757,404 @@
       border:1px solid rgba(107,85,35,0.10);
     }
 
-    /* BOTÓN */
-.btn-primary{
-  display:block;
-  width:100%;
-  text-align:center;
-  background:#5a4720;
-  color:#f5f1e8;
-  padding:14px 18px;
-  border-radius:12px;
-  font-size:16px;
-  font-family:'Times New Roman', serif;
-  transition:0.3s ease;
-}
-.btn-primary:hover{
-  background:#6a5428;
-}
+    .btn-primary{
+      display:block;
+      width:100%;
+      text-align:center;
+      background:#5a4720;
+      color:#f5f1e8;
+      padding:14px 18px;
+      border-radius:12px;
+      font-size:16px;
+      font-family:'Times New Roman', serif;
+      transition:0.3s ease;
+    }
+    .btn-primary:hover{
+      background:#6a5428;
+    }
 
-/* OVERLAY */
-.cart-icon-wrap{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
+    .cart-icon-wrap{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .cart-count{
+      position:absolute;
+      top:-8px;
+      right:-10px;
+      min-width:18px;
+      height:18px;
+      padding:0 5px;
+      border-radius:999px;
+      background:#c9a227;
+      color:#fff;
+      font-size:11px;
+      font-weight:bold;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+    }
 
-.cart-count{
-  position:absolute;
-  top:-8px;
-  right:-10px;
-  min-width:18px;
-  height:18px;
-  padding:0 5px;
-  border-radius:999px;
-  background:#c9a227;
-  color:#fff;
-  font-size:11px;
-  font-weight:bold;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  line-height:1;
-}
+    .cart-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.4);
+      opacity:0;
+      visibility:hidden;
+      transition:0.3s;
+      z-index:150;
+    }
+    .cart-overlay.active{
+      opacity:1;
+      visibility:visible;
+    }
 
-.btn-primary{
-  display:block;
-  width:100%;
-  text-align:center;
-  background:#5a4720;
-  color:#f5f1e8;
-  padding:14px 18px;
-  border-radius:12px;
-  font-size:16px;
-  font-family:'Times New Roman', serif;
-  transition:0.3s ease;
-}
+    .cart-sidebar{
+      position:fixed;
+      top:0;
+      right:-100%;
+      width:320px;
+      height:100%;
+      background:#fff;
+      box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+      z-index:200;
+      transition:0.4s;
+      display:flex;
+      flex-direction:column;
+    }
+    .cart-sidebar.active{
+      right:0;
+    }
 
-.btn-primary:hover{
-  background:#6a5428;
-}
+    .cart-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px;
+      border-bottom:1px solid #ddd;
+    }
+    .cart-header h2{
+      font-size:24px;
+      color:#2f2b1f;
+      margin:0;
+    }
+    .cart-header span{
+      cursor:pointer;
+      font-size:22px;
+      color:#5a4720;
+    }
 
-.cart-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.4);
-  opacity:0;
-  visibility:hidden;
-  transition:0.3s;
-  z-index:150;
-}
+    .cart-body{
+      flex:1;
+      padding:20px;
+      text-align:center;
+    }
 
-.cart-overlay.active{
-  opacity:1;
-  visibility:visible;
-}
+    .cart-footer{
+      padding:20px;
+      border-top:1px solid rgba(90,71,32,0.12);
+      background:#f8f5ef;
+    }
 
-.cart-sidebar{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:360px;
-  max-width:92vw;
-  height:100%;
-  background:#f8f5ef;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.2);
-  z-index:200;
-  transition:0.4s ease;
-  display:flex;
-  flex-direction:column;
-}
+    .cart-item{
+      display:flex;
+      gap:12px;
+      padding-bottom:14px;
+      margin-bottom:14px;
+      border-bottom:1px solid rgba(90,71,32,0.10);
+    }
+    .cart-item-image{
+      width:78px;
+      height:90px;
+      flex-shrink:0;
+      border-radius:12px;
+      overflow:hidden;
+      background:#efeeee;
+    }
+    .cart-item-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .cart-item-info{
+      flex:1;
+    }
+    .cart-item-name{
+      display:block;
+      font-size:15px;
+      color:#2f2b1f;
+      line-height:1.3;
+      margin-bottom:6px;
+    }
+    .cart-item-price{
+      font-size:15px;
+      color:#c9a227;
+      font-weight:bold;
+      margin-bottom:8px;
+    }
+    .cart-item-controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .cart-item-controls button{
+      width:30px;
+      height:30px;
+      border:none;
+      border-radius:8px;
+      background:#ece7da;
+      color:#5a4720;
+      cursor:pointer;
+      font-size:18px;
+    }
+    .cart-item-controls span{
+      min-width:18px;
+      text-align:center;
+      font-size:15px;
+    }
+    .cart-remove-btn{
+      border:none;
+      background:transparent;
+      color:#8a4b4b;
+      font-size:13px;
+      cursor:pointer;
+      padding:0;
+    }
+    .cart-total{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+      font-size:17px;
+      color:#2f2b1f;
+    }
+    .cart-clear-btn{
+      width:100%;
+      margin-top:10px;
+      border:none;
+      background:#ece7da;
+      color:#5a4720;
+      padding:12px 14px;
+      border-radius:12px;
+      font-size:15px;
+      cursor:pointer;
+    }
 
-.cart-sidebar.active{
-  right:0;
-}
+    .related-section{
+      width:min(1280px, 94%);
+      margin:0 auto 40px;
+    }
+    .related-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:16px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .related-header h2{
+      font-size:30px;
+      color:#6b5523;
+    }
+    .related-header p{
+      font-size:15px;
+      color:#4b4535;
+    }
+    .related-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:18px;
+    }
+    .related-card{
+      background:#ece8dd;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid rgba(90,71,32,0.08);
+      box-shadow:0 8px 20px rgba(0,0,0,0.05);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .related-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 24px rgba(0,0,0,0.08);
+    }
+    .related-card-link{
+      display:block;
+    }
+    .related-image-wrap{
+      position:relative;
+      background:#f3f0ea;
+      aspect-ratio:4 / 4.4;
+      overflow:hidden;
+    }
+    .related-image-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:opacity 0.3s ease;
+    }
+    .related-image-wrap .img-hover{
+      position:absolute;
+      inset:0;
+      opacity:0;
+    }
+    .related-card:hover .related-image-wrap .img-hover{
+      opacity:1;
+    }
+    .related-card:hover .related-image-wrap .img-main{
+      opacity:0;
+    }
+    .related-info{
+      padding:16px 16px 18px;
+    }
+    .related-category{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:#8b7b50;
+      margin-bottom:8px;
+    }
+    .related-name{
+      font-size:18px;
+      line-height:1.2;
+      color:#2f2b1f;
+      margin-bottom:10px;
+      min-height:44px;
+    }
+    .related-price{
+      font-size:20px;
+      color:#c9a227;
+      font-weight:bold;
+      margin-bottom:14px;
+    }
+    .related-actions{
+      display:grid;
+      gap:10px;
+    }
+    .related-btn,
+    .related-cart-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 14px;
+      border-radius:12px;
+      font-size:15px;
+      transition:0.25s ease;
+    }
+    .related-btn{
+      background:#f4f1eb;
+      color:#5a4720;
+      border:1px solid rgba(90,71,32,0.12);
+    }
+    .related-btn:hover{
+      background:#e7dfd1;
+    }
+    .related-cart-btn{
+      border:none;
+      background:#5a4720;
+      color:#f5f1e8;
+      cursor:pointer;
+    }
+    .related-cart-btn:hover{
+      background:#6a5428;
+    }
 
-.cart-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 20px;
-  border-bottom:1px solid rgba(90,71,32,0.12);
-}
+    .advice-banner{
+      width:min(1280px, 94%);
+      margin:0 auto 40px;
+      min-height:260px;
+      border-radius:22px;
+      overflow:hidden;
+      position:relative;
+      background:
+        linear-gradient(rgba(60, 52, 45, 0.28), rgba(60, 52, 45, 0.28)),
+        url("img/banner/banner-asesoria.jpg") center/cover no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      box-shadow:0 10px 26px rgba(0,0,0,0.10);
+    }
+    .advice-banner-content{
+      width:min(760px, 92%);
+      color:#fff;
+      padding:28px 18px;
+    }
+    .advice-banner h2{
+      margin:0 0 14px;
+      font-size:34px;
+      line-height:1.15;
+      font-weight:bold;
+    }
+    .advice-banner p{
+      margin:0 0 22px;
+      font-size:17px;
+      line-height:1.5;
+    }
+    .advice-banner-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-width:210px;
+      padding:14px 24px;
+      border-radius:12px;
+      background:#ffffff;
+      color:#2f2b1f;
+      text-decoration:none;
+      font-size:18px;
+      font-weight:600;
+      transition:0.3s ease;
+      box-shadow:0 8px 18px rgba(0,0,0,0.12);
+    }
+    .advice-banner-btn:hover{
+      transform:translateY(-2px);
+      background:#f5f1ea;
+    }
 
-.cart-header h2{
-  font-size:24px;
-  color:#2f2b1f;
-  margin:0;
-}
-
-.cart-header span{
-  cursor:pointer;
-  font-size:24px;
-  color:#5a4720;
-}
-
-.cart-body{
-  flex:1;
-  overflow-y:auto;
-  padding:18px;
-  text-align:left;
-}
-
-.cart-footer{
-  padding:18px;
-  border-top:1px solid rgba(90,71,32,0.12);
-  background:#f8f5ef;
-}
-
-.cart-item{
-  display:flex;
-  gap:12px;
-  padding-bottom:14px;
-  margin-bottom:14px;
-  border-bottom:1px solid rgba(90,71,32,0.10);
-}
-
-.cart-item-image{
-  width:78px;
-  height:90px;
-  flex-shrink:0;
-  border-radius:12px;
-  overflow:hidden;
-  background:#efeeee;
-}
-
-.cart-item-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.cart-item-info{
-  flex:1;
-}
-
-.cart-item-name{
-  display:block;
-  font-size:15px;
-  color:#2f2b1f;
-  line-height:1.3;
-  margin-bottom:6px;
-}
-
-.cart-item-price{
-  font-size:15px;
-  color:#c9a227;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.cart-item-controls{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-
-.cart-item-controls button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:8px;
-  background:#ece7da;
-  color:#5a4720;
-  cursor:pointer;
-  font-size:18px;
-}
-
-.cart-item-controls span{
-  min-width:18px;
-  text-align:center;
-  font-size:15px;
-}
-
-.cart-remove-btn{
-  border:none;
-  background:transparent;
-  color:#8a4b4b;
-  font-size:13px;
-  cursor:pointer;
-  padding:0;
-}
-
-.cart-total{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-  font-size:17px;
-  color:#2f2b1f;
-}
-
-.cart-clear-btn{
-  width:100%;
-  margin-top:10px;
-  border:none;
-  background:#ece7da;
-  color:#5a4720;
-  padding:12px 14px;
-  border-radius:12px;
-  font-size:15px;
-  cursor:pointer;
-}
-
-/* SIDEBAR */
-.cart-sidebar{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:320px;
-  height:100%;
-  background:#fff;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.2);
-  z-index:200;
-  transition:0.4s;
-  display:flex;
-  flex-direction:column;
-}
-.cart-sidebar.active{
-  right:0;
-}
-
-/* HEADER */
-.cart-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px;
-  border-bottom:1px solid #ddd;
-}
-.cart-header span{
-  cursor:pointer;
-  font-size:22px;
-}
-
-/* BODY */
-.cart-body{
-  flex:1;
-  padding:20px;
-  text-align:center;
-}
-
-/* FOOTER */
-.cart-footer{
-  padding:20px;
-}
-
-.related-section{
-  width:min(1280px, 94%);
-  margin:0 auto 40px;
-}
-.related-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:16px;
-  margin-bottom:18px;
-  flex-wrap:wrap;
-}
-.related-header h2{
-  font-size:30px;
-  color:#6b5523;
-}
-.related-header p{
-  font-size:15px;
-  color:#4b4535;
-}
-.related-grid{
-  display:grid;
-  grid-template-columns:repeat(4, minmax(0, 1fr));
-  gap:18px;
-}
-.related-card{
-  background:#ece8dd;
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid rgba(90,71,32,0.08);
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
-  transition:transform 0.3s ease, box-shadow 0.3s ease;
-}
-.related-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 24px rgba(0,0,0,0.08);
-}
-.related-card-link{
-  display:block;
-}
-.related-image-wrap{
-  position:relative;
-  background:#f3f0ea;
-  aspect-ratio:4 / 4.4;
-  overflow:hidden;
-}
-.related-image-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:opacity 0.3s ease;
-}
-.related-image-wrap .img-hover{
-  position:absolute;
-  inset:0;
-  opacity:0;
-}
-.related-card:hover .related-image-wrap .img-hover{
-  opacity:1;
-}
-.related-card:hover .related-image-wrap .img-main{
-  opacity:0;
-}
-.related-info{
-  padding:16px 16px 18px;
-}
-.related-category{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:0.14em;
-  color:#8b7b50;
-  margin-bottom:8px;
-}
-.related-name{
-  font-size:18px;
-  line-height:1.2;
-  color:#2f2b1f;
-  margin-bottom:10px;
-  min-height:44px;
-}
-.related-price{
-  font-size:20px;
-  color:#c9a227;
-  font-weight:bold;
-  margin-bottom:14px;
-}
-.related-actions{
-  display:grid;
-  gap:10px;
-}
-.related-btn,
-.related-cart-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:12px 14px;
-  border-radius:12px;
-  font-size:15px;
-  transition:0.25s ease;
-}
-.related-btn{
-  background:#f4f1eb;
-  color:#5a4720;
-  border:1px solid rgba(90,71,32,0.12);
-}
-.related-btn:hover{
-  background:#e7dfd1;
-}
-.related-cart-btn{
-  border:none;
-  background:#5a4720;
-  color:#f5f1e8;
-  cursor:pointer;
-}
-.related-cart-btn:hover{
-  background:#6a5428;
-}
-
-
+    .image-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.88);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      z-index:9999;
+      opacity:0;
+      visibility:hidden;
+      transition:0.3s ease;
+    }
+    .image-modal.active{
+      opacity:1;
+      visibility:visible;
+    }
+    .image-modal img{
+      max-width:92%;
+      max-height:88vh;
+      object-fit:contain;
+      border-radius:16px;
+      background:#fff;
+      padding:10px;
+    }
+    .image-modal-close{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:50%;
+      background:#ffffff;
+      color:#2f2b1f;
+      font-size:18px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
     @media (max-width: 992px){
       .main-header{
@@ -1200,8 +1208,8 @@
         flex:1;
       }
       .related-grid{
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-  }
+        grid-template-columns:repeat(3, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 768px){
@@ -1242,8 +1250,8 @@
         background:rgba(107,85,35,0.10);
       }
       .related-grid{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-  }
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 640px){
@@ -1287,6 +1295,12 @@
       .product-info{
         border-radius:20px;
         padding:18px 16px;
+      }
+      .gallery-slide{
+        border-radius:18px;
+      }
+      .gallery-slide img{
+        padding:12px;
       }
       .product-info h1{
         font-size:28px;
@@ -1345,11 +1359,35 @@
         bottom:84px;
       }
       .related-grid{
-    grid-template-columns:1fr;
-  }
-  .related-header h2{
-    font-size:26px;
-  }
+        grid-template-columns:1fr;
+      }
+      .related-header h2{
+        font-size:26px;
+      }
+      .advice-banner{
+        width:min(94%, 94%);
+        min-height:220px;
+        border-radius:16px;
+        margin:0 auto 28px;
+      }
+      .advice-banner h2{
+        font-size:26px;
+      }
+      .advice-banner p{
+        font-size:15px;
+      }
+      .advice-banner-btn{
+        min-width:190px;
+        font-size:16px;
+        padding:12px 20px;
+      }
+      .image-modal{
+        padding:14px;
+      }
+      .image-modal img{
+        max-width:96%;
+        max-height:82vh;
+      }
     }
   </style>
 </head>
@@ -1392,10 +1430,10 @@
         <a href="favoritos.html" title="Favoritos">
           <i class="fa-regular fa-heart"></i>
         </a>
-       <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
-  <i class="fa-solid fa-bag-shopping"></i>
-  <span id="cartCount" class="cart-count">0</span>
-</a>
+        <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cartCount" class="cart-count">0</span>
+        </a>
       </div>
     </div>
 
@@ -1423,10 +1461,7 @@
 
   <section class="product-page">
     <div class="gallery-box">
-      <div class="main-image-wrap">
-        <img id="mainProductImage" src="" alt="">
-      </div>
-      <div class="thumbs" id="thumbsContainer"></div>
+      <div class="product-gallery" id="productGallery"></div>
     </div>
 
     <div class="product-info">
@@ -1562,14 +1597,14 @@
   </section>
 
   <section class="related-section">
-  <div class="related-header">
-    <div>
-      <h2>También te puede gustar</h2>
-      <p>Descubre otras fragancias similares que podrían encantarte.</p>
+    <div class="related-header">
+      <div>
+        <h2>También te puede gustar</h2>
+        <p>Descubre otras fragancias similares que podrían encantarte.</p>
+      </div>
     </div>
-  </div>
-  <div class="related-grid" id="relatedProductsGrid"></div>
-</section>
+    <div class="related-grid" id="relatedProductsGrid"></div>
+  </section>
 
   <div class="sticky-cart-bar" id="stickyCartBar">
     <div class="sticky-product">
@@ -1592,6 +1627,16 @@
   <button class="scroll-top" id="scrollTopBtn" aria-label="Subir al inicio">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
+
+  <section class="advice-banner">
+    <div class="advice-banner-content">
+      <h2>No sabes qué perfume elegir?</h2>
+      <p>Recibe asesoría GRATIS, profesional y personalizada.</p>
+      <a class="advice-banner-btn" href="https://wa.me/573145661788?text=Hola,%20quiero%20asesor%C3%ADa%20para%20elegir%20un%20perfume" target="_blank">
+        Quiero asesoría
+      </a>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <section class="footer-benefits">
@@ -1665,681 +1710,704 @@
     </section>
   </footer>
 
-<div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-overlay" id="cartOverlay"></div>
 
-<div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header">
-    <h2>Carrito</h2>
-    <span id="closeCart">✕</span>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Carrito</h2>
+      <span id="closeCart">✕</span>
+    </div>
+
+    <div class="cart-body">
+      <p>Tu carrito está vacío</p>
+    </div>
+
+    <div class="cart-footer">
+      <a href="todos.html" class="btn-primary">Seguir comprando</a>
+    </div>
   </div>
 
-  <div class="cart-body">
-    <p>Tu carrito está vacío</p>
+  <div class="image-modal" id="imageModal">
+    <button class="image-modal-close" id="imageModalClose" aria-label="Cerrar imagen">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="imageModalImg" src="" alt="">
   </div>
 
-  <div class="cart-footer">
-    <a href="todos.html" class="btn-primary">Seguir comprando</a>
-  </div>
-</div>
-
-<script>
-  const perfumesHombre = [
-    {
-      id: "afnan-9am-dive",
-      nombre: "Afnan 9AM Dive",
-      precio: 230000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/afnan-9am-dive.jpg",
-      hover: "img/hombre/afnan-9am-dive-hover.jpg",
-      descripcion: `
-        <p>Una fragancia con carácter <strong>fresco, moderno y energético</strong>, ideal para hombres que buscan un aroma limpio y versátil.</p>
-        <p>Se siente vibrante y fácil de usar durante el día, especialmente en climas cálidos.</p>
-        <p><strong>Notas principales:</strong> cítricas, acuáticas y frescas con una sensación juvenil y dinámica.</p>
-        <p><strong>Ocasión de uso:</strong> perfecta para oficina, universidad, uso diario y salidas casuales.</p>
-      `
-    },
-    {
-      id: "afnan-9pm",
-      nombre: "Afnan 9PM",
-      precio: 230000,
-      aroma: "Dulce",
-      imagen: "img/hombre/afnan-9pm.jpeg",
-      hover: "img/hombre/afnan-9pm-hover.jpeg",
-      descripcion: `
-        <p>Una fragancia <strong>dulce, intensa y muy llamativa</strong>, ideal para hombres que quieren destacar con facilidad.</p>
-        <p>Su perfil es seductor, moderno y perfecto para quienes disfrutan aromas con mucha presencia.</p>
-        <p><strong>Notas principales:</strong> dulce, cálido y especiado con fondo envolvente.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para la noche, fiestas, citas y eventos especiales.</p>
-      `
-    },
-    {
-      id: "afnan-9pm-elixir",
-      nombre: "Afnan 9PM Elixir",
-      precio: 280000,
-      aroma: "Dulce",
-      imagen: "img/hombre/afnan-9pm-elixir.jpg",
-      hover: "img/hombre/afnan-9pm-elixir-hover.webp",
-      descripcion: `
-        <p>Una versión más refinada y potente, con un estilo <strong>dulce, elegante y seductor</strong>.</p>
-        <p>Está pensada para quienes buscan una fragancia nocturna con mucha personalidad.</p>
-        <p><strong>Notas principales:</strong> dulces, intensas y cálidas con un aire sofisticado.</p>
-        <p><strong>Ocasión de uso:</strong> ideal para noches especiales, cenas y reuniones importantes.</p>
-      `
-    },
-    {
-      id: "armaf-club-de-nuit-intense-man",
-      nombre: "Armaf Club de Nuit Intense Man",
-      precio: 200000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/armaf-club-de-nuit-intense-man.png",
-      hover: "img/hombre/armaf-club-de-nuit-intense-man-hover.jpg",
-      descripcion: `
-        <p>Fragancia masculina con una presencia <strong>elegante, cítrica y muy reconocible</strong>, perfecta para destacar sin esfuerzo.</p>
-        <p>Combina frescura con un fondo serio y varonil que le da mucha versatilidad.</p>
-        <p><strong>Notas principales:</strong> cítricas, ahumadas y amaderadas.</p>
-        <p><strong>Ocasión de uso:</strong> oficina, reuniones, salidas nocturnas y uso diario.</p>
-      `
-    },
-    {
-      id: "armaf-odyssey-mandarin-sky",
-      nombre: "Armaf Odyssey Mandarin Sky",
-      precio: 230000,
-      aroma: "Dulce",
-      imagen: "img/hombre/armaf-odyssey-mandarin-sky.jpeg",
-      hover: "img/hombre/armaf-odyssey-mandarin-sky-hover.jpg",
-      descripcion: `
-        <p>Una fragancia <strong>dulce, juvenil y moderna</strong>, ideal para hombres que buscan un aroma alegre y muy atractivo.</p>
-        <p>Su estilo es llamativo pero fácil de llevar.</p>
-        <p><strong>Notas principales:</strong> dulces con matices cítricos y cálidos.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para salidas, tardes y noches casuales.</p>
-      `
-    },
-    {
-      id: "armaf-odyssey-mandarin-sky-elixir",
-      nombre: "Armaf Odyssey Mandarin Sky Elixir",
-      precio: 270000,
-      aroma: "Dulce",
-      imagen: "img/hombre/armaf-odyssey-mandarin-sky-elixir.jpg",
-      hover: "img/hombre/armaf-odyssey-mandarin-sky-elixir-hover.webp",
-      descripcion: `
-        <p>Versión más intensa y refinada, con un perfil <strong>dulce, envolvente y elegante</strong>.</p>
-        <p>Perfecta para quienes quieren más presencia y duración en su fragancia.</p>
-        <p><strong>Notas principales:</strong> dulces, cálidas y modernas.</p>
-        <p><strong>Ocasión de uso:</strong> ideal para noche, eventos y momentos especiales.</p>
-      `
-    },
-    {
-      id: "bharara-king",
-      nombre: "Bharara King",
-      precio: 320000,
-      aroma: "Amaderado",
-      imagen: "img/hombre/bharara-king.jpg",
-      hover: "img/hombre/bharara-king-hover.jpg",
-      descripcion: `
-        <p>Una fragancia con mucho porte, de estilo <strong>amaderado, elegante y masculino</strong>.</p>
-        <p>Se siente sofisticada y con una presencia fuerte que marca diferencia.</p>
-        <p><strong>Notas principales:</strong> amaderadas, cálidas y con profundidad.</p>
-        <p><strong>Ocasión de uso:</strong> recomendable para eventos, reuniones y noches especiales.</p>
-      `
-    },
-    {
-      id: "carolina-herrera-212-nyc",
-      nombre: "Carolina Herrera 212 NYC",
-      precio: 450000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/carolina-herrera-212-nyc.jpg",
-      hover: "img/hombre/carolina-herrera-212-nyc-hover.jpg",
-      descripcion: `
-        <p>Perfume con una vibra <strong>urbana, fresca y elegante</strong>, ideal para hombres modernos y activos.</p>
-        <p>Muy versátil para quienes quieren oler limpio y sofisticado.</p>
-        <p><strong>Notas principales:</strong> frescas, cítricas y con fondo masculino suave.</p>
-        <p><strong>Ocasión de uso:</strong> perfecto para uso diario, oficina y clima cálido.</p>
-      `
-    },
-    {
-      id: "carolina-herrera-212-vip",
-      nombre: "Carolina Herrera 212 VIP",
-      precio: 420000,
-      aroma: "Dulce",
-      imagen: "img/hombre/carolina-herrera-212-vip.jpeg",
-      hover: "img/hombre/carolina-herrera-212-vip-hover.jpg",
-      descripcion: `
-        <p>Una fragancia <strong>dulce, elegante y fiestera</strong>, hecha para destacar en ambientes nocturnos.</p>
-        <p>Tiene una vibra moderna y segura que llama la atención.</p>
-        <p><strong>Notas principales:</strong> dulces, especiadas y cálidas.</p>
-        <p><strong>Ocasión de uso:</strong> ideal para fiestas, citas y eventos nocturnos.</p>
-      `
-    },
-    {
-      id: "dolce-gabbana-light-blue",
-      nombre: "Dolce & Gabbana Light Blue",
-      precio: 450000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/dolce-gabbana-light-blue.webp",
-      hover: "img/hombre/dolce-gabbana-light-blue-hover.jpg",
-      descripcion: `
-        <p>Fragancia con una sensación <strong>fresca, limpia y mediterránea</strong>, ideal para climas cálidos.</p>
-        <p>Muy agradable para quienes prefieren aromas ligeros pero con clase.</p>
-        <p><strong>Notas principales:</strong> cítricas, acuáticas y frescas.</p>
-        <p><strong>Ocasión de uso:</strong> día a día, vacaciones, oficina y clima caliente.</p>
-      `
-    },
-    {
-      id: "giorgio-armani-acqua-di-gio",
-      nombre: "Giorgio Armani Acqua di Gio",
-      precio: 440000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/giorgio-armani-acqua-di-gio.jpg",
-      hover: "img/hombre/giorgio-armani-acqua-di-gio-hover.jpg",
-      descripcion: `
-        <p>Un clásico masculino con un perfil <strong>fresco, elegante y natural</strong>.</p>
-        <p>Es una opción muy versátil para quienes quieren un aroma limpio y refinado.</p>
-        <p><strong>Notas principales:</strong> acuáticas, cítricas y aromáticas.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para oficina, uso diario y clima cálido.</p>
-      `
-    },
-    {
-      id: "giorgio-armani-acqua-di-gio-profondo",
-      nombre: "Giorgio Armani Acqua di Gio Profondo",
-      precio: 620000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/giorgio-armani-acqua-di-gio-profondo.jpg",
-      hover: "img/hombre/giorgio-armani-acqua-di-gio-profondo-hover.png",
-      descripcion: `
-        <p>Una versión más intensa y profunda, con una frescura <strong>elegante, moderna y sofisticada</strong>.</p>
-        <p>Ideal para quienes quieren un aroma fresco pero más serio y refinado.</p>
-        <p><strong>Notas principales:</strong> acuáticas, frescas y con un fondo profundo.</p>
-        <p><strong>Ocasión de uso:</strong> oficina, reuniones y eventos donde quieras proyectar elegancia.</p>
-      `
-    },
-    {
-      id: "issey-miyake-leau-dissey",
-      nombre: "Issey Miyake L'eau d'Issey",
-      precio: 290000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/issey-miyake-leau-dissey.jpg",
-      hover: "img/hombre/issey-miyake-leau-dissey-hover.jpg",
-      descripcion: `
-        <p>Una fragancia con estilo <strong>limpio, fresco y atemporal</strong>, perfecta para quienes disfrutan perfumes discretos pero elegantes.</p>
-        <p>Tiene una presencia ligera y refinada.</p>
-        <p><strong>Notas principales:</strong> cítricas, frescas y aromáticas.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para el día, oficina y climas cálidos.</p>
-      `
-    },
-    {
-      id: "lacoste-l1212-blanc",
-      nombre: "Lacoste L12.12 Blanc",
-      precio: 300000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/lacoste-l1212-blanc.jpg",
-      hover: "img/hombre/lacoste-l1212-blanc-hover.jpeg",
-      descripcion: `
-        <p>Fragancia masculina con una sensación <strong>limpia, deportiva y elegante</strong>.</p>
-        <p>Es ideal para hombres que buscan un aroma fresco y versátil para todo momento.</p>
-        <p><strong>Notas principales:</strong> frescas, limpias y con toque cítrico.</p>
-        <p><strong>Ocasión de uso:</strong> uso diario, oficina, universidad y salidas casuales.</p>
-      `
-    },
-    {
-      id: "lattafa-asad",
-      nombre: "Lattafa Asad",
-      precio: 200000,
-      aroma: "Amaderado",
-      imagen: "img/hombre/lattafa-asad.jpeg",
-      hover: "img/hombre/lattafa-asad-hover.webp",
-      descripcion: `
-        <p>Perfume con mucha presencia, de estilo <strong>amaderado, especiado y masculino</strong>.</p>
-        <p>Proyecta seguridad y firmeza, ideal para quienes quieren destacar.</p>
-        <p><strong>Notas principales:</strong> especiadas, cálidas y amaderadas.</p>
-        <p><strong>Ocasión de uso:</strong> perfecto para noche, reuniones y eventos especiales.</p>
-      `
-    },
-    {
-      id: "lattafa-asad-bourbon",
-      nombre: "Lattafa Asad Bourbon",
-      precio: 230000,
-      aroma: "Amaderado",
-      imagen: "img/hombre/lattafa-asad-bourbon.png",
-      hover: "img/hombre/lattafa-asad-bourbon-hover.jpg",
-      descripcion: `
-        <p>Una versión más cálida y refinada, con un aire <strong>amaderado, intenso y elegante</strong>.</p>
-        <p>Tiene una vibra madura y muy atractiva.</p>
-        <p><strong>Notas principales:</strong> amaderadas, cálidas y profundas.</p>
-        <p><strong>Ocasión de uso:</strong> ideal para noches, climas frescos y momentos especiales.</p>
-      `
-    },
-    {
-      id: "lattafa-fakhar",
-      nombre: "Lattafa Fakhar",
-      precio: 200000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/lattafa-fakhar.jpg",
-      hover: "img/hombre/lattafa-fakhar-hover.webp",
-      descripcion: `
-        <p>Fragancia masculina de estilo <strong>fresco, moderno y muy agradable</strong>.</p>
-        <p>Perfecta para quienes buscan un perfume limpio, versátil y fácil de llevar.</p>
-        <p><strong>Notas principales:</strong> frescas, aromáticas y cítricas.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para día a día, oficina y clima cálido.</p>
-      `
-    },
-    {
-      id: "montblanc-starwalker",
-      nombre: "Montblanc Starwalker",
-      precio: 200000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/montblanc-starwalker.jpg",
-      hover: "img/hombre/montblanc-starwalker-hover.webp",
-      descripcion: `
-        <p>Un aroma con perfil <strong>fresco, suave y elegante</strong>, ideal para hombres que prefieren fragancias discretas y refinadas.</p>
-        <p>Muy cómoda para uso diario.</p>
-        <p><strong>Notas principales:</strong> frescas, ligeras y amaderadas suaves.</p>
-        <p><strong>Ocasión de uso:</strong> oficina, universidad, reuniones y día a día.</p>
-      `
-    },
-    {
-      id: "moschino-toy-boy",
-      nombre: "Moschino Toy Boy",
-      precio: 210000,
-      aroma: "Amaderado",
-      imagen: "img/hombre/moschino-toy-boy.jpg",
-      hover: "img/hombre/moschino-toy-boy-hover.jpeg",
-      descripcion: `
-        <p>Una fragancia diferente, con personalidad <strong>amaderada, moderna y atrevida</strong>.</p>
-        <p>Ideal para hombres que quieren salirse de lo común y destacar.</p>
-        <p><strong>Notas principales:</strong> amaderadas, especiadas y con mucha personalidad.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para la noche, salidas y ocasiones especiales.</p>
-      `
-    },
-    {
-      id: "nautica-voyage",
-      nombre: "Nautica Voyage",
-      precio: 200000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/nautica-voyage.webp",
-      hover: "img/hombre/nautica-voyage-hover.jpg",
-      descripcion: `
-        <p>Un perfume muy popular por su estilo <strong>fresco, limpio y acuático</strong>.</p>
-        <p>Es una opción segura para quienes quieren oler bien todos los días sin complicarse.</p>
-        <p><strong>Notas principales:</strong> acuáticas y frescas.</p>
-        <p><strong>Ocasión de uso:</strong> uso diario, clima cálido, oficina y planes casuales.</p>
-      `
-    },
-    {
-      id: "paco-rabanne-invictus",
-      nombre: "Paco Rabanne Invictus",
-      precio: 200000,
-      aroma: "Fresco-Cítrico",
-      imagen: "img/hombre/paco-rabanne-invictus.webp",
-      hover: "img/hombre/paco-rabanne-invictus-hover.webp",
-      descripcion: `
-        <p>Fragancia masculina con una vibra <strong>fresca, deportiva y llamativa</strong>.</p>
-        <p>Ideal para hombres activos que quieren una presencia moderna y segura.</p>
-        <p><strong>Notas principales:</strong> frescas, marinas y con fondo masculino limpio.</p>
-        <p><strong>Ocasión de uso:</strong> gimnasio, salidas casuales, día y clima cálido.</p>
-      `
-    },
-    {
-      id: "paco-rabanne-one-million",
-      nombre: "Paco Rabanne One Million",
-      precio: 200000,
-      aroma: "Dulce",
-      imagen: "img/hombre/paco-rabanne-one-million.jpg",
-      hover: "img/hombre/paco-rabanne-one-million-hover.jpg",
-      descripcion: `
-        <p>Un perfume icónico con perfil <strong>dulce, lujoso y muy seductor</strong>.</p>
-        <p>Perfecto para quienes quieren destacar y dejar huella.</p>
-        <p><strong>Notas principales:</strong> dulces, cálidas y especiadas.</p>
-        <p><strong>Ocasión de uso:</strong> noche, fiestas, citas y eventos especiales.</p>
-      `
-    },
-    {
-      id: "rasasi-hawas-fire",
-      nombre: "Rasasi Hawas Fire",
-      precio: 200000,
-      aroma: "Dulce",
-      imagen: "img/hombre/rasasi-hawas-fire.png",
-      hover: "img/hombre/rasasi-hawas-fire-hover.webp",
-      descripcion: `
-        <p>Fragancia con una energía <strong>dulce, intensa y moderna</strong>, ideal para hombres que quieren un aroma llamativo.</p>
-        <p>Su estilo es juvenil, fuerte y con mucha proyección.</p>
-        <p><strong>Notas principales:</strong> dulces, especiadas y cálidas.</p>
-        <p><strong>Ocasión de uso:</strong> excelente para noche, fiestas y salidas especiales.</p>
-      `
-    },
-    {
-      id: "rasasi-hawas-tropical",
-      nombre: "Rasasi Hawas Tropical",
-      precio: 210000,
-      aroma: "Floral-Frutal",
-      imagen: "img/hombre/rasasi-hawas-tropical.jpeg",
-      hover: "img/hombre/rasasi-hawas-tropical-hover.webp",
-      descripcion: `
-        <p>Una propuesta más fresca y exótica, con un aire <strong>tropical, moderno y atractivo</strong>.</p>
-        <p>Es ideal para quienes quieren un perfume diferente y fácil de disfrutar.</p>
-        <p><strong>Notas principales:</strong> frutales, frescas y tropicales.</p>
-        <p><strong>Ocasión de uso:</strong> día, vacaciones, clima cálido y planes relajados.</p>
-      `
-    },
-    {
-      id: "valentino-uomo-born-in-roma",
-      nombre: "Valentino Uomo Born in Roma",
-      precio: 270000,
-      aroma: "Amaderado",
-      imagen: "img/hombre/valentino-uomo-born-in-roma.png",
-      hover: "img/hombre/valentino-uomo-born-in-roma-hover.jpg",
-      descripcion: `
-        <p>Fragancia masculina con un perfil <strong>elegante, moderno y amaderado</strong>.</p>
-        <p>Combina sofisticación con un estilo juvenil que lo hace muy versátil.</p>
-        <p><strong>Notas principales:</strong> amaderadas, aromáticas y cálidas.</p>
-        <p><strong>Ocasión de uso:</strong> ideal para oficina, citas, noche y eventos especiales.</p>
-      `
-    },
-    {
-      id: "versace-eros-flame",
-      nombre: "Versace Eros Flame",
-      precio: 400000,
-      aroma: "Amaderado",
-      imagen: "img/hombre/versace-eros-flame.jpg",
-      hover: "img/hombre/versace-eros-flame-hover.jpg",
-      descripcion: `
-        <p>Una fragancia intensa con carácter <strong>amaderado, cálido y muy masculino</strong>.</p>
-        <p>Ideal para hombres seguros que quieren una presencia fuerte y apasionada.</p>
-        <p><strong>Notas principales:</strong> especiadas, amaderadas y cálidas.</p>
-        <p><strong>Ocasión de uso:</strong> noche, citas, eventos y climas frescos.</p>
-      `
-    },
-    {
-      id: "versace-eros",
-      nombre: "Versace Eros",
-      precio: 390000,
-      aroma: "Dulce",
-      imagen: "img/hombre/versace-eros.jpg",
-      hover: "img/hombre/versace-eros-hover.png",
-      descripcion: `
-        <p>Perfume con mucha fuerza, de estilo <strong>dulce, fresco y seductor</strong>.</p>
-        <p>Es una fragancia muy popular por su capacidad de llamar la atención.</p>
-        <p><strong>Notas principales:</strong> dulces, aromáticas y frescas con fondo atractivo.</p>
-        <p><strong>Ocasión de uso:</strong> ideal para noche, fiestas, salidas y momentos especiales.</p>
-      `
-    }
-  ];
-
-  const params = new URLSearchParams(window.location.search);
-  const perfumeId = params.get("id");
-  const producto = perfumesHombre.find(p => p.id === perfumeId) || perfumesHombre[0];
-
-  const productName = document.getElementById("productName");
-  const breadcrumbName = document.getElementById("breadcrumbName");
-  const productPrice = document.getElementById("productPrice");
-  const productDescription = document.getElementById("productDescription");
-  const mainProductImage = document.getElementById("mainProductImage");
-  const thumbsContainer = document.getElementById("thumbsContainer");
-  const buyWhatsapp = document.getElementById("buyWhatsapp");
-  const qtyValue = document.getElementById("qtyValue");
-  const minusQty = document.getElementById("minusQty");
-  const plusQty = document.getElementById("plusQty");
-  const stickyCartBar = document.getElementById("stickyCartBar");
-  const stickyProductImage = document.getElementById("stickyProductImage");
-  const stickyProductName = document.getElementById("stickyProductName");
-  const stickyProductPrice = document.getElementById("stickyProductPrice");
-  const stickyQtyValue = document.getElementById("stickyQtyValue");
-  const minusStickyQty = document.getElementById("minusStickyQty");
-  const plusStickyQty = document.getElementById("plusStickyQty");
-  const scrollTopBtn = document.getElementById("scrollTopBtn");
-  const searchForm = document.getElementById("searchForm");
-  const searchInputHeader = document.getElementById("searchInputHeader");
-  const addToCartBtn = document.getElementById("addToCartBtn");
-  const stickyAddBtn = document.getElementById("stickyAddBtn");
-  const stickyHeader = document.getElementById("stickyHeader");
-  const relatedProductsGrid = document.getElementById("relatedProductsGrid");
-
-  let cantidad = 1;
-
-  function formatPrice(value){
-    return "$" + value.toLocaleString("es-CO");
-  }
-
-  function setMainImage(src, alt){
-    mainProductImage.src = src;
-    mainProductImage.alt = alt;
-  }
-
-  function updateWhatsappLink(){
-    const mensaje = encodeURIComponent(
-      "Hola, quiero comprar " + producto.nombre + " x" + cantidad + " - " + formatPrice(producto.precio)
-    );
-    buyWhatsapp.href = `https://wa.me/573145661788?text=${mensaje}`;
-  }
-
-  function updateQtyViews(){
-    qtyValue.textContent = cantidad;
-    stickyQtyValue.textContent = cantidad;
-    updateWhatsappLink();
-  }
-
-  function renderProduct(){
-    document.title = producto.nombre + " | Origen Perfumería";
-    productName.textContent = producto.nombre;
-    breadcrumbName.textContent = producto.nombre;
-    productPrice.textContent = formatPrice(producto.precio);
-    productDescription.innerHTML = producto.descripcion;
-
-    setMainImage(producto.imagen, producto.nombre);
-
-    stickyProductImage.src = producto.imagen;
-    stickyProductImage.alt = producto.nombre;
-    stickyProductName.textContent = producto.nombre;
-    stickyProductPrice.textContent = formatPrice(producto.precio);
-
-    const galleryImages = [
-      { src: producto.imagen, label: producto.nombre },
-      { src: producto.hover, label: producto.nombre + " detalle" },
-      { src: producto.imagen, label: producto.nombre + " presentación" }
+  <script>
+    const perfumesHombre = [
+      {
+        id: "afnan-9am-dive",
+        nombre: "Afnan 9AM Dive",
+        precio: 230000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/afnan-9am-dive.jpg",
+        hover: "img/hombre/afnan-9am-dive-hover.jpg",
+        descripcion: `
+          <p>Una fragancia con carácter <strong>fresco, moderno y energético</strong>, ideal para hombres que buscan un aroma limpio y versátil.</p>
+          <p>Se siente vibrante y fácil de usar durante el día, especialmente en climas cálidos.</p>
+          <p><strong>Notas principales:</strong> cítricas, acuáticas y frescas con una sensación juvenil y dinámica.</p>
+          <p><strong>Ocasión de uso:</strong> perfecta para oficina, universidad, uso diario y salidas casuales.</p>
+        `
+      },
+      {
+        id: "afnan-9pm",
+        nombre: "Afnan 9PM",
+        precio: 230000,
+        aroma: "Dulce",
+        imagen: "img/hombre/afnan-9pm.jpeg",
+        hover: "img/hombre/afnan-9pm-hover.jpeg",
+        descripcion: `
+          <p>Una fragancia <strong>dulce, intensa y muy llamativa</strong>, ideal para hombres que quieren destacar con facilidad.</p>
+          <p>Su perfil es seductor, moderno y perfecto para quienes disfrutan aromas con mucha presencia.</p>
+          <p><strong>Notas principales:</strong> dulce, cálido y especiado con fondo envolvente.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para la noche, fiestas, citas y eventos especiales.</p>
+        `
+      },
+      {
+        id: "afnan-9pm-elixir",
+        nombre: "Afnan 9PM Elixir",
+        precio: 280000,
+        aroma: "Dulce",
+        imagen: "img/hombre/afnan-9pm-elixir.jpg",
+        hover: "img/hombre/afnan-9pm-elixir-hover.webp",
+        descripcion: `
+          <p>Una versión más refinada y potente, con un estilo <strong>dulce, elegante y seductor</strong>.</p>
+          <p>Está pensada para quienes buscan una fragancia nocturna con mucha personalidad.</p>
+          <p><strong>Notas principales:</strong> dulces, intensas y cálidas con un aire sofisticado.</p>
+          <p><strong>Ocasión de uso:</strong> ideal para noches especiales, cenas y reuniones importantes.</p>
+        `
+      },
+      {
+        id: "armaf-club-de-nuit-intense-man",
+        nombre: "Armaf Club de Nuit Intense Man",
+        precio: 200000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/armaf-club-de-nuit-intense-man.png",
+        hover: "img/hombre/armaf-club-de-nuit-intense-man-hover.jpg",
+        descripcion: `
+          <p>Fragancia masculina con una presencia <strong>elegante, cítrica y muy reconocible</strong>, perfecta para destacar sin esfuerzo.</p>
+          <p>Combina frescura con un fondo serio y varonil que le da mucha versatilidad.</p>
+          <p><strong>Notas principales:</strong> cítricas, ahumadas y amaderadas.</p>
+          <p><strong>Ocasión de uso:</strong> oficina, reuniones, salidas nocturnas y uso diario.</p>
+        `
+      },
+      {
+        id: "armaf-odyssey-mandarin-sky",
+        nombre: "Armaf Odyssey Mandarin Sky",
+        precio: 230000,
+        aroma: "Dulce",
+        imagen: "img/hombre/armaf-odyssey-mandarin-sky.jpeg",
+        hover: "img/hombre/armaf-odyssey-mandarin-sky-hover.jpg",
+        descripcion: `
+          <p>Una fragancia <strong>dulce, juvenil y moderna</strong>, ideal para hombres que buscan un aroma alegre y muy atractivo.</p>
+          <p>Su estilo es llamativo pero fácil de llevar.</p>
+          <p><strong>Notas principales:</strong> dulces con matices cítricos y cálidos.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para salidas, tardes y noches casuales.</p>
+        `
+      },
+      {
+        id: "armaf-odyssey-mandarin-sky-elixir",
+        nombre: "Armaf Odyssey Mandarin Sky Elixir",
+        precio: 270000,
+        aroma: "Dulce",
+        imagen: "img/hombre/armaf-odyssey-mandarin-sky-elixir.jpg",
+        hover: "img/hombre/armaf-odyssey-mandarin-sky-elixir-hover.webp",
+        descripcion: `
+          <p>Versión más intensa y refinada, con un perfil <strong>dulce, envolvente y elegante</strong>.</p>
+          <p>Perfecta para quienes quieren más presencia y duración en su fragancia.</p>
+          <p><strong>Notas principales:</strong> dulces, cálidas y modernas.</p>
+          <p><strong>Ocasión de uso:</strong> ideal para noche, eventos y momentos especiales.</p>
+        `
+      },
+      {
+        id: "bharara-king",
+        nombre: "Bharara King",
+        precio: 320000,
+        aroma: "Amaderado",
+        imagen: "img/hombre/bharara-king.jpg",
+        hover: "img/hombre/bharara-king-hover.jpg",
+        descripcion: `
+          <p>Una fragancia con mucho porte, de estilo <strong>amaderado, elegante y masculino</strong>.</p>
+          <p>Se siente sofisticada y con una presencia fuerte que marca diferencia.</p>
+          <p><strong>Notas principales:</strong> amaderadas, cálidas y con profundidad.</p>
+          <p><strong>Ocasión de uso:</strong> recomendable para eventos, reuniones y noches especiales.</p>
+        `
+      },
+      {
+        id: "carolina-herrera-212-nyc",
+        nombre: "Carolina Herrera 212 NYC",
+        precio: 450000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/carolina-herrera-212-nyc.jpg",
+        hover: "img/hombre/carolina-herrera-212-nyc-hover.jpg",
+        descripcion: `
+          <p>Perfume con una vibra <strong>urbana, fresca y elegante</strong>, ideal para hombres modernos y activos.</p>
+          <p>Muy versátil para quienes quieren oler limpio y sofisticado.</p>
+          <p><strong>Notas principales:</strong> frescas, cítricas y con fondo masculino suave.</p>
+          <p><strong>Ocasión de uso:</strong> perfecto para uso diario, oficina y clima cálido.</p>
+        `
+      },
+      {
+        id: "carolina-herrera-212-vip",
+        nombre: "Carolina Herrera 212 VIP",
+        precio: 420000,
+        aroma: "Dulce",
+        imagen: "img/hombre/carolina-herrera-212-vip.jpeg",
+        hover: "img/hombre/carolina-herrera-212-vip-hover.jpg",
+        descripcion: `
+          <p>Una fragancia <strong>dulce, elegante y fiestera</strong>, hecha para destacar en ambientes nocturnos.</p>
+          <p>Tiene una vibra moderna y segura que llama la atención.</p>
+          <p><strong>Notas principales:</strong> dulces, especiadas y cálidas.</p>
+          <p><strong>Ocasión de uso:</strong> ideal para fiestas, citas y eventos nocturnos.</p>
+        `
+      },
+      {
+        id: "dolce-gabbana-light-blue",
+        nombre: "Dolce & Gabbana Light Blue",
+        precio: 450000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/dolce-gabbana-light-blue.webp",
+        hover: "img/hombre/dolce-gabbana-light-blue-hover.jpg",
+        descripcion: `
+          <p>Fragancia con una sensación <strong>fresca, limpia y mediterránea</strong>, ideal para climas cálidos.</p>
+          <p>Muy agradable para quienes prefieren aromas ligeros pero con clase.</p>
+          <p><strong>Notas principales:</strong> cítricas, acuáticas y frescas.</p>
+          <p><strong>Ocasión de uso:</strong> día a día, vacaciones, oficina y clima caliente.</p>
+        `
+      },
+      {
+        id: "giorgio-armani-acqua-di-gio",
+        nombre: "Giorgio Armani Acqua di Gio",
+        precio: 440000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/giorgio-armani-acqua-di-gio.jpg",
+        hover: "img/hombre/giorgio-armani-acqua-di-gio-hover.jpg",
+        descripcion: `
+          <p>Un clásico masculino con un perfil <strong>fresco, elegante y natural</strong>.</p>
+          <p>Es una opción muy versátil para quienes quieren un aroma limpio y refinado.</p>
+          <p><strong>Notas principales:</strong> acuáticas, cítricas y aromáticas.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para oficina, uso diario y clima cálido.</p>
+        `
+      },
+      {
+        id: "giorgio-armani-acqua-di-gio-profondo",
+        nombre: "Giorgio Armani Acqua di Gio Profondo",
+        precio: 620000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/giorgio-armani-acqua-di-gio-profondo.jpg",
+        hover: "img/hombre/giorgio-armani-acqua-di-gio-profondo-hover.png",
+        descripcion: `
+          <p>Una versión más intensa y profunda, con una frescura <strong>elegante, moderna y sofisticada</strong>.</p>
+          <p>Ideal para quienes quieren un aroma fresco pero más serio y refinado.</p>
+          <p><strong>Notas principales:</strong> acuáticas, frescas y con un fondo profundo.</p>
+          <p><strong>Ocasión de uso:</strong> oficina, reuniones y eventos donde quieras proyectar elegancia.</p>
+        `
+      },
+      {
+        id: "issey-miyake-leau-dissey",
+        nombre: "Issey Miyake L'eau d'Issey",
+        precio: 290000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/issey-miyake-leau-dissey.jpg",
+        hover: "img/hombre/issey-miyake-leau-dissey-hover.jpg",
+        descripcion: `
+          <p>Una fragancia con estilo <strong>limpio, fresco y atemporal</strong>, perfecta para quienes disfrutan perfumes discretos pero elegantes.</p>
+          <p>Tiene una presencia ligera y refinada.</p>
+          <p><strong>Notas principales:</strong> cítricas, frescas y aromáticas.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para el día, oficina y climas cálidos.</p>
+        `
+      },
+      {
+        id: "lacoste-l1212-blanc",
+        nombre: "Lacoste L12.12 Blanc",
+        precio: 300000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/lacoste-l1212-blanc.jpg",
+        hover: "img/hombre/lacoste-l1212-blanc-hover.jpeg",
+        descripcion: `
+          <p>Fragancia masculina con una sensación <strong>limpia, deportiva y elegante</strong>.</p>
+          <p>Es ideal para hombres que buscan un aroma fresco y versátil para todo momento.</p>
+          <p><strong>Notas principales:</strong> frescas, limpias y con toque cítrico.</p>
+          <p><strong>Ocasión de uso:</strong> uso diario, oficina, universidad y salidas casuales.</p>
+        `
+      },
+      {
+        id: "lattafa-asad",
+        nombre: "Lattafa Asad",
+        precio: 200000,
+        aroma: "Amaderado",
+        imagen: "img/hombre/lattafa-asad.jpeg",
+        hover: "img/hombre/lattafa-asad-hover.webp",
+        descripcion: `
+          <p>Perfume con mucha presencia, de estilo <strong>amaderado, especiado y masculino</strong>.</p>
+          <p>Proyecta seguridad y firmeza, ideal para quienes quieren destacar.</p>
+          <p><strong>Notas principales:</strong> especiadas, cálidas y amaderadas.</p>
+          <p><strong>Ocasión de uso:</strong> perfecto para noche, reuniones y eventos especiales.</p>
+        `
+      },
+      {
+        id: "lattafa-asad-bourbon",
+        nombre: "Lattafa Asad Bourbon",
+        precio: 230000,
+        aroma: "Amaderado",
+        imagen: "img/hombre/lattafa-asad-bourbon.png",
+        hover: "img/hombre/lattafa-asad-bourbon-hover.jpg",
+        descripcion: `
+          <p>Una versión más cálida y refinada, con un aire <strong>amaderado, intenso y elegante</strong>.</p>
+          <p>Tiene una vibra madura y muy atractiva.</p>
+          <p><strong>Notas principales:</strong> amaderadas, cálidas y profundas.</p>
+          <p><strong>Ocasión de uso:</strong> ideal para noches, climas frescos y momentos especiales.</p>
+        `
+      },
+      {
+        id: "lattafa-fakhar",
+        nombre: "Lattafa Fakhar",
+        precio: 200000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/lattafa-fakhar.jpg",
+        hover: "img/hombre/lattafa-fakhar-hover.webp",
+        descripcion: `
+          <p>Fragancia masculina de estilo <strong>fresco, moderno y muy agradable</strong>.</p>
+          <p>Perfecta para quienes buscan un perfume limpio, versátil y fácil de llevar.</p>
+          <p><strong>Notas principales:</strong> frescas, aromáticas y cítricas.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para día a día, oficina y clima cálido.</p>
+        `
+      },
+      {
+        id: "montblanc-starwalker",
+        nombre: "Montblanc Starwalker",
+        precio: 200000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/montblanc-starwalker.jpg",
+        hover: "img/hombre/montblanc-starwalker-hover.webp",
+        descripcion: `
+          <p>Un aroma con perfil <strong>fresco, suave y elegante</strong>, ideal para hombres que prefieren fragancias discretas y refinadas.</p>
+          <p>Muy cómoda para uso diario.</p>
+          <p><strong>Notas principales:</strong> frescas, ligeras y amaderadas suaves.</p>
+          <p><strong>Ocasión de uso:</strong> oficina, universidad, reuniones y día a día.</p>
+        `
+      },
+      {
+        id: "moschino-toy-boy",
+        nombre: "Moschino Toy Boy",
+        precio: 210000,
+        aroma: "Amaderado",
+        imagen: "img/hombre/moschino-toy-boy.jpg",
+        hover: "img/hombre/moschino-toy-boy-hover.jpeg",
+        descripcion: `
+          <p>Una fragancia diferente, con personalidad <strong>amaderada, moderna y atrevida</strong>.</p>
+          <p>Ideal para hombres que quieren salirse de lo común y destacar.</p>
+          <p><strong>Notas principales:</strong> amaderadas, especiadas y con mucha personalidad.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para la noche, salidas y ocasiones especiales.</p>
+        `
+      },
+      {
+        id: "nautica-voyage",
+        nombre: "Nautica Voyage",
+        precio: 200000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/nautica-voyage.webp",
+        hover: "img/hombre/nautica-voyage-hover.jpg",
+        descripcion: `
+          <p>Un perfume muy popular por su estilo <strong>fresco, limpio y acuático</strong>.</p>
+          <p>Es una opción segura para quienes quieren oler bien todos los días sin complicarse.</p>
+          <p><strong>Notas principales:</strong> acuáticas y frescas.</p>
+          <p><strong>Ocasión de uso:</strong> uso diario, clima cálido, oficina y planes casuales.</p>
+        `
+      },
+      {
+        id: "paco-rabanne-invictus",
+        nombre: "Paco Rabanne Invictus",
+        precio: 200000,
+        aroma: "Fresco-Cítrico",
+        imagen: "img/hombre/paco-rabanne-invictus.webp",
+        hover: "img/hombre/paco-rabanne-invictus-hover.webp",
+        descripcion: `
+          <p>Fragancia masculina con una vibra <strong>fresca, deportiva y llamativa</strong>.</p>
+          <p>Ideal para hombres activos que quieren una presencia moderna y segura.</p>
+          <p><strong>Notas principales:</strong> frescas, marinas y con fondo masculino limpio.</p>
+          <p><strong>Ocasión de uso:</strong> gimnasio, salidas casuales, día y clima cálido.</p>
+        `
+      },
+      {
+        id: "paco-rabanne-one-million",
+        nombre: "Paco Rabanne One Million",
+        precio: 200000,
+        aroma: "Dulce",
+        imagen: "img/hombre/paco-rabanne-one-million.jpg",
+        hover: "img/hombre/paco-rabanne-one-million-hover.jpg",
+        descripcion: `
+          <p>Un perfume icónico con perfil <strong>dulce, lujoso y muy seductor</strong>.</p>
+          <p>Perfecto para quienes quieren destacar y dejar huella.</p>
+          <p><strong>Notas principales:</strong> dulces, cálidas y especiadas.</p>
+          <p><strong>Ocasión de uso:</strong> noche, fiestas, citas y eventos especiales.</p>
+        `
+      },
+      {
+        id: "rasasi-hawas-fire",
+        nombre: "Rasasi Hawas Fire",
+        precio: 200000,
+        aroma: "Dulce",
+        imagen: "img/hombre/rasasi-hawas-fire.png",
+        hover: "img/hombre/rasasi-hawas-fire-hover.webp",
+        descripcion: `
+          <p>Fragancia con una energía <strong>dulce, intensa y moderna</strong>, ideal para hombres que quieren un aroma llamativo.</p>
+          <p>Su estilo es juvenil, fuerte y con mucha proyección.</p>
+          <p><strong>Notas principales:</strong> dulces, especiadas y cálidas.</p>
+          <p><strong>Ocasión de uso:</strong> excelente para noche, fiestas y salidas especiales.</p>
+        `
+      },
+      {
+        id: "rasasi-hawas-tropical",
+        nombre: "Rasasi Hawas Tropical",
+        precio: 210000,
+        aroma: "Floral-Frutal",
+        imagen: "img/hombre/rasasi-hawas-tropical.jpeg",
+        hover: "img/hombre/rasasi-hawas-tropical-hover.webp",
+        descripcion: `
+          <p>Una propuesta más fresca y exótica, con un aire <strong>tropical, moderno y atractivo</strong>.</p>
+          <p>Es ideal para quienes quieren un perfume diferente y fácil de disfrutar.</p>
+          <p><strong>Notas principales:</strong> frutales, frescas y tropicales.</p>
+          <p><strong>Ocasión de uso:</strong> día, vacaciones, clima cálido y planes relajados.</p>
+        `
+      },
+      {
+        id: "valentino-uomo-born-in-roma",
+        nombre: "Valentino Uomo Born in Roma",
+        precio: 270000,
+        aroma: "Amaderado",
+        imagen: "img/hombre/valentino-uomo-born-in-roma.png",
+        hover: "img/hombre/valentino-uomo-born-in-roma-hover.jpg",
+        descripcion: `
+          <p>Fragancia masculina con un perfil <strong>elegante, moderno y amaderado</strong>.</p>
+          <p>Combina sofisticación con un estilo juvenil que lo hace muy versátil.</p>
+          <p><strong>Notas principales:</strong> amaderadas, aromáticas y cálidas.</p>
+          <p><strong>Ocasión de uso:</strong> ideal para oficina, citas, noche y eventos especiales.</p>
+        `
+      },
+      {
+        id: "versace-eros-flame",
+        nombre: "Versace Eros Flame",
+        precio: 400000,
+        aroma: "Amaderado",
+        imagen: "img/hombre/versace-eros-flame.jpg",
+        hover: "img/hombre/versace-eros-flame-hover.jpg",
+        descripcion: `
+          <p>Una fragancia intensa con carácter <strong>amaderado, cálido y muy masculino</strong>.</p>
+          <p>Ideal para hombres seguros que quieren una presencia fuerte y apasionada.</p>
+          <p><strong>Notas principales:</strong> especiadas, amaderadas y cálidas.</p>
+          <p><strong>Ocasión de uso:</strong> noche, citas, eventos y climas frescos.</p>
+        `
+      },
+      {
+        id: "versace-eros",
+        nombre: "Versace Eros",
+        precio: 390000,
+        aroma: "Dulce",
+        imagen: "img/hombre/versace-eros.jpg",
+        hover: "img/hombre/versace-eros-hover.png",
+        descripcion: `
+          <p>Perfume con mucha fuerza, de estilo <strong>dulce, fresco y seductor</strong>.</p>
+          <p>Es una fragancia muy popular por su capacidad de llamar la atención.</p>
+          <p><strong>Notas principales:</strong> dulces, aromáticas y frescas con fondo atractivo.</p>
+          <p><strong>Ocasión de uso:</strong> ideal para noche, fiestas, salidas y momentos especiales.</p>
+        `
+      }
     ];
 
-    thumbsContainer.innerHTML = "";
+    const params = new URLSearchParams(window.location.search);
+    const perfumeId = params.get("id");
+    const producto = perfumesHombre.find(p => p.id === perfumeId) || perfumesHombre[0];
 
-    galleryImages.forEach((img, index) => {
-      const button = document.createElement("button");
-      button.className = "thumb" + (index === 0 ? " active" : "");
-      button.type = "button";
-      button.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
+    const productName = document.getElementById("productName");
+    const breadcrumbName = document.getElementById("breadcrumbName");
+    const productPrice = document.getElementById("productPrice");
+    const productDescription = document.getElementById("productDescription");
+    const buyWhatsapp = document.getElementById("buyWhatsapp");
+    const qtyValue = document.getElementById("qtyValue");
+    const minusQty = document.getElementById("minusQty");
+    const plusQty = document.getElementById("plusQty");
+    const stickyCartBar = document.getElementById("stickyCartBar");
+    const stickyProductImage = document.getElementById("stickyProductImage");
+    const stickyProductName = document.getElementById("stickyProductName");
+    const stickyProductPrice = document.getElementById("stickyProductPrice");
+    const stickyQtyValue = document.getElementById("stickyQtyValue");
+    const minusStickyQty = document.getElementById("minusStickyQty");
+    const plusStickyQty = document.getElementById("plusStickyQty");
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    const searchForm = document.getElementById("searchForm");
+    const searchInputHeader = document.getElementById("searchInputHeader");
+    const addToCartBtn = document.getElementById("addToCartBtn");
+    const stickyAddBtn = document.getElementById("stickyAddBtn");
+    const stickyHeader = document.getElementById("stickyHeader");
+    const relatedProductsGrid = document.getElementById("relatedProductsGrid");
+    const productGallery = document.getElementById("productGallery");
+    const imageModal = document.getElementById("imageModal");
+    const imageModalImg = document.getElementById("imageModalImg");
+    const imageModalClose = document.getElementById("imageModalClose");
 
-      button.addEventListener("click", () => {
-        setMainImage(img.src, img.label);
-        document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
-        button.classList.add("active");
+    let cantidad = 1;
+
+    function formatPrice(value){
+      return "$" + value.toLocaleString("es-CO");
+    }
+
+    function openImageModal(src, alt){
+      imageModalImg.src = src;
+      imageModalImg.alt = alt || "Imagen del producto";
+      imageModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeImageModal(){
+      imageModal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    function updateWhatsappLink(){
+      const mensaje = encodeURIComponent(
+        "Hola, quiero comprar " + producto.nombre + " x" + cantidad + " - " + formatPrice(producto.precio)
+      );
+      buyWhatsapp.href = `https://wa.me/573145661788?text=${mensaje}`;
+    }
+
+    function updateQtyViews(){
+      qtyValue.textContent = cantidad;
+      stickyQtyValue.textContent = cantidad;
+      updateWhatsappLink();
+    }
+
+    function renderProduct(){
+      document.title = producto.nombre + " | Origen Perfumería";
+      productName.textContent = producto.nombre;
+      breadcrumbName.textContent = producto.nombre;
+      productPrice.textContent = formatPrice(producto.precio);
+      productDescription.innerHTML = producto.descripcion;
+
+      stickyProductImage.src = producto.imagen;
+      stickyProductImage.alt = producto.nombre;
+      stickyProductName.textContent = producto.nombre;
+      stickyProductPrice.textContent = formatPrice(producto.precio);
+
+      const galleryImages = [
+        { src: producto.imagen, label: producto.nombre },
+        { src: producto.hover, label: producto.nombre + " detalle" },
+        { src: producto.imagen, label: producto.nombre + " presentación" }
+      ];
+
+      productGallery.innerHTML = "";
+
+      galleryImages.forEach((img) => {
+        const slide = document.createElement("div");
+        slide.className = "gallery-slide";
+        slide.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
+
+        slide.addEventListener("click", () => {
+          openImageModal(img.src, img.label);
+        });
+
+        productGallery.appendChild(slide);
       });
 
-      thumbsContainer.appendChild(button);
-    });
-
-    updateQtyViews();
-  }
-
-  function addToCartAction(){
-    if (typeof agregarAlCarrito !== "function") {
-      console.error("No se encontró la función agregarAlCarrito en carrito.js");
-      return;
-    }
-
-    agregarAlCarrito({
-      id: producto.id,
-      nombre: producto.nombre,
-      precio: producto.precio,
-      imagen: producto.imagen,
-      url: `producto-hombre.html?id=${producto.id}`,
-      categoria: "Hombre"
-    }, cantidad);
-  }
-
-  minusQty.addEventListener("click", () => {
-    if(cantidad > 1){
-      cantidad--;
       updateQtyViews();
     }
-  });
 
-  plusQty.addEventListener("click", () => {
-    cantidad++;
-    updateQtyViews();
-  });
-
-  minusStickyQty.addEventListener("click", () => {
-    if(cantidad > 1){
-      cantidad--;
-      updateQtyViews();
-    }
-  });
-
-  plusStickyQty.addEventListener("click", () => {
-    cantidad++;
-    updateQtyViews();
-  });
-
-  addToCartBtn.addEventListener("click", addToCartAction);
-  stickyAddBtn.addEventListener("click", addToCartAction);
-
-  document.querySelectorAll(".accordion-header").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = button.parentElement;
-      item.classList.toggle("active");
-    });
-  });
-
-  if(searchForm && searchInputHeader){
-    searchForm.addEventListener("submit", function(e){
-      e.preventDefault();
-      const texto = searchInputHeader.value.trim();
-
-      if(texto !== ""){
-        window.location.href = `todos.html?buscar=${encodeURIComponent(texto)}`;
-      } else {
-        window.location.href = "todos.html";
-      }
-    });
-  }
-
-  const announcementItems = document.querySelectorAll(".announcement-item");
-  let announcementIndex = 0;
-
-  function cambiarAnnouncement() {
-    announcementItems[announcementIndex].classList.remove("active");
-    announcementIndex++;
-    if (announcementIndex >= announcementItems.length) {
-      announcementIndex = 0;
-    }
-    announcementItems[announcementIndex].classList.add("active");
-  }
-
-  setInterval(cambiarAnnouncement, 3500);
-
-  let lastScrollTop = 0;
-
-  window.addEventListener("scroll", () => {
-    if(window.scrollY > 500){
-      stickyCartBar.classList.add("show");
-      scrollTopBtn.classList.add("show");
-    } else {
-      stickyCartBar.classList.remove("show");
-      scrollTopBtn.classList.remove("show");
-    }
-
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if(currentScroll > 60){
-      stickyHeader.classList.add("show-shadow");
-    } else {
-      stickyHeader.classList.remove("show-shadow");
-    }
-
-    if(window.innerWidth > 768){
-      if(currentScroll > lastScrollTop && currentScroll > 140){
-        stickyHeader.classList.add("hide-header");
-      } else {
-        stickyHeader.classList.remove("hide-header");
-      }
-    } else {
-      stickyHeader.classList.remove("hide-header");
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
-
-  scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-
-function obtenerRelacionados() {
-  const mismosAroma = perfumesHombre.filter(p => p.id !== producto.id && p.aroma === producto.aroma);
-  const mismaCategoria = perfumesHombre.filter(p => p.id !== producto.id && p.aroma !== producto.aroma);
-
-  const relacionados = [...mismosAroma, ...mismaCategoria].slice(0, 4);
-  return relacionados;
-}
-
-function renderRelacionados() {
-  if (!relatedProductsGrid) return;
-
-  const relacionados = obtenerRelacionados();
-
-  if (relacionados.length === 0) {
-    relatedProductsGrid.innerHTML = `
-      <p style="font-size:16px;color:#4b4535;">Pronto agregaremos más recomendaciones para este perfume.</p>
-    `;
-    return;
-  }
-
-  relatedProductsGrid.innerHTML = relacionados.map(item => `
-    <article class="related-card">
-      <a href="producto-hombre.html?id=${item.id}" class="related-card-link">
-        <div class="related-image-wrap">
-          <img class="img-main" src="${item.imagen}" alt="${item.nombre}">
-          <img class="img-hover" src="${item.hover}" alt="${item.nombre} hover">
-        </div>
-      </a>
-      <div class="related-info">
-        <p class="related-category">${item.aroma}</p>
-        <h3 class="related-name">${item.nombre}</h3>
-        <p class="related-price">${formatPrice(item.precio)}</p>
-        <div class="related-actions">
-          <a href="producto-hombre.html?id=${item.id}" class="related-btn">Ver detalles</a>
-          <button class="related-cart-btn" type="button" data-id="${item.id}">Agregar al carrito</button>
-        </div>
-      </div>
-    </article>
-  `).join("");
-
-  document.querySelectorAll(".related-cart-btn").forEach(btn => {
-    btn.addEventListener("click", function() {
-      const id = this.dataset.id;
-      const perfumeRelacionado = perfumesHombre.find(p => p.id === id);
-
-      if (!perfumeRelacionado) return;
-
+    function addToCartAction(){
       if (typeof agregarAlCarrito !== "function") {
         console.error("No se encontró la función agregarAlCarrito en carrito.js");
         return;
       }
 
       agregarAlCarrito({
-        id: perfumeRelacionado.id,
-        nombre: perfumeRelacionado.nombre,
-        precio: perfumeRelacionado.precio,
-        imagen: perfumeRelacionado.imagen,
-        url: `producto-hombre.html?id=${perfumeRelacionado.id}`,
+        id: producto.id,
+        nombre: producto.nombre,
+        precio: producto.precio,
+        imagen: producto.imagen,
+        url: `producto-hombre.html?id=${producto.id}`,
         categoria: "Hombre"
-      }, 1);
-    });
-  });
-}
+      }, cantidad);
+    }
 
- renderProduct();
-renderRelacionados();
-</script>
-<script src="carrito.js"></script>
+    minusQty.addEventListener("click", () => {
+      if(cantidad > 1){
+        cantidad--;
+        updateQtyViews();
+      }
+    });
+
+    plusQty.addEventListener("click", () => {
+      cantidad++;
+      updateQtyViews();
+    });
+
+    minusStickyQty.addEventListener("click", () => {
+      if(cantidad > 1){
+        cantidad--;
+        updateQtyViews();
+      }
+    });
+
+    plusStickyQty.addEventListener("click", () => {
+      cantidad++;
+      updateQtyViews();
+    });
+
+    addToCartBtn.addEventListener("click", addToCartAction);
+    stickyAddBtn.addEventListener("click", addToCartAction);
+
+    imageModalClose.addEventListener("click", closeImageModal);
+
+    imageModal.addEventListener("click", (e) => {
+      if (e.target === imageModal) {
+        closeImageModal();
+      }
+    });
+
+    document.querySelectorAll(".accordion-header").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.parentElement;
+        item.classList.toggle("active");
+      });
+    });
+
+    if(searchForm && searchInputHeader){
+      searchForm.addEventListener("submit", function(e){
+        e.preventDefault();
+        const texto = searchInputHeader.value.trim();
+
+        if(texto !== ""){
+          window.location.href = `todos.html?buscar=${encodeURIComponent(texto)}`;
+        } else {
+          window.location.href = "todos.html";
+        }
+      });
+    }
+
+    const announcementItems = document.querySelectorAll(".announcement-item");
+    let announcementIndex = 0;
+
+    function cambiarAnnouncement() {
+      announcementItems[announcementIndex].classList.remove("active");
+      announcementIndex++;
+      if (announcementIndex >= announcementItems.length) {
+        announcementIndex = 0;
+      }
+      announcementItems[announcementIndex].classList.add("active");
+    }
+
+    setInterval(cambiarAnnouncement, 3500);
+
+    let lastScrollTop = 0;
+
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 500){
+        stickyCartBar.classList.add("show");
+        scrollTopBtn.classList.add("show");
+      } else {
+        stickyCartBar.classList.remove("show");
+        scrollTopBtn.classList.remove("show");
+      }
+
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if(currentScroll > 60){
+        stickyHeader.classList.add("show-shadow");
+      } else {
+        stickyHeader.classList.remove("show-shadow");
+      }
+
+      if(window.innerWidth > 768){
+        if(currentScroll > lastScrollTop && currentScroll > 140){
+          stickyHeader.classList.add("hide-header");
+        } else {
+          stickyHeader.classList.remove("hide-header");
+        }
+      } else {
+        stickyHeader.classList.remove("hide-header");
+      }
+
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    function obtenerRelacionados() {
+      const mismosAroma = perfumesHombre.filter(p => p.id !== producto.id && p.aroma === producto.aroma);
+      const mismaCategoria = perfumesHombre.filter(p => p.id !== producto.id && p.aroma !== producto.aroma);
+      return [...mismosAroma, ...mismaCategoria].slice(0, 4);
+    }
+
+    function renderRelacionados() {
+      if (!relatedProductsGrid) return;
+
+      const relacionados = obtenerRelacionados();
+
+      if (relacionados.length === 0) {
+        relatedProductsGrid.innerHTML = `
+          <p style="font-size:16px;color:#4b4535;">Pronto agregaremos más recomendaciones para este perfume.</p>
+        `;
+        return;
+      }
+
+      relatedProductsGrid.innerHTML = relacionados.map(item => `
+        <article class="related-card">
+          <a href="producto-hombre.html?id=${item.id}" class="related-card-link">
+            <div class="related-image-wrap">
+              <img class="img-main" src="${item.imagen}" alt="${item.nombre}">
+              <img class="img-hover" src="${item.hover}" alt="${item.nombre} hover">
+            </div>
+          </a>
+          <div class="related-info">
+            <p class="related-category">${item.aroma}</p>
+            <h3 class="related-name">${item.nombre}</h3>
+            <p class="related-price">${formatPrice(item.precio)}</p>
+            <div class="related-actions">
+              <a href="producto-hombre.html?id=${item.id}" class="related-btn">Ver detalles</a>
+              <button class="related-cart-btn" type="button" data-id="${item.id}">Agregar al carrito</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      document.querySelectorAll(".related-cart-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+          const id = this.dataset.id;
+          const perfumeRelacionado = perfumesHombre.find(p => p.id === id);
+
+          if (!perfumeRelacionado) return;
+
+          if (typeof agregarAlCarrito !== "function") {
+            console.error("No se encontró la función agregarAlCarrito en carrito.js");
+            return;
+          }
+
+          agregarAlCarrito({
+            id: perfumeRelacionado.id,
+            nombre: perfumeRelacionado.nombre,
+            precio: perfumeRelacionado.precio,
+            imagen: perfumeRelacionado.imagen,
+            url: `producto-hombre.html?id=${perfumeRelacionado.id}`,
+            categoria: "Hombre"
+          }, 1);
+        });
+      });
+    }
+
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && imageModal.classList.contains("active")) {
+        closeImageModal();
+      }
+    });
+
+    renderProduct();
+    renderRelacionados();
+  </script>
+  <script src="carrito.js"></script>
 </body>
 </html>
