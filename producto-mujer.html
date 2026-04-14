@@ -222,36 +222,149 @@
       box-shadow:0 8px 22px rgba(0,0,0,0.06);
       position:relative;
     }
-    .main-image-wrap{
-      border-radius:22px;
-      overflow:hidden;
-      background:#f4f1eb;
-      aspect-ratio:1 / 1.08;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:14px;
-    }
-    .main-image-wrap img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-    }
-    .thumbs{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:12px;
-    }
-    .thumb{
-      border:none;
-      border-radius:16px;
-      overflow:hidden;
-      background:#f4f1eb;
-      cursor:pointer;
-      border:2px solid transparent;
-      transition:0.25s ease;
-      aspect-ratio:1/1;
-    }
+.main-image-slider{
+  position:relative;
+}
+
+.main-image-wrap{
+  border-radius:22px;
+  overflow:hidden;
+  background:#f4f1eb;
+  aspect-ratio:1 / 1.08;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:14px;
+  position:relative;
+}
+
+.main-image-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transition:transform 0.3s ease;
+}
+
+.zoom-cursor{
+  cursor:zoom-in;
+}
+
+.gallery-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:50%;
+  background:rgba(122,92,46,0.92);
+  color:#fff;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:3;
+  opacity:0;
+  visibility:hidden;
+  transition:0.25s ease;
+  box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+.main-image-slider:hover .gallery-arrow{
+  opacity:1;
+  visibility:visible;
+}
+
+.gallery-arrow:hover{
+  background:#b8860b;
+  transform:translateY(-50%) scale(1.05);
+}
+
+.gallery-prev{
+  left:14px;
+}
+
+.gallery-next{
+  right:14px;
+}
+
+.thumbs{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+
+.thumb{
+  border:none;
+  border-radius:16px;
+  overflow:hidden;
+  background:#f4f1eb;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:0.25s ease;
+  aspect-ratio:1/1;
+}
+
+.thumb.active{
+  border-color:#c99a2e;
+}
+
+.thumb:hover{
+  transform:translateY(-2px);
+}
+
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.image-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.88);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:9999;
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s ease;
+}
+
+.image-modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.image-modal img{
+  max-width:92%;
+  max-height:88vh;
+  object-fit:contain;
+  border-radius:16px;
+  background:#fff;
+  padding:10px;
+}
+
+.image-modal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:#ffffff;
+  color:#2f2b1f;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
     .thumb.active{
       border-color:#c99a2e;
     }
@@ -1400,6 +1513,42 @@
     font-size:16px;
     padding:12px 20px;
   }
+    .gallery-arrow{
+    width:44px;
+    height:44px;
+    font-size:15px;
+    opacity:1;
+    visibility:visible;
+  }
+
+  .gallery-prev{
+    left:10px;
+  }
+
+  .gallery-next{
+    right:10px;
+  }
+
+  .main-image-wrap{
+    border-radius:18px;
+  }
+
+  .thumbs{
+    gap:10px;
+  }
+
+  .thumb{
+    border-radius:14px;
+  }
+
+  .image-modal{
+    padding:14px;
+  }
+
+  .image-modal img{
+    max-width:96%;
+    max-height:82vh;
+  }
     }
   </style>
 </head>
@@ -1472,12 +1621,23 @@
   </div>
 
   <section class="product-page">
-    <div class="gallery-box">
-      <div class="main-image-wrap">
-        <img id="mainProductImage" src="" alt="">
-      </div>
-      <div class="thumbs" id="thumbsContainer"></div>
+<div class="gallery-box">
+  <div class="main-image-slider" id="mainImageSlider">
+    <button class="gallery-arrow gallery-prev" id="galleryPrev" type="button" aria-label="Imagen anterior">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="main-image-wrap zoom-cursor" id="mainImageWrap">
+      <img id="mainProductImage" src="" alt="">
     </div>
+
+    <button class="gallery-arrow gallery-next" id="galleryNext" type="button" aria-label="Imagen siguiente">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="thumbs" id="thumbsContainer"></div>
+</div>
 
     <div class="product-info">
       <span class="tag-category">Mujer</span>
@@ -1959,7 +2119,6 @@
   const params = new URLSearchParams(window.location.search);
   const perfumeId = params.get("id");
   const producto = perfumesMujer.find(p => p.id === perfumeId) || perfumesMujer[0];
-
   const productName = document.getElementById("productName");
   const breadcrumbName = document.getElementById("breadcrumbName");
   const productPrice = document.getElementById("productPrice");
@@ -1984,18 +2143,34 @@
   const stickyAddBtn = document.getElementById("stickyAddBtn");
   const stickyHeader = document.getElementById("stickyHeader");
   const relatedProductsGrid = document.getElementById("relatedProductsGrid");
+  const galleryPrev = document.getElementById("galleryPrev");
+const galleryNext = document.getElementById("galleryNext");
+const mainImageWrap = document.getElementById("mainImageWrap");
+const imageModal = document.getElementById("imageModal");
+const imageModalImg = document.getElementById("imageModalImg");
+const imageModalClose = document.getElementById("imageModalClose");
 
   let cantidad = 1;
+  let galleryImages = [];
+let currentImageIndex = 0;
 
   function formatPrice(value){
     return "$" + Number(value).toLocaleString("es-CO");
   }
 
-  function setMainImage(src, alt){
-    if (!mainProductImage) return;
-    mainProductImage.src = src;
-    mainProductImage.alt = alt;
-  }
+  function setMainImage(index){
+  if(!galleryImages.length || !mainProductImage) return;
+
+  currentImageIndex = index;
+  const current = galleryImages[currentImageIndex];
+
+  mainProductImage.src = current.src;
+  mainProductImage.alt = current.label;
+
+  document.querySelectorAll(".thumb").forEach((thumb, i) => {
+    thumb.classList.toggle("active", i === currentImageIndex);
+  });
+}
 
   function updateWhatsappLink(){
     if (!buyWhatsapp || !producto) return;
@@ -2011,6 +2186,46 @@
     updateWhatsappLink();
   }
 
+  function openImageModal(src, alt){
+  if (!imageModal || !imageModalImg) return;
+  imageModalImg.src = src;
+  imageModalImg.alt = alt || "Imagen del producto";
+  imageModal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeImageModal(){
+  if (!imageModal) return;
+  imageModal.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function setMainImage(index){
+  if(!galleryImages.length || !mainProductImage) return;
+
+  currentImageIndex = index;
+  const current = galleryImages[currentImageIndex];
+
+  mainProductImage.src = current.src;
+  mainProductImage.alt = current.label;
+
+  document.querySelectorAll(".thumb").forEach((thumb, i) => {
+    thumb.classList.toggle("active", i === currentImageIndex);
+  });
+}
+
+function nextImage(){
+  if(!galleryImages.length) return;
+  currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+  setMainImage(currentImageIndex);
+}
+
+function prevImage(){
+  if(!galleryImages.length) return;
+  currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+  setMainImage(currentImageIndex);
+}
+
   function renderProduct(){
     if (!producto) return;
 
@@ -2021,38 +2236,38 @@
     if (productPrice) productPrice.textContent = formatPrice(producto.precio);
     if (productDescription) productDescription.innerHTML = producto.descripcion;
 
-    setMainImage(producto.imagen, producto.nombre);
+if (stickyProductImage) {
+  stickyProductImage.src = producto.imagen;
+  stickyProductImage.alt = producto.nombre;
+}
+if (stickyProductName) stickyProductName.textContent = producto.nombre;
+if (stickyProductPrice) stickyProductPrice.textContent = formatPrice(producto.precio);
 
-    if (stickyProductImage) {
-      stickyProductImage.src = producto.imagen;
-      stickyProductImage.alt = producto.nombre;
-    }
-    if (stickyProductName) stickyProductName.textContent = producto.nombre;
-    if (stickyProductPrice) stickyProductPrice.textContent = formatPrice(producto.precio);
+galleryImages = [
+  { src: producto.imagen, label: producto.nombre },
+  { src: producto.hover || producto.imagen, label: producto.nombre + " detalle" },
+  { src: producto.imagen, label: producto.nombre + " presentación" }
+];
 
-    const galleryImages = [
-      { src: producto.imagen, label: producto.nombre },
-      { src: producto.hover || producto.imagen, label: producto.nombre + " detalle" },
-      { src: producto.imagen, label: producto.nombre + " presentación" }
-    ];
+if (thumbsContainer) {
+  thumbsContainer.innerHTML = "";
 
-    if (thumbsContainer) {
-      thumbsContainer.innerHTML = "";
-      galleryImages.forEach((img, index) => {
-        const button = document.createElement("button");
-        button.className = "thumb" + (index === 0 ? " active" : "");
-        button.type = "button";
-        button.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
+  galleryImages.forEach((img, index) => {
+    const button = document.createElement("button");
+    button.className = "thumb" + (index === 0 ? " active" : "");
+    button.type = "button";
+    button.innerHTML = `<img src="${img.src}" alt="${img.label}">`;
 
-        button.addEventListener("click", () => {
-          setMainImage(img.src, img.label);
-          document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
-          button.classList.add("active");
-        });
+    button.addEventListener("click", () => {
+      setMainImage(index);
+    });
 
-        thumbsContainer.appendChild(button);
-      });
-    }
+    thumbsContainer.appendChild(button);
+  });
+}
+
+currentImageIndex = 0;
+setMainImage(0);
 
     updateQtyViews();
   }
@@ -2263,9 +2478,54 @@ function renderRelacionados() {
   });
 }
 
+if (galleryNext) {
+  galleryNext.addEventListener("click", nextImage);
+}
+
+if (galleryPrev) {
+  galleryPrev.addEventListener("click", prevImage);
+}
+
+if (mainImageWrap) {
+  mainImageWrap.addEventListener("click", () => {
+    if(galleryImages.length){
+      openImageModal(galleryImages[currentImageIndex].src, galleryImages[currentImageIndex].label);
+    }
+  });
+}
+
+if (imageModalClose) {
+  imageModalClose.addEventListener("click", closeImageModal);
+}
+
+if (imageModal) {
+  imageModal.addEventListener("click", (e) => {
+    if (e.target === imageModal) {
+      closeImageModal();
+    }
+  });
+}
+
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape") {
+    if (imageModal && imageModal.classList.contains("active")) {
+      closeImageModal();
+    }
+  }
+});
+
   renderProduct();
 renderRelacionados();
 </script>
+
+<div class="image-modal" id="imageModal">
+  <button class="image-modal-close" id="imageModalClose" aria-label="Cerrar imagen">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <img id="imageModalImg" src="" alt="">
+</div>
+
+
 <script src="carrito.js"></script>
 </body>
 </html>
