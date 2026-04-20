@@ -129,59 +129,43 @@
     }, 3500);
   }
 
-  function initStickyHeader() {
-    const siteHeaderWrap = document.getElementById("siteHeaderWrap");
-    if (!siteHeaderWrap) return;
+function initStickyHeader() {
+  const siteHeaderWrap = document.getElementById("siteHeaderWrap");
+  if (!siteHeaderWrap) return;
 
-    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    let accumulatedUp = 0;
-    let accumulatedDown = 0;
+  let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      const delta = currentScroll - lastScrollTop;
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollDiff = currentScroll - lastScrollTop;
 
-      if (currentScroll > 40) {
-        siteHeaderWrap.classList.add("show-shadow");
-      } else {
-        siteHeaderWrap.classList.remove("show-shadow");
-      }
+    if (currentScroll > 20) {
+      siteHeaderWrap.classList.add("show-shadow");
+    } else {
+      siteHeaderWrap.classList.remove("show-shadow");
+    }
 
-      if (window.innerWidth <= 768) {
-        siteHeaderWrap.classList.remove("hide-header");
-        accumulatedUp = 0;
-        accumulatedDown = 0;
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        return;
-      }
-
-      if (currentScroll <= 20) {
-        siteHeaderWrap.classList.remove("hide-header");
-        accumulatedUp = 0;
-        accumulatedDown = 0;
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        return;
-      }
-
-      if (delta > 0) {
-        accumulatedDown += delta;
-        accumulatedUp = 0;
-
-        if (accumulatedDown > 18) {
-          siteHeaderWrap.classList.add("hide-header");
-        }
-      } else if (delta < 0) {
-        accumulatedUp += Math.abs(delta);
-        accumulatedDown = 0;
-
-        if (accumulatedUp > 6) {
-          siteHeaderWrap.classList.remove("hide-header");
-        }
-      }
-
+    if (window.innerWidth <= 768) {
+      siteHeaderWrap.classList.remove("hide-header");
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    });
-  }
+      return;
+    }
+
+    if (currentScroll <= 10) {
+      siteHeaderWrap.classList.remove("hide-header");
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      return;
+    }
+
+    if (scrollDiff > 4) {
+      siteHeaderWrap.classList.add("hide-header");
+    } else if (scrollDiff < -4) {
+      siteHeaderWrap.classList.remove("hide-header");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+}
 
   actualizarContadorFavoritosHeader();
   initSearchHeader();
