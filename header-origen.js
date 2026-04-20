@@ -119,10 +119,13 @@
     const stickyHeader = document.getElementById("stickyHeader");
     if (!stickyHeader) return;
 
-    let lastScrollTop = 0;
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let accumulatedUp = 0;
+    let accumulatedDown = 0;
 
     window.addEventListener("scroll", () => {
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      const delta = currentScroll - lastScrollTop;
 
       if (currentScroll > 60) {
         stickyHeader.classList.add("show-shadow");
@@ -130,14 +133,36 @@
         stickyHeader.classList.remove("show-shadow");
       }
 
-      if (window.innerWidth > 768) {
-        if (currentScroll > lastScrollTop && currentScroll > 140) {
+      if (window.innerWidth <= 768) {
+        stickyHeader.classList.remove("hide-header");
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        accumulatedUp = 0;
+        accumulatedDown = 0;
+        return;
+      }
+
+      if (currentScroll <= 80) {
+        stickyHeader.classList.remove("hide-header");
+        accumulatedUp = 0;
+        accumulatedDown = 0;
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        return;
+      }
+
+      if (delta > 0) {
+        accumulatedDown += delta;
+        accumulatedUp = 0;
+
+        if (accumulatedDown > 18) {
           stickyHeader.classList.add("hide-header");
-        } else {
+        }
+      } else if (delta < 0) {
+        accumulatedUp += Math.abs(delta);
+        accumulatedDown = 0;
+
+        if (accumulatedUp > 8) {
           stickyHeader.classList.remove("hide-header");
         }
-      } else {
-        stickyHeader.classList.remove("hide-header");
       }
 
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
