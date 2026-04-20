@@ -8,7 +8,7 @@
   const headerHTML = `
     <div class="site-header-wrap" id="siteHeaderWrap">
       <div class="top-announcement">
-        <div class="announcement-track">
+        <div class="announcement-track" id="announcementTrack">
           <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
           <span class="announcement-item">Perfumes 100% originales con garantía</span>
           <span class="announcement-item">Asesoría personalizada por WhatsApp</span>
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="sticky-header" id="stickyHeader">
+      <div class="sticky-header">
         <div class="main-header">
           <div class="search-box">
             <form id="searchFormHeader">
@@ -98,6 +98,7 @@
   function initSearchHeader() {
     const form = document.getElementById("searchFormHeader");
     const input = document.getElementById("searchInputHeaderGlobal");
+
     if (!form || !input) return;
 
     const params = new URLSearchParams(window.location.search);
@@ -116,6 +117,56 @@
     });
   }
 
+  function initStickyHeader() {
+    const siteHeaderWrap = document.getElementById("siteHeaderWrap");
+    if (!siteHeaderWrap) return;
+
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let ticking = false;
+
+    function handleScroll() {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollDiff = currentScroll - lastScrollTop;
+
+      if (currentScroll > 10) {
+        siteHeaderWrap.classList.add("show-shadow");
+      } else {
+        siteHeaderWrap.classList.remove("show-shadow");
+      }
+
+      if (currentScroll <= 0) {
+        siteHeaderWrap.classList.remove("hide-header");
+        lastScrollTop = 0;
+        ticking = false;
+        return;
+      }
+
+      /* Si baja, ocultar */
+      if (scrollDiff > 4 && currentScroll > 120) {
+        siteHeaderWrap.classList.add("hide-header");
+      }
+
+      /* Si sube aunque sea un poco, mostrar */
+      if (scrollDiff < -2) {
+        siteHeaderWrap.classList.remove("hide-header");
+      }
+
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          window.requestAnimationFrame(handleScroll);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+
   function initAnnouncement() {
     const announcementItems = document.querySelectorAll(".announcement-item");
     if (!announcementItems.length) return;
@@ -129,46 +180,8 @@
     }, 3500);
   }
 
-function initStickyHeader() {
-  const siteHeaderWrap = document.getElementById("siteHeaderWrap");
-  if (!siteHeaderWrap) return;
-
-  let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollDiff = currentScroll - lastScrollTop;
-
-    if (currentScroll > 20) {
-      siteHeaderWrap.classList.add("show-shadow");
-    } else {
-      siteHeaderWrap.classList.remove("show-shadow");
-    }
-
-    if (window.innerWidth <= 768) {
-      siteHeaderWrap.classList.remove("hide-header");
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      return;
-    }
-
-    if (currentScroll <= 10) {
-      siteHeaderWrap.classList.remove("hide-header");
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      return;
-    }
-
-    if (scrollDiff > 4) {
-      siteHeaderWrap.classList.add("hide-header");
-    } else if (scrollDiff < -4) {
-      siteHeaderWrap.classList.remove("hide-header");
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
-}
-
   actualizarContadorFavoritosHeader();
   initSearchHeader();
-  initAnnouncement();
   initStickyHeader();
+  initAnnouncement();
 })();
