@@ -123,23 +123,26 @@
 
     let ticking = false;
 
-    function handleScroll() {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+function handleScroll() {
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (currentScroll > 10) {
-        siteHeaderWrap.classList.add("show-shadow");
-      } else {
-        siteHeaderWrap.classList.remove("show-shadow");
-      }
+  if (currentScroll > 10) {
+    siteHeaderWrap.classList.add("show-shadow");
+  } else {
+    siteHeaderWrap.classList.remove("show-shadow");
+  }
 
-      if (currentScroll > 40) {
-        siteHeaderWrap.classList.add("scrolled");
-      } else {
-        siteHeaderWrap.classList.remove("scrolled");
-      }
+  if (currentScroll > 40) {
+    siteHeaderWrap.classList.add("scrolled");
+    document.body.classList.add("header-compact");
+  } else {
+    siteHeaderWrap.classList.remove("scrolled");
+    document.body.classList.remove("header-compact");
+  }
 
-      ticking = false;
-    }
+  ticking = false;
+}
 
     window.addEventListener(
       "scroll",

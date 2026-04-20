@@ -14,6 +14,11 @@ img{
 
 body{
   padding-top:165px;
+  transition:padding-top 0.35s ease;
+}
+
+body.header-compact{
+  padding-top:89px;
 }
 
 /* TOP ANNOUNCEMENT */
