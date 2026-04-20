@@ -6,8 +6,7 @@
   }
 
   const headerHTML = `
-  <div class="site-header-wrap" id="siteHeaderWrap">
-    <div class="header-top" id="headerTop">
+    <div class="site-header-wrap">
       <div class="top-announcement">
         <div class="announcement-track" id="announcementTrack">
           <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
@@ -26,53 +25,54 @@
           </a>
         </div>
       </div>
-    </div>
 
-    <div class="sticky-header">
-      <div class="main-header">
-        <div class="search-box">
-          <form id="searchFormHeader">
-            <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
-          </form>
+      <div class="sticky-header" id="stickyHeader">
+        <div class="main-header">
+          <div class="search-box">
+            <form id="searchFormHeader">
+              <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
+            </form>
+          </div>
+
+          <div class="header-logo">
+            <a href="index.html">
+              <img src="logo.png" alt="Origen Perfumería">
+            </a>
+          </div>
+
+          <div class="header-icons">
+            <a href="cuenta.html" title="Cuenta">
+              <i class="fa-regular fa-user"></i>
+            </a>
+
+            <a href="favoritos.html" title="Favoritos" class="favorites-link">
+              <i class="fa-regular fa-heart"></i>
+              <span class="favorites-count-badge" id="favoritesCountBadge"></span>
+            </a>
+
+            <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span id="cartCount" class="cart-count">0</span>
+            </a>
+          </div>
         </div>
 
-        <div class="header-logo">
-          <a href="index.html">
-            <img src="logo.png" alt="Origen Perfumería">
-          </a>
-        </div>
+        <nav class="main-menu">
+          <a href="index.html" class="${getActiveClass("inicio")}">INICIO</a>
+          <a href="todos.html" class="${getActiveClass("todos")}">TODOS LOS PERFUMES</a>
+          <a href="hombre.html" class="${getActiveClass("hombre")}">HOMBRE</a>
+          <a href="mujer.html" class="${getActiveClass("mujer")}">MUJER</a>
+          <a href="unisex.html" class="${getActiveClass("unisex")}">UNISEX</a>
+        </nav>
 
-        <div class="header-icons">
-          <a href="cuenta.html" title="Cuenta">
-            <i class="fa-regular fa-user"></i>
-          </a>
-          <a href="favoritos.html" title="Favoritos" class="favorites-link">
-            <i class="fa-regular fa-heart"></i>
-            <span class="favorites-count-badge" id="favoritesCountBadge"></span>
-          </a>
-          <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span id="cartCount" class="cart-count">0</span>
-          </a>
+        <div class="mobile-category-tabs">
+          <a href="todos.html" class="${getActiveClass("todos")}">Todos</a>
+          <a href="hombre.html" class="${getActiveClass("hombre")}">Hombre</a>
+          <a href="mujer.html" class="${getActiveClass("mujer")}">Mujer</a>
+          <a href="unisex.html" class="${getActiveClass("unisex")}">Unisex</a>
         </div>
       </div>
-
-      <nav class="main-menu">
-        <a href="index.html" class="${getActiveClass("inicio")}">INICIO</a>
-        <a href="todos.html" class="${getActiveClass("todos")}">TODOS LOS PERFUMES</a>
-        <a href="hombre.html" class="${getActiveClass("hombre")}">HOMBRE</a>
-        <a href="mujer.html" class="${getActiveClass("mujer")}">MUJER</a>
-        <a href="unisex.html" class="${getActiveClass("unisex")}">UNISEX</a>
-      </nav>
-
-      <div class="mobile-category-tabs">
-        <a href="todos.html" class="${getActiveClass("todos")}">Todos</a>
-        <a href="hombre.html" class="${getActiveClass("hombre")}">Hombre</a>
-        <a href="mujer.html" class="${getActiveClass("mujer")}">Mujer</a>
-        <a href="unisex.html" class="${getActiveClass("unisex")}">Unisex</a>
-      </div>
     </div>
-  </div>
   `;
 
   const mountPoint = document.getElementById("origen-header");
@@ -98,7 +98,6 @@
   function initSearchHeader() {
     const form = document.getElementById("searchFormHeader");
     const input = document.getElementById("searchInputHeaderGlobal");
-
     if (!form || !input) return;
 
     const params = new URLSearchParams(window.location.search);
@@ -118,44 +117,36 @@
   }
 
   function initStickyHeader() {
-    const siteHeaderWrap = document.getElementById("siteHeaderWrap");
-    if (!siteHeaderWrap) return;
+    const stickyHeader = document.getElementById("stickyHeader");
+    if (!stickyHeader) return;
 
-    let ticking = false;
-
-    
-function handleScroll() {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-  if (currentScroll > 10) {
-    siteHeaderWrap.classList.add("show-shadow");
-  } else {
-    siteHeaderWrap.classList.remove("show-shadow");
-  }
-
-  if (currentScroll > 40) {
-    siteHeaderWrap.classList.add("scrolled");
-    document.body.classList.add("header-compact");
-  } else {
-    siteHeaderWrap.classList.remove("scrolled");
-    document.body.classList.remove("header-compact");
-  }
-
-  ticking = false;
-}
+    let lastScrollTop = 0;
 
     window.addEventListener(
       "scroll",
       function () {
-        if (!ticking) {
-          window.requestAnimationFrame(handleScroll);
-          ticking = true;
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > 60) {
+          stickyHeader.classList.add("show-shadow");
+        } else {
+          stickyHeader.classList.remove("show-shadow");
         }
+
+        if (window.innerWidth > 768) {
+          if (currentScroll > lastScrollTop && currentScroll > 140) {
+            stickyHeader.classList.add("hide-header");
+          } else {
+            stickyHeader.classList.remove("hide-header");
+          }
+        } else {
+          stickyHeader.classList.remove("hide-header");
+        }
+
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
       },
       { passive: true }
     );
-
-    handleScroll();
   }
 
   function initAnnouncement() {
