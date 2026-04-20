@@ -104,7 +104,7 @@ body.header-compact{
   transition:box-shadow 0.32s ease;
 }
 .header-top{
-  max-height:80px;
+  max-height:95px;
   overflow:hidden;
   opacity:1;
   transition:max-height 0.35s ease, opacity 0.35s ease;
@@ -334,6 +334,9 @@ body.header-compact{
 @media (max-width: 768px){
   body{
     padding-top:145px;
+  }
+    body.header-compact{
+    padding-top:77px;
   }
 
   .main-menu{
