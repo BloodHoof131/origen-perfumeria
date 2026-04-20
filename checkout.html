@@ -721,281 +721,152 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 
+<!-- PRIMERO el carrito global -->
+<script src="carrito.js"></script>
+
 <script>
-  const supabase = window.supabaseClient;
-  const CARRITO_KEY = "origen_carrito";
+const checkoutItemsContainer = document.getElementById("checkoutItemsContainer");
+const subtotalText = document.getElementById("subtotalText");
+const shippingText = document.getElementById("shippingText");
+const totalText = document.getElementById("totalText");
+const finishOrderBtn = document.getElementById("finishOrderBtn");
+const clearCartBtn = document.getElementById("clearCartBtn");
 
-  const checkoutItemsContainer = document.getElementById("checkoutItemsContainer");
-  const subtotalText = document.getElementById("subtotalText");
-  const shippingText = document.getElementById("shippingText");
-  const totalText = document.getElementById("totalText");
-  const finishOrderBtn = document.getElementById("finishOrderBtn");
-  const clearCartBtn = document.getElementById("clearCartBtn");
+let usuarioActual = null;
 
-  let usuarioActual = null;
+async function cargarSesion() {
+  if (!window.supabaseClient) return false;
 
-  async function cargarSesion() {
-    if (!supabase) {
-      console.error("Supabase no está cargado");
-      return false;
-    }
+  const { data, error } = await window.supabaseClient.auth.getUser();
 
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error || !data.user) {
-      alert("Debes iniciar sesión para finalizar la compra.");
-      window.location.href = "cuenta.html";
-      return false;
-    }
-
-    usuarioActual = data.user;
-    return true;
+  if (error || !data.user) {
+    alert("Debes iniciar sesión para finalizar la compra.");
+    window.location.href = "cuenta.html";
+    return false;
   }
 
-  function obtenerCarrito() {
-    return JSON.parse(localStorage.getItem(CARRITO_KEY)) || [];
-  }
+  usuarioActual = data.user;
+  return true;
+}
 
-  function guardarCarrito(carrito) {
-    localStorage.setItem(CARRITO_KEY, JSON.stringify(carrito));
-  }
+function formatPrice(value) {
+  return "$" + Number(value).toLocaleString("es-CO");
+}
 
-  function formatPrice(value) {
-    return "$" + Number(value).toLocaleString("es-CO");
-  }
+function calcularSubtotal(carrito) {
+  return carrito.reduce((acc, item) => {
+    return acc + (Number(item.precio) * Number(item.cantidad));
+  }, 0);
+}
 
-  function calcularSubtotal(carrito) {
-    return carrito.reduce((acc, item) => {
-      return acc + (Number(item.precio) * Number(item.cantidad));
-    }, 0);
-  }
+function calcularEnvio(subtotal) {
+  return subtotal >= 199900 ? 0 : 12000;
+}
 
-  function calcularEnvio(subtotal) {
-    return subtotal >= 199900 ? 0 : 12000;
-  }
+function renderResumenCheckout() {
+  const carrito = obtenerCarrito(); // 🔥 ahora usa el global
 
-  function cambiarCantidadCheckout(id, cambio) {
-    const carrito = obtenerCarrito();
-    const index = carrito.findIndex(item => item.id === id);
-
-    if (index === -1) return;
-
-    carrito[index].cantidad += cambio;
-
-    if (carrito[index].cantidad <= 0) {
-      carrito.splice(index, 1);
-    }
-
-    guardarCarrito(carrito);
-    renderResumenCheckout();
-
-    if (typeof actualizarCarritoUI === "function") {
-      actualizarCarritoUI();
-    }
-  }
-
-  function eliminarProductoCheckout(id) {
-    let carrito = obtenerCarrito();
-    carrito = carrito.filter(item => item.id !== id);
-    guardarCarrito(carrito);
-    renderResumenCheckout();
-
-    if (typeof actualizarCarritoUI === "function") {
-      actualizarCarritoUI();
-    }
-  }
-
-  function vaciarCarritoCheckout() {
-    localStorage.removeItem(CARRITO_KEY);
-    renderResumenCheckout();
-
-    if (typeof actualizarCarritoUI === "function") {
-      actualizarCarritoUI();
-    }
-  }
-
-  function renderResumenCheckout() {
-    const carrito = obtenerCarrito();
-
-    if (!checkoutItemsContainer || !subtotalText || !shippingText || !totalText) {
-      console.error("Faltan elementos del checkout en el HTML.");
-      return;
-    }
-
-    if (carrito.length === 0) {
-      checkoutItemsContainer.innerHTML = `
-        <div class="cart-empty">
-          <p>Tu carrito está vacío.</p>
-          <a href="todos.html">Seguir comprando</a>
-        </div>
-      `;
-      subtotalText.textContent = "$0";
-      shippingText.textContent = "$0";
-      totalText.textContent = "$0";
-      return;
-    }
-
-    const subtotal = calcularSubtotal(carrito);
-    const envio = calcularEnvio(subtotal);
-    const total = subtotal + envio;
-
+  if (carrito.length === 0) {
     checkoutItemsContainer.innerHTML = `
-      <div class="checkout-items">
-        ${carrito.map(item => `
-          <div class="checkout-item">
-            <a href="${item.url}" class="checkout-item-image">
-              <img src="${item.imagen}" alt="${item.nombre}">
-            </a>
-
-            <div class="checkout-item-info">
-              <div class="checkout-item-category">${item.categoria || ""}</div>
-              <h3>${item.nombre}</h3>
-              <div class="checkout-item-price">${formatPrice(item.precio)}</div>
-
-              <div class="checkout-item-actions">
-                <div class="qty-box">
-                  <button type="button" onclick="cambiarCantidadCheckout('${item.id}', -1)">−</button>
-                  <span>${item.cantidad}</span>
-                  <button type="button" onclick="cambiarCantidadCheckout('${item.id}', 1)">+</button>
-                </div>
-
-                <button type="button" class="remove-btn" onclick="eliminarProductoCheckout('${item.id}')">
-                  Eliminar
-                </button>
-              </div>
-            </div>
-
-            <div class="checkout-item-total">
-              ${formatPrice(item.precio * item.cantidad)}
-            </div>
-          </div>
-        `).join("")}
+      <div class="cart-empty">
+        <p>Tu carrito está vacío.</p>
+        <a href="todos.html">Seguir comprando</a>
       </div>
     `;
-
-    subtotalText.textContent = formatPrice(subtotal);
-    shippingText.textContent = envio === 0 ? "Gratis" : formatPrice(envio);
-    totalText.textContent = formatPrice(total);
+    subtotalText.textContent = "$0";
+    shippingText.textContent = "$0";
+    totalText.textContent = "$0";
+    return;
   }
 
-  async function finalizarCompraReal() {
-    const sesionValida = await cargarSesion();
-    if (!sesionValida) return;
+  const subtotal = calcularSubtotal(carrito);
+  const envio = calcularEnvio(subtotal);
+  const total = subtotal + envio;
 
-    const carrito = obtenerCarrito();
+  checkoutItemsContainer.innerHTML = `
+    <div class="checkout-items">
+      ${carrito.map(item => `
+        <div class="checkout-item">
+          <a href="${item.url}" class="checkout-item-image">
+            <img src="${item.imagen}" alt="${item.nombre}">
+          </a>
+          <div class="checkout-item-info">
+            <div class="checkout-item-category">${item.categoria || ""}</div>
+            <h3>${item.nombre}</h3>
+            <div class="checkout-item-price">${formatPrice(item.precio)}</div>
+            <div class="checkout-item-actions">
+              <div class="qty-box">
+                <button onclick="cambiarCantidadCarrito('${item.id}', -1)">−</button>
+                <span>${item.cantidad}</span>
+                <button onclick="cambiarCantidadCarrito('${item.id}', 1)">+</button>
+              </div>
+              <button onclick="eliminarDelCarrito('${item.id}')" class="remove-btn">
+                Eliminar
+              </button>
+            </div>
+          </div>
+          <div class="checkout-item-total">
+            ${formatPrice(item.precio * item.cantidad)}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
 
-    if (carrito.length === 0) {
-      alert("Tu carrito está vacío.");
+  subtotalText.textContent = formatPrice(subtotal);
+  shippingText.textContent = envio === 0 ? "Gratis" : formatPrice(envio);
+  totalText.textContent = formatPrice(total);
+}
+
+async function finalizarCompraReal() {
+  const sesionValida = await cargarSesion();
+  if (!sesionValida) return;
+
+  const carrito = obtenerCarrito();
+
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío.");
+    return;
+  }
+
+  const subtotal = calcularSubtotal(carrito);
+  const envio = calcularEnvio(subtotal);
+  const total = subtotal + envio;
+
+  try {
+    const { data, error } = await window.supabaseClient
+      .from("pedidos")
+      .insert([{
+        user_id: usuarioActual.id,
+        subtotal,
+        envio,
+        total,
+        estado: "pendiente"
+      }])
+      .select()
+      .single();
+
+    if (error) {
+      alert("Error al guardar pedido");
       return;
     }
 
-    const datosCliente = {
-      nombre: document.getElementById("nombre")?.value.trim() || "",
-      telefono: document.getElementById("telefono")?.value.trim() || "",
-      email: document.getElementById("email")?.value.trim() || "",
-      ciudad: document.getElementById("ciudad")?.value.trim() || "",
-      direccion: document.getElementById("direccion")?.value.trim() || "",
-      metodoPago: document.getElementById("metodoPago")?.value || "",
-      envio: document.getElementById("envio")?.value || "",
-      notas: document.getElementById("notas")?.value.trim() || ""
-    };
+    localStorage.removeItem("origen_carrito");
+    actualizarCarritoUI();
+    alert("Compra realizada con éxito");
+    window.location.href = "panel-cuenta.html";
 
-    if (
-      !datosCliente.nombre ||
-      !datosCliente.telefono ||
-      !datosCliente.ciudad ||
-      !datosCliente.direccion ||
-      !datosCliente.metodoPago
-    ) {
-      alert("Por favor completa los campos obligatorios.");
-      return;
-    }
-
-    const subtotal = calcularSubtotal(carrito);
-    const envio = calcularEnvio(subtotal);
-    const total = subtotal + envio;
-
-    finishOrderBtn.disabled = true;
-    finishOrderBtn.textContent = "Procesando compra...";
-
-    try {
-      const { data: pedidoData, error: pedidoError } = await supabase
-        .from("pedidos")
-        .insert([
-          {
-            user_id: usuarioActual.id,
-            nombre_cliente: datosCliente.nombre,
-            telefono: datosCliente.telefono,
-            email: datosCliente.email || usuarioActual.email || "",
-            ciudad: datosCliente.ciudad,
-            direccion: datosCliente.direccion,
-            metodo_pago: datosCliente.metodoPago,
-            tipo_envio: datosCliente.envio,
-            notas: datosCliente.notas,
-            subtotal: subtotal,
-            envio: envio,
-            total: total,
-            estado: "pendiente"
-          }
-        ])
-        .select()
-        .single();
-
-      if (pedidoError) {
-        console.error("Error guardando pedido:", pedidoError);
-        alert("No se pudo guardar el pedido.");
-        finishOrderBtn.disabled = false;
-        finishOrderBtn.textContent = "Finalizar compra";
-        return;
-      }
-
-      const detallePedido = carrito.map(item => ({
-        pedido_id: pedidoData.id,
-        producto_id: item.id,
-        nombre: item.nombre,
-        precio: Number(item.precio),
-        imagen: item.imagen || "",
-        cantidad: Number(item.cantidad),
-        subtotal: Number(item.precio) * Number(item.cantidad)
-      }));
-
-      const { error: detalleError } = await supabase
-        .from("detalle_pedidos")
-        .insert(detallePedido);
-
-      if (detalleError) {
-        console.error("Error guardando detalle del pedido:", detalleError);
-        alert("El pedido principal se guardó, pero hubo un problema con el detalle.");
-        finishOrderBtn.disabled = false;
-        finishOrderBtn.textContent = "Finalizar compra";
-        return;
-      }
-
-      localStorage.removeItem(CARRITO_KEY);
-
-      if (typeof actualizarCarritoUI === "function") {
-        actualizarCarritoUI();
-      }
-
-      alert("Compra realizada con éxito. Tu pedido fue guardado correctamente.");
-      window.location.href = "panel-cuenta.html";
-    } catch (error) {
-      console.error("Error inesperado:", error);
-      alert("Ocurrió un error inesperado al finalizar la compra.");
-      finishOrderBtn.disabled = false;
-      finishOrderBtn.textContent = "Finalizar compra";
-    }
+  } catch (err) {
+    console.error(err);
+    alert("Error inesperado");
   }
+}
 
-  if (finishOrderBtn) {
-    finishOrderBtn.addEventListener("click", finalizarCompraReal);
-  }
+finishOrderBtn.addEventListener("click", finalizarCompraReal);
+clearCartBtn.addEventListener("click", vaciarCarrito);
 
-  if (clearCartBtn) {
-    clearCartBtn.addEventListener("click", vaciarCarritoCheckout);
-  }
-
-  renderResumenCheckout();
+// 🔥 render inicial
+renderResumenCheckout();
 </script>
 
 <script src="carrito.js"></script>
