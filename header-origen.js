@@ -122,7 +122,7 @@ function initStickyHeader() {
 
   let lastScrollTop = 0;
 
-  window.addEventListener("scroll", () => {
+  window.addEventListener("scroll", function () {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
     if (currentScroll > 60) {
@@ -142,7 +142,7 @@ function initStickyHeader() {
     }
 
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  }, { passive: true });
+  });
 }
 
   function initAnnouncement() {
