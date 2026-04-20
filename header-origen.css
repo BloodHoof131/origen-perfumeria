@@ -13,7 +13,7 @@ img{
 }
 
 body{
-  padding-top:155px;
+  padding-top:165px;
 }
 
 /* TOP ANNOUNCEMENT */
@@ -95,13 +95,19 @@ body{
   width:100%;
   z-index:9999;
   background:#D9D7D7;
-  transform:translateY(0);
-  transition:transform 0.32s ease, box-shadow 0.32s ease;
-  will-change:transform;
+  box-shadow:none;
+  transition:box-shadow 0.32s ease;
+}
+.header-top{
+  max-height:80px;
+  overflow:hidden;
+  opacity:1;
+  transition:max-height 0.35s ease, opacity 0.35s ease;
 }
 
-.site-header-wrap.hide-header{
-  transform:translateY(-100%);
+.site-header-wrap.scrolled .header-top{
+  max-height:0;
+  opacity:0;
 }
 
 .site-header-wrap.show-shadow{
@@ -111,6 +117,8 @@ body{
 /* HEADER INTERNO */
 .sticky-header{
   background:#D9D7D7;
+  position:relative;
+  z-index:2;
 }
 
 /* MAIN HEADER */

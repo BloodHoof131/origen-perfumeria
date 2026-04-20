@@ -6,7 +6,8 @@
   }
 
   const headerHTML = `
-    <div class="site-header-wrap" id="siteHeaderWrap">
+  <div class="site-header-wrap" id="siteHeaderWrap">
+    <div class="header-top" id="headerTop">
       <div class="top-announcement">
         <div class="announcement-track" id="announcementTrack">
           <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
@@ -25,54 +26,53 @@
           </a>
         </div>
       </div>
+    </div>
 
-      <div class="sticky-header">
-        <div class="main-header">
-          <div class="search-box">
-            <form id="searchFormHeader">
-              <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
-            </form>
-          </div>
-
-          <div class="header-logo">
-            <a href="index.html">
-              <img src="logo.png" alt="Origen Perfumería">
-            </a>
-          </div>
-
-          <div class="header-icons">
-            <a href="cuenta.html" title="Cuenta">
-              <i class="fa-regular fa-user"></i>
-            </a>
-
-            <a href="favoritos.html" title="Favoritos" class="favorites-link">
-              <i class="fa-regular fa-heart"></i>
-              <span class="favorites-count-badge" id="favoritesCountBadge"></span>
-            </a>
-
-            <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
-              <i class="fa-solid fa-bag-shopping"></i>
-              <span id="cartCount" class="cart-count">0</span>
-            </a>
-          </div>
+    <div class="sticky-header">
+      <div class="main-header">
+        <div class="search-box">
+          <form id="searchFormHeader">
+            <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
+          </form>
         </div>
 
-        <nav class="main-menu">
-          <a href="index.html" class="${getActiveClass("inicio")}">INICIO</a>
-          <a href="todos.html" class="${getActiveClass("todos")}">TODOS LOS PERFUMES</a>
-          <a href="hombre.html" class="${getActiveClass("hombre")}">HOMBRE</a>
-          <a href="mujer.html" class="${getActiveClass("mujer")}">MUJER</a>
-          <a href="unisex.html" class="${getActiveClass("unisex")}">UNISEX</a>
-        </nav>
+        <div class="header-logo">
+          <a href="index.html">
+            <img src="logo.png" alt="Origen Perfumería">
+          </a>
+        </div>
 
-        <div class="mobile-category-tabs">
-          <a href="todos.html" class="${getActiveClass("todos")}">Todos</a>
-          <a href="hombre.html" class="${getActiveClass("hombre")}">Hombre</a>
-          <a href="mujer.html" class="${getActiveClass("mujer")}">Mujer</a>
-          <a href="unisex.html" class="${getActiveClass("unisex")}">Unisex</a>
+        <div class="header-icons">
+          <a href="cuenta.html" title="Cuenta">
+            <i class="fa-regular fa-user"></i>
+          </a>
+          <a href="favoritos.html" title="Favoritos" class="favorites-link">
+            <i class="fa-regular fa-heart"></i>
+            <span class="favorites-count-badge" id="favoritesCountBadge"></span>
+          </a>
+          <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cartCount" class="cart-count">0</span>
+          </a>
         </div>
       </div>
+
+      <nav class="main-menu">
+        <a href="index.html" class="${getActiveClass("inicio")}">INICIO</a>
+        <a href="todos.html" class="${getActiveClass("todos")}">TODOS LOS PERFUMES</a>
+        <a href="hombre.html" class="${getActiveClass("hombre")}">HOMBRE</a>
+        <a href="mujer.html" class="${getActiveClass("mujer")}">MUJER</a>
+        <a href="unisex.html" class="${getActiveClass("unisex")}">UNISEX</a>
+      </nav>
+
+      <div class="mobile-category-tabs">
+        <a href="todos.html" class="${getActiveClass("todos")}">Todos</a>
+        <a href="hombre.html" class="${getActiveClass("hombre")}">Hombre</a>
+        <a href="mujer.html" class="${getActiveClass("mujer")}">Mujer</a>
+        <a href="unisex.html" class="${getActiveClass("unisex")}">Unisex</a>
+      </div>
     </div>
+  </div>
   `;
 
   const mountPoint = document.getElementById("origen-header");
@@ -121,12 +121,10 @@
     const siteHeaderWrap = document.getElementById("siteHeaderWrap");
     if (!siteHeaderWrap) return;
 
-    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     let ticking = false;
 
     function handleScroll() {
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollDiff = currentScroll - lastScrollTop;
 
       if (currentScroll > 10) {
         siteHeaderWrap.classList.add("show-shadow");
@@ -134,24 +132,12 @@
         siteHeaderWrap.classList.remove("show-shadow");
       }
 
-      if (currentScroll <= 0) {
-        siteHeaderWrap.classList.remove("hide-header");
-        lastScrollTop = 0;
-        ticking = false;
-        return;
+      if (currentScroll > 40) {
+        siteHeaderWrap.classList.add("scrolled");
+      } else {
+        siteHeaderWrap.classList.remove("scrolled");
       }
 
-      /* Si baja, ocultar */
-      if (scrollDiff > 4 && currentScroll > 120) {
-        siteHeaderWrap.classList.add("hide-header");
-      }
-
-      /* Si sube aunque sea un poco, mostrar */
-      if (scrollDiff < -2) {
-        siteHeaderWrap.classList.remove("hide-header");
-      }
-
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
       ticking = false;
     }
 
@@ -165,6 +151,8 @@
       },
       { passive: true }
     );
+
+    handleScroll();
   }
 
   function initAnnouncement() {
