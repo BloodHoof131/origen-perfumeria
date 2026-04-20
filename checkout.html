@@ -75,10 +75,10 @@
       align-items:center;
     }
     .header-logo img{
-  width:300px;
-  max-width:100%;
-  display:block;
-}
+      width:300px;
+      max-width:100%;
+      display:block;
+    }
     .header-right{
       display:flex;
       justify-content:flex-end;
@@ -135,6 +135,7 @@
       display:flex;
       flex-direction:column;
       gap:14px;
+      margin-bottom:18px;
     }
     .checkout-item{
       display:grid;
@@ -324,226 +325,186 @@
     .footer-space{
       height:20px;
     }
-
-.cart-icon-wrap{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-
-
-.cart-count{
-  position:absolute;
-  top:-8px;
-  right:-10px;
-  min-width:18px;
-  height:18px;
-  padding:0 5px;
-  border-radius:999px;
-  background:#c9a227;
-  color:#fff;
-  font-size:11px;
-  font-weight:bold;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  line-height:1;
-}
-
-
-.btn-primary{
-  display:block;
-  width:100%;
-  text-align:center;
-  background:#5a4720;
-  color:#f5f1e8;
-  padding:14px 18px;
-  border-radius:12px;
-  font-size:16px;
-  font-family:'Times New Roman', serif;
-  transition:0.3s ease;
-}
-.btn-primary:hover{
-  background:#6a5428;
-}
-
-
-.cart-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.4);
-  opacity:0;
-  visibility:hidden;
-  transition:0.3s;
-  z-index:150;
-}
-.cart-overlay.active{
-  opacity:1;
-  visibility:visible;
-}
-
-
-.cart-sidebar{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:360px;
-  max-width:92vw;
-  height:100%;
-  background:#f8f5ef;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.2);
-  z-index:200;
-  transition:0.4s ease;
-  display:flex;
-  flex-direction:column;
-}
-.cart-sidebar.active{
-  right:0;
-}
-
-
-.cart-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 20px;
-  border-bottom:1px solid rgba(90,71,32,0.12);
-}
-.cart-header h2{
-  font-size:24px;
-  color:#2f2b1f;
-  margin:0;
-}
-.cart-header span{
-  cursor:pointer;
-  font-size:24px;
-  color:#5a4720;
-}
-
-
-.cart-body{
-  flex:1;
-  overflow-y:auto;
-  padding:18px;
-  text-align:left;
-}
-
-
-.cart-footer{
-  padding:18px;
-  border-top:1px solid rgba(90,71,32,0.12);
-  background:#f8f5ef;
-}
-
-
-.cart-item{
-  display:flex;
-  gap:12px;
-  padding-bottom:14px;
-  margin-bottom:14px;
-  border-bottom:1px solid rgba(90,71,32,0.10);
-}
-
-
-.cart-item-image{
-  width:78px;
-  height:90px;
-  flex-shrink:0;
-  border-radius:12px;
-  overflow:hidden;
-  background:#efeeee;
-}
-.cart-item-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-
-.cart-item-info{
-  flex:1;
-}
-
-
-.cart-item-name{
-  display:block;
-  font-size:15px;
-  color:#2f2b1f;
-  line-height:1.3;
-  margin-bottom:6px;
-}
-
-
-.cart-item-price{
-  font-size:15px;
-  color:#c9a227;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-
-.cart-item-controls{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-
-
-.cart-item-controls button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:8px;
-  background:#ece7da;
-  color:#5a4720;
-  cursor:pointer;
-  font-size:18px;
-}
-
-
-.cart-item-controls span{
-  min-width:18px;
-  text-align:center;
-  font-size:15px;
-}
-
-
-.cart-remove-btn{
-  border:none;
-  background:transparent;
-  color:#8a4b4b;
-  font-size:13px;
-  cursor:pointer;
-  padding:0;
-}
-
-
-.cart-total{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-  font-size:17px;
-  color:#2f2b1f;
-}
-
-
-.cart-clear-btn{
-  width:100%;
-  margin-top:10px;
-  border:none;
-  background:#ece7da;
-  color:#5a4720;
-  padding:12px 14px;
-  border-radius:12px;
-  font-size:15px;
-  cursor:pointer;
-}
-
-
-
+    .cart-icon-wrap{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .cart-count{
+      position:absolute;
+      top:-8px;
+      right:-10px;
+      min-width:18px;
+      height:18px;
+      padding:0 5px;
+      border-radius:999px;
+      background:#c9a227;
+      color:#fff;
+      font-size:11px;
+      font-weight:bold;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+    }
+    .btn-primary{
+      display:block;
+      width:100%;
+      text-align:center;
+      background:#5a4720;
+      color:#f5f1e8;
+      padding:14px 18px;
+      border-radius:12px;
+      font-size:16px;
+      font-family:'Times New Roman', serif;
+      transition:0.3s ease;
+    }
+    .btn-primary:hover{
+      background:#6a5428;
+    }
+    .cart-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.4);
+      opacity:0;
+      visibility:hidden;
+      transition:0.3s;
+      z-index:150;
+    }
+    .cart-overlay.active{
+      opacity:1;
+      visibility:visible;
+    }
+    .cart-sidebar{
+      position:fixed;
+      top:0;
+      right:-100%;
+      width:360px;
+      max-width:92vw;
+      height:100%;
+      background:#f8f5ef;
+      box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+      z-index:200;
+      transition:0.4s ease;
+      display:flex;
+      flex-direction:column;
+    }
+    .cart-sidebar.active{
+      right:0;
+    }
+    .cart-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 20px;
+      border-bottom:1px solid rgba(90,71,32,0.12);
+    }
+    .cart-header h2{
+      font-size:24px;
+      color:#2f2b1f;
+      margin:0;
+    }
+    .cart-header span{
+      cursor:pointer;
+      font-size:24px;
+      color:#5a4720;
+    }
+    .cart-body{
+      flex:1;
+      overflow-y:auto;
+      padding:18px;
+      text-align:left;
+    }
+    .cart-footer{
+      padding:18px;
+      border-top:1px solid rgba(90,71,32,0.12);
+      background:#f8f5ef;
+    }
+    .cart-item{
+      display:flex;
+      gap:12px;
+      padding-bottom:14px;
+      margin-bottom:14px;
+      border-bottom:1px solid rgba(90,71,32,0.10);
+    }
+    .cart-item-image{
+      width:78px;
+      height:90px;
+      flex-shrink:0;
+      border-radius:12px;
+      overflow:hidden;
+      background:#efeeee;
+    }
+    .cart-item-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .cart-item-info{
+      flex:1;
+    }
+    .cart-item-name{
+      display:block;
+      font-size:15px;
+      color:#2f2b1f;
+      line-height:1.3;
+      margin-bottom:6px;
+    }
+    .cart-item-price{
+      font-size:15px;
+      color:#c9a227;
+      font-weight:bold;
+      margin-bottom:8px;
+    }
+    .cart-item-controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .cart-item-controls button{
+      width:30px;
+      height:30px;
+      border:none;
+      border-radius:8px;
+      background:#ece7da;
+      color:#5a4720;
+      cursor:pointer;
+      font-size:18px;
+    }
+    .cart-item-controls span{
+      min-width:18px;
+      text-align:center;
+      font-size:15px;
+    }
+    .cart-remove-btn{
+      border:none;
+      background:transparent;
+      color:#8a4b4b;
+      font-size:13px;
+      cursor:pointer;
+      padding:0;
+    }
+    .cart-total{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+      font-size:17px;
+      color:#2f2b1f;
+    }
+    .cart-clear-btn{
+      width:100%;
+      margin-top:10px;
+      border:none;
+      background:#ece7da;
+      color:#5a4720;
+      padding:12px 14px;
+      border-radius:12px;
+      font-size:15px;
+      cursor:pointer;
+    }
     @media (max-width: 992px){
       .checkout-wrapper{
         grid-template-columns:1fr;
@@ -592,24 +553,20 @@
       </a>
     </div>
 
-<div class="header-right">
-  <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
-    <i class="fa-solid fa-bag-shopping"></i>
-    <span id="cartCount" class="cart-count">0</span>
-  </a>
-</div>
-
-
+    <div class="header-right">
+      <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cartCount" class="cart-count">0</span>
+      </a>
+    </div>
   </header>
 
   <main class="checkout-wrapper">
     <section class="checkout-card">
       <h1 class="section-title">Checkout</h1>
-
       <div id="checkoutItemsContainer"></div>
 
       <h2 class="section-subtitle">Datos de contacto</h2>
-
       <form id="checkoutForm">
         <div class="form-grid">
           <div class="form-group">
@@ -672,12 +629,10 @@
           <span>Subtotal</span>
           <strong id="subtotalText">$0</strong>
         </div>
-
         <div class="summary-line">
           <span>Envío</span>
           <strong id="shippingText">$0</strong>
         </div>
-
         <div class="summary-line total">
           <span>Total</span>
           <strong id="totalText">$0</strong>
@@ -689,8 +644,8 @@
       </div>
 
       <button type="button" class="checkout-btn" id="finishOrderBtn">
-  Finalizar compra
-</button>
+        Finalizar compra
+      </button>
 
       <button type="button" class="secondary-btn" id="clearCartBtn">
         Vaciar carrito
@@ -704,172 +659,242 @@
   </main>
 
   <div class="footer-space"></div>
-<div class="cart-overlay" id="cartOverlay"></div>
-<div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header">
-    <h2>Carrito</h2>
-    <span id="closeCart">✕</span>
-  </div>
-  <div class="cart-body">
-    <p>Tu carrito está vacío</p>
-  </div>
-  <div class="cart-footer">
-    <a href="todos.html" class="btn-primary">Seguir comprando</a>
-  </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
+  <div class="cart-overlay" id="cartOverlay"></div>
 
-<!-- PRIMERO el carrito global -->
-<script src="carrito.js"></script>
-
-<script>
-const checkoutItemsContainer = document.getElementById("checkoutItemsContainer");
-const subtotalText = document.getElementById("subtotalText");
-const shippingText = document.getElementById("shippingText");
-const totalText = document.getElementById("totalText");
-const finishOrderBtn = document.getElementById("finishOrderBtn");
-const clearCartBtn = document.getElementById("clearCartBtn");
-
-let usuarioActual = null;
-
-async function cargarSesion() {
-  if (!window.supabaseClient) return false;
-
-  const { data, error } = await window.supabaseClient.auth.getUser();
-
-  if (error || !data.user) {
-    alert("Debes iniciar sesión para finalizar la compra.");
-    window.location.href = "cuenta.html";
-    return false;
-  }
-
-  usuarioActual = data.user;
-  return true;
-}
-
-function formatPrice(value) {
-  return "$" + Number(value).toLocaleString("es-CO");
-}
-
-function calcularSubtotal(carrito) {
-  return carrito.reduce((acc, item) => {
-    return acc + (Number(item.precio) * Number(item.cantidad));
-  }, 0);
-}
-
-function calcularEnvio(subtotal) {
-  return subtotal >= 199900 ? 0 : 12000;
-}
-
-function renderResumenCheckout() {
-  const carrito = obtenerCarrito(); // 🔥 ahora usa el global
-
-  if (carrito.length === 0) {
-    checkoutItemsContainer.innerHTML = `
-      <div class="cart-empty">
-        <p>Tu carrito está vacío.</p>
-        <a href="todos.html">Seguir comprando</a>
-      </div>
-    `;
-    subtotalText.textContent = "$0";
-    shippingText.textContent = "$0";
-    totalText.textContent = "$0";
-    return;
-  }
-
-  const subtotal = calcularSubtotal(carrito);
-  const envio = calcularEnvio(subtotal);
-  const total = subtotal + envio;
-
-  checkoutItemsContainer.innerHTML = `
-    <div class="checkout-items">
-      ${carrito.map(item => `
-        <div class="checkout-item">
-          <a href="${item.url}" class="checkout-item-image">
-            <img src="${item.imagen}" alt="${item.nombre}">
-          </a>
-          <div class="checkout-item-info">
-            <div class="checkout-item-category">${item.categoria || ""}</div>
-            <h3>${item.nombre}</h3>
-            <div class="checkout-item-price">${formatPrice(item.precio)}</div>
-            <div class="checkout-item-actions">
-              <div class="qty-box">
-                <button onclick="cambiarCantidadCarrito('${item.id}', -1)">−</button>
-                <span>${item.cantidad}</span>
-                <button onclick="cambiarCantidadCarrito('${item.id}', 1)">+</button>
-              </div>
-              <button onclick="eliminarDelCarrito('${item.id}')" class="remove-btn">
-                Eliminar
-              </button>
-            </div>
-          </div>
-          <div class="checkout-item-total">
-            ${formatPrice(item.precio * item.cantidad)}
-          </div>
-        </div>
-      `).join("")}
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Carrito</h2>
+      <span id="closeCart">✕</span>
     </div>
-  `;
+    <div class="cart-body">
+      <p>Tu carrito está vacío</p>
+    </div>
+    <div class="cart-footer">
+      <a href="todos.html" class="btn-primary">Seguir comprando</a>
+    </div>
+  </div>
 
-  subtotalText.textContent = formatPrice(subtotal);
-  shippingText.textContent = envio === 0 ? "Gratis" : formatPrice(envio);
-  totalText.textContent = formatPrice(total);
-}
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="carrito.js"></script>
 
-async function finalizarCompraReal() {
-  const sesionValida = await cargarSesion();
-  if (!sesionValida) return;
+  <script>
+    const checkoutItemsContainer = document.getElementById("checkoutItemsContainer");
+    const subtotalText = document.getElementById("subtotalText");
+    const shippingText = document.getElementById("shippingText");
+    const totalText = document.getElementById("totalText");
+    const finishOrderBtn = document.getElementById("finishOrderBtn");
+    const clearCartBtn = document.getElementById("clearCartBtn");
 
-  const carrito = obtenerCarrito();
+    let usuarioActual = null;
 
-  if (carrito.length === 0) {
-    alert("Tu carrito está vacío.");
-    return;
-  }
+    async function cargarSesion() {
+      if (!window.supabaseClient) return false;
 
-  const subtotal = calcularSubtotal(carrito);
-  const envio = calcularEnvio(subtotal);
-  const total = subtotal + envio;
+      const { data, error } = await window.supabaseClient.auth.getUser();
 
-  try {
-    const { data, error } = await window.supabaseClient
-      .from("pedidos")
-      .insert([{
-        user_id: usuarioActual.id,
-        subtotal,
-        envio,
-        total,
-        estado: "pendiente"
-      }])
-      .select()
-      .single();
+      if (error || !data.user) {
+        alert("Debes iniciar sesión para finalizar la compra.");
+        window.location.href = "cuenta.html";
+        return false;
+      }
 
-    if (error) {
-      alert("Error al guardar pedido");
-      return;
+      usuarioActual = data.user;
+      return true;
     }
 
-    localStorage.removeItem("origen_carrito");
-    actualizarCarritoUI();
-    alert("Compra realizada con éxito");
-    window.location.href = "panel-cuenta.html";
+    function formatPrice(value) {
+      return "$" + Number(value).toLocaleString("es-CO");
+    }
 
-  } catch (err) {
-    console.error(err);
-    alert("Error inesperado");
-  }
-}
+    function calcularSubtotal(carrito) {
+      return carrito.reduce((acc, item) => {
+        return acc + (Number(item.precio) * Number(item.cantidad));
+      }, 0);
+    }
 
-finishOrderBtn.addEventListener("click", finalizarCompraReal);
-clearCartBtn.addEventListener("click", vaciarCarrito);
+    function calcularEnvio(subtotal) {
+      return subtotal >= 199900 ? 0 : 12000;
+    }
 
-// 🔥 render inicial
-renderResumenCheckout();
-</script>
+    function renderResumenCheckout() {
+      const carrito = obtenerCarrito();
 
-<script src="carrito.js"></script>
+      if (!checkoutItemsContainer) return;
+
+      if (carrito.length === 0) {
+        checkoutItemsContainer.innerHTML = `
+          <div class="cart-empty">
+            <p>Tu carrito está vacío.</p>
+            <a href="todos.html">Seguir comprando</a>
+          </div>
+        `;
+        subtotalText.textContent = "$0";
+        shippingText.textContent = "$0";
+        totalText.textContent = "$0";
+        return;
+      }
+
+      const subtotal = calcularSubtotal(carrito);
+      const envio = calcularEnvio(subtotal);
+      const total = subtotal + envio;
+
+      checkoutItemsContainer.innerHTML = `
+        <div class="checkout-items">
+          ${carrito.map(item => `
+            <div class="checkout-item">
+              <a href="${item.url}" class="checkout-item-image">
+                <img src="${item.imagen}" alt="${item.nombre}">
+              </a>
+
+              <div class="checkout-item-info">
+                <div class="checkout-item-category">${item.categoria || ""}</div>
+                <h3>${item.nombre}</h3>
+                <div class="checkout-item-price">${formatPrice(item.precio)}</div>
+
+                <div class="checkout-item-actions">
+                  <div class="qty-box">
+                    <button type="button" onclick="cambiarCantidadCheckout('${item.id}', -1)">−</button>
+                    <span>${item.cantidad}</span>
+                    <button type="button" onclick="cambiarCantidadCheckout('${item.id}', 1)">+</button>
+                  </div>
+
+                  <button type="button" onclick="eliminarProductoCheckout('${item.id}')" class="remove-btn">
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+
+              <div class="checkout-item-total">
+                ${formatPrice(item.precio * item.cantidad)}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      subtotalText.textContent = formatPrice(subtotal);
+      shippingText.textContent = envio === 0 ? "Gratis" : formatPrice(envio);
+      totalText.textContent = formatPrice(total);
+    }
+
+    function cambiarCantidadCheckout(id, cambio) {
+      cambiarCantidadCarrito(id, cambio);
+      renderResumenCheckout();
+    }
+
+    function eliminarProductoCheckout(id) {
+      eliminarDelCarrito(id);
+      renderResumenCheckout();
+    }
+
+    function vaciarCarritoCheckout() {
+      vaciarCarrito();
+      renderResumenCheckout();
+    }
+
+    async function finalizarCompraReal() {
+      const sesionValida = await cargarSesion();
+      if (!sesionValida) return;
+
+      const carrito = obtenerCarrito();
+
+      if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      const subtotal = calcularSubtotal(carrito);
+      const envio = calcularEnvio(subtotal);
+      const total = subtotal + envio;
+
+      const datosCliente = {
+        nombre: document.getElementById("nombre")?.value.trim() || "",
+        telefono: document.getElementById("telefono")?.value.trim() || "",
+        email: document.getElementById("email")?.value.trim() || "",
+        ciudad: document.getElementById("ciudad")?.value.trim() || "",
+        direccion: document.getElementById("direccion")?.value.trim() || "",
+        metodoPago: document.getElementById("metodoPago")?.value || "",
+        envio: document.getElementById("envio")?.value || "",
+        notas: document.getElementById("notas")?.value.trim() || ""
+      };
+
+      if (
+        !datosCliente.nombre ||
+        !datosCliente.telefono ||
+        !datosCliente.ciudad ||
+        !datosCliente.direccion ||
+        !datosCliente.metodoPago
+      ) {
+        alert("Por favor completa los campos obligatorios.");
+        return;
+      }
+
+      finishOrderBtn.disabled = true;
+      finishOrderBtn.textContent = "Procesando compra...";
+
+      try {
+        const { data, error } = await window.supabaseClient
+          .from("pedidos")
+          .insert([{
+            user_id: usuarioActual.id,
+            nombre_cliente: datosCliente.nombre,
+            telefono: datosCliente.telefono,
+            email: datosCliente.email || usuarioActual.email || "",
+            ciudad: datosCliente.ciudad,
+            direccion: datosCliente.direccion,
+            metodo_pago: datosCliente.metodoPago,
+            tipo_envio: datosCliente.envio,
+            notas: datosCliente.notas,
+            subtotal,
+            envio,
+            total,
+            estado: "pendiente"
+          }])
+          .select()
+          .single();
+
+        if (error) {
+          console.error(error);
+          alert("Error al guardar pedido");
+          finishOrderBtn.disabled = false;
+          finishOrderBtn.textContent = "Finalizar compra";
+          return;
+        }
+
+        localStorage.removeItem("origen_carrito");
+        actualizarCarritoUI();
+        renderResumenCheckout();
+
+        alert("Compra realizada con éxito");
+        window.location.href = "panel-cuenta.html";
+      } catch (err) {
+        console.error(err);
+        alert("Error inesperado");
+        finishOrderBtn.disabled = false;
+        finishOrderBtn.textContent = "Finalizar compra";
+      }
+    }
+
+    window.cambiarCantidadCheckout = cambiarCantidadCheckout;
+    window.eliminarProductoCheckout = eliminarProductoCheckout;
+
+    if (finishOrderBtn) {
+      finishOrderBtn.addEventListener("click", finalizarCompraReal);
+    }
+
+    if (clearCartBtn) {
+      clearCartBtn.addEventListener("click", vaciarCarritoCheckout);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      renderResumenCheckout();
+    });
+
+    window.addEventListener("load", function () {
+      renderResumenCheckout();
+    });
+  </script>
 </body>
 </html>
-
