@@ -111,7 +111,7 @@
       }
     });
   }
-
+  
 function initStickyHeader() {
   const stickyHeader = document.getElementById("stickyHeader");
   if (!stickyHeader) return;
@@ -121,19 +121,33 @@ function initStickyHeader() {
   window.addEventListener("scroll", function () {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
+    // sombra
     if (currentScroll > 60) {
       stickyHeader.classList.add("show-shadow");
     } else {
       stickyHeader.classList.remove("show-shadow");
     }
 
+    // comportamiento mostrar/ocultar
     if (window.innerWidth > 768) {
-      if (currentScroll > lastScrollTop && currentScroll > 140) {
+
+      // 🔽 BAJANDO → oculta
+      if (currentScroll > lastScrollTop && currentScroll > 120) {
         stickyHeader.classList.add("hide-header");
-      } else {
+      }
+
+      // 🔼 SUBIENDO → muestra (aunque sea poquito)
+      else if (currentScroll < lastScrollTop) {
         stickyHeader.classList.remove("hide-header");
       }
+
+      // 🔝 arriba del todo → siempre visible
+      if (currentScroll <= 10) {
+        stickyHeader.classList.remove("hide-header");
+      }
+
     } else {
+      // en móvil nunca ocultar
       stickyHeader.classList.remove("hide-header");
     }
 
