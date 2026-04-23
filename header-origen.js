@@ -76,14 +76,7 @@
     mountPoint.innerHTML = headerHTML;
   }
 
-  const announcement = document.querySelector(".top-announcement");
-const infoBar = document.querySelector(".info-bar");
-const stickyHeader = document.getElementById("stickyHeader");
-
-if (announcement && infoBar && stickyHeader) {
-  const totalHeight = announcement.offsetHeight + infoBar.offsetHeight;
-  stickyHeader.style.top = totalHeight + "px";
-}
+  
 
   function actualizarContadorFavoritosHeader() {
     const badge = document.getElementById("favoritesCountBadge");
