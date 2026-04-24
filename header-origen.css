@@ -138,16 +138,22 @@
   border-bottom:1px solid rgba(107,85,35,0.08);
 }
 
-.main-menu a{
-  font-size:12.5px;
-  font-weight:bold;
-  padding:8px 12px;
-}
+ .main-menu a{
+      position:relative;
+      text-decoration:none;
+      color:#6b5523;
+      font-size:12.5px;
+      font-weight:bold;
+      letter-spacing:0.4px;
+      transition:0.3s;
+      padding:8px 12px;
+      border-radius:999px;
+    }
 
 .main-menu a.active{
-  background:#7a5c2e;
-  color:#fff;
-}
+      color:#f7f2e8;
+      background:#7a5c2e;
+    }
 
 /* 📱 TABLET */
 @media (max-width: 992px){

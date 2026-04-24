@@ -115,8 +115,8 @@
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
 
-// 🔥 ACTIVAR MENÚ SEGÚN LA PÁGINA
-const currentPage = window.location.pathname.split("/").pop();
+  // 🔥 ACTIVAR MENÚ SEGÚN LA PÁGINA
+const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
 document.querySelectorAll(".main-menu a").forEach(link => {
   const linkPage = link.getAttribute("href");
