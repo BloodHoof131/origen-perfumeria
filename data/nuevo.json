@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "nombre": "Tubbees Lemon M-licious",
+    "categoria": "Novedad",
+    "precio": 199900,
+    "imagen": "img/productos/nuevo/p1.png",
+    "badge": "Nuevo"
+  },
+  {
+    "id": 2,
+    "nombre": "Tubbees Tira-Miss-ooo",
+    "categoria": "Novedad",
+    "precio": 189900,
+    "imagen": "img/productos/nuevo/p2.png",
+    "badge": "Nuevo"
+  },
+  {
+    "id": 3,
+    "nombre": "Tubbees Berry Explosion",
+    "categoria": "Novedad",
+    "precio": 209900,
+    "imagen": "img/productos/nuevo/p3.png",
+    "badge": "Nuevo"
+  },
+  {
+    "id": 4,
+    "nombre": "Tubbees Golden Praline Bliss",
+    "categoria": "Novedad",
+    "precio": 194900,
+    "imagen": "img/productos/nuevo/p4.png",
+    "badge": "Nuevo"
+  }
+]

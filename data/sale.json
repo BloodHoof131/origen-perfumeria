@@ -1,0 +1,38 @@
+[
+  {
+    "id": 9,
+    "nombre": "Amber Oud Gold",
+    "categoria": "Oferta",
+    "precio": 159900,
+    "precio_old": 199900,
+    "imagen": "img/productos/descuento/p1.png",
+    "badge": "Sale"
+  },
+  {
+    "id": 10,
+    "nombre": "Khamrah Qahwa",
+    "categoria": "Oferta",
+    "precio": 169900,
+    "precio_old": 209900,
+    "imagen": "img/productos/descuento/p2.png",
+    "badge": "Sale"
+  },
+  {
+    "id": 11,
+    "nombre": "Asad Lattafa",
+    "categoria": "Oferta",
+    "precio": 149900,
+    "precio_old": 189900,
+    "imagen": "img/productos/descuento/p3.png",
+    "badge": "Sale"
+  },
+  {
+    "id": 12,
+    "nombre": "Fakhar Rose",
+    "categoria": "Oferta",
+    "precio": 139900,
+    "precio_old": 179900,
+    "imagen": "img/productos/descuento/p4.png",
+    "badge": "Sale"
+  }
+]

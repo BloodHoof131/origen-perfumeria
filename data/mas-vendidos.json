@@ -1,0 +1,34 @@
+[
+  {
+    "id": 5,
+    "nombre": "Club de Nuit Intense",
+    "categoria": "Más vendido",
+    "precio": 249900,
+    "imagen": "img/productos/mas_vendido/p1.png",
+    "badge": "Top"
+  },
+  {
+    "id": 6,
+    "nombre": "Yara Lattafa",
+    "categoria": "Más vendido",
+    "precio": 179900,
+    "imagen": "img/productos/mas_vendido/p2.png",
+    "badge": "Top"
+  },
+  {
+    "id": 7,
+    "nombre": "9PM Afnan",
+    "categoria": "Más vendido",
+    "precio": 219900,
+    "imagen": "img/productos/mas_vendido/p3.png",
+    "badge": "Top"
+  },
+  {
+    "id": 8,
+    "nombre": "Bade'e Al Oud",
+    "categoria": "Más vendido",
+    "precio": 229900,
+    "imagen": "img/productos/mas_vendido/p4.png",
+    "badge": "Top"
+  }
+]
