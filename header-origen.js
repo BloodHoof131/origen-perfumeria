@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-  const headerHTML = `
+ document.addEventListener("DOMContentLoaded", () => {
+ const headerHTML = `
   <div class="top-announcement">
     <div class="announcement-track">
       <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
@@ -115,5 +114,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
+
+// 🔥 ACTIVAR MENÚ SEGÚN LA PÁGINA
+const currentPage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".main-menu a").forEach(link => {
+  const linkPage = link.getAttribute("href");
+
+  if (linkPage === currentPage) {
+    link.classList.add("active");
+  }
+});
+
 
 });
