@@ -28,11 +28,16 @@
   <!-- 🔥 SOLO ESTO ES STICKY -->
   <div class="sticky-header" id="stickyHeader">
     <div class="main-header">
-      <div class="search-box">
+
+      </div>
+
+ <div class="search-box">
         <form id="searchFormHeader">
           <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
         </form>
-      </div>
+        <div class="menu-toggle">
+  <i class="fa-solid fa-bars"></i>
+</div>
 
       <div class="header-logo">
         <a href="index.html">
@@ -53,7 +58,7 @@
       </div>
     </div>
 
-    <nav class="main-menu">
+    <nav class="main-menu nav">
       <a href="index.html" class="${getActiveClass("inicio")}">INICIO</a>
       <a href="todos.html" class="${getActiveClass("todos")}">TODOS LOS PERFUMES</a>
       <a href="hombre.html" class="${getActiveClass("hombre")}">HOMBRE</a>
@@ -67,22 +72,7 @@
   if (mountPoint) {
     mountPoint.innerHTML = headerHTML;
   }
-  
-  fetch("header-origen.html")
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("origen-header").innerHTML = data;
 
-    // 🔥 ACTIVAR MENÚ MOBILE DESPUÉS DE CARGAR
-    const menuBtn = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".nav");
-
-    if(menuBtn && nav){
-      menuBtn.addEventListener("click", () => {
-        nav.classList.toggle("active");
-      });
-    }
-  });
 
   
 
@@ -177,6 +167,15 @@ function initStickyHeader() {
       announcementItems[announcementIndex].classList.add("active");
     }, 3500);
   }
+
+  const menuBtn = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".nav");
+
+if(menuBtn && nav){
+  menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
+}
 
   actualizarContadorFavoritosHeader();
   initSearchHeader();
