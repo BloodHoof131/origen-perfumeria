@@ -1,174 +1,109 @@
 (function () {
-  const currentPage = document.body.dataset.page || "";
+  // 1. Configuración de la página actual
+  // Asegúrate de que en tu HTML tengas: <body data-page="caballeros">
+  const currentPage = document.body.dataset.page || "inicio";
 
+  // Función para determinar si un link debe estar activo
   function getActiveClass(page) {
     return currentPage === page ? "active" : "";
   }
 
- const headerHTML = `
-  <div class="top-announcement">
-    <div class="announcement-track" id="announcementTrack">
-      <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
-      <span class="announcement-item">Perfumes 100% originales con garantía</span>
-      <span class="announcement-item">Asesoría personalizada por WhatsApp</span>
-    </div>
-  </div>
-
-  <div class="info-bar">
-    <div class="info-left">
-      <a href="https://www.instagram.com/perfumeria.origen" target="_blank" class="info-link">
-        <i class="fa-brands fa-instagram"></i> @origenperfumeria
-      </a>
-      <a href="https://wa.me/573145661788" target="_blank" class="info-link">
-        <i class="fa-brands fa-whatsapp"></i> Asesoría personalizada
-      </a>
-    </div>
-  </div>
-
-  <!-- 🔥 SOLO ESTO ES STICKY -->
-  <div class="sticky-header" id="stickyHeader">
-    <div class="main-header">
-
+  // 2. Definición del Template con Template Literals para clases dinámicas
+  const headerHTML = `
+    <header class="sticky-header" id="mainHeader">
+      <div class="top-announcement">
+        <div class="announcement-track" id="announcementTrack">
+          <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
+          <span class="announcement-item">Perfumes 100% originales con garantía</span>
+          <span class="announcement-item">Asesoría personalizada por WhatsApp</span>
+        </div>
       </div>
 
- <div class="search-box">
-        <form id="searchFormHeader">
-          <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
-        </form>
-
-
-      <div class="header-logo">
-        <a href="index.html">
-          <img src="logo.png" alt="Origen Perfumería">
-        </a>
+      <div class="info-bar">
+        <div class="info-left">
+          <a href="https://www.instagram.com/perfumeria.origen" target="_blank" class="info-link">
+            <i class="fa-brands fa-instagram"></i> @origenperfumeria
+          </a>
+          <a href="https://wa.me/573145661788" target="_blank" class="info-link">
+            <i class="fa-brands fa-whatsapp"></i> Asesoría Personalizada
+          </a>
+        </div>
       </div>
 
-      <div class="header-icons">
-        <a href="cuenta.html"><i class="fa-regular fa-user"></i></a>
-        <a href="favoritos.html" class="favorites-link">
-          <i class="fa-regular fa-heart"></i>
-          <span id="favoritesCountBadge"></span>
-        </a>
-        <a href="#" id="openCart" class="cart-icon-wrap">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span id="cartCount" class="cart-count">0</span>
-        </a>
+      <div class="main-header">
+        <div class="search-box">
+          <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Buscar fragancia..." aria-label="Buscar">
+          </form>
+        </div>
+        <div class="header-logo">
+          <a href="/">
+            <img src="img/logo.png" alt="Origen Perfumería Logo">
+          </a>
+        </div>
+        <div class="header-icons">
+          <a href="/cuenta" title="Mi Cuenta"><i class="fa-regular fa-user"></i></a>
+          <a href="#" class="cart-icon-wrap" id="cartTrigger">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
       </div>
-    </div>
 
-    <nav class="main-menu nav">
-      <a href="index.html" class="${getActiveClass("inicio")}">INICIO</a>
-      <a href="todos.html" class="${getActiveClass("todos")}">TODOS LOS PERFUMES</a>
-      <a href="hombre.html" class="${getActiveClass("hombre")}">HOMBRE</a>
-      <a href="mujer.html" class="${getActiveClass("mujer")}">MUJER</a>
-      <a href="unisex.html" class="${getActiveClass("unisex")}">UNISEX</a>
-    </nav>
-  </div>
-`;
+      <nav class="main-menu">
+        <a href="/" class="${getActiveClass('inicio')}">INICIO</a>
+        <a href="/caballeros" class="${getActiveClass('caballeros')}">CABALLEROS</a>
+        <a href="/damas" class="${getActiveClass('damas')}">DAMAS</a>
+        <a href="/unisex" class="${getActiveClass('unisex')}">UNISEX</a>
+        <a href="/nichos" class="${getActiveClass('nichos')}">NICHOS</a>
+        <a href="/ofertas" class="${getActiveClass('ofertas')}">OFERTAS</a>
+      </nav>
 
-  const mountPoint = document.getElementById("origen-header");
-  if (mountPoint) {
-    mountPoint.innerHTML = headerHTML;
-  }
+      <div class="mobile-category-tabs">
+        <a href="/caballeros" class="${getActiveClass('caballeros')}">Caballeros</a>
+        <a href="/damas" class="${getActiveClass('damas')}">Damas</a>
+        <a href="/unisex" class="${getActiveClass('unisex')}">Unisex</a>
+        <a href="/nichos" class="${getActiveClass('nichos')}">Nichos</a>
+      </div>
+    </header>
+  `;
 
+  // 3. Inyección en el DOM e Inicialización de eventos
+  document.addEventListener('DOMContentLoaded', () => {
+    // Insertamos el header al principio del body (o en un contenedor específico)
+    document.body.insertAdjacentHTML('afterbegin', headerHTML);
 
-  
+    const header = document.getElementById('mainHeader');
+    const items = document.querySelectorAll('.announcement-item');
+    let current = 0;
+    let lastScroll = 0;
 
-  function actualizarContadorFavoritosHeader() {
-    const badge = document.getElementById("favoritesCountBadge");
-    if (!badge) return;
-
-    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-
-    if (favoritos.length > 0) {
-      badge.textContent = favoritos.length;
-      badge.classList.add("show");
-    } else {
-      badge.textContent = "";
-      badge.classList.remove("show");
-    }
-  }
-
-  function initSearchHeader() {
-    const form = document.getElementById("searchFormHeader");
-    const input = document.getElementById("searchInputHeaderGlobal");
-    if (!form || !input) return;
-
-    const params = new URLSearchParams(window.location.search);
-    const buscarActual = params.get("buscar") || "";
-    input.value = buscarActual;
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const texto = input.value.trim();
-
-      if (texto) {
-        window.location.href = `todos.html?buscar=${encodeURIComponent(texto)}`;
-      } else {
-        window.location.href = "todos.html";
-      }
-    });
-  }
-
-function initStickyHeader() {
-  const stickyHeader = document.getElementById("stickyHeader");
-  if (!stickyHeader) return;
-
-  let lastScrollTop = 0;
-
-  window.addEventListener("scroll", function () {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    // sombra
-    if (currentScroll > 60) {
-      stickyHeader.classList.add("show-shadow");
-    } else {
-      stickyHeader.classList.remove("show-shadow");
+    // --- Rotación de Anuncios ---
+    if (items.length > 0) {
+      setInterval(() => {
+        items[current].classList.remove('active');
+        current = (current + 1) % items.length;
+        items[current].classList.add('active');
+      }, 4000);
     }
 
-    // comportamiento mostrar/ocultar
-    if (window.innerWidth > 768) {
+    // --- Efecto Sticky Hide/Show ---
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
 
-      // 🔽 BAJANDO → oculta
-      if (currentScroll > lastScrollTop && currentScroll > 120) {
-        stickyHeader.classList.add("hide-header");
+      if (currentScroll <= 100) {
+        header.classList.remove('hide-header', 'show-shadow');
+        return;
       }
 
-      // 🔼 SUBIENDO → muestra (aunque sea poquito)
-      else if (currentScroll < lastScrollTop) {
-        stickyHeader.classList.remove("hide-header");
+      if (currentScroll > lastScroll && !header.classList.contains('hide-header')) {
+        header.classList.add('hide-header');
+      } else if (currentScroll < lastScroll && header.classList.contains('hide-header')) {
+        header.classList.remove('hide-header');
+        header.classList.add('show-shadow');
       }
-
-      // 🔝 arriba del todo → siempre visible
-      if (currentScroll <= 10) {
-        stickyHeader.classList.remove("hide-header");
-      }
-
-    } else {
-      // en móvil nunca ocultar
-      stickyHeader.classList.remove("hide-header");
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      
+      lastScroll = currentScroll;
+    }, { passive: true });
   });
-}
-
-  function initAnnouncement() {
-    const announcementItems = document.querySelectorAll(".announcement-item");
-    if (!announcementItems.length) return;
-
-    let announcementIndex = 0;
-
-    setInterval(() => {
-      announcementItems[announcementIndex].classList.remove("active");
-      announcementIndex = (announcementIndex + 1) % announcementItems.length;
-      announcementItems[announcementIndex].classList.add("active");
-    }, 3500);
-  }
-
-
-  actualizarContadorFavoritosHeader();
-  initSearchHeader();
-  initStickyHeader();
-  initAnnouncement();
 })();
