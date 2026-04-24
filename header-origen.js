@@ -5,7 +5,7 @@
     return currentPage === page ? "active" : "";
   }
 
-  const headerHTML = `
+ const headerHTML = `
   <div class="top-announcement">
     <div class="announcement-track" id="announcementTrack">
       <span class="announcement-item active">Envíos GRATIS por compras superiores a $199.900</span>
@@ -16,7 +16,7 @@
 
   <div class="info-bar">
     <div class="info-left">
-      <a href="https://www.instagram.com/perfumeria.origen?igsh=MXExdmpqNTl1NnZrZg==" target="_blank" class="info-link">
+      <a href="https://www.instagram.com/perfumeria.origen" target="_blank" class="info-link">
         <i class="fa-brands fa-instagram"></i> @origenperfumeria
       </a>
       <a href="https://wa.me/573145661788" target="_blank" class="info-link">
@@ -25,6 +25,7 @@
     </div>
   </div>
 
+  <!-- 🔥 SOLO ESTO ES STICKY -->
   <div class="sticky-header" id="stickyHeader">
     <div class="main-header">
       <div class="search-box">
@@ -40,14 +41,12 @@
       </div>
 
       <div class="header-icons">
-        <a href="cuenta.html" title="Cuenta">
-          <i class="fa-regular fa-user"></i>
-        </a>
-        <a href="favoritos.html" title="Favoritos" class="favorites-link">
+        <a href="cuenta.html"><i class="fa-regular fa-user"></i></a>
+        <a href="favoritos.html" class="favorites-link">
           <i class="fa-regular fa-heart"></i>
-          <span class="favorites-count-badge" id="favoritesCountBadge"></span>
+          <span id="favoritesCountBadge"></span>
         </a>
-        <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
+        <a href="#" id="openCart" class="cart-icon-wrap">
           <i class="fa-solid fa-bag-shopping"></i>
           <span id="cartCount" class="cart-count">0</span>
         </a>
@@ -61,13 +60,6 @@
       <a href="mujer.html" class="${getActiveClass("mujer")}">MUJER</a>
       <a href="unisex.html" class="${getActiveClass("unisex")}">UNISEX</a>
     </nav>
-
-    <div class="mobile-category-tabs">
-      <a href="todos.html" class="${getActiveClass("todos")}">Todos</a>
-      <a href="hombre.html" class="${getActiveClass("hombre")}">Hombre</a>
-      <a href="mujer.html" class="${getActiveClass("mujer")}">Mujer</a>
-      <a href="unisex.html" class="${getActiveClass("unisex")}">Unisex</a>
-    </div>
   </div>
 `;
 
