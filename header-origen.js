@@ -67,6 +67,22 @@
   if (mountPoint) {
     mountPoint.innerHTML = headerHTML;
   }
+  
+  fetch("header-origen.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("origen-header").innerHTML = data;
+
+    // 🔥 ACTIVAR MENÚ MOBILE DESPUÉS DE CARGAR
+    const menuBtn = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav");
+
+    if(menuBtn && nav){
+      menuBtn.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+    }
+  });
 
   
 
