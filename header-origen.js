@@ -36,10 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="header-icons">
-        <a href="cuenta.html"><i class="fa-regular fa-user"></i></a>
-        <a href="favoritos.html"><i class="fa-regular fa-heart"></i></a>
-        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
-      </div>
+  <a href="cuenta.html"><i class="fa-regular fa-user"></i></a>
+
+  <a href="favoritos.html" class="cart-icon-wrap">
+    <i class="fa-regular fa-heart"></i>
+    <span id="favCount" class="cart-count">0</span>
+  </a>
+
+  <a href="#" id="openCart" class="cart-icon-wrap">
+    <i class="fa-solid fa-bag-shopping"></i>
+    <span id="cartCount" class="cart-count">0</span>
+  </a>
+</div>
 
     </div>
 
