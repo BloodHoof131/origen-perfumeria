@@ -1,4 +1,4 @@
-/* RESET BÁSICO DEL HEADER */
+/* TOP ANNOUNCEMENT */
 .top-announcement{
   position:relative;
   background:linear-gradient(90deg, #ece7da, #ddd6c3, #ece7da);
@@ -26,16 +26,19 @@
   top:50%;
   transform:translate(-50%, -50%);
   opacity:0;
-  transition:opacity 0.7s ease;
+  transition:opacity 0.7s ease, transform 0.7s ease;
   font-size:12.5px;
   font-weight:600;
+  letter-spacing:0.04em;
   white-space:nowrap;
+  color:#6b5523;
 }
 
 .announcement-item.active{
   opacity:1;
 }
 
+/* INFO BAR */
 .info-bar{
   background:#ece8dd;
   color:#6b5523;
@@ -44,39 +47,62 @@
   align-items:center;
   padding:8px 24px;
   font-size:12px;
+  border-bottom:1px solid rgba(107,85,35,0.15);
 }
 
 .info-left{
   display:flex;
   gap:22px;
+  flex-wrap:wrap;
 }
 
 .info-link{
   color:#6b5523;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
+.info-link:hover{
+  color:#b8860b;
+}
+
+/* HEADER */
 .sticky-header{
   position:sticky;
   top:0;
   z-index:120;
-  background:#D9D7D7;
+  transition:transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.sticky-header.hide-header{
+  transform:translateY(-100%);
+}
+
+.sticky-header.show-shadow{
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .main-header{
+  background:#D9D7D7;
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
   padding:6px 24px;
+  gap:12px;
   min-height:72px;
 }
 
+/* SEARCH */
 .search-box input{
   width:220px;
   padding:8px 14px;
   border-radius:10px;
   border:1px solid rgba(107,85,35,0.18);
+  background:#efeded;
 }
 
+/* LOGO */
 .header-logo{
   display:flex;
   justify-content:center;
@@ -86,18 +112,30 @@
   width:300px;
 }
 
+/* ICONS */
 .header-icons{
   display:flex;
   justify-content:flex-end;
   gap:14px;
 }
 
+.header-icons a{
+  color:#6b5523;
+  font-size:20px;
+}
+
+.header-icons a:hover{
+  color:#b8860b;
+}
+
+/* MENU */
 .main-menu{
   background:#d8d2bf;
   display:flex;
   justify-content:center;
   gap:18px;
   padding:8px 16px;
+  border-bottom:1px solid rgba(107,85,35,0.08);
 }
 
 .main-menu a{
