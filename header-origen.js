@@ -35,9 +35,7 @@
         <form id="searchFormHeader">
           <input type="text" id="searchInputHeaderGlobal" placeholder="Buscar productos">
         </form>
-        <div class="menu-toggle">
-  <i class="fa-solid fa-bars"></i>
-</div>
+
 
       <div class="header-logo">
         <a href="index.html">
@@ -168,14 +166,6 @@ function initStickyHeader() {
     }, 3500);
   }
 
-  const menuBtn = document.querySelector(".menu-toggle");
-const nav = document.querySelector(".nav");
-
-if(menuBtn && nav){
-  menuBtn.addEventListener("click", () => {
-    nav.classList.toggle("active");
-  });
-}
 
   actualizarContadorFavoritosHeader();
   initSearchHeader();
