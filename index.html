@@ -963,8 +963,22 @@ a{
     font-size:13px;
   }
   .products-panel.active{
-    grid-template-columns:1fr;
-    gap:18px;
+    display:flex; /* 🔥 clave */
+    gap:16px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding:4px 2px 10px;
+    scrollbar-width:none;
+  }
+
+  .products-panel.active::-webkit-scrollbar{
+    display:none;
+  }
+
+  .product-card{
+    flex:0 0 75%; /* 🔥 tamaño de cada card */
+    min-width:75%;
+    scroll-snap-align:start;
   }
   .product-name{
     min-height:auto;
