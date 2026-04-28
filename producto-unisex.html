@@ -2597,30 +2597,19 @@ if (favoriteBtn && producto) {
     return getFavoritos().includes(id);
   }
 
-  function actualizarContadorFavoritos(){
-    const favCount = document.getElementById("favCount");
-    if(favCount){
-      favCount.textContent = getFavoritos().length;
-    }
-  }
+function updateFavoriteUI(){
+  const icon = favoriteBtn.querySelector("i");
 
-  function updateFavoriteUI(){
-    const icon = favoriteBtn.querySelector("i");
-    const tooltip = favoriteBtn.querySelector(".tooltip");
-    if(!icon) return;
-
-    if(esFavorito(producto.id)){
-      favoriteBtn.classList.add("active");
-      icon.classList.remove("fa-regular");
-      icon.classList.add("fa-solid");
-      if(tooltip) tooltip.textContent = "Quitar de favoritos";
-    }else{
-      favoriteBtn.classList.remove("active");
-      icon.classList.remove("fa-solid");
-      icon.classList.add("fa-regular");
-      if(tooltip) tooltip.textContent = "Añadir a favoritos";
-    }
+  if(esFavorito(producto.id)){
+    favoriteBtn.classList.add("active");
+    icon.classList.remove("fa-regular");
+    icon.classList.add("fa-solid");
+  }else{
+    favoriteBtn.classList.remove("active");
+    icon.classList.remove("fa-solid");
+    icon.classList.add("fa-regular");
   }
+}
 
   favoriteBtn.addEventListener("click", () => {
     let favs = getFavoritos();
@@ -2633,12 +2622,9 @@ if (favoriteBtn && producto) {
 
     setFavoritos(favs);
     updateFavoriteUI();
-    actualizarContadorFavoritos();
   });
 
-  // Inicializar
   updateFavoriteUI();
-  actualizarContadorFavoritos();
 }
 
   renderProduct();
