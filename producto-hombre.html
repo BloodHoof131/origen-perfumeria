@@ -298,58 +298,64 @@
 
 .favorite-btn {
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 2px solid #e5e5e5;
+  border: 1.5px solid #e5e5e5;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
-/* Corazón */
+/* ICONO CORAZÓN */
 .favorite-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   stroke: #222;
-  stroke-width: 2;
+  stroke-width: 1.6;
   fill: none;
-  transition: all 0.3s ease;
+  display: block;
+  transition: all 0.25s ease;
 }
 
-/* Hover botón */
+/* HOVER BOTÓN */
 .favorite-btn:hover {
-  border-color: #bbb;
+  border-color: #bdbdbd;
 }
 
-/* Activo */
+/* EFECTO HOVER ICONO */
+.favorite-btn:hover svg {
+  transform: scale(1.08);
+}
+
+/* ESTADO ACTIVO */
 .favorite-btn.active svg {
   fill: #e63946;
   stroke: #e63946;
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 
 /* TOOLTIP */
 .favorite-btn .tooltip {
   position: absolute;
-  right: 110%;
+  right: 115%;
   top: 50%;
   transform: translateY(-50%);
-  background: #333;
+  background: #2f2f2f;
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   padding: 6px 10px;
   border-radius: 6px;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: 0.3s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* Flechita */
+/* FLECHA TOOLTIP */
 .favorite-btn .tooltip::after {
   content: "";
   position: absolute;
@@ -358,12 +364,13 @@
   transform: translateY(-50%);
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent transparent #333;
+  border-color: transparent transparent transparent #2f2f2f;
 }
 
-/* Mostrar tooltip */
+/* MOSTRAR TOOLTIP */
 .favorite-btn:hover .tooltip {
   opacity: 1;
+  transform: translateY(-50%) translateX(-2px);
 }
     .product-info h1{
       font-size:34px;
@@ -1708,9 +1715,12 @@
   <div class="product-top-row">
     <span class="tag-category">Hombre</span>
     <button id="favoriteBtn" class="favorite-btn">
-  <svg viewBox="0 0 24 24">
+  <svg class="heart-icon" viewBox="0 0 24 24">
     <path d="M12 21s-6.7-4.35-9.3-7.33C-1.1 9.1 1.1 3.5 6 3.5c2 0 3.5 1.2 4 2.1.5-.9 2-2.1 4-2.1 4.9 0 7.1 5.6 3.3 10.2C18.7 16.6 12 21 12 21z"/>
   </svg>
+
+  <span class="tooltip">Añadir a favoritos</span>
+</button>
 
   <span class="tooltip">Añadir a favoritos</span>
 </button>
