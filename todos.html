@@ -1698,10 +1698,12 @@
 
 
   <section class="category-hero">
-    <h1>Todos los Perfumes</h1>
-    <p>Explora todo nuestro catálogo de fragancias para hombre, mujer y unisex.</p>
-  </section>
+  <section class="header-tienda">
+  <h1>Todos los Perfumes</h1>
+  <p>Explora todo nuestro catálogo de fragancias para hombre, mujer y unisex.</p>
 
+  <input type="text" id="buscador" placeholder="Buscar perfume..." class="input-buscador">
+</section>
   <div class="mobile-tools-bar">
     <button type="button" class="mobile-tool-btn" id="openFiltersBtn">
       <span>Filtro</span>
@@ -2626,6 +2628,7 @@ document.addEventListener("keydown", function(e) {
   }
 });
 
+
 /* ===== ANUNCIO SUPERIOR ===== */
 const announcementItems = document.querySelectorAll(".announcement-item");
 let announcementIndex = 0;
@@ -2654,6 +2657,27 @@ scrollTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth"
+  });
+});
+
+const buscador = document.getElementById("buscador");
+const productos = document.querySelectorAll(".producto");
+
+buscador.addEventListener("input", function () {
+  const texto = buscador.value.toLowerCase();
+
+  productos.forEach(producto => {
+    const nombreEl = producto.querySelector(".nombre");
+    const marcaEl = producto.querySelector(".marca");
+
+    const nombre = nombreEl ? nombreEl.textContent.toLowerCase() : "";
+    const marca = marcaEl ? marcaEl.textContent.toLowerCase() : "";
+
+    if (nombre.includes(texto) || marca.includes(texto)) {
+      producto.style.display = "block";
+    } else {
+      producto.style.display = "none";
+    }
   });
 });
 
