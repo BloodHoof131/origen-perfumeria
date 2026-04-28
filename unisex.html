@@ -1966,39 +1966,32 @@ function getDescription(producto){
 }
 
 
-function getStock(producto){
+function getStockUnisex(producto){
   const stockMap = {
-    "afnan-9am-dive": 18,
-    "afnan-9pm": 27,
-    "afnan-9pm-elixir": 13,
-    "armaf-club-de-nuit-intense-man": 22,
-    "armaf-odyssey-mandarin-sky": 11,
-    "armaf-odyssey-mandarin-sky-elixir": 8,
-    "bharara-king": 6,
-    "carolina-herrera-212-nyc": 10,
-    "carolina-herrera-212-vip": 9,
-    "dolce-gabbana-light-blue": 14,
-    "giorgio-armani-acqua-di-gio": 12,
-    "giorgio-armani-acqua-di-gio-profondo": 7,
-    "issey-miyake-leau-dissey": 9,
-    "lacoste-l1212-blanc": 15,
-    "lattafa-asad": 24,
-    "lattafa-asad-bourbon": 10,
-    "lattafa-fakhar": 20,
-    "montblanc-starwalker": 8,
-    "moschino-toy-boy": 7,
-    "nautica-voyage": 25,
-    "paco-rabanne-invictus": 12,
-    "paco-rabanne-one-million": 14,
-    "rasasi-hawas-fire": 11,
-    "rasasi-hawas-tropical": 9,
-    "valentino-uomo-born-in-roma": 6,
-    "versace-eros-flame": 8,
-    "versace-eros": 10
+    "al-haramain-amber-oud-gold": 7,
+    "armaf-club-de-nuit-untold": 9,
+    "armaf-odyssey-dubai-chocolat": 11,
+    "armaf-odyssey-go-mango-tropical": 8,
+    "calvin-klein-ck-one": 15,
+    "emper-stallion-53": 10,
+    "jo-milano-game-of-spades-full-house": 6,
+    "lattafa-ajwad": 14,
+    "lattafa-art-of-universe": 9,
+    "lattafa-badee-al-oud-amethyst": 12,
+    "lattafa-badee-al-oud-honor-glory": 13,
+    "lattafa-badee-al-oud-oud-for-glory": 11,
+    "lattafa-badee-al-oud-sublime": 10,
+    "lattafa-khamrah": 18,
+    "lattafa-khamrah-dukhan": 7,
+    "lattafa-mussamam-white-intense": 9,
+    "lattafa-pride-alqiam-gold": 10,
+    "lattafa-pride-shaheen-gold": 8,
+    "montale-arabians-tonka": 6,
+    "moschino-toy-2-pearl": 9,
+    "orientica-velvet-gold": 7
   };
   return stockMap[producto.id] || 12;
 }
-
 function updateQtyUI(){
   qtyValue.textContent = currentQty;
 }
