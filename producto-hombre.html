@@ -273,6 +273,12 @@
       padding:28px 26px;
       box-shadow:0 8px 22px rgba(0,0,0,0.06);
     }
+    .product-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
     .tag-category{
       display:inline-block;
       background:#d8d2bf;
@@ -284,6 +290,23 @@
       text-transform:uppercase;
       margin-bottom:14px;
     }
+    .tag-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.favorite-btn{
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  transition:transform 0.2s ease;
+}
+
+.favorite-btn.active{
+  transform:scale(1.2);
+}
     .product-info h1{
       font-size:34px;
       color:#2f2b1f;
@@ -1622,12 +1645,15 @@
   <div class="thumbs" id="thumbsContainer"></div>
 </div>
 
-    <div class="product-info">
-      <span class="tag-category">Hombre</span>
+<div class="product-info">
 
-<div class="product-title-row">
+  <div class="product-top-row">
+    <span class="tag-category">Hombre</span>
+    <button id="favoriteBtn" class="favorite-btn"></button>
+  </div>
+
   <h1 id="productName">Perfume</h1>
-  <button id="favoriteBtn" class="favorite-btn">♡</button>
+
 </div>
 
 <p class="price" id="productPrice">$0</p>
@@ -2612,10 +2638,9 @@ mainImageWrap.addEventListener("click", () => {
     openImageModal(galleryImages[currentImageIndex].src, galleryImages[currentImageIndex].label);
   }
 });
-
 const favoriteBtn = document.getElementById("favoriteBtn");
 
-if (favoriteBtn) {
+if (favoriteBtn && producto) {
 
   function getFavoritos(){
     return JSON.parse(localStorage.getItem("favoritos")) || [];
@@ -2632,10 +2657,10 @@ if (favoriteBtn) {
   function updateFavoriteUI(){
     if(esFavorito(producto.id)){
       favoriteBtn.classList.add("active");
-      favoriteBtn.textContent = "♥";
+      favoriteBtn.innerHTML = "❤️"; // más bonito
     }else{
       favoriteBtn.classList.remove("active");
-      favoriteBtn.textContent = "♡";
+      favoriteBtn.innerHTML = "🤍";
     }
   }
 
@@ -2644,7 +2669,7 @@ if (favoriteBtn) {
 
     if(esFavorito(producto.id)){
       favs = favs.filter(id => id !== producto.id);
-    }else{
+    } else {
       favs.push(producto.id);
     }
 
