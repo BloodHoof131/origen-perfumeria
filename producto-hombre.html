@@ -298,80 +298,28 @@
 
 .favorite-btn {
   position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1.5px solid #e5e5e5;
-  background: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
 }
 
-/* ICONO CORAZÓN */
-.favorite-btn svg {
-  width: 22px;
-  height: 22px;
-  display: block;
-  stroke: #222;
-  stroke-width: 2;
-  fill: none;
-  transition: all 0.25s ease;
+.favorite-btn i {
+  font-size: 22px;
+  color: #8a6d2f; /* mismo dorado */
+  transition: 0.25s ease;
 }
 
-/* HOVER BOTÓN */
-.favorite-btn:hover {
-  border-color: #bdbdbd;
+.favorite-btn:hover i {
+  transform: scale(1.1);
 }
 
-/* EFECTO HOVER ICONO */
-.favorite-btn:hover svg {
-  transform: scale(1.08);
+.favorite-btn.active i {
+  color: #8a6d2f;
 }
 
-/* ESTADO ACTIVO */
-.favorite-btn.active svg {
-  fill: #e63946;
-  stroke: #e63946;
-  transform: scale(1.12);
-}
-
-/* TOOLTIP */
-.favorite-btn .tooltip {
-  position: absolute;
-  right: 115%;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #2f2f2f;
-  color: #fff;
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-/* FLECHA TOOLTIP */
-.favorite-btn .tooltip::after {
-  content: "";
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent #2f2f2f;
-}
-
-/* MOSTRAR TOOLTIP */
-.favorite-btn:hover .tooltip {
-  opacity: 1;
-  transform: translateY(-50%) translateX(-2px);
-}
     .product-info h1{
       font-size:34px;
       color:#2f2b1f;
@@ -1715,9 +1663,7 @@
   <div class="product-top-row">
     <span class="tag-category">Hombre</span>
     <button id="favoriteBtn" class="favorite-btn">
-  <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
-    <path d="M20.8 4.6c-1.5-1.5-3.9-1.5-5.4 0L12 8l-3.4-3.4c-1.5-1.5-3.9-1.5-5.4 0s-1.5 3.9 0 5.4L12 21l8.8-11c1.5-1.5 1.5-3.9 0-5.4z"/>
-  </svg>
+  <i class="fa-regular fa-heart"></i>
   <span class="tooltip">Añadir a favoritos</span>
 </button>
   </div>
