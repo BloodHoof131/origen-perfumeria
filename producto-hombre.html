@@ -319,6 +319,25 @@
 .favorite-btn.active i {
   color: #8a6d2f;
 }
+/* Tooltip igual que antes */
+.favorite-btn .tooltip {
+  position: absolute;
+  right: 115%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2f2f2f;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.favorite-btn:hover .tooltip {
+  opacity: 1;
+}
 
     .product-info h1{
       font-size:34px;
