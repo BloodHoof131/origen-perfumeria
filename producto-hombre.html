@@ -1254,6 +1254,24 @@
   object-fit:contain;
 }
 
+.product-title-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.favorite-btn{
+  font-size:24px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#999;
+  transition:0.3s;
+}
+
+.favorite-btn.active{
+  color:red;
+}
 
     @media (max-width: 992px){
       .main-header{
@@ -1606,9 +1624,13 @@
 
     <div class="product-info">
       <span class="tag-category">Hombre</span>
-      <h1 id="productName">Perfume</h1>
-      <p class="price" id="productPrice">$0</p>
 
+<div class="product-title-row">
+  <h1 id="productName">Perfume</h1>
+  <button id="favoriteBtn" class="favorite-btn">♡</button>
+</div>
+
+<p class="price" id="productPrice">$0</p>
       <div class="benefits-list">
         <div class="benefit-row">
           <i class="fa-regular fa-circle-check"></i>
@@ -2591,6 +2613,47 @@ mainImageWrap.addEventListener("click", () => {
   }
 });
 
+const favoriteBtn = document.getElementById("favoriteBtn");
+
+if (favoriteBtn) {
+
+  function getFavoritos(){
+    return JSON.parse(localStorage.getItem("favoritos")) || [];
+  }
+
+  function setFavoritos(favs){
+    localStorage.setItem("favoritos", JSON.stringify(favs));
+  }
+
+  function esFavorito(id){
+    return getFavoritos().includes(id);
+  }
+
+  function updateFavoriteUI(){
+    if(esFavorito(producto.id)){
+      favoriteBtn.classList.add("active");
+      favoriteBtn.textContent = "♥";
+    }else{
+      favoriteBtn.classList.remove("active");
+      favoriteBtn.textContent = "♡";
+    }
+  }
+
+  favoriteBtn.addEventListener("click", () => {
+    let favs = getFavoritos();
+
+    if(esFavorito(producto.id)){
+      favs = favs.filter(id => id !== producto.id);
+    }else{
+      favs.push(producto.id);
+    }
+
+    setFavoritos(favs);
+    updateFavoriteUI();
+  });
+
+  updateFavoriteUI();
+}
     renderProduct();
     renderRelacionados();
   </script>
