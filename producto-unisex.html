@@ -406,6 +406,48 @@
       text-transform:uppercase;
       margin-bottom:14px;
     }
+    .favorite-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-btn i {
+  font-size: 22px;
+  color: #8a6d2f; /* mismo dorado */
+  transition: 0.25s ease;
+}
+
+.favorite-btn:hover i {
+  transform: scale(1.1);
+}
+
+.favorite-btn.active i {
+  color: #8a6d2f;
+}
+/* Tooltip igual que antes */
+.favorite-btn .tooltip {
+  position: absolute;
+  right: 115%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2f2f2f;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.favorite-btn:hover .tooltip {
+  opacity: 1;
+}
     .product-info h1{
       font-size:34px;
       color:#2f2b1f;
@@ -1619,6 +1661,10 @@
 
     <div class="product-info">
       <span class="tag-category">Unisex</span>
+      <button id="favoriteBtn" class="favorite-btn">
+  <i class="fa-regular fa-heart"></i>
+  <span class="tooltip">Añadir a favoritos</span>
+</button>
       <h1 id="productName">Perfume</h1>
       <p class="price" id="productPrice">$0</p>
 
@@ -2529,6 +2575,66 @@ function renderRelacionados() {
       </a>
     </article>
   `).join("");
+}
+
+const favoriteBtn = document.getElementById("favoriteBtn");
+
+if (favoriteBtn && producto) {
+
+  function getFavoritos(){
+    return JSON.parse(localStorage.getItem("favoritos")) || [];
+  }
+
+  function setFavoritos(favs){
+    localStorage.setItem("favoritos", JSON.stringify(favs));
+  }
+
+  function esFavorito(id){
+    return getFavoritos().includes(id);
+  }
+
+  function actualizarContadorFavoritos(){
+    const favCount = document.getElementById("favCount");
+    if(favCount){
+      favCount.textContent = getFavoritos().length;
+    }
+  }
+
+  function updateFavoriteUI(){
+    const icon = favoriteBtn.querySelector("i");
+    const tooltip = favoriteBtn.querySelector(".tooltip");
+    if(!icon) return;
+
+    if(esFavorito(producto.id)){
+      favoriteBtn.classList.add("active");
+      icon.classList.remove("fa-regular");
+      icon.classList.add("fa-solid");
+      if(tooltip) tooltip.textContent = "Quitar de favoritos";
+    }else{
+      favoriteBtn.classList.remove("active");
+      icon.classList.remove("fa-solid");
+      icon.classList.add("fa-regular");
+      if(tooltip) tooltip.textContent = "Añadir a favoritos";
+    }
+  }
+
+  favoriteBtn.addEventListener("click", () => {
+    let favs = getFavoritos();
+
+    if(esFavorito(producto.id)){
+      favs = favs.filter(id => id !== producto.id);
+    } else {
+      favs.push(producto.id);
+    }
+
+    setFavoritos(favs);
+    updateFavoriteUI();
+    actualizarContadorFavoritos();
+  });
+
+  // Inicializar
+  updateFavoriteUI();
+  actualizarContadorFavoritos();
 }
 
   renderProduct();
