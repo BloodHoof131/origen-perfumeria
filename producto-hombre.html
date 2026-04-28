@@ -2653,6 +2653,7 @@ mainImageWrap.addEventListener("click", () => {
     openImageModal(galleryImages[currentImageIndex].src, galleryImages[currentImageIndex].label);
   }
 });
+
 const favoriteBtn = document.getElementById("favoriteBtn");
 
 if (favoriteBtn && producto) {
@@ -2670,10 +2671,16 @@ if (favoriteBtn && producto) {
   }
 
 function updateFavoriteUI(){
+  const icon = favoriteBtn.querySelector("i");
+
   if(esFavorito(producto.id)){
     favoriteBtn.classList.add("active");
+    icon.classList.remove("fa-regular");
+    icon.classList.add("fa-solid");
   }else{
     favoriteBtn.classList.remove("active");
+    icon.classList.remove("fa-solid");
+    icon.classList.add("fa-regular");
   }
 }
 
