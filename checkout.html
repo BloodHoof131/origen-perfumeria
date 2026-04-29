@@ -505,6 +505,28 @@
       font-size:15px;
       cursor:pointer;
     }
+    .checkout-policies{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+  padding:18px 10px 30px;
+  font-size:13px;
+  color:#5a4720;
+  border-top:1px solid rgba(90,71,32,0.10);
+}
+
+.checkout-policies a{
+  color:#5a4720;
+  letter-spacing:0.04em;
+  transition:0.25s;
+}
+
+.checkout-policies a:hover{
+  color:#c9a227;
+  text-decoration:underline;
+}
     @media (max-width: 992px){
       .checkout-wrapper{
         grid-template-columns:1fr;
@@ -654,6 +676,14 @@
   </main>
 
   <div class="footer-space"></div>
+
+  <div class="checkout-policies">
+  <a href="politica-reembolso.html">Política de reembolso</a>
+  <a href="politica-envio.html">Envíos</a>
+  <a href="politica-privacidad.html">Política de privacidad</a>
+  <a href="terminos-servicio.html">Términos del servicio</a>
+  <a href="contactanos.html">Contacto</a>
+</div>
 
   <div class="cart-overlay" id="cartOverlay"></div>
 
