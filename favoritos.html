@@ -966,9 +966,10 @@
         <a href="cuenta.html" title="Cuenta">
           <i class="fa-regular fa-user"></i>
         </a>
-        <a href="favoritos.html" title="Favoritos">
-          <i class="fa-solid fa-heart"></i>
-        </a>
+        <a href="favoritos.html" class="cart-icon-wrap">
+  <i class="fa-solid fa-heart"></i>
+  <span id="favCount" class="cart-count">0</span>
+</a>
         <a href="#" id="openCart" title="Carrito" class="cart-icon-wrap">
   <i class="fa-solid fa-bag-shopping"></i>
   <span id="cartCount" class="cart-count">0</span>
@@ -1363,7 +1364,18 @@
     });
   }
 
+  function updateFavoritesCount() {
+  const favorites = JSON.parse(localStorage.getItem("favoritos")) || [];
+  const count = favorites.length;
+  const badge = document.getElementById("favCount");
+
+  if (!badge) return;
+
+  badge.textContent = count;
+  badge.style.display = count > 0 ? "flex" : "none";
+}
   renderFavoritos();
+  updateFavoritesCount();
 </script>
 
 </body>

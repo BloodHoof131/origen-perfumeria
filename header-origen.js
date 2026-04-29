@@ -127,7 +127,7 @@ document.querySelectorAll(".main-menu a").forEach(link => {
 });
 
 function updateFavoritesCount() {
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const favorites = JSON.parse(localStorage.getItem("favoritos")) || [];
   const count = favorites.length;
 
   const badge = document.getElementById("favCount");
