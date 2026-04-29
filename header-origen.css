@@ -247,7 +247,24 @@
     font-size:17px;
   }
 
-  .main-menu{
-    display:none; /* 👈 esto es CLAVE */
+    .main-menu{
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding:10px;
+    justify-content:flex-start;
+    scrollbar-width:none;
+  }
+
+  .main-menu::-webkit-scrollbar{
+    display:none;
+  }
+
+  .main-menu a{
+    flex:0 0 auto;
+    background:#ece8dd;
+    padding:10px 14px;
+    border-radius:999px;
+    font-size:12px;
   }
 }
