@@ -1376,6 +1376,7 @@
 }
   renderFavoritos();
   updateFavoritesCount();
+  window.dispatchEvent(new Event("favoritesUpdated"));
 </script>
 
 </body>

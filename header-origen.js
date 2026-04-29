@@ -143,4 +143,5 @@ function updateFavoritesCount() {
 }
 
 updateFavoritesCount();
+window.addEventListener("favoritesUpdated", updateFavoritesCount);
 });
