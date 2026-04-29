@@ -126,5 +126,21 @@ document.querySelectorAll(".main-menu a").forEach(link => {
   }
 });
 
+function updateFavoritesCount() {
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const count = favorites.length;
 
+  const badge = document.getElementById("favCount");
+  if (!badge) return;
+
+  badge.textContent = count;
+
+  if (count > 0) {
+    badge.style.display = "flex";
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+updateFavoritesCount();
 });

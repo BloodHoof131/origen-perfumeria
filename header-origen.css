@@ -128,6 +128,30 @@
   color:#b8860b;
 }
 
+.cart-icon-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cart-count{
+  position:absolute;
+  top:-6px;
+  right:-8px;
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  border-radius:999px;
+  background:#c9a227;
+  color:#fff;
+  font-size:10px;
+  font-weight:bold;
+  display:none; /* 👈 importante */
+  align-items:center;
+  justify-content:center;
+}
+
 /* MENU */
 .main-menu{
   background:#d8d2bf;
