@@ -2299,31 +2299,48 @@ function renderProducts(lista) {
     const card = document.createElement("article");
     card.className = "product-card";
 
-    card.innerHTML = `
-      <a href="${getProductUrl(producto)}" class="product-card-link">
-        <div class="product-image-wrap">
-          <img class="img-main" src="${producto.imagen}" alt="${producto.nombre}">
-          <img class="img-hover" src="${producto.hover}" alt="${producto.nombre} hover">
-          <div class="product-overlay">
-            <div class="overlay-actions">
-              <button class="circle-btn favorite-btn" type="button" title="Favoritos">
-                <i class="fa-regular fa-heart"></i>
-              </button>
-              <button class="circle-btn view-btn" type="button" title="Vista rápida">
-                <i class="fa-regular fa-eye"></i>
-              </button>
-            </div>
-            <button class="quick-buy quick-buy-btn" type="button">Compra rápida</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">${producto.categoria}</div>
-          <h3 class="product-name">${producto.nombre}</h3>
-          <p class="product-price">${formatPrice(producto.precio)}</p>
-        </div>
-      </a>
-    `;
+card.innerHTML = `
+  <div class="product-card-link" data-url="${getProductUrl(producto)}">
+    <div class="product-image-wrap">
+      <img class="img-main" src="${producto.imagen}" alt="${producto.nombre}">
+      <img class="img-hover" src="${producto.hover}" alt="${producto.nombre} hover">
 
+      <div class="product-overlay">
+        <div class="overlay-actions">
+          <button class="circle-btn favorite-btn" type="button">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button class="circle-btn view-btn" type="button">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+
+        <button class="quick-buy quick-buy-btn" type="button">
+          Compra rápida
+        </button>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <div class="product-category">${producto.categoria}</div>
+      <h3 class="product-name">${producto.nombre}</h3>
+      <p class="product-price">${formatPrice(producto.precio)}</p>
+    </div>
+  </div>
+`;
+
+const cardLink = card.querySelector(".product-card-link");
+
+cardLink.addEventListener("click", (e) => {
+  if (
+    e.target.closest("button") ||
+    e.target.closest(".favorite-btn") ||
+    e.target.closest(".view-btn") ||
+    e.target.closest(".quick-buy-btn")
+  ) return;
+
+  window.location.href = cardLink.dataset.url;
+});
     const link = card.querySelector(".product-card-link");
     const favoriteBtn = card.querySelector(".favorite-btn");
     const viewBtn = card.querySelector(".view-btn");
@@ -2479,7 +2496,7 @@ function syncRanges(e) {
 /* ===== CARGAR JSON ===== */
 async function cargarProductosDesdeJSON() {
   try {
-    const respuesta = await fetch("productos.json");
+    const respuesta = await fetch("./productos.json");
 
     if (!respuesta.ok) {
       throw new Error("No se pudo cargar productos.json");
@@ -2515,6 +2532,7 @@ async function cargarProductosDesdeJSON() {
     productsGrid.innerHTML = `<p style="font-size:18px;color:#8a4b4b;">No se pudo cargar la base de datos de productos.</p>`;
     resultsText.textContent = "Error al cargar productos";
   }
+  console.log("Productos cargados:", productosTodos);
 }
 
 /* ===== EVENTOS ===== */
@@ -2662,26 +2680,7 @@ scrollTopBtn.addEventListener("click", () => {
   });
 });
 
-const buscador = document.getElementById("buscador");
-const productos = document.querySelectorAll(".producto");
 
-buscador.addEventListener("input", function () {
-  const texto = buscador.value.toLowerCase();
-
-  productos.forEach(producto => {
-    const nombreEl = producto.querySelector(".nombre");
-    const marcaEl = producto.querySelector(".marca");
-
-    const nombre = nombreEl ? nombreEl.textContent.toLowerCase() : "";
-    const marca = marcaEl ? marcaEl.textContent.toLowerCase() : "";
-
-    if (nombre.includes(texto) || marca.includes(texto)) {
-      producto.style.display = "block";
-    } else {
-      producto.style.display = "none";
-    }
-  });
-});
 
 /* ===== INIT ===== */
 actualizarContadorFavoritos();
