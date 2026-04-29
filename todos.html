@@ -417,6 +417,8 @@
     }
     .img-main{ opacity:1; }
     .img-hover{ opacity:0; }
+
+
     .product-card:hover .img-main{
       opacity:0;
       transform:scale(1.03);
@@ -2328,9 +2330,14 @@ function renderProducts(lista) {
     const viewBtn = card.querySelector(".view-btn");
     const quickBuyBtn = card.querySelector(".quick-buy-btn");
 
+
     const productoFavorito = {
       id: producto.id,
-      categoria: producto.categoria
+      nombre: producto.nombre,
+      precio: producto.precio,
+      imagen: producto.imagen,
+      url: getProductUrl(producto),
+    categoria: producto.categoria
     };
 
     if (estaEnFavoritos(producto.id)) {
