@@ -418,7 +418,7 @@
     .img-main{ opacity:1; }
     .img-hover{ opacity:0; }
 
-
+    
     .product-card:hover .img-main{
       opacity:0;
       transform:scale(1.03);
@@ -1705,7 +1705,7 @@
   <h1>Todos los Perfumes</h1>
   <p>Explora todo nuestro catálogo de fragancias para hombre, mujer y unisex.</p>
 
- </section>
+</section>
   <div class="mobile-tools-bar">
     <button type="button" class="mobile-tool-btn" id="openFiltersBtn">
       <span>Filtro</span>
@@ -2329,14 +2329,9 @@ function renderProducts(lista) {
     const viewBtn = card.querySelector(".view-btn");
     const quickBuyBtn = card.querySelector(".quick-buy-btn");
 
-
     const productoFavorito = {
       id: producto.id,
-      nombre: producto.nombre,
-      precio: producto.precio,
-      imagen: producto.imagen,
-      url: getProductUrl(producto),
-    categoria: producto.categoria
+      categoria: producto.categoria
     };
 
     if (estaEnFavoritos(producto.id)) {
