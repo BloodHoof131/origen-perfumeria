@@ -1419,6 +1419,25 @@
       .mobile-category-tabs a:hover{
         background:rgba(107,85,35,0.10);
       }
+      
+  .related-grid{
+    display:flex;
+    overflow-x:auto;
+    gap:14px;
+    padding-bottom:10px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .related-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .related-card{
+    flex:0 0 75%;
+    scroll-snap-align:start;
+  }
+
     }
     @media (max-width: 640px){
       .info-bar{
@@ -1518,9 +1537,26 @@
         right:16px;
         bottom:84px;
       }
-      .related-grid{
-    grid-template-columns:1fr;
+      
+      
+  .related-grid{
+    display:flex;
+    overflow-x:auto;
+    gap:14px;
+    padding-bottom:10px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
   }
+
+  .related-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .related-card{
+    flex:0 0 75%;
+    scroll-snap-align:start;
+  }
+
   .related-title{
     font-size:26px;
   }
