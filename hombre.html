@@ -1004,7 +1004,11 @@
   text-align:left;
 }
 
-
+.cart-footer{
+  padding:18px;
+  border-top:1px solid rgba(90,71,32,0.12);
+  background:#f8f5ef;
+}
 
 .cart-item{
   display:flex;
@@ -1690,6 +1694,7 @@
   <i class="fa-solid fa-arrow-up"></i>
 </button>
 
+<div id="origen-footer"></div>
   
   <div class="cart-overlay" id="cartOverlay"></div>
 
@@ -1701,6 +1706,9 @@
 
   <div class="cart-body">
     <p>Tu carrito está vacío</p>
+  </div>
+  <div class="cart-footer">
+    <a href="todos.html" class="btn-primary">Seguir comprando</a>
   </div>
 
  
@@ -2272,6 +2280,13 @@ cargarProductos();
 </script>
 
 <script src="header-origen.js"></script>
+<script>
+fetch("footer-origen.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("origen-footer").innerHTML = data;
+  });
+</script>
 <script src="carrito.js"></script>
 
 </body>
