@@ -263,8 +263,8 @@
   .main-menu a{
     flex:0 0 auto;
     background:#ece8dd;
-    padding:6px 10px;
+    padding:5px 9px;
     border-radius:999px;
-    font-size:11px;
+    font-size:10px;
   }
 }
