@@ -249,6 +249,7 @@
 
     .main-menu{
     display:flex;
+    flex-wrap:nowrap;
     overflow-x:auto;
     gap:6px;
     padding:10px;
@@ -263,8 +264,8 @@
   .main-menu a{
     flex:0 0 auto;
     background:#ece8dd;
-    padding:5px 9px;
+    padding:6px 10px;
     border-radius:999px;
-    font-size:10px;
+    font-size:11px;
   }
 }
