@@ -1452,7 +1452,7 @@ async function cargarProductos(url, contenedorId){
     data = data.slice(0, 12);
   }
 
-  contenedor.innerHTML = data.map(crearCard).join("");
+  contenedor.innerHTML = data.map(p => crearCard(p, contenedorId)).join("");
 }
 
 // Cargar todo
