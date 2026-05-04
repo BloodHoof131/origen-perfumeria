@@ -1430,9 +1430,15 @@ function crearCard(producto){
 
 async function cargarProductos(url, contenedorId){
   const res = await fetch(url);
-  const data = await res.json();
+  let data = await res.json();
 
   const contenedor = document.getElementById(contenedorId);
+
+  // 🔥 SOLO para "mas-vendidos"
+  if (contenedorId === "mas-vendidos") {
+    data = data.slice(0, 12); // 👈 aquí limitas a 12
+  }
+
   contenedor.innerHTML = data.map(crearCard).join("");
 }
 
