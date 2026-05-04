@@ -1399,25 +1399,33 @@ window.addEventListener("load", () => {
   return "$ " + precio.toLocaleString("es-CO");
 }
 
-function crearCard(producto){
+function crearCard(producto, contenedorId){
+  let badgeTexto = "";
+  let badgeClase = "";
+
+  if (contenedorId === "mas-vendidos") {
+    badgeTexto = "TOP";
+  } else if (contenedorId === "sale") {
+    badgeTexto = "SALE";
+    badgeClase = "sale";
+  } else {
+    badgeTexto = "NUEVO";
+  }
+
   return `
     <a class="product-card" href="producto.html?id=${producto.id}">
-      <span class="product-badge ${producto.badge === 'Sale' ? 'sale' : ''}">
-        ${producto.badge}
+      <span class="product-badge ${badgeClase}">
+        ${badgeTexto}
       </span>
-
       <div class="product-image">
         <img src="${producto.imagen}" alt="${producto.nombre}">
       </div>
-
       <div class="product-info">
         <div class="product-category">${producto.categoria}</div>
         <h3 class="product-name">${producto.nombre}</h3>
-
         <div class="product-price">
           ${formatearPrecio(producto.precio)}
         </div>
-
         ${
           producto.precio_old
             ? `<span class="product-price-old">${formatearPrecio(producto.precio_old)}</span>`
