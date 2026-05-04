@@ -1512,26 +1512,44 @@ function crearCard(producto, contenedorId){
   }
 
   return `
-    <a class="product-card" href="producto.html?id=${producto.id}">
+    <div class="product-card">
+      
       <span class="product-badge ${badgeClase}">
         ${badgeTexto}
       </span>
-      <div class="product-image">
-        <img src="${producto.imagen}" alt="${producto.nombre}">
+
+      <div class="product-image-wrap">
+        <img class="img-main" src="${producto.imagen}" alt="${producto.nombre}">
+        <img class="img-hover" src="${producto.imagen_hover || producto.imagen}" alt="${producto.nombre}">
+        
+        <div class="product-overlay">
+          
+          <div class="overlay-actions">
+            <button class="circle-btn"><i class="fa-regular fa-heart"></i></button>
+            <button class="circle-btn"><i class="fa-solid fa-eye"></i></button>
+          </div>
+
+          <button class="quick-buy">Comprar rápido</button>
+
+        </div>
       </div>
+
       <div class="product-info">
         <div class="product-category">${producto.categoria}</div>
         <h3 class="product-name">${producto.nombre}</h3>
+
         <div class="product-price">
           ${formatearPrecio(producto.precio)}
         </div>
+
         ${
           producto.precio_old
             ? `<span class="product-price-old">${formatearPrecio(producto.precio_old)}</span>`
             : ""
         }
       </div>
-    </a>
+
+    </div>
   `;
 }
 
