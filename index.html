@@ -1434,9 +1434,14 @@ async function cargarProductos(url, contenedorId){
 
   const contenedor = document.getElementById(contenedorId);
 
-  // 🔥 SOLO para "mas-vendidos"
+  // 🔥 ARREGLA EL JSON
+  if (data.mas_vendidos) {
+    data = data.mas_vendidos;
+  }
+
+  // 🔥 SOLO 12 productos
   if (contenedorId === "mas-vendidos") {
-    data = data.slice(0, 12); // 👈 aquí limitas a 12
+    data = data.slice(0, 12);
   }
 
   contenedor.innerHTML = data.map(crearCard).join("");
