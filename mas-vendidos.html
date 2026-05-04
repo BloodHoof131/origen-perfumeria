@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfumes</title>
+
+  <style>
+    body { font-family: Arial; margin: 0; padding: 20px; }
+    h1 { margin-bottom: 10px; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      position: relative;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: black;
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+    .tag.discount {
+      background: red;
+    }
+
+    .price-old {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1 id="title"></h1>
+<p id="resultsText"></p>
+
+<div class="products-grid" id="productsGrid"></div>
+
+<script>
+const grid = document.getElementById("productsGrid");
+const title = document.getElementById("title");
+const resultsText = document.getElementById("resultsText");
+
+// 🔥 calcular descuento
+function calcularPrecio(p) {
+  if (p.descuento) {
+    return p.precio - (p.precio * p.descuento / 100);
+  }
+  return p.precio;
+}
+
+// 🔥 renderizar productos
+function render(products) {
+  grid.innerHTML = "";
+
+  if (products.length === 0) {
+    grid.innerHTML = "<p>No hay productos disponibles</p>";
+    return;
+  }
+
+  products.forEach(p => {
+    grid.innerHTML += `
+      <div class="product-card">
+
+        ${p.nuevo ? '<span class="tag">Nuevo</span>' : ''}
+        ${p.descuento ? `<span class="tag discount">-${p.descuento}%</span>` : ''}
+
+        <img src="${p.imagen}" 
+             onmouseover="this.src='${p.hover}'" 
+             onmouseout="this.src='${p.imagen}'">
+
+        <h3>${p.nombre}</h3>
+
+        ${
+          p.descuento
+            ? `
+              <p class="price-old">$${p.precio.toLocaleString()}</p>
+              <p>$${calcularPrecio(p).toLocaleString()}</p>
+            `
+            : `<p>$${p.precio.toLocaleString()}</p>`
+        }
+
+      </div>
+    `;
+  });
+}
+
+// 🔥 CARGAR DESDE mas-vendidos.json
+async function cargarProductos() {
+  try {
+    const res = await fetch("mas-vendidos.json");
+    const data = await res.json();
+
+    // 👇 tu JSON debe ser directamente un array
+    const tipo = new URLSearchParams(window.location.search).get("tipo") || "mas_vendidos";
+
+    let productos = data;
+
+    if (tipo === "mas_vendidos") {
+      title.innerText = "Más Vendidos";
+      resultsText.innerText = "Productos más vendidos";
+
+      productos = data.filter(p => p.categoria === "Hombre");
+    }
+
+    if (tipo === "nuevos") {
+      title.innerText = "Nuevos";
+      resultsText.innerText = "Productos nuevos";
+
+      productos = data.filter(p => p.nuevo);
+    }
+
+    if (tipo === "descuentos") {
+      title.innerText = "Descuentos";
+      resultsText.innerText = "Productos en oferta";
+
+      productos = data.filter(p => p.descuento);
+    }
+
+    render(productos);
+
+  } catch (error) {
+    console.error("Error cargando JSON:", error);
+    grid.innerHTML = "<p>Error cargando productos</p>";
+  }
+}
+
+// 🚀 iniciar
+cargarProductos();
+</script>
+
+</body>
+</html>
