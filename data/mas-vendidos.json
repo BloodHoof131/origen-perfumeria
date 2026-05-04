@@ -1,34 +1,184 @@
-[
-  {
-    "id": 5,
-    "nombre": "Club de Nuit Intense",
-    "categoria": "Más vendido",
-    "precio": 249900,
-    "imagen": "img/productos/mas_vendido/p1.png",
-    "badge": "Top"
-  },
-  {
-    "id": 6,
-    "nombre": "Yara Lattafa",
-    "categoria": "Más vendido",
-    "precio": 179900,
-    "imagen": "img/productos/mas_vendido/p2.png",
-    "badge": "Top"
-  },
-  {
-    "id": 7,
-    "nombre": "9PM Afnan",
-    "categoria": "Más vendido",
-    "precio": 219900,
-    "imagen": "img/productos/mas_vendido/p3.png",
-    "badge": "Top"
-  },
-  {
-    "id": 8,
-    "nombre": "Bade'e Al Oud",
-    "categoria": "Más vendido",
-    "precio": 229900,
-    "imagen": "img/productos/mas_vendido/p4.png",
-    "badge": "Top"
-  }
-]
+{
+  "mas_vendidos": [
+    {
+      "id": "armaf-club-de-nuit-intense-man",
+      "nombre": "Armaf Club de Nuit Intense Man",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/armaf-club-de-nuit-intense-man.png",
+      "hover": "img/hombre/armaf-club-de-nuit-intense-man-hover.jpg"
+    },
+    {
+      "id": "afnan-9pm",
+      "nombre": "Afnan 9PM",
+      "precio": 230000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/afnan-9pm.jpeg",
+      "hover": "img/hombre/afnan-9pm-hover.jpeg"
+    },
+    {
+      "id": "lattafa-asad",
+      "nombre": "Lattafa Asad",
+      "precio": 200000,
+      "aroma": "Amaderado",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/lattafa-asad.jpeg",
+      "hover": "img/hombre/lattafa-asad-hover.webp"
+    },
+    {
+      "id": "nautica-voyage",
+      "nombre": "Nautica Voyage",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/nautica-voyage.webp",
+      "hover": "img/hombre/nautica-voyage-hover.jpg"
+    },
+    {
+      "id": "paco-rabanne-invictus",
+      "nombre": "Paco Rabanne Invictus",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/paco-rabanne-invictus.webp",
+      "hover": "img/hombre/paco-rabanne-invictus-hover.webp"
+    },
+    {
+      "id": "paco-rabanne-one-million",
+      "nombre": "Paco Rabanne One Million",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/paco-rabanne-one-million.jpg",
+      "hover": "img/hombre/paco-rabanne-one-million-hover.jpg"
+    },
+    {
+      "id": "versace-eros",
+      "nombre": "Versace Eros",
+      "precio": 390000,
+      "aroma": "Dulce",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/versace-eros.jpg",
+      "hover": "img/hombre/versace-eros-hover.png"
+    },
+    {
+      "id": "dolce-gabbana-light-blue",
+      "nombre": "Dolce & Gabbana Light Blue",
+      "precio": 450000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/dolce-gabbana-light-blue.webp",
+      "hover": "img/hombre/dolce-gabbana-light-blue-hover.jpg"
+    },
+    {
+      "id": "giorgio-armani-acqua-di-gio",
+      "nombre": "Giorgio Armani Acqua di Gio",
+      "precio": 440000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/giorgio-armani-acqua-di-gio.jpg",
+      "hover": "img/hombre/giorgio-armani-acqua-di-gio-hover.jpg"
+    },
+    {
+      "id": "lattafa-fakhar",
+      "nombre": "Lattafa Fakhar",
+      "precio": 200000,
+      "aroma": "Fresco-Cítrico",
+      "categoria": "Hombre",
+      "imagen": "img/hombre/lattafa-fakhar.jpg",
+      "hover": "img/hombre/lattafa-fakhar-hover.webp"
+    },
+    {
+      "id": "ariana-grande-cloud",
+      "nombre": "Ariana Grande Cloud",
+      "precio": 360000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/ariana-grande-cloud.jpeg",
+      "hover": "img/mujer/ariana-grande-cloud-hover.jpg"
+    },
+    {
+      "id": "lattafa-yara",
+      "nombre": "Lattafa Yara",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-yara.png",
+      "hover": "img/mujer/lattafa-yara-hover.jpeg"
+    },
+    {
+      "id": "lattafa-yara-candy",
+      "nombre": "Lattafa Yara Candy",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-yara-candy.jpg",
+      "hover": "img/mujer/lattafa-yara-candy-hover.jpg"
+    },
+    {
+      "id": "moschino-toy-2-bubble-gum",
+      "nombre": "Moschino Toy 2 Bubble Gum",
+      "precio": 200000,
+      "aroma": "Dulce",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/moschino-toy-2-bubble-gum.jpg",
+      "hover": "img/mujer/moschino-toy-2-bubble-gum-hover.jpg"
+    },
+    {
+      "id": "lattafa-haya",
+      "nombre": "Lattafa Haya",
+      "precio": 210000,
+      "aroma": "Floral-Frutal",
+      "categoria": "Mujer",
+      "imagen": "img/mujer/lattafa-haya.webp",
+      "hover": "img/mujer/lattafa-haya-hover.webp"
+    },
+    {
+      "id": "al-haramain-amber-oud-gold",
+      "nombre": "Al Haramain Amber Oud Gold",
+      "precio": 370000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/al-haramain-amber-oud-gold.png",
+      "hover": "img/unisex/al-haramain-amber-oud-gold-hover.png"
+    },
+    {
+      "id": "armaf-club-de-nuit-untold",
+      "nombre": "Armaf Club de Nuit Untold",
+      "precio": 270000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/armaf-club-de-nuit-untold.jpg",
+      "hover": "img/unisex/armaf-club-de-nuit-untold-hover.png"
+    },
+    {
+      "id": "lattafa-khamrah",
+      "nombre": "Lattafa Khamrah",
+      "precio": 210000,
+      "aroma": "Dulce",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/lattafa-khamrah.jpg",
+      "hover": "img/unisex/lattafa-khamrah-hover.jpg"
+    },
+    {
+      "id": "montale-arabians-tonka",
+      "nombre": "Montale Arabians Tonka",
+      "precio": 200000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/montale-arabians-tonka.png",
+      "hover": "img/unisex/montale-arabians-tonka-hover.jpg"
+    },
+    {
+      "id": "orientica-velvet-gold",
+      "nombre": "Orientica Velvet Gold",
+      "precio": 270000,
+      "aroma": "Amaderado",
+      "categoria": "Unisex",
+      "imagen": "img/unisex/orientica-velvet-gold.jpg",
+      "hover": "img/unisex/orientica-velvet-gold-hover.png"
+    }
+  ]
+}
