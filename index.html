@@ -1525,11 +1525,18 @@ function crearCard(producto, contenedorId){
         <div class="product-overlay">
           
           <div class="overlay-actions">
-            <button class="circle-btn"><i class="fa-regular fa-heart"></i></button>
-            <button class="circle-btn"><i class="fa-solid fa-eye"></i></button>
-          </div>
+  <button class="circle-btn fav-btn" data-id="${producto.id}">
+    <i class="fa-regular fa-heart"></i>
+  </button>
 
-          <button class="quick-buy">Comprar rápido</button>
+  <button class="circle-btn quickview-btn" data-id="${producto.id}">
+    <i class="fa-solid fa-eye"></i>
+  </button>
+</div>
+
+<button class="quick-buy" data-id="${producto.id}">
+  Comprar rápido
+</button>
 
         </div>
       </div>
@@ -1551,6 +1558,18 @@ function crearCard(producto, contenedorId){
 
     </div>
   `;
+}
+
+function agregarAlCarrito(id){
+  console.log("Agregado al carrito:", id);
+
+  // Aquí puedes conectar con carrito.js
+}
+
+function abrirQuickView(id){
+  console.log("Abrir modal:", id);
+
+  // Aquí puedes abrir el modal que ya usas en hombre
 }
 
 async function cargarProductos(url, contenedorId){
@@ -1576,6 +1595,48 @@ async function cargarProductos(url, contenedorId){
 cargarProductos("data/nuevo.json", "nuevo");
 cargarProductos("data/mas-vendidos.json", "mas-vendidos");
 cargarProductos("data/sale.json", "sale");
+});
+document.addEventListener("click", function(e){
+
+  // 🚫 evitar que el click abra el producto
+  if(
+    e.target.closest(".circle-btn") ||
+    e.target.closest(".quick-buy")
+  ){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  // ❤️ FAVORITOS
+  if(e.target.closest(".fav-btn")){
+    const btn = e.target.closest(".fav-btn");
+    const id = btn.dataset.id;
+
+    btn.classList.toggle("active");
+
+    console.log("Favorito:", id);
+  }
+
+  // 👁 QUICK VIEW
+  if(e.target.closest(".quickview-btn")){
+    const btn = e.target.closest(".quickview-btn");
+    const id = btn.dataset.id;
+
+    console.log("Quick view:", id);
+
+    abrirQuickView(id);
+  }
+
+  // 🛒 COMPRA RÁPIDA
+  if(e.target.closest(".quick-buy")){
+    const btn = e.target.closest(".quick-buy");
+    const id = btn.dataset.id;
+
+    console.log("Comprar rápido:", id);
+
+    agregarAlCarrito(id);
+  }
+
 });
 
 </script>
