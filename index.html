@@ -875,6 +875,11 @@ a{
   cursor:pointer;
 }
 
+.fav-btn.active{
+  background:#c9a227;
+  color:#fff;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1200px){
   .categories-grid{
@@ -1511,6 +1516,8 @@ function crearCard(producto, contenedorId){
     badgeTexto = "NUEVO";
   }
 
+  const favoritos = obtenerFavoritos();
+const esFavorito = favoritos.includes(producto.id);
   return `
     <div class="product-card">
       
@@ -1525,9 +1532,9 @@ function crearCard(producto, contenedorId){
         <div class="product-overlay">
           
           <div class="overlay-actions">
-  <button class="circle-btn fav-btn" data-id="${producto.id}">
-    <i class="fa-regular fa-heart"></i>
-  </button>
+  <button class="circle-btn fav-btn ${esFavorito ? 'active' : ''}" data-id="${producto.id}">
+  <i class="fa-regular fa-heart"></i>
+</button>
 
   <button class="circle-btn quickview-btn" data-id="${producto.id}">
     <i class="fa-solid fa-eye"></i>
@@ -1561,15 +1568,19 @@ function crearCard(producto, contenedorId){
 }
 
 function agregarAlCarrito(id){
-  console.log("Agregado al carrito:", id);
-
-  // Aquí puedes conectar con carrito.js
+  const producto = window.productosGlobal?.find(p => p.id == id);
+  
+  if(producto){
+    agregarProductoAlCarrito(producto); // 👈 función de carrito.js
+  }
 }
 
 function abrirQuickView(id){
-  console.log("Abrir modal:", id);
-
-  // Aquí puedes abrir el modal que ya usas en hombre
+  const producto = window.productosGlobal?.find(p => p.id == id);
+  
+  if(producto){
+    abrirModalProducto(producto); // 👈 misma función que usas en hombre
+  }
 }
 
 async function cargarProductos(url, contenedorId){
@@ -1596,6 +1607,27 @@ cargarProductos("data/nuevo.json", "nuevo");
 cargarProductos("data/mas-vendidos.json", "mas-vendidos");
 cargarProductos("data/sale.json", "sale");
 });
+
+function obtenerFavoritos(){
+  return JSON.parse(localStorage.getItem("favoritos")) || [];
+}
+
+function guardarFavoritos(lista){
+  localStorage.setItem("favoritos", JSON.stringify(lista));
+}
+
+function toggleFavorito(id){
+  let favoritos = obtenerFavoritos();
+
+  if(favoritos.includes(id)){
+    favoritos = favoritos.filter(f => f != id);
+  } else {
+    favoritos.push(id);
+  }
+
+  guardarFavoritos(favoritos);
+  return favoritos;
+}
 document.addEventListener("click", function(e){
 
   // 🚫 evitar que el click abra el producto
@@ -1609,13 +1641,15 @@ document.addEventListener("click", function(e){
 
   // ❤️ FAVORITOS
   if(e.target.closest(".fav-btn")){
-    const btn = e.target.closest(".fav-btn");
-    const id = btn.dataset.id;
+  const btn = e.target.closest(".fav-btn");
+  const id = btn.dataset.id;
 
-    btn.classList.toggle("active");
+  const favoritos = toggleFavorito(id);
 
-    console.log("Favorito:", id);
-  }
+  btn.classList.toggle("active");
+
+  console.log("Favoritos:", favoritos);
+}
 
   // 👁 QUICK VIEW
   if(e.target.closest(".quickview-btn")){
