@@ -1813,7 +1813,7 @@ function openQuickView(productId){
   currentQty = 1;
   updateQtyUI();
 
-  const stock = getStock(producto);
+  const stock = getStockMujer(producto);
 
   quickviewImage.src = producto.imagen;
   quickviewImage.alt = producto.nombre;
@@ -1822,7 +1822,7 @@ function openQuickView(productId){
   quickviewDescription.textContent = getDescription(producto);
   quickviewAroma.textContent = producto.aroma.replace("-", " / ");
   quickviewStockText.textContent = `${stock} en stock`;
-  quickviewDetails.href = `producto-hombre.html?id=${producto.id}`;
+  quickviewDetails.href = `producto-mujer.html?id=${producto.id}`;
 
   quickviewAddCart.onclick = () => {
     agregarAlCarrito({
@@ -1836,7 +1836,7 @@ function openQuickView(productId){
   };
 
   quickviewComprar.onclick = () => {
-    window.location.href = `producto-hombre.html?id=${producto.id}`;
+    window.location.href = `producto-mujer.html?id=${producto.id}`;
   };
 
    quickviewModal.classList.add("active");
