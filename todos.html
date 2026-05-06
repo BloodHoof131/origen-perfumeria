@@ -2204,7 +2204,12 @@ cardLink.addEventListener("click", (e) => {
 /* ===== FILTROS ===== */
 function getFilteredProducts() {
   let lista = [...productosTodos];
-  const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : "";
+  const currentSearchInput = document.getElementById("searchInputHeader");
+
+const searchTerm = currentSearchInput
+  ? currentSearchInput.value.trim().toLowerCase()
+  : "";
+  
   const min = parseInt(minRange.value);
   const max = parseInt(maxRange.value);
 
