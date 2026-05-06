@@ -1800,7 +1800,7 @@ const maxPrice = document.getElementById("maxPrice");
 const rangeFill = document.getElementById("rangeFill");
 const categoriaFilters = document.querySelectorAll(".categoria-filter");
 const aromaFilters = document.querySelectorAll(".aroma-filter");
-const searchInput = document.getElementById("searchInputHeader");
+let searchInput;
 const resultsText = document.getElementById("resultsText");
 const searchForm = document.getElementById("searchForm");
 const filtersPanel = document.getElementById("filtersPanel");
@@ -2268,6 +2268,7 @@ function syncRanges(e) {
 
 /* ===== CARGAR JSON ===== */
 async function cargarProductosDesdeJSON() {
+  searchInput = document.getElementById("searchInputHeader");
   try {
     const respuesta = await fetch("./productos.json");
 
