@@ -91,26 +91,23 @@
 
   // 🔥 EFECTO SCROLL HEADER (IGUAL)
   const stickyHeader = document.getElementById("stickyHeader");
-let lastScrollTop = 0;
-
-window.addEventListener("scroll", () => {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-  // sombra (esto déjalo igual)
-  if(currentScroll > 60){
-    stickyHeader.classList.add("show-shadow");
-  } else {
-    stickyHeader.classList.remove("show-shadow");
-  }
-
-  // 🔥 NUEVA LÓGICA PARA TODOS (incluye celular)
-  if(currentScroll > lastScrollTop && currentScroll > 140){
-    // bajando
-    stickyHeader.classList.add("hide-header");
-  } else {
-    // subiendo
-    stickyHeader.classList.remove("hide-header");
-  }
+  let lastScrollTop = 0;
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if(currentScroll > 60){
+      stickyHeader.classList.add("show-shadow");
+    } else {
+      stickyHeader.classList.remove("show-shadow");
+    }
+    if(window.innerWidth > 768){
+      if(currentScroll > lastScrollTop && currentScroll > 140){
+        stickyHeader.classList.add("hide-header");
+      } else {
+        stickyHeader.classList.remove("hide-header");
+      }
+    } else {
+      stickyHeader.classList.remove("hide-header");
+    }
 
   lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 });
