@@ -61,10 +61,13 @@
 }
 /* HEADER */
 .sticky-header{
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  width:100%;
   z-index:120;
   transition:transform 0.35s ease, box-shadow 0.35s ease;
+  will-change:transform;
 }
 .sticky-header.hide-header{
   transform:translateY(-100%);
@@ -80,6 +83,9 @@
   padding:6px 24px;
   gap:12px;
   min-height:72px;
+}
+body{
+  padding-top:140px;
 }
 /* SEARCH */
 .search-box input{
