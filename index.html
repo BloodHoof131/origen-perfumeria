@@ -880,6 +880,33 @@ a{
   color:#fff;
 }
 
+.product-link{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+
+.ver-todos-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:28px;
+}
+
+.ver-todos-btn{
+  background:#5a4720;
+  color:#fff;
+  padding:13px 28px;
+  border-radius:999px;
+  font-size:15px;
+  letter-spacing:0.05em;
+  transition:0.3s ease;
+}
+
+.ver-todos-btn:hover{
+  background:#c9a227;
+  transform:translateY(-2px);
+}
+
 /* RESPONSIVE */
 @media (max-width: 1200px){
   .categories-grid{
@@ -1282,6 +1309,13 @@ a{
   <div class="products-panel" id="mas-vendidos"></div>
 
   <div class="products-panel" id="sale"></div>
+
+<div class="ver-todos-wrap">
+  <a href="mas-vendidos.html" class="ver-todos-btn">
+    Ver todos
+  </a>
+</div>
+
 </section>
 
 <section class="advice-banner">
@@ -1518,8 +1552,17 @@ function crearCard(producto, contenedorId){
 
   const favoritos = obtenerFavoritos();
 const esFavorito = favoritos.includes(producto.id);
-  return `
+  const paginaProducto =
+  producto.categoria?.toLowerCase().includes("hombre")
+    ? "producto-hombre.html"
+    : producto.categoria?.toLowerCase().includes("mujer")
+    ? "producto-mujer.html"
+    : "producto-unisex.html";
+
+return `
+  <a href="${paginaProducto}?id=${producto.id}" class="product-link">
     <div class="product-card">
+    </a>
       
       <span class="product-badge ${badgeClase}">
         ${badgeTexto}
