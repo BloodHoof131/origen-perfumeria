@@ -69,10 +69,13 @@
 
 /* HEADER */
 .sticky-header{
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  width:100%;
   z-index:120;
   transition:transform 0.35s ease, box-shadow 0.35s ease;
+  will-change:transform;
 }
 
 .sticky-header.hide-header{
@@ -178,6 +181,10 @@
       color:#f7f2e8;
       background:#7a5c2e;
     }
+
+    body{
+  padding-top:140px;
+}
 
 /* 📱 TABLET */
 @media (max-width: 992px){
