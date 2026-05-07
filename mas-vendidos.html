@@ -1,67 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <link rel="stylesheet" href="header-origen.css?v=12">
+  <link rel="stylesheet" href="footer-origen.css">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfumes</title>
+
+  <title>Más Vendidos | Origen Perfumería</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    body { font-family: Arial; margin: 0; padding: 20px; }
-    h1 { margin-bottom: 10px; }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    .product-card {
-      border: 1px solid #ddd;
-      padding: 10px;
-      position: relative;
-      text-align: center;
+    body{
+      font-family:'Times New Roman', serif;
+      background:#D9D7D7;
+      color:#2f2b1f;
     }
 
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .tag {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: black;
-      color: white;
-      padding: 4px 8px;
-      font-size: 12px;
+    img{
+      max-width:100%;
+      display:block;
     }
 
-    .tag.discount {
-      background: red;
+    .category-hero{
+      padding:32px 16px 20px;
+      text-align:center;
     }
 
-    .price-old {
-      text-decoration: line-through;
-      color: gray;
+    .category-hero h1{
+      font-size:34px;
+      color:#5a4720;
+      margin-bottom:10px;
+    }
+
+    .category-hero p{
+      font-size:15px;
+      color:#5f5847;
+    }
+
+    .shop-container{
+      width:min(1320px, 94%);
+      margin:0 auto 40px;
+    }
+
+    .products-topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .products-topbar p{
+      color:#5f5a46;
+      font-size:15px;
+    }
+
+    .products-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .product-card{
+      position:relative;
+    }
+
+    .product-card-link{
+      display:block;
+    }
+
+    .product-image-wrap{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      background:#efeeee;
+      aspect-ratio:4 / 4.5;
+    }
+
+    .product-image-wrap img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.35s ease;
+    }
+
+    .img-main{
+      opacity:1;
+    }
+
+    .img-hover{
+      opacity:0;
+    }
+
+    .product-card:hover .img-main{
+      opacity:0;
+      transform:scale(1.03);
+    }
+
+    .product-card:hover .img-hover{
+      opacity:1;
+      transform:scale(1.03);
+    }
+
+    .tag{
+      position:absolute;
+      top:12px;
+      left:12px;
+      z-index:5;
+      background:#111;
+      color:#fff;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11px;
+      letter-spacing:.05em;
+    }
+
+    .tag.discount{
+      background:#b22222;
+      top:48px;
+    }
+
+    .product-info{
+      padding:12px 4px 0;
+    }
+
+    .product-category{
+      font-size:12px;
+      color:#7b7460;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .product-name{
+      font-size:17px;
+      line-height:1.2;
+      min-height:44px;
+      margin-bottom:8px;
+      color:#1f1d18;
+    }
+
+    .product-price{
+      font-size:20px;
+      color:#c9a227;
+      font-weight:bold;
+    }
+
+    .price-old{
+      text-decoration:line-through;
+      color:#777;
+      font-size:14px;
+      margin-bottom:4px;
+    }
+
+    @media (max-width: 1100px){
+      .products-grid{
+        grid-template-columns:repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px){
+      .products-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .category-hero h1{
+        font-size:28px;
+      }
+    }
+
+    @media (max-width: 480px){
+      .products-grid{
+        gap:12px;
+      }
+
+      .product-name{
+        font-size:14px;
+        min-height:36px;
+      }
+
+      .product-price{
+        font-size:16px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<h1 id="title"></h1>
-<p id="resultsText"></p>
+<div id="origen-header"></div>
 
-<div class="products-grid" id="productsGrid"></div>
+<section class="category-hero">
+  <h1 id="title">Más Vendidos</h1>
+  <p id="resultsText">Explora nuestros perfumes más vendidos.</p>
+</section>
+
+<section class="shop-container">
+
+  <div class="products-topbar">
+    <p id="cantidadProductos"></p>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+
+</section>
+
+<div id="origen-footer"></div>
 
 <script>
 const grid = document.getElementById("productsGrid");
 const title = document.getElementById("title");
 const resultsText = document.getElementById("resultsText");
+const cantidadProductos = document.getElementById("cantidadProductos");
 
-// 🔥 calcular descuento
+/* ===== DESCUENTO ===== */
 function calcularPrecio(p) {
   if (p.descuento) {
     return p.precio - (p.precio * p.descuento / 100);
@@ -69,84 +238,182 @@ function calcularPrecio(p) {
   return p.precio;
 }
 
-// 🔥 renderizar productos
-function render(products) {
+/* ===== FORMATO ===== */
+function formatPrice(value){
+  return "$ " + value.toLocaleString("es-CO");
+}
+
+/* ===== URL PRODUCTO ===== */
+function getProductUrl(producto){
+
+  if(producto.categoria === "Hombre"){
+    return `producto-hombre.html?id=${producto.id}`;
+  }
+
+  if(producto.categoria === "Mujer"){
+    return `producto-mujer.html?id=${producto.id}`;
+  }
+
+  if(producto.categoria === "Unisex"){
+    return `producto-unisex.html?id=${producto.id}`;
+  }
+
+  return "#";
+}
+
+/* ===== RENDER ===== */
+function render(products){
+
   grid.innerHTML = "";
 
-  if (products.length === 0) {
-    grid.innerHTML = "<p>No hay productos disponibles</p>";
+  cantidadProductos.textContent =
+    `${products.length} producto(s) encontrados`;
+
+  if(products.length === 0){
+    grid.innerHTML = `
+      <p style="font-size:18px;color:#5a4720;">
+        No hay productos disponibles
+      </p>
+    `;
     return;
   }
 
-  products.forEach(p => {
+  products.forEach(producto => {
+
     grid.innerHTML += `
-      <div class="product-card">
+      <article class="product-card">
 
-        ${p.nuevo ? '<span class="tag">Nuevo</span>' : ''}
-        ${p.descuento ? `<span class="tag discount">-${p.descuento}%</span>` : ''}
+        <a href="${getProductUrl(producto)}"
+           class="product-card-link">
 
-        <img src="${p.imagen}" 
-             onmouseover="this.src='${p.hover}'" 
-             onmouseout="this.src='${p.imagen}'">
+          <div class="product-image-wrap">
 
-        <h3>${p.nombre}</h3>
+            ${producto.nuevo
+              ? `<span class="tag">Nuevo</span>`
+              : ''
+            }
 
-        ${
-          p.descuento
-            ? `
-              <p class="price-old">$${p.precio.toLocaleString()}</p>
-              <p>$${calcularPrecio(p).toLocaleString()}</p>
-            `
-            : `<p>$${p.precio.toLocaleString()}</p>`
-        }
+            ${producto.descuento
+              ? `<span class="tag discount">-${producto.descuento}%</span>`
+              : ''
+            }
 
-      </div>
+            <img class="img-main"
+                 src="${producto.imagen}"
+                 alt="${producto.nombre}">
+
+            <img class="img-hover"
+                 src="${producto.hover || producto.imagen}"
+                 alt="${producto.nombre}">
+
+          </div>
+
+          <div class="product-info">
+
+            <div class="product-category">
+              ${producto.categoria}
+            </div>
+
+            <h3 class="product-name">
+              ${producto.nombre}
+            </h3>
+
+            ${
+              producto.descuento
+              ? `
+                <p class="price-old">
+                  ${formatPrice(producto.precio)}
+                </p>
+
+                <p class="product-price">
+                  ${formatPrice(calcularPrecio(producto))}
+                </p>
+              `
+              : `
+                <p class="product-price">
+                  ${formatPrice(producto.precio)}
+                </p>
+              `
+            }
+
+          </div>
+
+        </a>
+
+      </article>
     `;
   });
 }
 
-// 🔥 CARGAR DESDE mas-vendidos.json
-async function cargarProductos() {
-  try {
+/* ===== CARGAR JSON ===== */
+async function cargarProductos(){
+
+  try{
+
     const res = await fetch("mas-vendidos.json");
     const data = await res.json();
 
-    // 👇 tu JSON debe ser directamente un array
-    const tipo = new URLSearchParams(window.location.search).get("tipo") || "mas_vendidos";
+    const tipo =
+      new URLSearchParams(window.location.search)
+      .get("tipo") || "mas_vendidos";
 
     let productos = data;
 
-    if (tipo === "mas_vendidos") {
-      title.innerText = "Más Vendidos";
-      resultsText.innerText = "Productos más vendidos";
+    if(tipo === "mas_vendidos"){
 
-      productos = data.filter(p => p.categoria === "Hombre");
+      title.innerText = "Más Vendidos";
+
+      resultsText.innerText =
+        "Los perfumes favoritos de nuestros clientes.";
+
     }
 
-    if (tipo === "nuevos") {
+    if(tipo === "nuevos"){
+
       title.innerText = "Nuevos";
-      resultsText.innerText = "Productos nuevos";
+
+      resultsText.innerText =
+        "Descubre los últimos perfumes agregados.";
 
       productos = data.filter(p => p.nuevo);
     }
 
-    if (tipo === "descuentos") {
+    if(tipo === "descuentos"){
+
       title.innerText = "Descuentos";
-      resultsText.innerText = "Productos en oferta";
+
+      resultsText.innerText =
+        "Perfumes con precios especiales.";
 
       productos = data.filter(p => p.descuento);
     }
 
     render(productos);
 
-  } catch (error) {
+  }catch(error){
+
     console.error("Error cargando JSON:", error);
-    grid.innerHTML = "<p>Error cargando productos</p>";
+
+    grid.innerHTML = `
+      <p style="font-size:18px;color:#5a4720;">
+        Error cargando productos
+      </p>
+    `;
   }
 }
 
-// 🚀 iniciar
+/* ===== INIT ===== */
 cargarProductos();
+</script>
+
+<script src="header-origen.js?v=12"></script>
+
+<script>
+fetch("footer-origen.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("origen-footer").innerHTML = data;
+  });
 </script>
 
 </body>
