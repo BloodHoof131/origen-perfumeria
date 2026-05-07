@@ -355,6 +355,26 @@
       transform:scale(1);
     }
 
+    .products-actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.filters-box select,
+.sort-box select{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(90,71,32,0.14);
+  background:#efeeee;
+  color:#5a4720;
+  font-size:14px;
+  outline:none;
+  font-family:'Times New Roman', serif;
+  cursor:pointer;
+}
+
     @media (max-width: 1100px){
       .products-grid{
         grid-template-columns:repeat(3, 1fr);
@@ -429,12 +449,43 @@
 <section class="shop-container">
 
   <div class="products-topbar">
+    <div class="products-actions">
+
+  <div class="filters-box">
+
+    <select id="filterCategory">
+
+      <option value="all">Todas las categorías</option>
+      <option value="Hombre">Hombre</option>
+      <option value="Mujer">Mujer</option>
+      <option value="Unisex">Unisex</option>
+
+    </select>
+
+  </div>
+
+  <div class="sort-box">
+
+    <select id="sortSelect">
+
+      <option value="default">Ordenar por destacados</option>
+      <option value="price-asc">Precio: menor a mayor</option>
+      <option value="price-desc">Precio: mayor a menor</option>
+      <option value="name-asc">Nombre: A-Z</option>
+
+    </select>
+
+  </div>
+
+</div>
     <p id="cantidadProductos"></p>
   </div>
 
   <div class="products-grid" id="productsGrid"></div>
 
 </section>
+
+
 
 <!-- BOTÓN WHATSAPP -->
 <a class="floating-expert"
@@ -557,10 +608,54 @@ function render(products){
 
   grid.innerHTML = "";
 
-  cantidadProductos.textContent =
-    `${products.length} producto(s) encontrados`;
+  const filtroCategoria =
+    document.getElementById("filterCategory").value;
 
-  if(products.length === 0){
+  const orden =
+    document.getElementById("sortSelect").value;
+
+  let lista = [...products];
+
+  /* FILTRO */
+
+  if(filtroCategoria !== "all"){
+
+    lista = lista.filter(
+      p => p.categoria === filtroCategoria
+    );
+
+  }
+
+  /* ORDENAR */
+
+  if(orden === "price-asc"){
+
+    lista.sort((a,b) =>
+      calcularPrecio(a) - calcularPrecio(b)
+    );
+
+  }
+
+  if(orden === "price-desc"){
+
+    lista.sort((a,b) =>
+      calcularPrecio(b) - calcularPrecio(a)
+    );
+
+  }
+
+  if(orden === "name-asc"){
+
+    lista.sort((a,b) =>
+      a.nombre.localeCompare(b.nombre, "es")
+    );
+
+  }
+
+  cantidadProductos.textContent =
+    `${lista.length} producto(s) encontrados`;
+
+  if(lista.length === 0){
 
     grid.innerHTML = `
       <p style="font-size:18px;color:#5a4720;">
@@ -571,7 +666,7 @@ function render(products){
     return;
   }
 
-  products.forEach(producto => {
+  lista.forEach(producto => {
 
     const precioFinal = producto.descuento
       ? calcularPrecio(producto)
@@ -582,7 +677,6 @@ function render(products){
     article.className = "product-card";
 
     article.innerHTML = `
-
       <a href="${getProductUrl(producto)}"
          class="product-card-link">
 
@@ -664,8 +758,11 @@ function render(products){
       </a>
     `;
 
-    const favoriteBtn = article.querySelector(".favorite-btn");
-    const quickBuyBtn = article.querySelector(".quick-buy-btn");
+    const favoriteBtn =
+      article.querySelector(".favorite-btn");
+
+    const quickBuyBtn =
+      article.querySelector(".quick-buy-btn");
 
     const productoFavorito = {
       id: producto.id,
@@ -677,8 +774,11 @@ function render(products){
     };
 
     if (estaEnFavoritos(producto.id)) {
+
       favoriteBtn.classList.add("active");
-      favoriteBtn.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+
+      favoriteBtn.innerHTML =
+        `<i class="fa-solid fa-heart"></i>`;
     }
 
     favoriteBtn.addEventListener("click", (e) => {
@@ -686,7 +786,8 @@ function render(products){
       e.preventDefault();
       e.stopPropagation();
 
-      const agregado = toggleFavorito(productoFavorito);
+      const agregado =
+        toggleFavorito(productoFavorito);
 
       if (agregado) {
 
@@ -710,7 +811,6 @@ function render(products){
       e.stopPropagation();
 
       if (typeof agregarAlCarrito !== "function") {
-        console.error("No existe agregarAlCarrito()");
         return;
       }
 
@@ -729,7 +829,6 @@ function render(products){
 
   });
 }
-
 /* ===== CARGAR JSON ===== */
 
 async function cargarProductos() {
@@ -812,6 +911,13 @@ scrollTopBtn.addEventListener("click", () => {
 /* ===== INIT ===== */
 
 cargarProductos();
+document
+  .getElementById("sortSelect")
+  .addEventListener("change", cargarProductos);
+
+document
+  .getElementById("filterCategory")
+  .addEventListener("change", cargarProductos);
 
 </script>
 
