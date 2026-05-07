@@ -346,56 +346,44 @@ function render(products){
 }
 
 /* ===== CARGAR JSON ===== */
-async function cargarProductos(){
+async function cargarProductos() {
+  try {
 
-  try{
-
+    // 🔥 ruta correcta
     const res = await fetch("data/mas-vendidos.json");
+
     const data = await res.json();
 
-    const tipo =
-      new URLSearchParams(window.location.search)
-      .get("tipo") || "mas_vendidos";
+    // 🔥 aquí estaba el error
+    let productos = data.mas_vendidos || [];
 
-    let productos = data;
+    const tipo = new URLSearchParams(window.location.search).get("tipo") || "mas_vendidos";
 
-    if(tipo === "mas_vendidos"){
-
+    if (tipo === "mas_vendidos") {
       title.innerText = "Más Vendidos";
-
-      resultsText.innerText =
-        "Los perfumes favoritos de nuestros clientes.";
-
+      resultsText.innerText = `${productos.length} productos`;
     }
 
-    if(tipo === "nuevos"){
-
+    if (tipo === "nuevos") {
       title.innerText = "Nuevos";
-
-      resultsText.innerText =
-        "Descubre los últimos perfumes agregados.";
-
-      productos = data.filter(p => p.nuevo);
+      productos = productos.filter(p => p.nuevo);
+      resultsText.innerText = `${productos.length} productos`;
     }
 
-    if(tipo === "descuentos"){
-
+    if (tipo === "descuentos") {
       title.innerText = "Descuentos";
-
-      resultsText.innerText =
-        "Perfumes con precios especiales.";
-
-      productos = data.filter(p => p.descuento);
+      productos = productos.filter(p => p.descuento);
+      resultsText.innerText = `${productos.length} productos`;
     }
 
     render(productos);
 
-  }catch(error){
+  } catch (error) {
 
     console.error("Error cargando JSON:", error);
 
     grid.innerHTML = `
-      <p style="font-size:18px;color:#5a4720;">
+      <p style="text-align:center;">
         Error cargando productos
       </p>
     `;
