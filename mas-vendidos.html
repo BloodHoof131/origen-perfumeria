@@ -3,10 +3,8 @@
 <head>
   <link rel="stylesheet" href="header-origen.css?v=12">
   <link rel="stylesheet" href="footer-origen.css">
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Más Vendidos | Origen Perfumería</title>
 
   <link rel="stylesheet"
@@ -78,6 +76,8 @@
 
     .product-card{
       position:relative;
+      background:transparent;
+      cursor:pointer;
     }
 
     .product-card-link{
@@ -117,6 +117,81 @@
     .product-card:hover .img-hover{
       opacity:1;
       transform:scale(1.03);
+    }
+
+    .product-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.08));
+      opacity:0;
+      transition:0.35s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:3;
+    }
+
+    .product-card:hover .product-overlay{
+      opacity:1;
+    }
+
+    .overlay-actions{
+      position:absolute;
+      right:12px;
+      top:50%;
+      transform:translateY(-50%);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .circle-btn{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border:none;
+      background:#f1efef;
+      color:#1f1f1f;
+      font-size:17px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(0,0,0,0.12);
+      transition:0.25s ease;
+    }
+
+    .circle-btn:hover{
+      transform:scale(1.06);
+      color:#c9a227;
+    }
+
+    .circle-btn.active{
+      background:#5a4720;
+      color:#f5f1e8;
+    }
+
+    .quick-buy{
+      position:absolute;
+      left:50%;
+      bottom:14px;
+      transform:translateX(-50%);
+      width:84%;
+      background:#efeeee;
+      color:#1c1c1c;
+      border:none;
+      border-radius:14px;
+      padding:10px 10px;
+      font-size:15px;
+      font-family:'Times New Roman', serif;
+      cursor:pointer;
+      box-shadow:0 10px 25px rgba(0,0,0,0.12);
+      transition:0.25s ease;
+      z-index:4;
+    }
+
+    .quick-buy:hover{
+      background:#e5e0d3;
     }
 
     .tag{
@@ -170,6 +245,116 @@
       margin-bottom:4px;
     }
 
+    /* BOTÓN WHATSAPP */
+    .floating-expert{
+      position:fixed;
+      left:18px;
+      bottom:24px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#efeeee;
+      color:#5a4720;
+      padding:10px 14px 10px 10px;
+      border-radius:999px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.14);
+      z-index:120;
+      transition:0.3s ease;
+      border:1px solid rgba(90,71,32,0.10);
+    }
+
+    .floating-expert:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(0,0,0,0.18);
+    }
+
+    .floating-expert-icon{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:#c9a227;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:21px;
+      flex-shrink:0;
+    }
+
+    .floating-expert-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+
+    .floating-expert-text strong{
+      font-size:13px;
+      color:#5a4720;
+      letter-spacing:0.03em;
+    }
+
+    .floating-expert-text span{
+      font-size:11px;
+      color:#7a715c;
+    }
+
+    /* BOTÓN TOP */
+    .scroll-top{
+      position:fixed;
+      right:20px;
+      bottom:90px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #c9ab72, #b8860b);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
+      cursor:pointer;
+      z-index:130;
+      opacity:0;
+      visibility:hidden;
+      transition:0.3s ease;
+      border:none;
+    }
+
+    .scroll-top.show{
+      opacity:1;
+      visibility:visible;
+    }
+
+    .scroll-top i{
+      font-size:22px;
+    }
+
+    .favorites-count-badge{
+      position:absolute;
+      top:-6px;
+      right:-8px;
+      min-width:18px;
+      height:18px;
+      padding:0 5px;
+      border-radius:999px;
+      background:#c9a227;
+      color:#fff;
+      font-size:10px;
+      font-weight:bold;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      transform:scale(0.7);
+      transition:0.25s ease;
+      pointer-events:none;
+    }
+
+    .favorites-count-badge.show{
+      opacity:1;
+      transform:scale(1);
+    }
+
     @media (max-width: 1100px){
       .products-grid{
         grid-template-columns:repeat(3, 1fr);
@@ -177,6 +362,7 @@
     }
 
     @media (max-width: 768px){
+
       .products-grid{
         grid-template-columns:repeat(2, 1fr);
       }
@@ -184,9 +370,19 @@
       .category-hero h1{
         font-size:28px;
       }
+
+      .floating-expert{
+        left:12px;
+        right:12px;
+        bottom:14px;
+        justify-content:center;
+        border-radius:18px;
+        padding:10px 12px;
+      }
     }
 
     @media (max-width: 480px){
+
       .products-grid{
         gap:12px;
       }
@@ -198,6 +394,24 @@
 
       .product-price{
         font-size:16px;
+      }
+
+      .quick-buy{
+        font-size:12px;
+        padding:9px 8px;
+      }
+
+      .circle-btn{
+        width:34px;
+        height:34px;
+        font-size:13px;
+      }
+
+      .scroll-top{
+        width:52px;
+        height:52px;
+        right:16px;
+        bottom:84px;
       }
     }
   </style>
@@ -222,28 +436,104 @@
 
 </section>
 
+<!-- BOTÓN WHATSAPP -->
+<a class="floating-expert"
+   href="https://wa.me/573145661788?text=Hola,%20quiero%20asesor%C3%ADa%20para%20elegir%20un%20perfume"
+   target="_blank"
+   aria-label="Contacta a un experto">
+
+  <span class="floating-expert-icon">
+    <i class="fa-brands fa-whatsapp"></i>
+  </span>
+
+  <span class="floating-expert-text">
+    <strong>Contacta a un experto</strong>
+    <span>Asesoría personalizada</span>
+  </span>
+
+</a>
+
+<!-- BOTÓN TOP -->
+<button class="scroll-top"
+        id="scrollTopBtn"
+        aria-label="Subir al inicio">
+
+  <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
 <div id="origen-footer"></div>
 
 <script>
+
 const grid = document.getElementById("productsGrid");
 const title = document.getElementById("title");
 const resultsText = document.getElementById("resultsText");
 const cantidadProductos = document.getElementById("cantidadProductos");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+/* ===== FAVORITOS ===== */
+
+function obtenerFavoritos() {
+  return JSON.parse(localStorage.getItem("favoritos")) || [];
+}
+
+function guardarFavoritos(favoritos) {
+  localStorage.setItem("favoritos", JSON.stringify(favoritos));
+}
+
+function estaEnFavoritos(id) {
+  return obtenerFavoritos().some(item => item.id === id);
+}
+
+function agregarAFavoritos(producto) {
+  const favoritos = obtenerFavoritos();
+
+  const existe = favoritos.some(item => item.id === producto.id);
+
+  if (!existe) {
+    favoritos.push(producto);
+    guardarFavoritos(favoritos);
+  }
+}
+
+function quitarDeFavoritos(id) {
+  const favoritos = obtenerFavoritos()
+    .filter(item => item.id !== id);
+
+  guardarFavoritos(favoritos);
+}
+
+function toggleFavorito(producto) {
+
+  if (estaEnFavoritos(producto.id)) {
+    quitarDeFavoritos(producto.id);
+    return false;
+  } else {
+    agregarAFavoritos(producto);
+    return true;
+  }
+}
 
 /* ===== DESCUENTO ===== */
+
 function calcularPrecio(p) {
+
   if (p.descuento) {
     return p.precio - (p.precio * p.descuento / 100);
   }
+
   return p.precio;
 }
 
 /* ===== FORMATO ===== */
+
 function formatPrice(value){
   return "$ " + value.toLocaleString("es-CO");
 }
 
 /* ===== URL PRODUCTO ===== */
+
 function getProductUrl(producto){
 
   if(producto.categoria === "Hombre"){
@@ -262,6 +552,7 @@ function getProductUrl(producto){
 }
 
 /* ===== RENDER ===== */
+
 function render(products){
 
   grid.innerHTML = "";
@@ -270,110 +561,217 @@ function render(products){
     `${products.length} producto(s) encontrados`;
 
   if(products.length === 0){
+
     grid.innerHTML = `
       <p style="font-size:18px;color:#5a4720;">
         No hay productos disponibles
       </p>
     `;
+
     return;
   }
 
   products.forEach(producto => {
 
-    grid.innerHTML += `
-      <article class="product-card">
+    const precioFinal = producto.descuento
+      ? calcularPrecio(producto)
+      : producto.precio;
 
-        <a href="${getProductUrl(producto)}"
-           class="product-card-link">
+    const article = document.createElement("article");
 
-          <div class="product-image-wrap">
+    article.className = "product-card";
 
-            ${producto.nuevo
-              ? `<span class="tag">Nuevo</span>`
-              : ''
-            }
+    article.innerHTML = `
 
-            ${producto.descuento
-              ? `<span class="tag discount">-${producto.descuento}%</span>`
-              : ''
-            }
+      <a href="${getProductUrl(producto)}"
+         class="product-card-link">
 
-            <img class="img-main"
-                 src="${producto.imagen}"
-                 alt="${producto.nombre}">
+        <div class="product-image-wrap">
 
-            <img class="img-hover"
-                 src="${producto.hover || producto.imagen}"
-                 alt="${producto.nombre}">
+          ${producto.nuevo
+            ? `<span class="tag">Nuevo</span>`
+            : ''
+          }
 
-          </div>
+          ${producto.descuento
+            ? `<span class="tag discount">-${producto.descuento}%</span>`
+            : ''
+          }
 
-          <div class="product-info">
+          <img class="img-main"
+               src="${producto.imagen}"
+               alt="${producto.nombre}">
 
-            <div class="product-category">
-              ${producto.categoria}
+          <img class="img-hover"
+               src="${producto.hover || producto.imagen}"
+               alt="${producto.nombre}">
+
+          <div class="product-overlay">
+
+            <div class="overlay-actions">
+
+              <button class="circle-btn favorite-btn"
+                      type="button"
+                      title="Favoritos">
+
+                <i class="fa-regular fa-heart"></i>
+
+              </button>
+
             </div>
 
-            <h3 class="product-name">
-              ${producto.nombre}
-            </h3>
+            <button class="quick-buy quick-buy-btn"
+                    type="button">
 
-            ${
-              producto.descuento
-              ? `
-                <p class="price-old">
-                  ${formatPrice(producto.precio)}
-                </p>
+              Compra rápida
 
-                <p class="product-price">
-                  ${formatPrice(calcularPrecio(producto))}
-                </p>
-              `
-              : `
-                <p class="product-price">
-                  ${formatPrice(producto.precio)}
-                </p>
-              `
-            }
+            </button>
 
           </div>
 
-        </a>
+        </div>
 
-      </article>
+        <div class="product-info">
+
+          <div class="product-category">
+            ${producto.categoria}
+          </div>
+
+          <h3 class="product-name">
+            ${producto.nombre}
+          </h3>
+
+          ${
+            producto.descuento
+            ? `
+              <p class="price-old">
+                ${formatPrice(producto.precio)}
+              </p>
+
+              <p class="product-price">
+                ${formatPrice(precioFinal)}
+              </p>
+            `
+            : `
+              <p class="product-price">
+                ${formatPrice(producto.precio)}
+              </p>
+            `
+          }
+
+        </div>
+
+      </a>
     `;
+
+    const favoriteBtn = article.querySelector(".favorite-btn");
+    const quickBuyBtn = article.querySelector(".quick-buy-btn");
+
+    const productoFavorito = {
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: precioFinal,
+      imagen: producto.imagen,
+      url: getProductUrl(producto),
+      categoria: producto.categoria
+    };
+
+    if (estaEnFavoritos(producto.id)) {
+      favoriteBtn.classList.add("active");
+      favoriteBtn.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+    }
+
+    favoriteBtn.addEventListener("click", (e) => {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const agregado = toggleFavorito(productoFavorito);
+
+      if (agregado) {
+
+        favoriteBtn.classList.add("active");
+
+        favoriteBtn.innerHTML =
+          `<i class="fa-solid fa-heart"></i>`;
+
+      } else {
+
+        favoriteBtn.classList.remove("active");
+
+        favoriteBtn.innerHTML =
+          `<i class="fa-regular fa-heart"></i>`;
+      }
+    });
+
+    quickBuyBtn.addEventListener("click", (e) => {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (typeof agregarAlCarrito !== "function") {
+        console.error("No existe agregarAlCarrito()");
+        return;
+      }
+
+      agregarAlCarrito({
+        id: producto.id,
+        nombre: producto.nombre,
+        precio: Number(precioFinal),
+        imagen: producto.imagen,
+        url: getProductUrl(producto),
+        categoria: producto.categoria
+      }, 1);
+
+    });
+
+    grid.appendChild(article);
+
   });
 }
 
 /* ===== CARGAR JSON ===== */
+
 async function cargarProductos() {
+
   try {
 
-    // 🔥 ruta correcta
     const res = await fetch("data/mas-vendidos.json");
 
     const data = await res.json();
 
-    // 🔥 aquí estaba el error
     let productos = data.mas_vendidos || [];
 
-    const tipo = new URLSearchParams(window.location.search).get("tipo") || "mas_vendidos";
+    const tipo =
+      new URLSearchParams(window.location.search)
+      .get("tipo") || "mas_vendidos";
 
     if (tipo === "mas_vendidos") {
+
       title.innerText = "Más Vendidos";
-      resultsText.innerText = `${productos.length} productos`;
+
+      resultsText.innerText =
+        `${productos.length} productos`;
     }
 
     if (tipo === "nuevos") {
+
       title.innerText = "Nuevos";
+
       productos = productos.filter(p => p.nuevo);
-      resultsText.innerText = `${productos.length} productos`;
+
+      resultsText.innerText =
+        `${productos.length} productos`;
     }
 
     if (tipo === "descuentos") {
+
       title.innerText = "Descuentos";
+
       productos = productos.filter(p => p.descuento);
-      resultsText.innerText = `${productos.length} productos`;
+
+      resultsText.innerText =
+        `${productos.length} productos`;
     }
 
     render(productos);
@@ -390,19 +788,46 @@ async function cargarProductos() {
   }
 }
 
+/* ===== SCROLL TOP ===== */
+
+window.addEventListener("scroll", () => {
+
+  if(window.scrollY > 500){
+    scrollTopBtn.classList.add("show");
+  } else {
+    scrollTopBtn.classList.remove("show");
+  }
+
+});
+
+scrollTopBtn.addEventListener("click", () => {
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+});
+
 /* ===== INIT ===== */
+
 cargarProductos();
+
 </script>
 
 <script src="header-origen.js?v=12"></script>
 
 <script>
+
 fetch("footer-origen.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("origen-footer").innerHTML = data;
   });
+
 </script>
+
+<script src="carrito.js"></script>
 
 </body>
 </html>
