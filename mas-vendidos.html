@@ -17,10 +17,15 @@
       box-sizing:border-box;
     }
 
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       font-family:'Times New Roman', serif;
       background:#D9D7D7;
       color:#2f2b1f;
+      overflow-x:hidden;
     }
 
     a{
@@ -33,70 +38,91 @@
       display:block;
     }
 
+    /* ================= HERO ================= */
+
     .category-hero{
-      padding:32px 16px 20px;
+      width:100%;
+      padding:145px 20px 35px;
       text-align:center;
+      background:#d9d7d7;
     }
 
     .category-hero h1{
-      font-size:34px;
+      font-size:48px;
       color:#5a4720;
-      margin-bottom:10px;
+      margin-bottom:12px;
+      font-weight:normal;
+      letter-spacing:.5px;
     }
 
     .category-hero p{
-      font-size:15px;
+      font-size:16px;
       color:#5f5847;
     }
 
+    /* ================= SHOP ================= */
+
     .shop-container{
-      width:min(1400px, 94%);
-      margin:0 auto 40px;
+      width:min(1450px, 94%);
+      margin:0 auto 60px;
       display:flex;
-      gap:20px;
+      gap:28px;
       align-items:flex-start;
     }
 
-    /* ===== SIDEBAR ===== */
+    /* ================= SIDEBAR ================= */
 
     .filters-sidebar{
-      width:250px;
-      background:#d8d4cf;
-      border-radius:22px;
-      padding:18px;
+      width:280px;
+      background:#d3cfca;
+      border-radius:28px;
+      padding:24px;
       position:sticky;
       top:110px;
       flex-shrink:0;
     }
 
     .filter-group{
-      margin-bottom:26px;
+      margin-bottom:30px;
+      border-bottom:1px solid rgba(90,71,32,.12);
+      padding-bottom:22px;
+    }
+
+    .filter-group:last-child{
+      border-bottom:none;
+      margin-bottom:0;
+      padding-bottom:0;
     }
 
     .filter-header{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      margin-bottom:14px;
+      margin-bottom:18px;
     }
 
     .filter-header h3{
-      font-size:20px;
+      font-size:24px;
       color:#4e3d1f;
       font-weight:normal;
+    }
+
+    .filter-header i{
+      font-size:14px;
+      color:#6b5a35;
     }
 
     .filter-options{
       display:flex;
       flex-direction:column;
-      gap:12px;
+      gap:14px;
     }
 
     .filter-options label{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:15px;
+      gap:12px;
+      font-size:16px;
       color:#5a4720;
       cursor:pointer;
     }
@@ -105,12 +131,14 @@
       width:18px;
       height:18px;
       accent-color:#8f6b1f;
+      cursor:pointer;
     }
 
     .price-slider{
       width:100%;
       accent-color:#8f6b1f;
-      margin:10px 0 14px;
+      margin:12px 0 16px;
+      cursor:pointer;
     }
 
     .price-values{
@@ -120,51 +148,57 @@
     }
 
     .price-box{
-      background:#e7e4e1;
-      border-radius:12px;
-      padding:12px;
+      background:#ece9e5;
+      border-radius:14px;
+      padding:13px;
       text-align:center;
-      font-size:14px;
+      font-size:15px;
       color:#5a4720;
       border:none;
       width:100%;
+      font-family:'Times New Roman', serif;
     }
 
-    /* ===== CONTENT ===== */
+    /* ================= CONTENT ================= */
 
     .shop-content{
       flex:1;
+      min-width:0;
     }
 
     .products-topbar{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      margin-bottom:20px;
+      margin-bottom:28px;
       flex-wrap:wrap;
-      gap:12px;
+      gap:14px;
     }
 
     .products-topbar p{
       color:#5f5a46;
-      font-size:15px;
+      font-size:16px;
     }
 
     .sort-select{
-      padding:12px 18px;
+      padding:14px 18px;
       border:none;
-      border-radius:14px;
+      border-radius:16px;
       background:#ece9e5;
       font-size:16px;
       color:#5a4720;
       font-family:'Times New Roman', serif;
       cursor:pointer;
+      min-width:240px;
+      outline:none;
     }
+
+    /* ================= GRID ================= */
 
     .products-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0, 1fr));
-      gap:18px;
+      gap:24px 20px;
     }
 
     .product-card{
@@ -178,9 +212,9 @@
     .product-image-wrap{
       position:relative;
       overflow:hidden;
-      border-radius:22px;
+      border-radius:26px;
       background:#efeeee;
-      aspect-ratio:4 / 4.5;
+      aspect-ratio:4 / 4.7;
     }
 
     .product-image-wrap img{
@@ -189,7 +223,7 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      transition:0.35s ease;
+      transition:0.4s ease;
     }
 
     .img-main{
@@ -202,56 +236,55 @@
 
     .product-card:hover .img-main{
       opacity:0;
-      transform:scale(1.03);
+      transform:scale(1.04);
     }
 
     .product-card:hover .img-hover{
       opacity:1;
-      transform:scale(1.03);
+      transform:scale(1.04);
     }
+
+    /* ================= TAGS ================= */
 
     .tag{
       position:absolute;
-      top:12px;
-      left:12px;
+      top:14px;
+      left:14px;
       z-index:5;
       background:#111;
       color:#fff;
-      padding:6px 10px;
+      padding:7px 12px;
       border-radius:999px;
       font-size:11px;
-      letter-spacing:.05em;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
 
     .tag.discount{
       background:#b22222;
-      top:48px;
+      top:52px;
     }
 
+    /* ================= INFO ================= */
+
     .product-info{
-      padding:12px 6px 0;
+      padding:14px 6px 0;
     }
 
     .product-category{
-      font-size:13px;
+      font-size:12px;
       color:#7b7460;
-      margin-bottom:6px;
+      margin-bottom:7px;
       text-transform:uppercase;
-      letter-spacing:.12em;
+      letter-spacing:.16em;
     }
 
     .product-name{
-      font-size:18px;
+      font-size:20px;
       line-height:1.2;
-      min-height:48px;
+      min-height:52px;
       margin-bottom:10px;
       color:#1f1d18;
-      font-weight:bold;
-    }
-
-    .product-price{
-      font-size:18px;
-      color:#c9a227;
       font-weight:bold;
     }
 
@@ -262,7 +295,26 @@
       margin-bottom:4px;
     }
 
-    @media (max-width:1100px){
+    .product-price{
+      font-size:20px;
+      color:#c9a227;
+      font-weight:bold;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width:1200px){
+
+      .products-grid{
+        grid-template-columns:repeat(3, 1fr);
+      }
+
+      .filters-sidebar{
+        width:250px;
+      }
+    }
+
+    @media (max-width:992px){
 
       .shop-container{
         flex-direction:column;
@@ -281,12 +333,12 @@
 
     @media (max-width:768px){
 
-      .products-grid{
-        grid-template-columns:repeat(2, 1fr);
+      .category-hero{
+        padding:125px 18px 30px;
       }
 
       .category-hero h1{
-        font-size:28px;
+        font-size:34px;
       }
 
       .products-topbar{
@@ -297,17 +349,50 @@
       .sort-select{
         width:100%;
       }
+
+      .products-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:18px 14px;
+      }
+
+      .product-name{
+        font-size:16px;
+        min-height:42px;
+      }
+
+      .product-price{
+        font-size:17px;
+      }
+
+      .filters-sidebar{
+        border-radius:24px;
+      }
     }
 
     @media (max-width:480px){
 
+      .category-hero h1{
+        font-size:30px;
+      }
+
       .products-grid{
-        gap:12px;
+        gap:16px 12px;
+      }
+
+      .product-image-wrap{
+        border-radius:20px;
+      }
+
+      .product-info{
+        padding-top:10px;
+      }
+
+      .product-category{
+        font-size:11px;
       }
 
       .product-name{
         font-size:15px;
-        min-height:38px;
       }
 
       .product-price{
@@ -323,6 +408,7 @@
 
 <section class="category-hero">
   <h1 id="title">Más Vendidos</h1>
+
   <p id="resultsText">
     Explora nuestros perfumes más vendidos.
   </p>
@@ -331,6 +417,7 @@
 <section class="shop-container">
 
   <!-- SIDEBAR -->
+
   <aside class="filters-sidebar">
 
     <div class="filter-group">
@@ -340,7 +427,6 @@
       </div>
 
       <div class="filter-options">
-
         <label>
           <input type="checkbox" value="Hombre">
           Perfumes Hombre
@@ -355,7 +441,6 @@
           <input type="checkbox" value="Unisex">
           Perfumes Unisex
         </label>
-
       </div>
     </div>
 
@@ -376,6 +461,7 @@
       >
 
       <div class="price-values">
+
         <input
           type="text"
           class="price-box"
@@ -390,13 +476,14 @@
           value="$ 1.000.000"
           readonly
         >
-      </div>
 
+      </div>
     </div>
 
   </aside>
 
-  <!-- CONTENIDO -->
+  <!-- CONTENT -->
+
   <div class="shop-content">
 
     <div class="products-topbar">
@@ -419,7 +506,6 @@
         <option value="az">
           Nombre: A-Z
         </option>
-
       </select>
 
     </div>
@@ -438,7 +524,6 @@ const grid = document.getElementById("productsGrid");
 const title = document.getElementById("title");
 const resultsText = document.getElementById("resultsText");
 const cantidadProductos = document.getElementById("cantidadProductos");
-
 const sortSelect = document.getElementById("sortSelect");
 const priceRange = document.getElementById("priceRange");
 const priceValue = document.getElementById("priceValue");
@@ -494,7 +579,10 @@ function render(products){
   if(products.length === 0){
 
     grid.innerHTML = `
-      <p style="font-size:18px;color:#5a4720;">
+      <p style="
+        font-size:18px;
+        color:#5a4720;
+      ">
         No hay productos disponibles
       </p>
     `;
@@ -576,7 +664,8 @@ function aplicarFiltros(){
 
   let productos = [...TODOS];
 
-  // Categorías
+  /* Categorías */
+
   const checks = document.querySelectorAll(
     '.filter-options input:checked'
   );
@@ -590,14 +679,16 @@ function aplicarFiltros(){
     );
   }
 
-  // Precio
+  /* Precio */
+
   const maxPrecio = parseInt(priceRange.value);
 
   productos = productos.filter(p =>
     calcularPrecio(p) <= maxPrecio
   );
 
-  // Orden
+  /* Orden */
+
   const orden = sortSelect.value;
 
   if(orden === "menor"){
@@ -709,13 +800,11 @@ cargarProductos();
 <script src="header-origen.js?v=12"></script>
 
 <script>
-
 fetch("footer-origen.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("origen-footer").innerHTML = data;
   });
-
 </script>
 
 </body>
