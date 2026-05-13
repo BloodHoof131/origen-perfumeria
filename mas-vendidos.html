@@ -315,21 +315,26 @@
    /* ================= WHATSAPP ================= */
 
 .whatsapp-float{
-   display:block;
-  width:100%;
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:22px;
+  right:22px;
+  background:#25D366;
+  color:#FFF;
+  border-radius:50%;
   text-align:center;
-  background:#5a4720;
-  color:#f5f1e8;
-  padding:14px 18px;
-  border-radius:12px;
-  font-size:16px;
-  font-family:'Times New Roman', serif;
-  transition:0.3s ease;
+  font-size:32px;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.3s ease;
 }
 
-
 .whatsapp-float:hover{
-  background:#6a5428;
+  transform:scale(1.08);
 }
 
 /* ================= TOP BUTTON ================= */
