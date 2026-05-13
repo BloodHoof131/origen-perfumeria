@@ -1521,133 +1521,172 @@
 
 <div id="origen-header"></div>
 
-<!-- HERO -->
+  <section class="category-hero">
+    <h1>Perfumes para Hombre</h1>
+    <p>Explora nuestra selección de fragancias masculinas con carácter, elegancia y presencia.</p>
+  </section>
 
-<section class="category-hero">
-
-  <h1 id="title">Más Vendidos</h1>
-
-  <p id="resultsText">
-    Explora nuestros perfumes más vendidos.
-  </p>
-
-</section>
-
-<!-- SHOP -->
-
-<section class="shop-container">
-
-  <!-- FILTERS -->
-
-  <aside class="filters">
-
-    <div class="filter-block">
-
-      <div class="filter-title">
-        <h3>Categorías</h3>
-        <i class="fa-solid fa-chevron-up"></i>
-      </div>
-
-      <div class="filter-list">
-
-        <label>
-          <input type="checkbox" value="Hombre">
-          Perfumes Hombre
-        </label>
-
-        <label>
-          <input type="checkbox" value="Mujer">
-          Perfumes Mujer
-        </label>
-
-        <label>
-          <input type="checkbox" value="Unisex">
-          Perfumes Unisex
-        </label>
-
-      </div>
-
-    </div>
-
-    <div class="filter-block">
-
-      <div class="filter-title">
-        <h3>Precio</h3>
-        <i class="fa-solid fa-chevron-up"></i>
-      </div>
-
-      <input
-        type="range"
-        min="0"
-        max="1000000"
-        value="1000000"
-        class="price-slider"
-        id="priceRange"
-      >
-
-      <input
-        type="text"
-        class="price-box"
-        id="priceValue"
-        value="$ 1.000.000"
-        readonly
-      >
-
-    </div>
-
-  </aside>
-
-  <!-- PRODUCTS -->
-
-  <div class="products-area">
-
-    <div class="products-topbar">
-
-      <p id="cantidadProductos"></p>
-
-      <select class="sort-select" id="sortSelect">
-
-        <option value="destacados">
-          Ordenar por destacados
-        </option>
-
-        <option value="menor">
-          Precio: menor a mayor
-        </option>
-
-        <option value="mayor">
-          Precio: mayor a menor
-        </option>
-
-        <option value="az">
-          Nombre: A-Z
-        </option>
-
-      </select>
-
-    </div>
-
-    <div class="products-grid" id="productsGrid"></div>
-
+  <div class="mobile-tools-bar">
+    <button type="button" class="mobile-tool-btn" id="openFiltersBtn">
+      <span>Filtro</span>
+      <i class="fa-solid fa-angle-down"></i>
+    </button>
+    <button type="button" class="mobile-tool-btn" id="openSortBtn">
+      <span>Ordenar</span>
+      <i class="fa-solid fa-angle-down"></i>
+    </button>
   </div>
 
-</section>
+  <section class="shop-container">
+    <div class="filters-overlay" id="filtersOverlay"></div>
 
-<!-- FLOATING -->
+    <aside class="filters" id="filtersPanel">
+      <div class="filters-mobile-header">
+        <h3>Filtros</h3>
+        <button type="button" class="filters-close-btn" id="closeFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-<a
-  href="https://wa.me/573001112233"
-  class="floating-whatsapp"
-  target="_blank"
->
-  <i class="fab fa-whatsapp"></i>
+      <div class="filter-block">
+        <div class="filter-title" onclick="toggleFilter(this)">
+          <span>Aromas</span>
+          <i class="fa-solid fa-angle-up"></i>
+        </div>
+        <ul class="filter-list">
+          <li><label><input type="checkbox" class="aroma-filter" value="Dulce"> Perfumes Dulces</label></li>
+          <li><label><input type="checkbox" class="aroma-filter" value="Floral-Frutal"> Perfumes Florales-Frutales</label></li>
+          <li><label><input type="checkbox" class="aroma-filter" value="Fresco-Cítrico"> Perfumes Frescos-Cítricos</label></li>
+          <li><label><input type="checkbox" class="aroma-filter" value="Amaderado"> Perfumes Amaderados</label></li>
+        </ul>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-title" onclick="toggleFilter(this)">
+          <span>Precio</span>
+          <i class="fa-solid fa-angle-up"></i>
+        </div>
+        <div class="price-range">
+          <div class="range-slider">
+            <div class="range-track"></div>
+            <div class="range-fill" id="rangeFill"></div>
+            <input type="range" min="0" max="1000000" value="0" id="minRange">
+            <input type="range" min="0" max="1000000" value="1000000" id="maxRange">
+          </div>
+          <div class="price-boxes">
+            <div class="price-box" id="minPrice">$0</div>
+            <div class="price-text">hasta</div>
+            <div class="price-box" id="maxPrice">$1.000.000</div>
+          </div>
+        </div>
+      </div>
+
+      
+    </aside>
+
+    <div class="products-area">
+      <div class="products-topbar">
+        <p id="resultsText">Mostrando perfumes de hombre</p>
+        <div class="sort-box">
+          <select id="sortSelect">
+            <option value="default">Ordenar por destacados</option>
+            <option value="price-asc">Precio: menor a mayor</option>
+            <option value="price-desc">Precio: mayor a menor</option>
+            <option value="name-asc">Nombre: A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+<div class="pagination" id="pagination"></div>
+    </div>
+  </section>
+
+  <div class="quickview-modal" id="quickviewModal" aria-hidden="true">
+    <div class="quickview-box" id="quickviewBox">
+      <button class="quickview-close" type="button" id="quickviewClose" aria-label="Cerrar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="quickview-image">
+        <img id="quickviewImage" src="" alt="">
+      </div>
+      <div class="quickview-content">
+        <h2 class="quickview-title" id="quickviewTitle"></h2>
+        <div class="quickview-price" id="quickviewPrice"></div>
+        <p class="quickview-description" id="quickviewDescription"></p>
+        <a href="#" class="quickview-link" id="quickviewDetails">Ver detalles</a>
+        <div class="quickview-stock">
+          <span class="stock-dot"></span>
+          <span id="quickviewStockText">En stock</span>
+        </div>
+        <div class="quickview-meta">
+          <span class="quickview-chip" id="quickviewAroma"></span>
+          <span class="quickview-chip">Perfume original</span>
+        </div>
+        <div class="quickview-label">Cantidad</div>
+        <div class="quickview-cart-row">
+          <div class="qty-box">
+            <button class="qty-btn" type="button" id="qtyMinus">−</button>
+            <span class="qty-value" id="qtyValue">1</span>
+            <button class="qty-btn" type="button" id="qtyPlus">+</button>
+          </div>
+          <button class="quickview-btn primary" type="button" id="quickviewAddCart">Agregar al carrito</button>
+        </div>
+        <button class="quickview-btn buy" type="button" id="quickviewComprar">Comprar ahora</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sort-modal" id="sortModal">
+    <div class="sort-modal-box">
+      <div class="sort-modal-header">
+        <h3>Ordenar</h3>
+        <button type="button" class="filters-close-btn" id="closeSortBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="sort-options">
+        <button type="button" class="sort-option" data-sort="default">Destacados</button>
+        <button type="button" class="sort-option" data-sort="price-asc">Precio: menor a mayor</button>
+        <button type="button" class="sort-option" data-sort="price-desc">Precio: mayor a menor</button>
+        <button type="button" class="sort-option" data-sort="name-asc">Nombre: A-Z</button>
+      </div>
+    </div>
+  </div>
+
+  <a class="floating-expert" href="https://wa.me/573145661788?text=Hola,%20quiero%20asesor%C3%ADa%20para%20elegir%20un%20perfume" target="_blank" aria-label="Contacta a un experto">
+  <span class="floating-expert-icon">
+    <i class="fa-brands fa-whatsapp"></i>
+  </span>
+  <span class="floating-expert-text">
+    <strong>Contacta a un experto</strong>
+    <span>Asesoría personalizada</span>
+  </span>
 </a>
 
-<button class="scroll-top" id="scrollTopBtn">
-  <i class="fa-solid fa-chevron-up"></i>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Subir al inicio">
+  <i class="fa-solid fa-arrow-up"></i>
 </button>
 
 <div id="origen-footer"></div>
+  
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>Carrito</h2>
+    <span id="closeCart">✕</span>
+  </div>
+
+  <div class="cart-body">
+    <p>Tu carrito está vacío</p>
+  </div>
+  <div class="cart-footer">
+    <a href="todos.html" class="btn-primary">Seguir comprando</a>
+  </div>
+
+ 
+</div>
 
 <script>
 
