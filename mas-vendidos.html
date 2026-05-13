@@ -1689,44 +1689,47 @@
 </div>
 
 <script>
-
 const grid = document.getElementById("productsGrid");
-const title = document.getElementById("title");
 const resultsText = document.getElementById("resultsText");
-const cantidadProductos = document.getElementById("cantidadProductos");
 const sortSelect = document.getElementById("sortSelect");
-const priceRange = document.getElementById("priceRange");
-const priceValue = document.getElementById("priceValue");
+
+const minRange = document.getElementById("minRange");
+const maxRange = document.getElementById("maxRange");
+
+const minPrice = document.getElementById("minPrice");
+const maxPrice = document.getElementById("maxPrice");
+
+const rangeFill = document.getElementById("rangeFill");
+
+const pagination = document.getElementById("pagination");
 
 let TODOS = [];
+let productosFiltrados = [];
 
-/* =========================
-   DESCUENTO
-========================= */
-
-function calcularPrecio(p){
-
-  if(p.descuento){
-    return p.precio - (p.precio * p.descuento / 100);
-  }
-
-  return p.precio;
-}
+let paginaActual = 1;
+const productosPorPagina = 8;
 
 /* =========================
    FORMATO PRECIO
 ========================= */
-
 function formatPrice(value){
   return "$ " + value.toLocaleString("es-CO");
 }
 
 /* =========================
+   PRECIO CON DESCUENTO
+========================= */
+function calcularPrecio(producto){
+  if(producto.descuento){
+    return producto.precio - (producto.precio * producto.descuento / 100);
+  }
+  return producto.precio;
+}
+
+/* =========================
    URL PRODUCTO
 ========================= */
-
 function getProductUrl(producto){
-
   if(producto.categoria === "Hombre"){
     return `producto-hombre.html?id=${producto.id}`;
   }
@@ -1743,47 +1746,111 @@ function getProductUrl(producto){
 }
 
 /* =========================
+   RANGE SLIDER
+========================= */
+function actualizarRangeVisual(){
+
+  let min = parseInt(minRange.value);
+  let max = parseInt(maxRange.value);
+
+  if(min > max - 50000){
+    min = max - 50000;
+    minRange.value = min;
+  }
+
+  if(max < min + 50000){
+    max = min + 50000;
+    maxRange.value = max;
+  }
+
+  const porcentajeMin = (min / 1000000) * 100;
+  const porcentajeMax = (max / 1000000) * 100;
+
+  rangeFill.style.left = porcentajeMin + "%";
+  rangeFill.style.width = (porcentajeMax - porcentajeMin) + "%";
+
+  minPrice.textContent = formatPrice(min);
+  maxPrice.textContent = formatPrice(max);
+}
+
+/* =========================
+   PAGINACIÓN
+========================= */
+function renderPagination(totalProductos){
+
+  pagination.innerHTML = "";
+
+  const totalPaginas = Math.ceil(totalProductos / productosPorPagina);
+
+  if(totalPaginas <= 1) return;
+
+  for(let i = 1; i <= totalPaginas; i++){
+
+    const btn = document.createElement("button");
+
+    btn.textContent = i;
+
+    if(i === paginaActual){
+      btn.classList.add("active");
+    }
+
+    btn.addEventListener("click", () => {
+      paginaActual = i;
+      render(productosFiltrados);
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+    });
+
+    pagination.appendChild(btn);
+  }
+}
+
+/* =========================
    RENDER
 ========================= */
-
-function render(products){
+function render(productos){
 
   grid.innerHTML = "";
 
-  cantidadProductos.textContent =
-    `${products.length} producto(s) encontrados`;
+  productosFiltrados = productos;
 
-  if(products.length === 0){
+  resultsText.textContent =
+    `${productos.length} perfume(s) encontrados`;
+
+  if(productos.length === 0){
 
     grid.innerHTML = `
-      <p style="font-size:16px;color:#5a4720;">
+      <p style="
+        font-size:16px;
+        color:#5a4720;
+      ">
         No hay productos disponibles
       </p>
     `;
 
+    pagination.innerHTML = "";
+
     return;
   }
 
-  products.forEach(producto => {
+  const inicio = (paginaActual - 1) * productosPorPagina;
+  const fin = inicio + productosPorPagina;
+
+  const productosPagina = productos.slice(inicio, fin);
+
+  productosPagina.forEach(producto => {
+
+    const precioFinal = calcularPrecio(producto);
 
     grid.innerHTML += `
-
       <article class="product-card">
 
         <a href="${getProductUrl(producto)}"
-           class="product-card-link">
+           class="product-link">
 
           <div class="product-image-wrap">
-
-            ${producto.nuevo
-              ? `<span class="tag">Nuevo</span>`
-              : ''
-            }
-
-            ${producto.descuento
-              ? `<span class="tag discount">-${producto.descuento}%</span>`
-              : ''
-            }
 
             <img
               class="img-main"
@@ -1801,200 +1868,161 @@ function render(products){
 
           <div class="product-info">
 
-            <div class="product-category">
-              ${producto.categoria}
+            <div class="product-name">
+              ${producto.nombre}
             </div>
 
-            <h3 class="product-name">
-              ${producto.nombre}
-            </h3>
-
-            ${
-              producto.descuento
-              ? `
-                <p class="price-old">
-                  ${formatPrice(producto.precio)}
-                </p>
-
-                <p class="product-price">
-                  ${formatPrice(calcularPrecio(producto))}
-                </p>
-              `
-              : `
-                <p class="product-price">
-                  ${formatPrice(producto.precio)}
-                </p>
-              `
-            }
+            <div class="product-price">
+              ${formatPrice(precioFinal)}
+            </div>
 
           </div>
 
         </a>
 
       </article>
-
     `;
-
   });
 
+  renderPagination(productos.length);
 }
 
 /* =========================
    FILTROS
 ========================= */
-
 function aplicarFiltros(){
 
   let productos = [...TODOS];
 
-  /* Categorías */
+  /* FILTRO AROMAS */
+  const aromasSeleccionados = [
+    ...document.querySelectorAll(".aroma-filter:checked")
+  ].map(el => el.value);
 
-  const checks = document.querySelectorAll(
-    '.filter-list input:checked'
-  );
+  if(aromasSeleccionados.length > 0){
 
-  const categorias = [...checks].map(c => c.value);
-
-  if(categorias.length > 0){
-
-    productos = productos.filter(p =>
-      categorias.includes(p.categoria)
+    productos = productos.filter(producto =>
+      aromasSeleccionados.includes(producto.aroma)
     );
-
   }
 
-  /* Precio */
+  /* FILTRO PRECIO */
+  const min = parseInt(minRange.value);
+  const max = parseInt(maxRange.value);
 
-  const maxPrecio = parseInt(priceRange.value);
+  productos = productos.filter(producto => {
 
-  productos = productos.filter(p =>
-    calcularPrecio(p) <= maxPrecio
-  );
+    const precio = calcularPrecio(producto);
 
-  /* Orden */
+    return precio >= min && precio <= max;
+  });
 
+  /* ORDENAMIENTO */
   const orden = sortSelect.value;
 
-  if(orden === "menor"){
+  if(orden === "price-asc"){
 
     productos.sort((a,b) =>
       calcularPrecio(a) - calcularPrecio(b)
     );
-
   }
 
-  if(orden === "mayor"){
+  if(orden === "price-desc"){
 
     productos.sort((a,b) =>
       calcularPrecio(b) - calcularPrecio(a)
     );
-
   }
 
-  if(orden === "az"){
+  if(orden === "name-asc"){
 
     productos.sort((a,b) =>
       a.nombre.localeCompare(b.nombre)
     );
-
   }
 
-  render(productos);
+  paginaActual = 1;
 
+  render(productos);
 }
 
 /* =========================
-   EVENTS
+   TOGGLE FILTROS
+========================= */
+function toggleFilter(element){
+
+  const block = element.parentElement;
+  const list = block.querySelector(".filter-list, .price-range");
+  const icon = element.querySelector("i");
+
+  if(list.style.display === "none"){
+
+    list.style.display = "block";
+    icon.style.transform = "rotate(0deg)";
+
+  }else{
+
+    list.style.display = "none";
+    icon.style.transform = "rotate(180deg)";
+  }
+}
+
+/* =========================
+   EVENTOS
 ========================= */
 
 document.addEventListener("change", aplicarFiltros);
 
-priceRange.addEventListener("input", () => {
+sortSelect.addEventListener("change", aplicarFiltros);
 
-  priceValue.value =
-    formatPrice(parseInt(priceRange.value));
-
+minRange.addEventListener("input", () => {
+  actualizarRangeVisual();
   aplicarFiltros();
+});
 
+maxRange.addEventListener("input", () => {
+  actualizarRangeVisual();
+  aplicarFiltros();
 });
 
 /* =========================
-   LOAD JSON
+   CARGAR PRODUCTOS
 ========================= */
-
 async function cargarProductos(){
 
   try{
 
-    const res = await fetch("data/mas-vendidos.json");
+    const response = await fetch("data/mas-vendidos.json");
 
-    const data = await res.json();
+    const data = await response.json();
 
-    let productos = data.mas_vendidos || [];
+    TODOS = data.mas_vendidos || [];
 
-    TODOS = productos;
-
-    const tipo =
-      new URLSearchParams(window.location.search)
-      .get("tipo") || "mas_vendidos";
-
-    if(tipo === "mas_vendidos"){
-
-      title.innerText = "Más Vendidos";
-
-      resultsText.innerText =
-        `${productos.length} productos`;
-
-    }
-
-    if(tipo === "nuevos"){
-
-      title.innerText = "Nuevos";
-
-      productos = productos.filter(p => p.nuevo);
-
-      TODOS = productos;
-
-      resultsText.innerText =
-        `${productos.length} productos`;
-
-    }
-
-    if(tipo === "descuentos"){
-
-      title.innerText = "Descuentos";
-
-      productos = productos.filter(p => p.descuento);
-
-      TODOS = productos;
-
-      resultsText.innerText =
-        `${productos.length} productos`;
-
-    }
-
-    render(productos);
+    render(TODOS);
 
   }catch(error){
 
-    console.error("Error cargando JSON:", error);
+    console.error(error);
 
     grid.innerHTML = `
-      <p style="text-align:center;">
+      <p style="
+        text-align:center;
+        color:#5a4720;
+        font-size:16px;
+      ">
         Error cargando productos
       </p>
     `;
-
   }
-
 }
 
 cargarProductos();
 
+actualizarRangeVisual();
+
 /* =========================
    SCROLL TOP
 ========================= */
-
 const scrollTopBtn =
   document.getElementById("scrollTopBtn");
 
@@ -2007,9 +2035,7 @@ window.addEventListener("scroll", () => {
   }else{
 
     scrollTopBtn.classList.remove("show");
-
   }
-
 });
 
 scrollTopBtn.addEventListener("click", () => {
@@ -2018,24 +2044,7 @@ scrollTopBtn.addEventListener("click", () => {
     top:0,
     behavior:"smooth"
   });
-
 });
-
-</script>
-
-<script src="header-origen.js?v=12"></script>
-
-<script>
-
-fetch("footer-origen.html")
-  .then(res => res.text())
-  .then(data => {
-
-    document.getElementById("origen-footer")
-      .innerHTML = data;
-
-  });
-
 </script>
 
 </body>
