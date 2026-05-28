@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <link rel="stylesheet" href="header-origen.css?v=12">
+  <link rel="stylesheet" href="footer-origen.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Más Vendidos | Origen Perfumería</title>
-
-  <link rel="stylesheet" href="header-origen.css?v=12">
-  <link rel="stylesheet" href="footer-origen.css">
 
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -2045,6 +2044,15 @@ scrollTopBtn.addEventListener("click", () => {
     behavior:"smooth"
   });
 });
+</script>
+
+<script src="header-origen.js?v=12"></script>
+<script>
+fetch("footer-origen.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("origen-footer").innerHTML = data;
+  });
 </script>
 
 </body>
