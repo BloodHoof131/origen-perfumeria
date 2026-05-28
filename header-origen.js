@@ -140,5 +140,14 @@ function updateFavoritesCount() {
 }
 
 updateFavoritesCount();
+
+// Cuando cambie en la misma página
 window.addEventListener("favoritesUpdated", updateFavoritesCount);
+
+// Cuando cambie el localStorage
+window.addEventListener("storage", (e) => {
+  if (e.key === "favoritos") {
+    updateFavoritesCount();
+  }
+});
 });
