@@ -1586,9 +1586,9 @@ const esFavorito = favoritos.includes(producto.id);
 
 return `
   <a href="${paginaProducto}?id=${producto.id}" class="product-link">
+    
     <div class="product-card">
-    </a>
-      
+
       <span class="product-badge ${badgeClase}">
         ${badgeTexto}
       </span>
@@ -1598,27 +1598,30 @@ return `
         <img class="img-hover" src="${producto.imagen_hover || producto.imagen}" alt="${producto.nombre}">
         
         <div class="product-overlay">
-          
+
           <div class="overlay-actions">
-  <button class="circle-btn fav-btn ${esFavorito ? 'active' : ''}" data-id="${producto.id}">
-  <i class="fa-regular fa-heart"></i>
-</button>
+            <button class="circle-btn fav-btn ${esFavorito ? 'active' : ''}" data-id="${producto.id}">
+              <i class="fa-regular fa-heart"></i>
+            </button>
 
-  <button class="circle-btn quickview-btn" data-id="${producto.id}">
-    <i class="fa-solid fa-eye"></i>
-  </button>
-</div>
+            <button class="circle-btn quickview-btn" data-id="${producto.id}">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
 
-<button class="quick-buy" data-id="${producto.id}">
-  Comprar rápido
-</button>
+          <button class="quick-buy" data-id="${producto.id}">
+            Comprar rápido
+          </button>
 
         </div>
       </div>
 
       <div class="product-info">
         <div class="product-category">${producto.categoria}</div>
-        <h3 class="product-name">${producto.nombre}</h3>
+
+        <h3 class="product-name">
+          ${producto.nombre}
+        </h3>
 
         <div class="product-price">
           ${formatearPrecio(producto.precio)}
@@ -1632,7 +1635,9 @@ return `
       </div>
 
     </div>
-  `;
+
+  </a>
+`;
 }
 
 function agregarAlCarrito(id){
