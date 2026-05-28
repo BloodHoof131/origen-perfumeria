@@ -139,15 +139,44 @@ function updateFavoritesCount() {
   }
 }
 
-updateFavoritesCount();
+function updateFavoritesCount() {
+  const badge = document.getElementById("favCount");
 
-// Cuando cambie en la misma página
-window.addEventListener("favoritesUpdated", updateFavoritesCount);
+  if (!badge) return;
 
-// Cuando cambie el localStorage
-window.addEventListener("storage", (e) => {
-  if (e.key === "favoritos") {
-    updateFavoritesCount();
-  }
+  // LEER SIEMPRE EL LOCALSTORAGE NUEVO
+  const favoritosActualizados =
+    JSON.parse(localStorage.getItem("favoritos")) || [];
+
+  const count = favoritosActualizados.length;
+
+  badge.textContent = count;
+
+  badge.style.display = count > 0 ? "flex" : "none";
+}
+
+// Actualizar automáticamente
+window.addEventListener("favoritesUpdated", () => {
+  updateFavoritesCount();
 });
+
+// Detectar cambios directos en localStorage
+setInterval(updateFavoritesCount, 500);
+
+function toggleFavorito(producto) {
+  let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+  const existe = favoritos.find(f => f.id === producto.id);
+
+  if (existe) {
+    favoritos = favoritos.filter(f => f.id !== producto.id);
+  } else {
+    favoritos.push(producto);
+  }
+
+  localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+  // 🔥 ACTUALIZAR CONTADOR INMEDIATAMENTE
+  window.dispatchEvent(new Event("favoritesUpdated"));
+}
 });
