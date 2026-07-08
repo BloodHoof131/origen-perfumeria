@@ -2508,6 +2508,146 @@ if (thumbsContainer) {
   });
 }
 
+/* ===== RENDER ===== */
+function renderProducts(lista) {
+  productsGrid.innerHTML = "";
+  pagination.innerHTML = "";
+
+  if (lista.length === 0) {
+    productsGrid.innerHTML = `<p style="font-size:18px;color:#5a4720;">No se encontraron perfumes con esos filtros.</p>`;
+    resultsText.textContent = "0 perfumes encontrados";
+    return;
+  }
+
+  const totalPages = Math.ceil(lista.length / productsPerPage);
+
+  if (currentPage > totalPages) {
+    currentPage = 1;
+  }
+
+  const start = (currentPage - 1) * productsPerPage;
+  const end = start + productsPerPage;
+  const productsToShow = lista.slice(start, end);
+
+  resultsText.textContent = `${lista.length} perfume(s) encontrados`;
+
+  productsToShow.forEach(producto => {
+    const card = document.createElement("article");
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <a href="${getProductUrl(producto)}" class="product-card-link">
+        <div class="product-image-wrap">
+          <img class="img-main" src="${producto.imagen}" alt="${producto.nombre}">
+          <img class="img-hover" src="${producto.hover}" alt="${producto.nombre} hover">
+          <div class="product-overlay">
+            <div class="overlay-actions">
+              <button class="circle-btn favorite-btn" type="button" title="Favoritos">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+              <button class="circle-btn view-btn" type="button" title="Vista rápida">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <button class="quick-buy quick-buy-btn" type="button">Compra rápida</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Hombre</div>
+          <h3 class="product-name">${producto.nombre}</h3>
+          <p class="product-price">${formatPrice(producto.precio)}</p>
+        </div>
+      </a>
+    `;
+
+    const link = card.querySelector(".product-card-link");
+    const favoriteBtn = card.querySelector(".favorite-btn");
+    const viewBtn = card.querySelector(".view-btn");
+    const quickBuyBtn = card.querySelector(".quick-buy-btn");
+
+    const productoFavorito = {
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      imagen: producto.imagen,
+      url: getProductUrl(producto),
+      categoria: "Hombre"
+    };
+
+    if (estaEnFavoritos(producto.id)) {
+      favoriteBtn.classList.add("active");
+      favoriteBtn.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+    }
+
+    favoriteBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const agregado = toggleFavorito(productoFavorito);
+
+      if (agregado) {
+        favoriteBtn.classList.add("active");
+        favoriteBtn.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+      } else {
+        favoriteBtn.classList.remove("active");
+        favoriteBtn.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+      }
+
+      actualizarContadorFavoritos();
+    });
+
+    viewBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openQuickView(producto.id);
+    });
+
+   quickBuyBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (typeof agregarAlCarrito !== "function") {
+    console.error("No existe la función agregarAlCarrito(). Revisa carrito.js");
+    return;
+  }
+
+  agregarAlCarrito({
+    id: producto.id,
+    nombre: producto.nombre,
+    precio: Number(producto.precio),
+    imagen: producto.imagen,
+    url: getProductUrl(producto),
+    categoria: "Hombre"
+  }, 1);
+});
+
+    link.addEventListener("click", () => {});
+    productsGrid.appendChild(card);
+  });
+
+  if (totalPages > 1) {
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+
+      if (i === currentPage) {
+        btn.classList.add("active");
+      }
+
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        renderProducts(getFilteredProducts());
+        window.scrollTo({
+          top: productsGrid.offsetTop - 120,
+          behavior: "smooth"
+        });
+      });
+
+      pagination.appendChild(btn);
+    }
+  }
+}
+
 currentImageIndex = 0;
 setMainImage(0);
 
