@@ -1186,7 +1186,7 @@
   padding:20px;
 }
 
-.related-section{
+.related-section{ 
   width:min(1280px, 94%);
   margin:0 auto 40px;
 }
@@ -2614,18 +2614,39 @@ function renderRelacionados() {
 
   relatedProductsGrid.innerHTML = relacionados.map(item => `
     <article class="related-card">
-      <a href="producto-unisex.html?id=${item.id}" class="related-card-link">
+
+    <a href="producto-unisex.html?id=${item.id}"
+       class="related-card-link">
+
         <div class="related-image-wrap">
-          <img class="img-main" src="${item.imagen}" alt="${item.nombre}">
-          <img class="img-hover" src="${item.hover || item.imagen}" alt="${item.nombre}">
+
+            <img class="img-main"
+                 src="${item.imagen}">
+
+            <img class="img-hover"
+                 src="${item.hover || item.imagen}">
+
         </div>
+
         <div class="related-info">
-          <p class="related-category">${item.categoria || "Unisex"}</p>
-          <h3 class="related-name">${item.nombre}</h3>
-          <p class="related-price">${formatPrice(item.precio)}</p>
+
+            <p class="related-category">
+                ${item.categoria || "Unisex"}
+            </p>
+
+            <h3 class="related-name">
+                ${item.nombre}
+            </h3>
+
+            <p class="related-price">
+                ${formatPrice(item.precio)}
+            </p>
+
         </div>
-      </a>
-    </article>
+
+    </a>
+
+</article>
   `).join("");
 }
 

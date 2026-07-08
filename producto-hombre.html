@@ -998,69 +998,87 @@
       cursor:pointer;
     }
 
-    .related-section{
-      width:min(1280px, 94%);
-      margin:0 auto 40px;
-    }
-    .related-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:end;
-      gap:16px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-    .related-header h2{
-      font-size:30px;
-      color:#6b5523;
-    }
-    .related-header p{
-      font-size:15px;
-      color:#4b4535;
-    }
-    .related-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0, 1fr));
-      gap:18px;
-    }
-    .related-card{
-      background:#ece8dd;
-      border-radius:20px;
-      overflow:hidden;
-      border:1px solid rgba(90,71,32,0.08);
-      box-shadow:0 8px 20px rgba(0,0,0,0.05);
-      transition:transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .related-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 12px 24px rgba(0,0,0,0.08);
-    }
-    .related-card-link{
-      display:block;
-    }
-    .related-image-wrap{
-      position:relative;
-      background:#f3f0ea;
-      aspect-ratio:4 / 4.4;
-      overflow:hidden;
-    }
-    .related-image-wrap img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:opacity 0.3s ease;
-    }
-    .related-image-wrap .img-hover{
-      position:absolute;
-      inset:0;
-      opacity:0;
-    }
-    .related-card:hover .related-image-wrap .img-hover{
-      opacity:1;
-    }
-    .related-card:hover .related-image-wrap .img-main{
-      opacity:0;
-    }
+    .related-section{ 
+  width:min(1280px, 94%);
+  margin:0 auto 40px;
+}
+.related-title{
+  font-size:30px;
+  color:#6b5523;
+  margin-bottom:18px;
+}
+.related-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:18px;
+}
+.related-card{
+  background:#ece8dd;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(107,85,35,0.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.related-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 24px rgba(0,0,0,0.08);
+}
+.related-card-link{
+  display:block;
+}
+.related-image-wrap{
+  position:relative;
+  background:#f4f1eb;
+  aspect-ratio:1 / 1.1;
+  overflow:hidden;
+}
+.related-image-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:opacity 0.35s ease;
+}
+.related-image-wrap .img-hover{
+  position:absolute;
+  inset:0;
+  opacity:0;
+}
+.related-card:hover .related-image-wrap .img-hover{
+  opacity:1;
+}
+.related-card:hover .related-image-wrap .img-main{
+  opacity:0;
+}
+.related-info{
+  padding:16px;
+}
+.related-category{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:#8b7b50;
+  margin-bottom:8px;
+}
+.related-name{
+  font-size:18px;
+  line-height:1.25;
+  color:#2f2b1f;
+  margin-bottom:10px;
+  min-height:44px;
+}
+.related-price{
+  font-size:20px;
+  color:#b8860b;
+  font-weight:bold;
+}
+.related-empty{
+  background:#ece8dd;
+  border-radius:20px;
+  padding:22px;
+  color:#4b4535;
+  font-size:16px;
+}
     /* =========================
    🔥 HOVER TIPO ZARA / FALABELLA
    ========================= */
@@ -1943,14 +1961,9 @@
   </section>
 
   <section class="related-section">
-    <div class="related-header">
-      <div>
-        <h2>También te puede gustar</h2>
-        <p>Descubre otras fragancias similares que podrían encantarte.</p>
-      </div>
-    </div>
-    <div class="related-grid" id="relatedProductsGrid"></div>
-  </section>
+  <h2 class="related-title">También te puede gustar</h2>
+  <div class="related-grid" id="relatedProductsGrid"></div>
+</section>
 
   <div class="sticky-cart-bar" id="stickyCartBar">
     <div class="sticky-product">
@@ -2721,10 +2734,15 @@ setMainImage(0);
     });
 
     function obtenerRelacionados() {
-      const mismosAroma = perfumesHombre.filter(p => p.id !== producto.id && p.aroma === producto.aroma);
-      const mismaCategoria = perfumesHombre.filter(p => p.id !== producto.id && p.aroma !== producto.aroma);
-      return [...mismosAroma, ...mismaCategoria].slice(0, 4);
-    }
+  if (!producto) return [];
+
+  let relacionados = perfumesUnisex.filter(p => p.id !== producto.id);
+
+  const mismosAroma = relacionados.filter(p => p.aroma === producto.aroma);
+  const otros = relacionados.filter(p => p.aroma !== producto.aroma);
+
+  return [...mismosAroma, ...otros].slice(0, 4);
+}
 
     function renderRelacionados() {
   if (!relatedProductsGrid) return;
@@ -2733,49 +2751,48 @@ setMainImage(0);
 
   if (relacionados.length === 0) {
     relatedProductsGrid.innerHTML = `
-      <p style="font-size:16px;color:#4b4535;">
-        Pronto agregaremos más recomendaciones para este perfume.
-      </p>
+      <div class="related-empty">
+        No hay productos relacionados disponibles en este momento.
+      </div>
     `;
     return;
   }
 
   relatedProductsGrid.innerHTML = relacionados.map(item => `
-    <div class="related-image-wrap">
+    <article class="related-card">
 
-  <!-- IMÁGENES -->
-  <img class="img-main" src="${item.imagen}" alt="${item.nombre}">
-  <img class="img-hover" src="${item.hover}" alt="${item.nombre} hover">
+    <a href="producto-hombre.html?id=${item.id}"
+       class="related-card-link">
 
-  <!-- OVERLAY -->
-  <div class="overlay">
+        <div class="related-image-wrap">
 
-    <!-- BOTONES LATERALES -->
-    <div class="overlay-icons">
-      <button class="fav-btn" data-id="${item.id}">
-        <i class="fa-regular fa-heart"></i>
-      </button>
+            <img class="img-main"
+                 src="${item.imagen}">
 
-      <button class="quick-view-btn" data-id="${item.id}">
-        <i class="fa-regular fa-eye"></i>
-      </button>
-    </div>
+            <img class="img-hover"
+                 src="${item.hover || item.imagen}">
 
-    <!-- BOTÓN INFERIOR -->
-    <a 
-      class="buy-overlay-btn" 
-      target="_blank"
-      href="https://wa.me/573145661788?text=${encodeURIComponent(
-        `Hola, quiero comprar:\n\n🧴 ${item.nombre}\n💰 ${formatPrice(item.precio)}`
-      )}"
-    >
-      Compra rápida
+        </div>
+
+        <div class="related-info">
+
+            <p class="related-category">
+                ${item.categoria || "Hombre"}
+            </p>
+
+            <h3 class="related-name">
+                ${item.nombre}
+            </h3>
+
+            <p class="related-price">
+                ${formatPrice(item.precio)}
+            </p>
+
+        </div>
+
     </a>
 
-  </div>
-
-</div>
-    </article>
+</article>
   `).join("");
 
   /* =========================
