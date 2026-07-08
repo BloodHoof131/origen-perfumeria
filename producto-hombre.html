@@ -2736,7 +2736,7 @@ setMainImage(0);
     function obtenerRelacionados() {
   if (!producto) return [];
 
-  let relacionados = perfumesUnisex.filter(p => p.id !== producto.id);
+  let relacionados = perfumesHombre.filter(p => p.id !== producto.id);
 
   const mismosAroma = relacionados.filter(p => p.aroma === producto.aroma);
   const otros = relacionados.filter(p => p.aroma !== producto.aroma);
